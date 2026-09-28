@@ -22,7 +22,9 @@
     "last_seen": "2026-09-28T06:53:54.930Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "7b5ad063e49cb645"
+    "fingerprint": "7b5ad063e49cb645",
+    "kind": "chat",
+    "listed_by": "api"
   },
   {
     "provider": "google-ai-studio",
@@ -47,7 +49,38 @@
     "last_seen": "2026-09-28T06:53:54.930Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "da61da97862093c2"
+    "fingerprint": "da61da97862093c2",
+    "kind": "chat",
+    "listed_by": "api"
+  },
+  {
+    "provider": "google-ai-studio",
+    "kind": "tts",
+    "listed_by": "api",
+    "limit_scope": "per-model",
+    "usage_terms": "production-ok",
+    "rate_limits": null,
+    "card_required": "no",
+    "account_required": "yes",
+    "licence": null,
+    "model_id": "gemini-2.5-flash-preview-tts",
+    "name": "Gemini 2.5 Flash Preview TTS",
+    "url": "https://ai.google.dev/gemini-api/docs/speech-generation",
+    "price_type": "unknown",
+    "context_length": null,
+    "input_modalities": [
+      "text"
+    ],
+    "tool_calling": null,
+    "id": "google-ai-studio/gemini-2.5-flash-preview-tts",
+    "slug": "gemini-2-5-flash-preview-tts",
+    "category": "ai-model",
+    "status": "active",
+    "first_seen": "2026-09-28T10:08:54.367Z",
+    "last_seen": "2026-09-28T10:08:54.367Z",
+    "missing_since": null,
+    "removed_at": null,
+    "fingerprint": "a819eeae34bd51db"
   },
   {
     "provider": "google-ai-studio",
@@ -72,7 +105,38 @@
     "last_seen": "2026-09-28T06:53:54.930Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "39ba2b2b0a71e2bf"
+    "fingerprint": "39ba2b2b0a71e2bf",
+    "kind": "chat",
+    "listed_by": "api"
+  },
+  {
+    "provider": "google-ai-studio",
+    "kind": "tts",
+    "listed_by": "api",
+    "limit_scope": "per-model",
+    "usage_terms": "production-ok",
+    "rate_limits": null,
+    "card_required": "no",
+    "account_required": "yes",
+    "licence": null,
+    "model_id": "gemini-2.5-pro-preview-tts",
+    "name": "Gemini 2.5 Pro Preview TTS",
+    "url": "https://ai.google.dev/gemini-api/docs/speech-generation",
+    "price_type": "unknown",
+    "context_length": null,
+    "input_modalities": [
+      "text"
+    ],
+    "tool_calling": null,
+    "id": "google-ai-studio/gemini-2.5-pro-preview-tts",
+    "slug": "gemini-2-5-pro-preview-tts",
+    "category": "ai-model",
+    "status": "active",
+    "first_seen": "2026-09-28T10:08:54.367Z",
+    "last_seen": "2026-09-28T10:08:54.367Z",
+    "missing_since": null,
+    "removed_at": null,
+    "fingerprint": "7593544a4267a043"
   },
   {
     "provider": "google-ai-studio",
@@ -97,7 +161,9 @@
     "last_seen": "2026-09-28T06:53:54.930Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "bf1a80589b5a58ce"
+    "fingerprint": "bf1a80589b5a58ce",
+    "kind": "chat",
+    "listed_by": "api"
   },
   {
     "provider": "google-ai-studio",
@@ -122,7 +188,9 @@
     "last_seen": "2026-09-28T06:53:54.930Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "c5bb4d2f48597042"
+    "fingerprint": "c5bb4d2f48597042",
+    "kind": "chat",
+    "listed_by": "api"
   },
   {
     "provider": "google-ai-studio",
@@ -147,7 +215,38 @@
     "last_seen": "2026-09-28T06:53:54.930Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "907dcb7cb4c4a7b0"
+    "fingerprint": "907dcb7cb4c4a7b0",
+    "kind": "chat",
+    "listed_by": "api"
+  },
+  {
+    "provider": "google-ai-studio",
+    "kind": "tts",
+    "listed_by": "api",
+    "limit_scope": "per-model",
+    "usage_terms": "production-ok",
+    "rate_limits": null,
+    "card_required": "no",
+    "account_required": "yes",
+    "licence": null,
+    "model_id": "gemini-3.1-flash-tts-preview",
+    "name": "Gemini 3.1 Flash TTS Preview",
+    "url": "https://ai.google.dev/gemini-api/docs/speech-generation",
+    "price_type": "unknown",
+    "context_length": null,
+    "input_modalities": [
+      "text"
+    ],
+    "tool_calling": null,
+    "id": "google-ai-studio/gemini-3.1-flash-tts-preview",
+    "slug": "gemini-3-1-flash-tts-preview",
+    "category": "ai-model",
+    "status": "active",
+    "first_seen": "2026-09-28T10:08:54.367Z",
+    "last_seen": "2026-09-28T10:08:54.367Z",
+    "missing_since": null,
+    "removed_at": null,
+    "fingerprint": "d4d71e67cd54de76"
   },
   {
     "provider": "google-ai-studio",
@@ -172,7 +271,9 @@
     "last_seen": "2026-09-28T06:53:54.930Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "2cca82177eac6e8a"
+    "fingerprint": "2cca82177eac6e8a",
+    "kind": "chat",
+    "listed_by": "api"
   },
   {
     "provider": "google-ai-studio",
@@ -197,7 +298,9 @@
     "last_seen": "2026-09-28T06:53:54.930Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "bf66c0cf0568b190"
+    "fingerprint": "bf66c0cf0568b190",
+    "kind": "chat",
+    "listed_by": "api"
   },
   {
     "provider": "google-ai-studio",
@@ -222,7 +325,38 @@
     "last_seen": "2026-09-28T06:53:54.930Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "ceff5af8f1f50247"
+    "fingerprint": "ceff5af8f1f50247",
+    "kind": "chat",
+    "listed_by": "api"
+  },
+  {
+    "provider": "google-ai-studio",
+    "kind": "stt",
+    "listed_by": "api",
+    "limit_scope": "per-model",
+    "usage_terms": "production-ok",
+    "rate_limits": null,
+    "card_required": "no",
+    "account_required": "yes",
+    "licence": null,
+    "model_id": "gemini-3.5-transcribe",
+    "name": "Gemini 3.5 Transcribe",
+    "url": "https://ai.google.dev/gemini-api/docs/models",
+    "price_type": "unknown",
+    "context_length": null,
+    "input_modalities": [
+      "audio"
+    ],
+    "tool_calling": null,
+    "id": "google-ai-studio/gemini-3.5-transcribe",
+    "slug": "gemini-3-5-transcribe",
+    "category": "ai-model",
+    "status": "active",
+    "first_seen": "2026-09-28T10:08:54.367Z",
+    "last_seen": "2026-09-28T10:08:54.367Z",
+    "missing_since": null,
+    "removed_at": null,
+    "fingerprint": "e698d25327f32a2d"
   },
   {
     "provider": "google-ai-studio",
@@ -247,7 +381,9 @@
     "last_seen": "2026-09-28T06:53:54.930Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "ebf9e175abe306ed"
+    "fingerprint": "ebf9e175abe306ed",
+    "kind": "chat",
+    "listed_by": "api"
   },
   {
     "provider": "google-ai-studio",
@@ -272,7 +408,9 @@
     "last_seen": "2026-09-28T06:53:54.930Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "7a3f9feeda081893"
+    "fingerprint": "7a3f9feeda081893",
+    "kind": "chat",
+    "listed_by": "api"
   },
   {
     "provider": "google-ai-studio",
@@ -297,7 +435,67 @@
     "last_seen": "2026-09-28T06:53:54.930Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "c870366e0d8d7736"
+    "fingerprint": "c870366e0d8d7736",
+    "kind": "chat",
+    "listed_by": "api"
+  },
+  {
+    "provider": "google-ai-studio",
+    "kind": "tts",
+    "listed_by": "api",
+    "limit_scope": "per-model",
+    "usage_terms": "production-ok",
+    "rate_limits": null,
+    "card_required": "no",
+    "account_required": "yes",
+    "licence": null,
+    "model_id": "gemini-3.8-flash-lite-tts",
+    "name": "Gemini 3.8 Flash Lite TTS",
+    "url": "https://ai.google.dev/gemini-api/docs/speech-generation",
+    "price_type": "unknown",
+    "context_length": null,
+    "input_modalities": [
+      "text"
+    ],
+    "tool_calling": null,
+    "id": "google-ai-studio/gemini-3.8-flash-lite-tts",
+    "slug": "gemini-3-8-flash-lite-tts",
+    "category": "ai-model",
+    "status": "active",
+    "first_seen": "2026-09-28T10:08:54.367Z",
+    "last_seen": "2026-09-28T10:08:54.367Z",
+    "missing_since": null,
+    "removed_at": null,
+    "fingerprint": "505bb0cb5bfaf313"
+  },
+  {
+    "provider": "google-ai-studio",
+    "kind": "tts",
+    "listed_by": "api",
+    "limit_scope": "per-model",
+    "usage_terms": "production-ok",
+    "rate_limits": null,
+    "card_required": "no",
+    "account_required": "yes",
+    "licence": null,
+    "model_id": "gemini-3.8-flash-tts",
+    "name": "Gemini 3.8 Flash TTS",
+    "url": "https://ai.google.dev/gemini-api/docs/speech-generation",
+    "price_type": "unknown",
+    "context_length": null,
+    "input_modalities": [
+      "text"
+    ],
+    "tool_calling": null,
+    "id": "google-ai-studio/gemini-3.8-flash-tts",
+    "slug": "gemini-3-8-flash-tts",
+    "category": "ai-model",
+    "status": "active",
+    "first_seen": "2026-09-28T10:08:54.367Z",
+    "last_seen": "2026-09-28T10:08:54.367Z",
+    "missing_since": null,
+    "removed_at": null,
+    "fingerprint": "4be3ecb9041fe498"
   },
   {
     "provider": "google-ai-studio",
@@ -322,7 +520,9 @@
     "last_seen": "2026-09-28T06:53:54.930Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "b59e0b71ae3c8706"
+    "fingerprint": "b59e0b71ae3c8706",
+    "kind": "chat",
+    "listed_by": "api"
   },
   {
     "provider": "google-ai-studio",
@@ -347,7 +547,9 @@
     "last_seen": "2026-09-28T06:53:54.930Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "ad05d00974c7975c"
+    "fingerprint": "ad05d00974c7975c",
+    "kind": "chat",
+    "listed_by": "api"
   },
   {
     "provider": "google-ai-studio",
@@ -372,7 +574,9 @@
     "last_seen": "2026-09-28T06:53:54.930Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "b79f1a5a434765d4"
+    "fingerprint": "b79f1a5a434765d4",
+    "kind": "chat",
+    "listed_by": "api"
   },
   {
     "provider": "google-ai-studio",
@@ -397,6 +601,8 @@
     "last_seen": "2026-09-28T06:53:54.930Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "43e424c4ec8aa53f"
+    "fingerprint": "43e424c4ec8aa53f",
+    "kind": "chat",
+    "listed_by": "api"
   }
 ]

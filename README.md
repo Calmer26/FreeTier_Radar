@@ -11,13 +11,13 @@ change history and ready-to-paste Cline settings.
 ## The list
 
 <!-- LIST:START -->
-_90 free chat models. Updated automatically; see [FreeTier Radar](https://freetierradar.com) for filters, limits and change history._
+_102 free models. Updated automatically; see [FreeTier Radar](https://freetierradar.com) for filters, limits and change history._
 
 🟢 responded to the latest daily test · 🟡 rate-limited or slow · 🔴 failed · 🤖 agent-ready (tool calling, ≥64k context, answered 5 of the last 7 days)
 
-### OpenRouter
+### Chat (90)
 
-Router over many inference providers. Models with a :free suffix cost nothing, within a daily request cap shared by all free models.
+#### OpenRouter
 
 | Model | ID | Context | Tools | Last test | Agent |
 |---|---|---|---|---|---|
@@ -38,9 +38,7 @@ Router over many inference providers. Models with a :free suffix cost nothing, w
 | [Thinking Machines: Inkling (free)](https://freetierradar.com/models/openrouter/thinkingmachines-inkling-free/) | `thinkingmachines/inkling:free` | 1M | yes | 🔴 |  |
 | [Thinking Machines: Inkling Small (free)](https://freetierradar.com/models/openrouter/thinkingmachines-inkling-small-free/) | `thinkingmachines/inkling-small:free` | 1M | yes | 🔴 |  |
 
-### Groq
-
-Fast inference on Groq hardware. Every active model is usable on the free plan, each with its own limits.
+#### Groq
 
 | Model | ID | Context | Tools | Last test | Agent |
 |---|---|---|---|---|---|
@@ -49,9 +47,7 @@ Fast inference on Groq hardware. Every active model is usable on the free plan, 
 | [openai/gpt-oss-20b (OpenAI)](https://freetierradar.com/models/groq/openai-gpt-oss-20b/) | `openai/gpt-oss-20b` | 131k | ? | 🟢 |  |
 | [qwen/qwen3.8-27b (Alibaba Cloud)](https://freetierradar.com/models/groq/qwen-qwen3-8-27b/) | `qwen/qwen3.8-27b` | 131k | ? | 🟢 |  |
 
-### Google AI Studio (Gemini API)
-
-Gemini API with a free tier for some models. The model list does not say which; the daily test on a free-tier key does.
+#### Google AI Studio (Gemini API)
 
 | Model | ID | Context | Tools | Last test | Agent |
 |---|---|---|---|---|---|
@@ -72,9 +68,7 @@ Gemini API with a free tier for some models. The model list does not say which; 
 | [Gemma 4 26B A4B IT](https://freetierradar.com/models/google-ai-studio/gemma-4-26b-a4b-it/) | `gemma-4-26b-a4b-it` | 262k | ? | 🟢 |  |
 | [Gemma 4 31B IT](https://freetierradar.com/models/google-ai-studio/gemma-4-31b-it/) | `gemma-4-31b-it` | 262k | ? | 🟡 |  |
 
-### NVIDIA API catalog (build.nvidia.com) ⚠ evaluation only
-
-Hosted NVIDIA NIM endpoints for many open models. Free, but only for testing and evaluation.
+#### NVIDIA API catalog (build.nvidia.com) ⚠ evaluation only
 
 | Model | ID | Context | Tools | Last test | Agent |
 |---|---|---|---|---|---|
@@ -132,6 +126,47 @@ Hosted NVIDIA NIM endpoints for many open models. Free, but only for testing and
 | [z-ai/glm-5.3 (z-ai)](https://freetierradar.com/models/nvidia/z-ai-glm-5-3/) | `z-ai/glm-5.3` | unknown | ? | 🟡 |  |
 | [z-ai/glm-5.3-flash (z-ai)](https://freetierradar.com/models/nvidia/z-ai-glm-5-3-flash/) | `z-ai/glm-5.3-flash` | unknown | ? | 🟡 |  |
 | [zyphra/zamba2-7b-instruct (zyphra)](https://freetierradar.com/models/nvidia/zyphra-zamba2-7b-instruct/) | `zyphra/zamba2-7b-instruct` | unknown | ? | 🔴 |  |
+
+### Text-to-speech (9)
+
+#### OpenRouter
+
+| Model | ID | Last test |
+|---|---|---|
+| [Deepgram: Flux TTS (free)](https://freetierradar.com/models/openrouter/deepgram-flux-tts-free/) | `deepgram/flux-tts:free` | – |
+| [Fish Audio: S2.1 Pro (free)](https://freetierradar.com/models/openrouter/fish-audio-s2-1-pro-free-free/) | `fish-audio/s2.1-pro-free:free` | – |
+
+#### Groq
+
+| Model | ID | Last test |
+|---|---|---|
+| [canopylabs/orpheus-arabic-saudi (Canopy Labs)](https://freetierradar.com/models/groq/canopylabs-orpheus-arabic-saudi/) | `canopylabs/orpheus-arabic-saudi` | – |
+| [canopylabs/orpheus-v1-english (Canopy Labs)](https://freetierradar.com/models/groq/canopylabs-orpheus-v1-english/) | `canopylabs/orpheus-v1-english` | – |
+
+#### Google AI Studio (Gemini API)
+
+| Model | ID | Last test |
+|---|---|---|
+| [Gemini 2.5 Flash Preview TTS](https://freetierradar.com/models/google-ai-studio/gemini-2-5-flash-preview-tts/) | `gemini-2.5-flash-preview-tts` | – |
+| [Gemini 2.5 Pro Preview TTS](https://freetierradar.com/models/google-ai-studio/gemini-2-5-pro-preview-tts/) | `gemini-2.5-pro-preview-tts` | – |
+| [Gemini 3.1 Flash TTS Preview](https://freetierradar.com/models/google-ai-studio/gemini-3-1-flash-tts-preview/) | `gemini-3.1-flash-tts-preview` | – |
+| [Gemini 3.8 Flash Lite TTS](https://freetierradar.com/models/google-ai-studio/gemini-3-8-flash-lite-tts/) | `gemini-3.8-flash-lite-tts` | – |
+| [Gemini 3.8 Flash TTS](https://freetierradar.com/models/google-ai-studio/gemini-3-8-flash-tts/) | `gemini-3.8-flash-tts` | – |
+
+### Speech-to-text (3)
+
+#### Groq
+
+| Model | ID | Last test |
+|---|---|---|
+| [whisper-large-v3 (OpenAI)](https://freetierradar.com/models/groq/whisper-large-v3/) | `whisper-large-v3` | – |
+| [whisper-large-v3-turbo (OpenAI)](https://freetierradar.com/models/groq/whisper-large-v3-turbo/) | `whisper-large-v3-turbo` | – |
+
+#### Google AI Studio (Gemini API)
+
+| Model | ID | Last test |
+|---|---|---|
+| [Gemini 3.5 Transcribe](https://freetierradar.com/models/google-ai-studio/gemini-3-5-transcribe/) | `gemini-3.5-transcribe` | – |
 
 <!-- LIST:END -->
 

@@ -29,7 +29,43 @@
     "last_seen": "2026-09-28T06:07:16.518Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "9f47863b927e48ad"
+    "fingerprint": "9f47863b927e48ad",
+    "kind": "chat",
+    "listed_by": "api"
+  },
+  {
+    "provider": "openrouter",
+    "kind": "tts",
+    "listed_by": "curated",
+    "limit_scope": "shared",
+    "usage_terms": "production-ok",
+    "rate_limits": {
+      "rpm": 20,
+      "rpd": 50,
+      "note": "Shared across all free models. 1,000 requests/day after a one-time purchase of 10 credits.",
+      "source": "https://openrouter.ai/docs/faq"
+    },
+    "card_required": "no",
+    "account_required": "yes",
+    "licence": null,
+    "model_id": "deepgram/flux-tts:free",
+    "name": "Deepgram: Flux TTS (free)",
+    "url": "https://openrouter.ai/deepgram/flux-tts",
+    "price_type": "free",
+    "context_length": null,
+    "input_modalities": [
+      "text"
+    ],
+    "tool_calling": null,
+    "id": "openrouter/deepgram/flux-tts:free",
+    "slug": "deepgram-flux-tts-free",
+    "category": "ai-model",
+    "status": "active",
+    "first_seen": "2026-09-28T10:08:54.367Z",
+    "last_seen": "2026-09-28T10:08:54.367Z",
+    "missing_since": null,
+    "removed_at": null,
+    "fingerprint": "fa51b8e94574f4a3"
   },
   {
     "provider": "openrouter",
@@ -62,7 +98,43 @@
     "last_seen": "2026-09-28T06:07:16.518Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "df9fb39b07a16c32"
+    "fingerprint": "df9fb39b07a16c32",
+    "kind": "chat",
+    "listed_by": "api"
+  },
+  {
+    "provider": "openrouter",
+    "kind": "tts",
+    "listed_by": "curated",
+    "limit_scope": "shared",
+    "usage_terms": "production-ok",
+    "rate_limits": {
+      "rpm": 20,
+      "rpd": 50,
+      "note": "Shared across all free models. 1,000 requests/day after a one-time purchase of 10 credits.",
+      "source": "https://openrouter.ai/docs/faq"
+    },
+    "card_required": "no",
+    "account_required": "yes",
+    "licence": null,
+    "model_id": "fish-audio/s2.1-pro-free:free",
+    "name": "Fish Audio: S2.1 Pro (free)",
+    "url": "https://openrouter.ai/fish-audio/s2.1-pro-free",
+    "price_type": "free",
+    "context_length": null,
+    "input_modalities": [
+      "text"
+    ],
+    "tool_calling": null,
+    "id": "openrouter/fish-audio/s2.1-pro-free:free",
+    "slug": "fish-audio-s2-1-pro-free-free",
+    "category": "ai-model",
+    "status": "active",
+    "first_seen": "2026-09-28T10:08:54.367Z",
+    "last_seen": "2026-09-28T10:08:54.367Z",
+    "missing_since": null,
+    "removed_at": null,
+    "fingerprint": "59d07aa8e2fc61aa"
   },
   {
     "provider": "openrouter",
@@ -96,7 +168,9 @@
     "last_seen": "2026-09-28T06:07:16.518Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "8443eefacf3a7b4e"
+    "fingerprint": "8443eefacf3a7b4e",
+    "kind": "chat",
+    "listed_by": "api"
   },
   {
     "provider": "openrouter",
@@ -130,7 +204,9 @@
     "last_seen": "2026-09-28T06:07:16.518Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "1e0e3b880cd3359d"
+    "fingerprint": "1e0e3b880cd3359d",
+    "kind": "chat",
+    "listed_by": "api"
   },
   {
     "provider": "openrouter",
@@ -162,7 +238,9 @@
     "last_seen": "2026-09-28T06:07:16.518Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "6e1fb3b95e60ed2b"
+    "fingerprint": "6e1fb3b95e60ed2b",
+    "kind": "chat",
+    "listed_by": "api"
   },
   {
     "provider": "openrouter",
@@ -194,7 +272,9 @@
     "last_seen": "2026-09-28T06:07:16.518Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "f4e88b792786ecb2"
+    "fingerprint": "f4e88b792786ecb2",
+    "kind": "chat",
+    "listed_by": "api"
   },
   {
     "provider": "openrouter",
@@ -226,7 +306,9 @@
     "last_seen": "2026-09-28T06:07:16.518Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "d5a337bda8e313e7"
+    "fingerprint": "d5a337bda8e313e7",
+    "kind": "chat",
+    "listed_by": "api"
   },
   {
     "provider": "openrouter",
@@ -261,7 +343,9 @@
     "last_seen": "2026-09-28T06:07:16.518Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "d50ca418d75b3de3"
+    "fingerprint": "d50ca418d75b3de3",
+    "kind": "chat",
+    "listed_by": "api"
   },
   {
     "provider": "openrouter",
@@ -293,7 +377,9 @@
     "last_seen": "2026-09-28T06:07:16.518Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "0ddc84dfa76e3bef"
+    "fingerprint": "0ddc84dfa76e3bef",
+    "kind": "chat",
+    "listed_by": "api"
   },
   {
     "provider": "openrouter",
@@ -325,7 +411,9 @@
     "last_seen": "2026-09-28T06:07:16.518Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "cb800016413cdb75"
+    "fingerprint": "cb800016413cdb75",
+    "kind": "chat",
+    "listed_by": "api"
   },
   {
     "provider": "openrouter",
@@ -357,7 +445,9 @@
     "last_seen": "2026-09-28T06:07:16.518Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "a8c082ddbc13acc4"
+    "fingerprint": "a8c082ddbc13acc4",
+    "kind": "chat",
+    "listed_by": "api"
   },
   {
     "provider": "openrouter",
@@ -389,7 +479,9 @@
     "last_seen": "2026-09-28T06:07:16.518Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "f119515ed9fa64a5"
+    "fingerprint": "f119515ed9fa64a5",
+    "kind": "chat",
+    "listed_by": "api"
   },
   {
     "provider": "openrouter",
@@ -421,7 +513,9 @@
     "last_seen": "2026-09-28T06:07:16.518Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "327e2dd3b6cc85b7"
+    "fingerprint": "327e2dd3b6cc85b7",
+    "kind": "chat",
+    "listed_by": "api"
   },
   {
     "provider": "openrouter",
@@ -455,7 +549,9 @@
     "last_seen": "2026-09-28T06:07:16.518Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "d010e0191e347d59"
+    "fingerprint": "d010e0191e347d59",
+    "kind": "chat",
+    "listed_by": "api"
   },
   {
     "provider": "openrouter",
@@ -489,7 +585,9 @@
     "last_seen": "2026-09-28T06:07:16.518Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "09bae3cc39615839"
+    "fingerprint": "09bae3cc39615839",
+    "kind": "chat",
+    "listed_by": "api"
   },
   {
     "provider": "openrouter",
@@ -523,6 +621,8 @@
     "last_seen": "2026-09-28T06:07:16.518Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "8a878891d93f4dbf"
+    "fingerprint": "8a878891d93f4dbf",
+    "kind": "chat",
+    "listed_by": "api"
   }
 ]

@@ -22,7 +22,67 @@
     "last_seen": "2026-09-28T06:53:54.930Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "1eb339ee4b176af7"
+    "fingerprint": "1eb339ee4b176af7",
+    "kind": "chat",
+    "listed_by": "api"
+  },
+  {
+    "provider": "groq",
+    "kind": "tts",
+    "listed_by": "api",
+    "limit_scope": "per-model",
+    "usage_terms": "production-ok",
+    "rate_limits": null,
+    "card_required": "no",
+    "account_required": "yes",
+    "licence": null,
+    "model_id": "canopylabs/orpheus-arabic-saudi",
+    "name": "canopylabs/orpheus-arabic-saudi (Canopy Labs)",
+    "url": "https://console.groq.com/docs/text-to-speech",
+    "price_type": "freemium-quota",
+    "context_length": null,
+    "input_modalities": [
+      "text"
+    ],
+    "tool_calling": null,
+    "id": "groq/canopylabs/orpheus-arabic-saudi",
+    "slug": "canopylabs-orpheus-arabic-saudi",
+    "category": "ai-model",
+    "status": "active",
+    "first_seen": "2026-09-28T10:08:54.367Z",
+    "last_seen": "2026-09-28T10:08:54.367Z",
+    "missing_since": null,
+    "removed_at": null,
+    "fingerprint": "97af3b3ee3c0c4b6"
+  },
+  {
+    "provider": "groq",
+    "kind": "tts",
+    "listed_by": "api",
+    "limit_scope": "per-model",
+    "usage_terms": "production-ok",
+    "rate_limits": null,
+    "card_required": "no",
+    "account_required": "yes",
+    "licence": null,
+    "model_id": "canopylabs/orpheus-v1-english",
+    "name": "canopylabs/orpheus-v1-english (Canopy Labs)",
+    "url": "https://console.groq.com/docs/text-to-speech",
+    "price_type": "freemium-quota",
+    "context_length": null,
+    "input_modalities": [
+      "text"
+    ],
+    "tool_calling": null,
+    "id": "groq/canopylabs/orpheus-v1-english",
+    "slug": "canopylabs-orpheus-v1-english",
+    "category": "ai-model",
+    "status": "active",
+    "first_seen": "2026-09-28T10:08:54.367Z",
+    "last_seen": "2026-09-28T10:08:54.367Z",
+    "missing_since": null,
+    "removed_at": null,
+    "fingerprint": "2227d2f13ca2ee81"
   },
   {
     "provider": "groq",
@@ -47,7 +107,9 @@
     "last_seen": "2026-09-28T06:53:54.930Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "41289f0068f4bb96"
+    "fingerprint": "41289f0068f4bb96",
+    "kind": "chat",
+    "listed_by": "api"
   },
   {
     "provider": "groq",
@@ -72,7 +134,9 @@
     "last_seen": "2026-09-28T06:53:54.930Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "8ee707f96adb8f3a"
+    "fingerprint": "8ee707f96adb8f3a",
+    "kind": "chat",
+    "listed_by": "api"
   },
   {
     "provider": "groq",
@@ -97,6 +161,66 @@
     "last_seen": "2026-09-28T06:53:54.930Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "f989bfc7b08d7db6"
+    "fingerprint": "f989bfc7b08d7db6",
+    "kind": "chat",
+    "listed_by": "api"
+  },
+  {
+    "provider": "groq",
+    "kind": "stt",
+    "listed_by": "api",
+    "limit_scope": "per-model",
+    "usage_terms": "production-ok",
+    "rate_limits": null,
+    "card_required": "no",
+    "account_required": "yes",
+    "licence": null,
+    "model_id": "whisper-large-v3",
+    "name": "whisper-large-v3 (OpenAI)",
+    "url": "https://console.groq.com/docs/speech-to-text",
+    "price_type": "freemium-quota",
+    "context_length": null,
+    "input_modalities": [
+      "audio"
+    ],
+    "tool_calling": null,
+    "id": "groq/whisper-large-v3",
+    "slug": "whisper-large-v3",
+    "category": "ai-model",
+    "status": "active",
+    "first_seen": "2026-09-28T10:08:54.367Z",
+    "last_seen": "2026-09-28T10:08:54.367Z",
+    "missing_since": null,
+    "removed_at": null,
+    "fingerprint": "92f837c9a12631f6"
+  },
+  {
+    "provider": "groq",
+    "kind": "stt",
+    "listed_by": "api",
+    "limit_scope": "per-model",
+    "usage_terms": "production-ok",
+    "rate_limits": null,
+    "card_required": "no",
+    "account_required": "yes",
+    "licence": null,
+    "model_id": "whisper-large-v3-turbo",
+    "name": "whisper-large-v3-turbo (OpenAI)",
+    "url": "https://console.groq.com/docs/speech-to-text",
+    "price_type": "freemium-quota",
+    "context_length": null,
+    "input_modalities": [
+      "audio"
+    ],
+    "tool_calling": null,
+    "id": "groq/whisper-large-v3-turbo",
+    "slug": "whisper-large-v3-turbo",
+    "category": "ai-model",
+    "status": "active",
+    "first_seen": "2026-09-28T10:08:54.367Z",
+    "last_seen": "2026-09-28T10:08:54.367Z",
+    "missing_since": null,
+    "removed_at": null,
+    "fingerprint": "0061b918a58950c3"
   }
 ]
