@@ -81,7 +81,7 @@ export const models: ModelView[] = withContext
       href: `/models/${r.provider}/${r.slug}/`,
       indexable: history.length > 0,
       unreachable: isUnreachable(history),
-      arena: r.kind === "chat" ? scoresFor(r.id, aliases, arenaFile) : null,
+      arena: r.kind === "chat" || r.kind === "image" ? scoresFor(r.id, aliases, arenaFile) : null,
       siblings: siblingsById.get(r.id) ?? [],
       testable: PROVIDERS[r.provider].testable !== false,
     };

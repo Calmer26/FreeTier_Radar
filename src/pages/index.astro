@@ -60,6 +60,7 @@ const kinds = MODEL_KINDS.map((k) => ({ kind: k, count: activeModels.filter((m) 
           <th data-chat-only>Context</th>
           <th class="hide-sm" data-chat-only>Tools</th>
           <th class="hide-sm num" data-chat-only title="LMArena Text rating">Arena</th>
+          <th class="num" data-image-only hidden title="LMArena text-to-image rating (blind comparisons)">Arena</th>
           <th class="num" data-image-only hidden title="Per 1024×1024 image at 4 steps: Neurons used (10,000 free a day), paid price, and how many fit in the free daily allowance">Per image</th>
           <th>Last test</th>
           <th class="hide-sm">Labels</th>
@@ -89,6 +90,7 @@ const kinds = MODEL_KINDS.map((k) => ({ kind: k, count: activeModels.filter((m) 
             <td class="hide-sm num" data-chat-only>
               {m.arena?.boards.text?.rating ? <a href={m.href} title={`#${m.arena.boards.text.rank} of ${m.arena.boards.text.of} on LMArena Text`}>{Math.round(m.arena.boards.text.rating)}</a> : <span class="sub">–</span>}
             </td>
+            <td class="num" data-image-only hidden>{m.arena?.boards.text_to_image?.rating ? Math.round(m.arena.boards.text_to_image.rating) : <span class="sub">–</span>}</td>
             <td class="num" data-image-only hidden>
               {(() => {
                 const e = m.kind === "image" && m.pricing ? imageCost(m.pricing) : null;

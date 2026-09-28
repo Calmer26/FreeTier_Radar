@@ -69,7 +69,7 @@ const description = `${m.name} on ${provider.label}: free-tier status, limits, d
   </dl>
   {m.limits?.note && <p class="sub">{m.limits.note}</p>}
 
-  {m.kind === "chat" && (
+  {(m.kind === "chat" || m.kind === "image") && (
     <>
       <h2>LMArena ratings</h2>
       {m.arena ? (

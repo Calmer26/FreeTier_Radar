@@ -74,3 +74,17 @@ describe("rank", () => {
     expect(out.map((x) => x.r.id)).toEqual(["whisper"]);
   });
 });
+
+describe("image ranking", () => {
+  it("orders by Arena image rating, then by fewer Neurons per image", () => {
+    const img = (id: string, rating: number | null, neuronsPerTile: number) => ({
+      r: res(id, { kind: "image", pricing: [{ usd: 0.0001, unit: "512x512 tile", neurons: neuronsPerTile }] }),
+      history: [day(1, "responded" as const)],
+      arena: rating ? { name: id, published: null, boards: { text_to_image: { rating, rank: 1, of: 80, votes: 1 } } } : null,
+    });
+    const out = rank(RANKINGS.find((d) => d.slug === "image-generation")!, [
+      img("cheap-unrated", null, 5), img("pricey-low", 1013, 600), img("cheap-good", 1030, 26), img("best", 1146, 150),
+    ]);
+    expect(out.map((x) => x.r.id)).toEqual(["best", "cheap-good", "pricey-low", "cheap-unrated"]);
+  });
+});

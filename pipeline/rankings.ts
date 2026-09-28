@@ -9,6 +9,7 @@
 
 import { AGENT_MIN_CONTEXT, agentReadiness, toolStats } from "./agent-ready";
 import type { ArenaScores } from "./arena";
+import { imageCost } from "./cloudflare-pricing";
 import type { ModelKind, Resource, TestResult, ToolResult } from "./types";
 
 export const RANKING_WINDOW_DAYS = 30;
@@ -78,6 +79,9 @@ const agentLevel = (x: RankedModel) => agentReadiness(x.r, x.history, x.tools).l
 /** Arena rating for coding: WebDev when rated there, else Text; -1 when unrated. */
 const codingRating = (x: RankedModel) => x.arena?.boards.webdev?.rating ?? x.arena?.boards.text?.rating ?? -1;
 const textRating = (x: RankedModel) => x.arena?.boards.text?.rating ?? -1;
+const imageRating = (x: RankedModel) => x.arena?.boards.text_to_image?.rating ?? -1;
+/** Neurons per 1024×1024 image; unknown prices sort last. */
+const imageNeurons = (x: RankedModel) => (x.r.pricing ? imageCost(x.r.pricing)?.neurons : null) ?? Number.MAX_SAFE_INTEGER;
 
 export const RANKINGS: RankingDef[] = [
   {
@@ -141,9 +145,9 @@ export const RANKINGS: RankingDef[] = [
     slug: "image-generation",
     title: "Best free image generation models",
     intro: "Free text-to-image models (FLUX, Stable Diffusion and more), tested weekly by generating one small picture. Check each model's licence before using images commercially.",
-    order: "Reliability over the last 30 days, then median response time.",
+    order: "LMArena text-to-image rating (unrated models after rated ones), then fewer Neurons per image, then reliability over the last 30 days.",
     filter: (x) => usable(x) && ofKind("image")(x),
-    compare: byReliability,
+    compare: (a, b) => imageRating(b) - imageRating(a) || imageNeurons(a) - imageNeurons(b) || byReliability(a, b),
   },
   {
     slug: "speech-to-text",

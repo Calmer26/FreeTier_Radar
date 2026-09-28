@@ -69,8 +69,9 @@ async function main() {
   writeJson(ARENA_FILE, file);
 
   const current: AliasFile = existsSync(ALIAS_FILE) ? JSON.parse(readFileSync(ALIAS_FILE, "utf8")) : {};
-  const chat = readResources().filter((r) => r.kind === "chat" && r.status !== "removed");
-  const { aliases, suggestions } = updateAliases(current, chat, arenaIndex(file), today);
+  // Chat models match the text boards, image models the text-to-image board.
+  const rated = readResources().filter((r) => (r.kind === "chat" || r.kind === "image") && r.status !== "removed");
+  const { aliases, suggestions } = updateAliases(current, rated, arenaIndex(file), today);
   writeJson(ALIAS_FILE, aliases);
   const linked = Object.values(aliases).filter((a) => a.status !== "rejected" && a.arena).length;
   console.log(`\n${linked} model(s) linked to Arena; ${suggestions.length} near match(es) to review.`);

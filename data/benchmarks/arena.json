@@ -5246,6 +5246,571 @@
           "votes": 9284
         }
       ]
+    },
+    "text_to_image": {
+      "published": "2026-09-24",
+      "models": [
+        {
+          "name": "gpt-image-2.5-sunburst",
+          "org": "openai",
+          "rating": 1423.6,
+          "rank": 1,
+          "votes": 10884
+        },
+        {
+          "name": "gpt-image-2.5-flare",
+          "org": "openai",
+          "rating": 1400.9,
+          "rank": 2,
+          "votes": 10058
+        },
+        {
+          "name": "gpt-image-2 (medium)",
+          "org": "openai",
+          "rating": 1383,
+          "rank": 3,
+          "votes": 88744
+        },
+        {
+          "name": "mai-image-2.6",
+          "org": "microsoft-ai",
+          "rating": 1335,
+          "rank": 4,
+          "votes": 18625
+        },
+        {
+          "name": "reve-2.1",
+          "org": "reve",
+          "rating": 1302.3,
+          "rank": 5,
+          "votes": 8305
+        },
+        {
+          "name": "grok-imagine-image-2.0 (low)",
+          "org": "xai",
+          "rating": 1300.8,
+          "rank": 6,
+          "votes": 7257
+        },
+        {
+          "name": "muse-image",
+          "org": "meta",
+          "rating": 1276,
+          "rank": 7,
+          "votes": 35422
+        },
+        {
+          "name": "reve-2.0",
+          "org": "reve",
+          "rating": 1268.9,
+          "rank": 8,
+          "votes": 15802
+        },
+        {
+          "name": "gemini-3.1-flash-image (nano-banana-2) [web-search]",
+          "org": "google",
+          "rating": 1261.2,
+          "rank": 9,
+          "votes": 53228
+        },
+        {
+          "name": "seedream-5.0-pro",
+          "org": "bytedance",
+          "rating": 1256.2,
+          "rank": 10,
+          "votes": 85690
+        },
+        {
+          "name": "qwen-image-3.0-pro",
+          "org": "alibaba",
+          "rating": 1255.9,
+          "rank": 11,
+          "votes": 11520
+        },
+        {
+          "name": "mai-image-2.5",
+          "org": "microsoft-ai",
+          "rating": 1254,
+          "rank": 12,
+          "votes": 61448
+        },
+        {
+          "name": "gemini-3.1-flash-lite-image (nano-banana-2-lite)",
+          "org": "google",
+          "rating": 1250,
+          "rank": 13,
+          "votes": 17851
+        },
+        {
+          "name": "gemini-3-pro-image-2k (nano-banana-pro)",
+          "org": "google",
+          "rating": 1247.4,
+          "rank": 14,
+          "votes": 168447
+        },
+        {
+          "name": "gpt-image-1.5-high-fidelity",
+          "org": "openai",
+          "rating": 1238.5,
+          "rank": 15,
+          "votes": 165437
+        },
+        {
+          "name": "gemini-3-pro-image-preview (nano-banana-pro)",
+          "org": "google",
+          "rating": 1234.1,
+          "rank": 16,
+          "votes": 86451
+        },
+        {
+          "name": "qwen-image-2.1",
+          "org": "alibaba",
+          "rating": 1227.6,
+          "rank": 17,
+          "votes": 4445
+        },
+        {
+          "name": "ideogram-4.0-quality",
+          "org": "ideogram",
+          "rating": 1204.8,
+          "rank": 18,
+          "votes": 53371
+        },
+        {
+          "name": "qwen-image-2.0-pro-2026-06-22",
+          "org": "alibaba",
+          "rating": 1191.7,
+          "rank": 19,
+          "votes": 13123
+        },
+        {
+          "name": "uni-1.1-max",
+          "org": "luma-ai",
+          "rating": 1189.1,
+          "rank": 20,
+          "votes": 14083
+        },
+        {
+          "name": "mai-image-2",
+          "org": "microsoft-ai",
+          "rating": 1183.8,
+          "rank": 21,
+          "votes": 51477
+        },
+        {
+          "name": "uni-1.1",
+          "org": "luma-ai",
+          "rating": 1183.5,
+          "rank": 22,
+          "votes": 41412
+        },
+        {
+          "name": "grok-imagine-image",
+          "org": "xai",
+          "rating": 1170.3,
+          "rank": 23,
+          "votes": 262132
+        },
+        {
+          "name": "recraft-v4.1-utility-pro",
+          "org": "recraft",
+          "rating": 1169.2,
+          "rank": 24,
+          "votes": 2618
+        },
+        {
+          "name": "Cosmos3-Super-Text2Image (Agentic)",
+          "org": "nvidia",
+          "rating": 1164.7,
+          "rank": 25,
+          "votes": 10856
+        },
+        {
+          "name": "grok-imagine-image-pro",
+          "org": "xai",
+          "rating": 1162.2,
+          "rank": 26,
+          "votes": 99444
+        },
+        {
+          "name": "flux-2-max",
+          "org": "bfl",
+          "rating": 1162.1,
+          "rank": 27,
+          "votes": 123187
+        },
+        {
+          "name": "flux-2-flex",
+          "org": "bfl",
+          "rating": 1156.5,
+          "rank": 28,
+          "votes": 156912
+        },
+        {
+          "name": "reve-v1.5",
+          "org": "reve",
+          "rating": 1155.3,
+          "rank": 29,
+          "votes": 39755
+        },
+        {
+          "name": "flux-2-pro",
+          "org": "bfl",
+          "rating": 1153.9,
+          "rank": 30,
+          "votes": 205540
+        },
+        {
+          "name": "Cosmos3-Super-Text2Image",
+          "org": "nvidia",
+          "rating": 1151.8,
+          "rank": 31,
+          "votes": 18581
+        },
+        {
+          "name": "gemini-2.5-flash-image-preview (nano-banana)",
+          "org": "google",
+          "rating": 1150.2,
+          "rank": 32,
+          "votes": 878451
+        },
+        {
+          "name": "hunyuan-image-3.0",
+          "org": "tencent",
+          "rating": 1149.5,
+          "rank": 33,
+          "votes": 180550
+        },
+        {
+          "name": "imagen-ultra-4.0-generate-001",
+          "org": "google",
+          "rating": 1147.7,
+          "rank": 34,
+          "votes": 388772
+        },
+        {
+          "name": "seedream-4.5",
+          "org": "bytedance",
+          "rating": 1147.5,
+          "rank": 35,
+          "votes": 287128
+        },
+        {
+          "name": "flux-2-dev",
+          "org": "bfl",
+          "rating": 1145.6,
+          "rank": 36,
+          "votes": 78080
+        },
+        {
+          "name": "seedream-4-2k",
+          "org": "bytedance",
+          "rating": 1140,
+          "rank": 37,
+          "votes": 12566
+        },
+        {
+          "name": "seedream-5.0-lite",
+          "org": "bytedance",
+          "rating": 1138.1,
+          "rank": 38,
+          "votes": 123178
+        },
+        {
+          "name": "wan2.6-t2i",
+          "org": "alibaba",
+          "rating": 1136.7,
+          "rank": 39,
+          "votes": 223535
+        },
+        {
+          "name": "recraft-v4.1-pro",
+          "org": "recraft",
+          "rating": 1132.5,
+          "rank": 40,
+          "votes": 2795
+        },
+        {
+          "name": "imagen-4.0-generate-001",
+          "org": "google",
+          "rating": 1129.1,
+          "rank": 41,
+          "votes": 539788
+        },
+        {
+          "name": "qwen-image-2512",
+          "org": "alibaba",
+          "rating": 1125.4,
+          "rank": 42,
+          "votes": 98363
+        },
+        {
+          "name": "krea-2-medium",
+          "org": "krea",
+          "rating": 1123.2,
+          "rank": 43,
+          "votes": 50800
+        },
+        {
+          "name": "seedream-4-fal",
+          "org": "bytedance",
+          "rating": 1116.5,
+          "rank": 44,
+          "votes": 11842
+        },
+        {
+          "name": "wan2.5-t2i-preview",
+          "org": "alibaba",
+          "rating": 1116.2,
+          "rank": 45,
+          "votes": 271922
+        },
+        {
+          "name": "hidream-o1-image",
+          "org": "hidream",
+          "rating": 1115.8,
+          "rank": 46,
+          "votes": 59511
+        },
+        {
+          "name": "gpt-image-1",
+          "org": "openai",
+          "rating": 1115.7,
+          "rank": 47,
+          "votes": 268466
+        },
+        {
+          "name": "recraft-v4",
+          "org": "recraft",
+          "rating": 1115,
+          "rank": 48,
+          "votes": 129674
+        },
+        {
+          "name": "seedream-4-high-res-fal",
+          "org": "bytedance",
+          "rating": 1113.3,
+          "rank": 49,
+          "votes": 182669
+        },
+        {
+          "name": "krea-2-turbo",
+          "org": "krea",
+          "rating": 1112.9,
+          "rank": 50,
+          "votes": 43913
+        },
+        {
+          "name": "krea-2-large",
+          "org": "krea",
+          "rating": 1109.8,
+          "rank": 51,
+          "votes": 49906
+        },
+        {
+          "name": "gpt-image-1-mini",
+          "org": "openai",
+          "rating": 1109.8,
+          "rank": 52,
+          "votes": 171058
+        },
+        {
+          "name": "wan2.7-image-pro",
+          "org": "alibaba",
+          "rating": 1103.5,
+          "rank": 53,
+          "votes": 30229
+        },
+        {
+          "name": "wan2.7-image",
+          "org": "alibaba",
+          "rating": 1101.3,
+          "rank": 54,
+          "votes": 30621
+        },
+        {
+          "name": "recraft-v4.1-flash",
+          "org": "recraft",
+          "rating": 1100.4,
+          "rank": 55,
+          "votes": 3533
+        },
+        {
+          "name": "mai-image-1",
+          "org": "microsoft-ai",
+          "rating": 1092.7,
+          "rank": 56,
+          "votes": 98414
+        },
+        {
+          "name": "z-image-turbo",
+          "org": "alibaba",
+          "rating": 1083.9,
+          "rank": 57,
+          "votes": 24291
+        },
+        {
+          "name": "seedream-3",
+          "org": "bytedance",
+          "rating": 1081.5,
+          "rank": 58,
+          "votes": 36890
+        },
+        {
+          "name": "flux-1-kontext-max",
+          "org": "bfl",
+          "rating": 1074.4,
+          "rank": 59,
+          "votes": 65517
+        },
+        {
+          "name": "flux-2-klein-9b",
+          "org": "bfl",
+          "rating": 1070.2,
+          "rank": 60,
+          "votes": 150780
+        },
+        {
+          "name": "qwen-image-prompt-extend",
+          "org": "alibaba",
+          "rating": 1060.3,
+          "rank": 61,
+          "votes": 716829
+        },
+        {
+          "name": "flux-1-kontext-pro",
+          "org": "bfl",
+          "rating": 1058.7,
+          "rank": 62,
+          "votes": 332376
+        },
+        {
+          "name": "imagen-3.0-generate-002",
+          "org": "google",
+          "rating": 1058,
+          "rank": 63,
+          "votes": 359786
+        },
+        {
+          "name": "qwen-image",
+          "org": "alibaba",
+          "rating": 1056.8,
+          "rank": 64,
+          "votes": 84555
+        },
+        {
+          "name": "ideogram-v3-quality",
+          "org": "ideogram",
+          "rating": 1048.4,
+          "rank": 65,
+          "votes": 118542
+        },
+        {
+          "name": "photon",
+          "org": "luma-ai",
+          "rating": 1035.7,
+          "rank": 66,
+          "votes": 130158
+        },
+        {
+          "name": "p-image",
+          "org": "",
+          "rating": 1033.1,
+          "rank": 67,
+          "votes": 109782
+        },
+        {
+          "name": "flux-2-klein-4b",
+          "org": "bfl",
+          "rating": 1030,
+          "rank": 68,
+          "votes": 152358
+        },
+        {
+          "name": "runway-gen4",
+          "org": "runway",
+          "rating": 1024.3,
+          "rank": 69,
+          "votes": 54376
+        },
+        {
+          "name": "recraft-v3",
+          "org": "recraft",
+          "rating": 1020.7,
+          "rank": 70,
+          "votes": 195623
+        },
+        {
+          "name": "flux-1.1-pro",
+          "org": "bfl",
+          "rating": 1015.6,
+          "rank": 71,
+          "votes": 70460
+        },
+        {
+          "name": "ideogram-v2",
+          "org": "ideogram",
+          "rating": 1013.4,
+          "rank": 72,
+          "votes": 72090
+        },
+        {
+          "name": "lucid-origin",
+          "org": "leonardo-ai",
+          "rating": 1013,
+          "rank": 73,
+          "votes": 287345
+        },
+        {
+          "name": "glm-image",
+          "org": "zai",
+          "rating": 1012,
+          "rank": 74,
+          "votes": 4852
+        },
+        {
+          "name": "gemini-2.0-flash-preview-image-generation",
+          "org": "google",
+          "rating": 975.3,
+          "rank": 75,
+          "votes": 257241
+        },
+        {
+          "name": "flux-1-dev-fp8",
+          "org": "bfl",
+          "rating": 969.4,
+          "rank": 76,
+          "votes": 49221
+        },
+        {
+          "name": "dall-e-3",
+          "org": "openai",
+          "rating": 967.8,
+          "rank": 77,
+          "votes": 238749
+        },
+        {
+          "name": "flux-1-kontext-dev",
+          "org": "bfl",
+          "rating": 941.1,
+          "rank": 78,
+          "votes": 216238
+        },
+        {
+          "name": "stable-diffusion-v35-large",
+          "org": "",
+          "rating": 938.3,
+          "rank": 79,
+          "votes": 23396
+        },
+        {
+          "name": "bagel",
+          "org": "bytedance",
+          "rating": 897.8,
+          "rank": 80,
+          "votes": 12363
+        }
+      ]
     }
   }
 }
