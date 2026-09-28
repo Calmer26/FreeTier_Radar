@@ -54,7 +54,7 @@ _120 free models. Updated automatically; see [FreeTier Radar](https://freetierra
 | [Gemini 2.5 Flash](https://freetierradar.com/models/google-ai-studio/gemini-2-5-flash/) | `gemini-2.5-flash` | 1M | ? | 🟢 |  |
 | [Gemini 2.5 Flash-Lite](https://freetierradar.com/models/google-ai-studio/gemini-2-5-flash-lite/) | `gemini-2.5-flash-lite` | 1M | ? | 🟢 |  |
 | [Gemini 2.5 Pro](https://freetierradar.com/models/google-ai-studio/gemini-2-5-pro/) | `gemini-2.5-pro` | 1M | ? | 🔴 |  |
-| [Gemini 3 Flash Preview](https://freetierradar.com/models/google-ai-studio/gemini-3-flash-preview/) | `gemini-3-flash-preview` | 1M | ? | 🟢 |  |
+| [Gemini 3 Flash Preview](https://freetierradar.com/models/google-ai-studio/gemini-3-flash-preview/) | `gemini-3-flash-preview` | 1M | ? | 🔴 |  |
 | [Gemini 3.1 Flash Lite](https://freetierradar.com/models/google-ai-studio/gemini-3-1-flash-lite/) | `gemini-3.1-flash-lite` | 1M | ? | 🟢 |  |
 | [Gemini 3.1 Flash Lite Preview](https://freetierradar.com/models/google-ai-studio/gemini-3-1-flash-lite-preview/) | `gemini-3.1-flash-lite-preview` | 1M | ? | 🟢 |  |
 | [Gemini 3.1 Pro Preview](https://freetierradar.com/models/google-ai-studio/gemini-3-1-pro-preview/) | `gemini-3.1-pro-preview` | 1M | ? | 🔴 |  |
@@ -66,7 +66,7 @@ _120 free models. Updated automatically; see [FreeTier Radar](https://freetierra
 | [Gemini Omni 1.1 Flash](https://freetierradar.com/models/google-ai-studio/gemini-omni-1-1-flash/) | `gemini-omni-1.1-flash` | 131k | ? | 🔴 |  |
 | [Gemini Omni Flash Preview](https://freetierradar.com/models/google-ai-studio/gemini-omni-flash-preview/) | `gemini-omni-flash-preview` | 131k | ? | 🔴 |  |
 | [Gemma 4 26B A4B IT](https://freetierradar.com/models/google-ai-studio/gemma-4-26b-a4b-it/) | `gemma-4-26b-a4b-it` | 262k | ? | 🟢 |  |
-| [Gemma 4 31B IT](https://freetierradar.com/models/google-ai-studio/gemma-4-31b-it/) | `gemma-4-31b-it` | 262k | ? | 🔴 |  |
+| [Gemma 4 31B IT](https://freetierradar.com/models/google-ai-studio/gemma-4-31b-it/) | `gemma-4-31b-it` | 262k | ? | 🟡 |  |
 
 #### NVIDIA API catalog (build.nvidia.com) ⚠ evaluation only
 
@@ -86,10 +86,10 @@ _120 free models. Updated automatically; see [FreeTier Radar](https://freetierra
 | [google/recurrentgemma-2b (google)](https://freetierradar.com/models/nvidia/google-recurrentgemma-2b/) | `google/recurrentgemma-2b` | unknown | ? | 🔴 |  |
 | [ibm/granite-3.0-3b-a800m-instruct (ibm)](https://freetierradar.com/models/nvidia/ibm-granite-3-0-3b-a800m-instruct/) | `ibm/granite-3.0-3b-a800m-instruct` | unknown | ? | 🔴 |  |
 | [ibm/granite-3.0-8b-instruct (ibm)](https://freetierradar.com/models/nvidia/ibm-granite-3-0-8b-instruct/) | `ibm/granite-3.0-8b-instruct` | unknown | ? | 🔴 |  |
-| [meta/llama-3.2-11b-vision-instruct (meta)](https://freetierradar.com/models/nvidia/meta-llama-3-2-11b-vision-instruct/) | `meta/llama-3.2-11b-vision-instruct` | unknown | ? | 🟢 |  |
+| [meta/llama-3.2-11b-vision-instruct (meta)](https://freetierradar.com/models/nvidia/meta-llama-3-2-11b-vision-instruct/) | `meta/llama-3.2-11b-vision-instruct` | unknown | ? | 🟡 |  |
 | [meta/llama-3.2-90b-vision-instruct (meta)](https://freetierradar.com/models/nvidia/meta-llama-3-2-90b-vision-instruct/) | `meta/llama-3.2-90b-vision-instruct` | unknown | ? | 🟡 |  |
 | [meta/llama2-70b (meta)](https://freetierradar.com/models/nvidia/meta-llama2-70b/) | `meta/llama2-70b` | unknown | ? | 🔴 |  |
-| [meta/muse-glimmer-30b (meta)](https://freetierradar.com/models/nvidia/meta-muse-glimmer-30b/) | `meta/muse-glimmer-30b` | unknown | ? | 🟡 |  |
+| [meta/muse-glimmer-30b (meta)](https://freetierradar.com/models/nvidia/meta-muse-glimmer-30b/) | `meta/muse-glimmer-30b` | unknown | ? | 🟢 |  |
 | [microsoft/phi-3-vision-128k-instruct (microsoft)](https://freetierradar.com/models/nvidia/microsoft-phi-3-vision-128k-instruct/) | `microsoft/phi-3-vision-128k-instruct` | unknown | ? | 🔴 |  |
 | [microsoft/phi-3.5-moe-instruct (microsoft)](https://freetierradar.com/models/nvidia/microsoft-phi-3-5-moe-instruct/) | `microsoft/phi-3.5-moe-instruct` | unknown | ? | 🔴 |  |
 | [mistralai/mistral-7b-instruct-v0.3 (mistralai)](https://freetierradar.com/models/nvidia/mistralai-mistral-7b-instruct-v0-3/) | `mistralai/mistral-7b-instruct-v0.3` | unknown | ? | 🔴 |  |
@@ -118,7 +118,7 @@ _120 free models. Updated automatically; see [FreeTier Radar](https://freetierra
 | [nvidia/riva-translate-4b-instruct-v2 (nvidia)](https://freetierradar.com/models/nvidia/nvidia-riva-translate-4b-instruct-v2/) | `nvidia/riva-translate-4b-instruct-v2` | unknown | ? | 🟡 |  |
 | [nvidia/vila (nvidia)](https://freetierradar.com/models/nvidia/nvidia-vila/) | `nvidia/vila` | unknown | ? | 🔴 |  |
 | [openai/gpt-oss-20b (openai)](https://freetierradar.com/models/nvidia/openai-gpt-oss-20b/) | `openai/gpt-oss-20b` | unknown | ? | 🟢 |  |
-| [poolside/laguna-xs-2.1 (poolside)](https://freetierradar.com/models/nvidia/poolside-laguna-xs-2-1/) | `poolside/laguna-xs-2.1` | unknown | ? | 🟢 |  |
+| [poolside/laguna-xs-2.1 (poolside)](https://freetierradar.com/models/nvidia/poolside-laguna-xs-2-1/) | `poolside/laguna-xs-2.1` | unknown | ? | 🔴 |  |
 | [writer/palmyra-creative-122b (writer)](https://freetierradar.com/models/nvidia/writer-palmyra-creative-122b/) | `writer/palmyra-creative-122b` | unknown | ? | 🔴 |  |
 | [writer/palmyra-fin-70b-32k (writer)](https://freetierradar.com/models/nvidia/writer-palmyra-fin-70b-32k/) | `writer/palmyra-fin-70b-32k` | unknown | ? | 🔴 |  |
 | [writer/palmyra-med-70b (writer)](https://freetierradar.com/models/nvidia/writer-palmyra-med-70b/) | `writer/palmyra-med-70b` | unknown | ? | 🔴 |  |
@@ -131,15 +131,15 @@ _120 free models. Updated automatically; see [FreeTier Radar](https://freetierra
 
 | Model | ID | Context | Tools | Last test | Agent |
 |---|---|---|---|---|---|
-| [Cohere: North Mini Code (free)](https://freetierradar.com/models/kilo/cohere-north-mini-code-free/) | `cohere/north-mini-code:free` | 256k | yes | – |  |
-| [Dots Studio: Dots3-Note Preview (free)](https://freetierradar.com/models/kilo/dots-studio-dots-3-note-preview-free/) | `dots-studio/dots-3-note-preview:free` | 512k | yes | – |  |
-| [inclusionAI: Ling 3.0 Flash Fin (free)](https://freetierradar.com/models/kilo/inclusionai-ling-3-0-flash-fin-free/) | `inclusionai/ling-3.0-flash-fin:free` | 262k | yes | – |  |
-| [inclusionAI: Ling 3.0 Flash Sante (free)](https://freetierradar.com/models/kilo/inclusionai-ling-3-0-flash-sante-free/) | `inclusionai/ling-3.0-flash-sante:free` | 262k | yes | – |  |
-| [LiquidAI: LFM2.5-2.6B (free)](https://freetierradar.com/models/kilo/liquid-lfm-2-5-2-6b-free/) | `liquid/lfm-2.5-2.6b:free` | 66k | yes | – |  |
-| [NVIDIA: Nemotron 3 Nano Omni (free)](https://freetierradar.com/models/kilo/nvidia-nemotron-3-nano-omni-30b-a3b-reasoning-free/) | `nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free` | 256k | yes | – |  |
-| [NVIDIA: Nemotron 3 Super (free)](https://freetierradar.com/models/kilo/nvidia-nemotron-3-super-120b-a12b-free/) | `nvidia/nemotron-3-super-120b-a12b:free` | 262k | yes | – |  |
-| [NVIDIA: Nemotron 3 Ultra (free)](https://freetierradar.com/models/kilo/nvidia-nemotron-3-ultra-550b-a55b-free/) | `nvidia/nemotron-3-ultra-550b-a55b:free` | 1M | yes | – |  |
-| [NVIDIA: Nemotron 3.5 Lightning (free)](https://freetierradar.com/models/kilo/nvidia-nemotron-3-5-lightning-free/) | `nvidia/nemotron-3.5-lightning:free` | 1M | yes | – |  |
+| [Cohere: North Mini Code (free)](https://freetierradar.com/models/kilo/cohere-north-mini-code-free/) | `cohere/north-mini-code:free` | 256k | yes | 🟢 |  |
+| [Dots Studio: Dots3-Note Preview (free)](https://freetierradar.com/models/kilo/dots-studio-dots-3-note-preview-free/) | `dots-studio/dots-3-note-preview:free` | 512k | yes | 🟢 |  |
+| [inclusionAI: Ling 3.0 Flash Fin (free)](https://freetierradar.com/models/kilo/inclusionai-ling-3-0-flash-fin-free/) | `inclusionai/ling-3.0-flash-fin:free` | 262k | yes | 🟢 |  |
+| [inclusionAI: Ling 3.0 Flash Sante (free)](https://freetierradar.com/models/kilo/inclusionai-ling-3-0-flash-sante-free/) | `inclusionai/ling-3.0-flash-sante:free` | 262k | yes | 🟢 |  |
+| [LiquidAI: LFM2.5-2.6B (free)](https://freetierradar.com/models/kilo/liquid-lfm-2-5-2-6b-free/) | `liquid/lfm-2.5-2.6b:free` | 66k | yes | 🟢 |  |
+| [NVIDIA: Nemotron 3 Nano Omni (free)](https://freetierradar.com/models/kilo/nvidia-nemotron-3-nano-omni-30b-a3b-reasoning-free/) | `nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free` | 256k | yes | 🟢 |  |
+| [NVIDIA: Nemotron 3 Super (free)](https://freetierradar.com/models/kilo/nvidia-nemotron-3-super-120b-a12b-free/) | `nvidia/nemotron-3-super-120b-a12b:free` | 262k | yes | 🟢 |  |
+| [NVIDIA: Nemotron 3 Ultra (free)](https://freetierradar.com/models/kilo/nvidia-nemotron-3-ultra-550b-a55b-free/) | `nvidia/nemotron-3-ultra-550b-a55b:free` | 1M | yes | 🟢 |  |
+| [NVIDIA: Nemotron 3.5 Lightning (free)](https://freetierradar.com/models/kilo/nvidia-nemotron-3-5-lightning-free/) | `nvidia/nemotron-3.5-lightning:free` | 1M | yes | 🟢 |  |
 | [Poolside: Laguna S 2.1 (free)](https://freetierradar.com/models/kilo/poolside-laguna-s-2-1-free/) | `poolside/laguna-s-2.1:free` | 262k | yes | – |  |
 | [Poolside: Laguna XS 2.1 (free)](https://freetierradar.com/models/kilo/poolside-laguna-xs-2-1-free/) | `poolside/laguna-xs-2.1:free` | 262k | yes | – |  |
 | [Qwen: Qwen3.8 27B (free)](https://freetierradar.com/models/kilo/qwen-qwen3-8-27b-free/) | `qwen/qwen3.8-27b:free` | 262k | yes | – |  |
@@ -151,9 +151,9 @@ _120 free models. Updated automatically; see [FreeTier Radar](https://freetierra
 
 | Model | ID | Context | Tools | Last test | Agent |
 |---|---|---|---|---|---|
-| [GLM-5.3-Flash](https://freetierradar.com/models/llm7/glm-5-3-flash/) | `GLM-5.3-Flash` | 400k | yes | – |  |
-| [minimax-m2.7](https://freetierradar.com/models/llm7/minimax-m2-7/) | `minimax-m2.7` | 180k | yes | – |  |
-| [mistral-Nemo-Instruct-2407](https://freetierradar.com/models/llm7/mistral-nemo-instruct-2407/) | `mistral-Nemo-Instruct-2407` | 128k | no | – |  |
+| [GLM-5.3-Flash](https://freetierradar.com/models/llm7/glm-5-3-flash/) | `GLM-5.3-Flash` | 400k | yes | 🟢 |  |
+| [minimax-m2.7](https://freetierradar.com/models/llm7/minimax-m2-7/) | `minimax-m2.7` | 180k | yes | 🟢 |  |
+| [mistral-Nemo-Instruct-2407](https://freetierradar.com/models/llm7/mistral-nemo-instruct-2407/) | `mistral-Nemo-Instruct-2407` | 128k | no | 🟢 |  |
 
 ### Text-to-speech (9)
 
