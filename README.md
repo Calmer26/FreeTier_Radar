@@ -11,11 +11,11 @@ change history and ready-to-paste Cline settings.
 ## The list
 
 <!-- LIST:START -->
-_120 free models. Updated automatically; see [FreeTier Radar](https://freetierradar.com) for filters, limits and change history._
+_126 free models. Updated automatically; see [FreeTier Radar](https://freetierradar.com) for filters, limits and change history._
 
 🟢 responded to the latest daily test · 🟡 rate-limited or slow · 🔴 failed · 🤖 agent-ready (tool calling, ≥64k context, answered 5 of the last 7 days)
 
-### Chat (108)
+### Chat (114)
 
 #### OpenRouter
 
@@ -154,6 +154,17 @@ _120 free models. Updated automatically; see [FreeTier Radar](https://freetierra
 | [GLM-5.3-Flash](https://freetierradar.com/models/llm7/glm-5-3-flash/) | `GLM-5.3-Flash` | 400k | yes | 🟢 |  |
 | [minimax-m2.7](https://freetierradar.com/models/llm7/minimax-m2-7/) | `minimax-m2.7` | 180k | yes | 🟢 |  |
 | [mistral-Nemo-Instruct-2407](https://freetierradar.com/models/llm7/mistral-nemo-instruct-2407/) | `mistral-Nemo-Instruct-2407` | 128k | no | 🟢 |  |
+
+#### Cline (free promotion)
+
+| Model | ID | Context | Tools | Last test | Agent |
+|---|---|---|---|---|---|
+| [Deepseek-v4.1-Flash](https://freetierradar.com/models/cline/cline-free-deepseek-v4-1-flash/) | `cline-free/deepseek-v4.1-flash` | unknown | ? | – |  |
+| [Gemini 3.8 Flash](https://freetierradar.com/models/cline/cline-free-gemini-3-8-flash/) | `cline-free/gemini-3.8-flash` | unknown | ? | – |  |
+| [Mimo V2.6 Flash](https://freetierradar.com/models/cline/cline-free-mimo-v2-6-flash/) | `cline-free/mimo-v2.6-flash` | unknown | ? | – |  |
+| [Muse Spark 1.3 Contributor](https://freetierradar.com/models/cline/cline-free-muse-spark-1-3-contributor/) | `cline-free/muse-spark-1.3-contributor` | unknown | ? | – |  |
+| [Pixel Canary](https://freetierradar.com/models/cline/stealth-pixel-canary/) | `stealth/pixel-canary` | unknown | ? | – |  |
+| [space-bunny-alpha](https://freetierradar.com/models/cline/stealth-space-bunny-alpha/) | `stealth/space-bunny-alpha` | unknown | ? | – |  |
 
 ### Text-to-speech (9)
 
