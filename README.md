@@ -11,7 +11,7 @@ change history and ready-to-paste Cline settings.
 ## The list
 
 <!-- LIST:START -->
-_151 free models. Updated automatically; see [FreeTier Radar](https://freetierradar.com) for filters, limits and change history._
+_150 free models. Updated automatically; see [FreeTier Radar](https://freetierradar.com) for filters, limits and change history._
 
 🟢 responded to the latest daily test · 🟡 rate-limited or slow · 🔴 failed · 🤖 agent-ready (tool calling, ≥64k context, answered 5 of the last 7 days)
 
@@ -237,7 +237,7 @@ _151 free models. Updated automatically; see [FreeTier Radar](https://freetierra
 | [openai/whisper](https://freetierradar.com/models/cloudflare/cf-openai-whisper/) | `@cf/openai/whisper` | 🟢 |
 | [openai/whisper-tiny-en](https://freetierradar.com/models/cloudflare/cf-openai-whisper-tiny-en/) | `@cf/openai/whisper-tiny-en` | 🟢 |
 
-### Image (10)
+### Image (9)
 
 #### Cloudflare Workers AI
 
@@ -251,7 +251,6 @@ _151 free models. Updated automatically; see [FreeTier Radar](https://freetierra
 | [leonardo/lucid-origin](https://freetierradar.com/models/cloudflare/cf-leonardo-lucid-origin/) | `@cf/leonardo/lucid-origin` | 🟢 |
 | [leonardo/phoenix-1.0](https://freetierradar.com/models/cloudflare/cf-leonardo-phoenix-1-0/) | `@cf/leonardo/phoenix-1.0` | 🟢 |
 | [lykon/dreamshaper-8-lcm](https://freetierradar.com/models/cloudflare/cf-lykon-dreamshaper-8-lcm/) | `@cf/lykon/dreamshaper-8-lcm` | 🟢 |
-| [runwayml/stable-diffusion-v1-5-inpainting](https://freetierradar.com/models/cloudflare/cf-runwayml-stable-diffusion-v1-5-inpainting/) | `@cf/runwayml/stable-diffusion-v1-5-inpainting` | 🔴 |
 | [stabilityai/stable-diffusion-xl-base-1.0](https://freetierradar.com/models/cloudflare/cf-stabilityai-stable-diffusion-xl-base-1-0/) | `@cf/stabilityai/stable-diffusion-xl-base-1.0` | 🟢 |
 
 <!-- LIST:END -->

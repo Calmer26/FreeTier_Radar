@@ -6,7 +6,7 @@
     "limit_scope": "shared",
     "usage_terms": "production-ok",
     "rate_limits": {
-      "note": "\u2248 313k input tokens a day within the free Neurons",
+      "note": "10,000 Neurons per day across all models (resets 00:00 UTC). How far that goes depends on the model; see the estimate per model.",
       "source": "https://developers.cloudflare.com/workers-ai/platform/pricing/"
     },
     "card_required": "no",
@@ -31,7 +31,19 @@
     "last_seen": "2026-09-28T16:52:45.565Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "bacba05082870920"
+    "fingerprint": "6d7ce934204a88b1",
+    "pricing": [
+      {
+        "usd": 0.351,
+        "unit": "M input tokens",
+        "neurons": 31876
+      },
+      {
+        "usd": 0.555,
+        "unit": "M output tokens",
+        "neurons": 50488
+      }
+    ]
   },
   {
     "provider": "cloudflare",
@@ -65,7 +77,19 @@
     "last_seen": "2026-09-28T16:52:45.565Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "d8b80a6993156640"
+    "fingerprint": "fba428c4880df828",
+    "pricing": [
+      {
+        "usd": 0.0000528,
+        "unit": "512x512 tile",
+        "neurons": 4.8
+      },
+      {
+        "usd": 0.0001056,
+        "unit": "step",
+        "neurons": 9.6
+      }
+    ]
   },
   {
     "provider": "cloudflare",
@@ -99,7 +123,19 @@
     "last_seen": "2026-09-28T16:52:45.565Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "9cf312137593dd13"
+    "fingerprint": "511a61842c317754",
+    "pricing": [
+      {
+        "usd": 0.00021,
+        "unit": "input 512x512 tile, per step",
+        "neurons": 18.75
+      },
+      {
+        "usd": 0.00041,
+        "unit": "output 512x512 tile, per step",
+        "neurons": 37.5
+      }
+    ]
   },
   {
     "provider": "cloudflare",
@@ -133,7 +169,19 @@
     "last_seen": "2026-09-28T16:52:45.565Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "8b8a01ddf44352e0"
+    "fingerprint": "199f552d60781a93",
+    "pricing": [
+      {
+        "usd": 0.000059,
+        "unit": "input 512x512 tile",
+        "neurons": 5.37
+      },
+      {
+        "usd": 0.000287,
+        "unit": "output 512x512 tile",
+        "neurons": 26.05
+      }
+    ]
   },
   {
     "provider": "cloudflare",
@@ -167,7 +215,24 @@
     "last_seen": "2026-09-28T16:52:45.565Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "7467f09eab54fec4"
+    "fingerprint": "126aa8ee24a10406",
+    "pricing": [
+      {
+        "usd": 0.015,
+        "unit": "first MP (1024x1024)",
+        "neurons": 1363.64
+      },
+      {
+        "usd": 0.002,
+        "unit": "subsequent MP",
+        "neurons": 181.82
+      },
+      {
+        "usd": 0.002,
+        "unit": "input image MP",
+        "neurons": 181.82
+      }
+    ]
   },
   {
     "provider": "cloudflare",
@@ -176,7 +241,7 @@
     "limit_scope": "shared",
     "usage_terms": "production-ok",
     "rate_limits": {
-      "note": "No charge listed (beta): doesn't use the free Neurons",
+      "note": "10,000 Neurons per day across all models (resets 00:00 UTC). How far that goes depends on the model; see the estimate per model.",
       "source": "https://developers.cloudflare.com/workers-ai/platform/pricing/"
     },
     "card_required": "no",
@@ -201,7 +266,14 @@
     "last_seen": "2026-09-28T16:52:45.565Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "10e41299067af60c"
+    "fingerprint": "b9dd1d421d7634c2",
+    "pricing": [
+      {
+        "usd": 0,
+        "unit": "step",
+        "neurons": 0
+      }
+    ]
   },
   {
     "provider": "cloudflare",
@@ -210,7 +282,7 @@
     "limit_scope": "shared",
     "usage_terms": "production-ok",
     "rate_limits": {
-      "note": "\u2248 221k input tokens a day within the free Neurons",
+      "note": "10,000 Neurons per day across all models (resets 00:00 UTC). How far that goes depends on the model; see the estimate per model.",
       "source": "https://developers.cloudflare.com/workers-ai/platform/pricing/"
     },
     "card_required": "no",
@@ -235,7 +307,19 @@
     "last_seen": "2026-09-28T16:52:45.565Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "0d1697d9cc46fd8e"
+    "fingerprint": "defeb4d199e65dcd",
+    "pricing": [
+      {
+        "usd": 0.497,
+        "unit": "M input tokens",
+        "neurons": 45170
+      },
+      {
+        "usd": 4.881,
+        "unit": "M output tokens",
+        "neurons": 443756
+      }
+    ]
   },
   {
     "provider": "cloudflare",
@@ -244,7 +328,7 @@
     "limit_scope": "shared",
     "usage_terms": "production-ok",
     "rate_limits": {
-      "note": "\u2248 6.5M input tokens a day within the free Neurons",
+      "note": "10,000 Neurons per day across all models (resets 00:00 UTC). How far that goes depends on the model; see the estimate per model.",
       "source": "https://developers.cloudflare.com/workers-ai/platform/pricing/"
     },
     "card_required": "no",
@@ -269,7 +353,19 @@
     "last_seen": "2026-09-28T16:52:45.565Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "de060d116833e4e7"
+    "fingerprint": "11051c65b93680fa",
+    "pricing": [
+      {
+        "usd": 0.017,
+        "unit": "M input tokens",
+        "neurons": 1542
+      },
+      {
+        "usd": 0.112,
+        "unit": "M output tokens",
+        "neurons": 10158
+      }
+    ]
   },
   {
     "provider": "cloudflare",
@@ -278,7 +374,7 @@
     "limit_scope": "shared",
     "usage_terms": "production-ok",
     "rate_limits": {
-      "note": "\u2248 15 images (512\u00d7512) a day within the free Neurons",
+      "note": "10,000 Neurons per day across all models (resets 00:00 UTC). How far that goes depends on the model; see the estimate per model.",
       "source": "https://developers.cloudflare.com/workers-ai/platform/pricing/"
     },
     "card_required": "no",
@@ -303,7 +399,19 @@
     "last_seen": "2026-09-28T16:52:45.565Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "d26b200072436fd9"
+    "fingerprint": "cd384dcf6c35552b",
+    "pricing": [
+      {
+        "usd": 0.006996,
+        "unit": "512x512 tile",
+        "neurons": 636
+      },
+      {
+        "usd": 0.000132,
+        "unit": "step",
+        "neurons": 12
+      }
+    ]
   },
   {
     "provider": "cloudflare",
@@ -312,7 +420,7 @@
     "limit_scope": "shared",
     "usage_terms": "production-ok",
     "rate_limits": {
-      "note": "\u2248 18 images (512\u00d7512) a day within the free Neurons",
+      "note": "10,000 Neurons per day across all models (resets 00:00 UTC). How far that goes depends on the model; see the estimate per model.",
       "source": "https://developers.cloudflare.com/workers-ai/platform/pricing/"
     },
     "card_required": "no",
@@ -337,7 +445,19 @@
     "last_seen": "2026-09-28T16:52:45.565Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "f77f3b865fcc46e1"
+    "fingerprint": "844acca3e69e2c6f",
+    "pricing": [
+      {
+        "usd": 0.00583,
+        "unit": "512x512 tile",
+        "neurons": 530
+      },
+      {
+        "usd": 0.00011,
+        "unit": "step",
+        "neurons": 10
+      }
+    ]
   },
   {
     "provider": "cloudflare",
@@ -371,7 +491,8 @@
     "last_seen": "2026-09-28T16:52:45.565Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "4c2d6d292a371076"
+    "fingerprint": "c6594a9cd5b558c1",
+    "pricing": null
   },
   {
     "provider": "cloudflare",
@@ -380,7 +501,7 @@
     "limit_scope": "shared",
     "usage_terms": "production-ok",
     "rate_limits": {
-      "note": "\u2248 724k input tokens a day within the free Neurons",
+      "note": "10,000 Neurons per day across all models (resets 00:00 UTC). How far that goes depends on the model; see the estimate per model.",
       "source": "https://developers.cloudflare.com/workers-ai/platform/pricing/"
     },
     "card_required": "no",
@@ -405,7 +526,19 @@
     "last_seen": "2026-09-28T16:52:45.565Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "1a1602c2963d6325"
+    "fingerprint": "23ff53ff288260c5",
+    "pricing": [
+      {
+        "usd": 0.152,
+        "unit": "M input tokens",
+        "neurons": 13778
+      },
+      {
+        "usd": 0.287,
+        "unit": "M output tokens",
+        "neurons": 26128
+      }
+    ]
   },
   {
     "provider": "cloudflare",
@@ -414,7 +547,7 @@
     "limit_scope": "shared",
     "usage_terms": "production-ok",
     "rate_limits": {
-      "note": "\u2248 2.3M input tokens a day within the free Neurons",
+      "note": "10,000 Neurons per day across all models (resets 00:00 UTC). How far that goes depends on the model; see the estimate per model.",
       "source": "https://developers.cloudflare.com/workers-ai/platform/pricing/"
     },
     "card_required": "no",
@@ -440,7 +573,19 @@
     "last_seen": "2026-09-28T16:52:45.565Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "9cbbc8a20b36c02b"
+    "fingerprint": "ac7b94425ef6fca8",
+    "pricing": [
+      {
+        "usd": 0.049,
+        "unit": "M input tokens",
+        "neurons": 4410
+      },
+      {
+        "usd": 0.676,
+        "unit": "M output tokens",
+        "neurons": 61493
+      }
+    ]
   },
   {
     "provider": "cloudflare",
@@ -449,7 +594,7 @@
     "limit_scope": "shared",
     "usage_terms": "production-ok",
     "rate_limits": {
-      "note": "\u2248 4.1M input tokens a day within the free Neurons",
+      "note": "10,000 Neurons per day across all models (resets 00:00 UTC). How far that goes depends on the model; see the estimate per model.",
       "source": "https://developers.cloudflare.com/workers-ai/platform/pricing/"
     },
     "card_required": "no",
@@ -474,7 +619,19 @@
     "last_seen": "2026-09-28T16:52:45.565Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "1ccfd5dbeb01ee65"
+    "fingerprint": "1b44c34bfffa7c27",
+    "pricing": [
+      {
+        "usd": 0.027,
+        "unit": "M input tokens",
+        "neurons": 2457
+      },
+      {
+        "usd": 0.201,
+        "unit": "M output tokens",
+        "neurons": 18252
+      }
+    ]
   },
   {
     "provider": "cloudflare",
@@ -483,7 +640,7 @@
     "limit_scope": "shared",
     "usage_terms": "production-ok",
     "rate_limits": {
-      "note": "\u2248 2.2M input tokens a day within the free Neurons",
+      "note": "10,000 Neurons per day across all models (resets 00:00 UTC). How far that goes depends on the model; see the estimate per model.",
       "source": "https://developers.cloudflare.com/workers-ai/platform/pricing/"
     },
     "card_required": "no",
@@ -508,7 +665,19 @@
     "last_seen": "2026-09-28T16:52:45.565Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "ee1486af24f20985"
+    "fingerprint": "f757fb1dc84d4945",
+    "pricing": [
+      {
+        "usd": 0.051,
+        "unit": "M input tokens",
+        "neurons": 4625
+      },
+      {
+        "usd": 0.335,
+        "unit": "M output tokens",
+        "neurons": 30475
+      }
+    ]
   },
   {
     "provider": "cloudflare",
@@ -517,7 +686,7 @@
     "limit_scope": "shared",
     "usage_terms": "production-ok",
     "rate_limits": {
-      "note": "\u2248 313k input tokens a day within the free Neurons",
+      "note": "10,000 Neurons per day across all models (resets 00:00 UTC). How far that goes depends on the model; see the estimate per model.",
       "source": "https://developers.cloudflare.com/workers-ai/platform/pricing/"
     },
     "card_required": "no",
@@ -542,7 +711,19 @@
     "last_seen": "2026-09-28T16:52:45.565Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "a1f0fe79f2ecc61c"
+    "fingerprint": "fb80e20d14dbbf46",
+    "pricing": [
+      {
+        "usd": 0.351,
+        "unit": "M input tokens",
+        "neurons": 31876
+      },
+      {
+        "usd": 0.555,
+        "unit": "M output tokens",
+        "neurons": 50488
+      }
+    ]
   },
   {
     "provider": "cloudflare",
@@ -551,7 +732,7 @@
     "limit_scope": "shared",
     "usage_terms": "production-ok",
     "rate_limits": {
-      "note": "\u2248 536 audio minutes a day within the free Neurons",
+      "note": "10,000 Neurons per day across all models (resets 00:00 UTC). How far that goes depends on the model; see the estimate per model.",
       "source": "https://developers.cloudflare.com/workers-ai/platform/pricing/"
     },
     "card_required": "no",
@@ -576,7 +757,14 @@
     "last_seen": "2026-09-28T16:52:45.565Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "036c2c038d4f8acd"
+    "fingerprint": "0e4c4a9c998c611d",
+    "pricing": [
+      {
+        "usd": 0.0002,
+        "unit": "audio minute",
+        "neurons": 18.63
+      }
+    ]
   },
   {
     "provider": "cloudflare",
@@ -585,7 +773,7 @@
     "limit_scope": "shared",
     "usage_terms": "production-ok",
     "rate_limits": {
-      "note": "\u2248 220k input tokens a day within the free Neurons",
+      "note": "10,000 Neurons per day across all models (resets 00:00 UTC). How far that goes depends on the model; see the estimate per model.",
       "source": "https://developers.cloudflare.com/workers-ai/platform/pricing/"
     },
     "card_required": "no",
@@ -610,7 +798,19 @@
     "last_seen": "2026-09-28T16:52:45.565Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "955b83bfb2c4e2ec"
+    "fingerprint": "ead3536794a665e8",
+    "pricing": [
+      {
+        "usd": 0.5,
+        "unit": "M input tokens",
+        "neurons": 45455
+      },
+      {
+        "usd": 1.5,
+        "unit": "M output tokens",
+        "neurons": 136364
+      }
+    ]
   },
   {
     "provider": "cloudflare",
@@ -619,7 +819,7 @@
     "limit_scope": "shared",
     "usage_terms": "production-ok",
     "rate_limits": {
-      "note": "\u2248 242 audio minutes a day within the free Neurons",
+      "note": "10,000 Neurons per day across all models (resets 00:00 UTC). How far that goes depends on the model; see the estimate per model.",
       "source": "https://developers.cloudflare.com/workers-ai/platform/pricing/"
     },
     "card_required": "no",
@@ -644,7 +844,14 @@
     "last_seen": "2026-09-28T16:52:45.565Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "97e3ad85b26fcaf1"
+    "fingerprint": "a5f59f4466965614",
+    "pricing": [
+      {
+        "usd": 0.0005,
+        "unit": "audio minute",
+        "neurons": 41.14
+      }
+    ]
   },
   {
     "provider": "cloudflare",
@@ -678,7 +885,8 @@
     "last_seen": "2026-09-28T16:52:45.565Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "278994bd9e899929"
+    "fingerprint": "6e2c46462b49a480",
+    "pricing": null
   },
   {
     "provider": "cloudflare",
@@ -687,7 +895,7 @@
     "limit_scope": "shared",
     "usage_terms": "production-ok",
     "rate_limits": {
-      "note": "\u2248 167k input tokens a day within the free Neurons",
+      "note": "10,000 Neurons per day across all models (resets 00:00 UTC). How far that goes depends on the model; see the estimate per model.",
       "source": "https://developers.cloudflare.com/workers-ai/platform/pricing/"
     },
     "card_required": "no",
@@ -712,7 +920,19 @@
     "last_seen": "2026-09-28T16:52:45.565Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "96f7eb1d728cfb93"
+    "fingerprint": "7a091677b5555cd5",
+    "pricing": [
+      {
+        "usd": 0.66,
+        "unit": "M input tokens",
+        "neurons": 60000
+      },
+      {
+        "usd": 1,
+        "unit": "M output tokens",
+        "neurons": 90909
+      }
+    ]
   },
   {
     "provider": "cloudflare",
@@ -721,7 +941,7 @@
     "limit_scope": "shared",
     "usage_terms": "production-ok",
     "rate_limits": {
-      "note": "\u2248 167k input tokens a day within the free Neurons",
+      "note": "10,000 Neurons per day across all models (resets 00:00 UTC). How far that goes depends on the model; see the estimate per model.",
       "source": "https://developers.cloudflare.com/workers-ai/platform/pricing/"
     },
     "card_required": "no",
@@ -746,7 +966,19 @@
     "last_seen": "2026-09-28T16:52:45.565Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "f1b542aa84698bc7"
+    "fingerprint": "42c65973d6f7413c",
+    "pricing": [
+      {
+        "usd": 0.66,
+        "unit": "M input tokens",
+        "neurons": 60000
+      },
+      {
+        "usd": 1,
+        "unit": "M output tokens",
+        "neurons": 90909
+      }
+    ]
   },
   {
     "provider": "cloudflare",
@@ -755,7 +987,7 @@
     "limit_scope": "shared",
     "usage_terms": "production-ok",
     "rate_limits": {
-      "note": "No charge listed (beta): doesn't use the free Neurons",
+      "note": "10,000 Neurons per day across all models (resets 00:00 UTC). How far that goes depends on the model; see the estimate per model.",
       "source": "https://developers.cloudflare.com/workers-ai/platform/pricing/"
     },
     "card_required": "no",
@@ -780,7 +1012,14 @@
     "last_seen": "2026-09-28T16:52:45.565Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "00d3844d4dc3aa6a"
+    "fingerprint": "b2927ba20ca2f876",
+    "pricing": [
+      {
+        "usd": 0,
+        "unit": "step",
+        "neurons": 0
+      }
+    ]
   },
   {
     "provider": "cloudflare",
@@ -789,7 +1028,7 @@
     "limit_scope": "shared",
     "usage_terms": "production-ok",
     "rate_limits": {
-      "note": "\u2248 1.8M input tokens a day within the free Neurons",
+      "note": "10,000 Neurons per day across all models (resets 00:00 UTC). How far that goes depends on the model; see the estimate per model.",
       "source": "https://developers.cloudflare.com/workers-ai/platform/pricing/"
     },
     "card_required": "no",
@@ -814,6 +1053,18 @@
     "last_seen": "2026-09-28T16:52:45.565Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "3176d0d33a8f02c6"
+    "fingerprint": "540893a04aa15ac1",
+    "pricing": [
+      {
+        "usd": 0.06,
+        "unit": "M input tokens",
+        "neurons": 5500
+      },
+      {
+        "usd": 0.4,
+        "unit": "M output tokens",
+        "neurons": 36400
+      }
+    ]
   }
 ]
