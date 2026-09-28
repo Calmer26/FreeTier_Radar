@@ -7,6 +7,7 @@ import TestStatus from "../../../components/TestStatus.astro";
 import { events, formatDate, formatTime, models, type ModelView } from "../../../lib/data";
 import { PROVIDERS } from "../../../../pipeline/providers";
 import { formatContext, formatLimits, KIND_LABELS } from "../../../../pipeline/templates";
+import { ARENA_ATTRIBUTION, ARENA_BOARD_LABELS, ARENA_BOARDS, ARENA_DATASET_URL } from "../../../../pipeline/arena";
 
 export function getStaticPaths() {
   return models.map((m) => ({ params: { provider: m.provider, slug: m.slug }, props: { m } }));
@@ -56,6 +57,34 @@ const description = `${m.name} on ${provider.label}: free-tier status, limits, d
     <div><dt>First seen</dt><dd>{formatDate(m.first_seen)}</dd></div>
   </dl>
   {m.limits?.note && <p class="sub">{m.limits.note}</p>}
+
+  {m.kind === "chat" && (
+    <>
+      <h2>LMArena ratings</h2>
+      {m.arena ? (
+        <>
+          <dl class="facts">
+            {ARENA_BOARDS.filter((b) => m.arena!.boards[b]).map((b) => {
+              const s = m.arena!.boards[b]!;
+              return (
+                <div>
+                  <dt>{ARENA_BOARD_LABELS[b]}{b === "agent" ? " (rank only)" : ""}</dt>
+                  <dd>{s.rating ? `${Math.round(s.rating)} · ` : ""}#{s.rank} of {s.of}</dd>
+                </div>
+              );
+            })}
+          </dl>
+          <p class="sub">
+            Listed on LMArena as <code>{m.arena.name}</code>{m.arena.published ? `, leaderboard of ${formatDate(m.arena.published)}` : ""}.
+            Source: <a href={ARENA_DATASET_URL} rel="noopener">{ARENA_ATTRIBUTION}</a>. Ratings come from people comparing
+            answers blind; they measure preference, not correctness.
+          </p>
+        </>
+      ) : (
+        <p class="sub">No LMArena rating yet. Many small or new free models aren't on its leaderboards.</p>
+      )}
+    </>
+  )}
 
   <h2>Daily test</h2>
   <p><TestStatus test={m.lastTest} /></p>

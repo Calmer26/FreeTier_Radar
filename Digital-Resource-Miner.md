@@ -511,7 +511,8 @@ A GitHub issue form (`.github/ISSUE_TEMPLATE/suggest-resource.yml`) with fields 
 **Status 28 Sep 2026:**
 - Built and live: offers + page watcher, rankings, roundup generator + pages/RSS, issue form.
 - Pulled forward: **TTS and STT models** (Groq, Gemini, OpenRouter hand-listed voices) with their own daily tests.
-- Still to do in 2a: the Arena adapter + aliases, and the keyless providers.
+- Arena ratings live: 4 leaderboards, 34 models linked automatically on 28 Sep, near matches via a weekly review PR.
+- Still to do in 2a: the keyless providers.
 
 **2a — no keys needed; can be built before Phase 0**
 1. Offer records + page-change watcher.

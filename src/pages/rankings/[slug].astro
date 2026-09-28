@@ -4,6 +4,7 @@ import Badges from "../../components/Badges.astro";
 import SponsorSlot from "../../components/SponsorSlot.astro";
 import { activeModels, type ModelView } from "../../lib/data";
 import { MIN_TESTED_DAYS, rank, RANKINGS, RANKING_WINDOW_DAYS, type RankingDef } from "../../../pipeline/rankings";
+import { ARENA_ATTRIBUTION, ARENA_DATASET_URL } from "../../../pipeline/arena";
 import { PROVIDERS } from "../../../pipeline/providers";
 import { formatContext } from "../../../pipeline/templates";
 
@@ -12,8 +13,14 @@ export function getStaticPaths() {
 }
 
 const { def } = Astro.props as { def: RankingDef };
-const list = rank(def, activeModels.map((m) => ({ r: m, history: m.tests })));
+const list = rank(def, activeModels.map((m) => ({ r: m, history: m.tests, arena: m.arena })));
 const isChat = !["text-to-speech", "speech-to-text"].includes(def.slug);
+const arenaBoard = def.slug === "coding-agents" ? "webdev" : def.slug === "vision" ? "vision" : "text";
+const showArena = isChat && list.some((x) => x.arena);
+const arenaCell = (m: ModelView) => {
+  const b = m.arena?.boards[arenaBoard] ?? (arenaBoard === "webdev" ? m.arena?.boards.text : undefined);
+  return b?.rating ? Math.round(b.rating) : "–";
+};
 const pct = (s: number | null) => (s == null ? "–" : `${Math.round(s * 100)}%`);
 ---
 <Base title={def.title} description={`${def.intro} Ranked by daily tests; updated every day.`} noindex={list.length === 0}>
@@ -31,6 +38,7 @@ const pct = (s: number | null) => (s == null ? "–" : `${Math.round(s * 100)}%`
           <tr>
             <th>#</th><th>Model</th><th>Provider</th>
             {isChat && <th class="num">Context</th>}
+            {showArena && <th class="num" title={`LMArena ${arenaBoard === "webdev" ? "WebDev (or Text)" : arenaBoard === "vision" ? "Vision" : "Text"} rating`}>Arena</th>}
             <th class="num">Answered</th><th class="num hide-sm">Median time</th><th class="hide-sm">Labels</th>
           </tr>
         </thead>
@@ -43,6 +51,7 @@ const pct = (s: number | null) => (s == null ? "–" : `${Math.round(s * 100)}%`
                 <td><a class="model-name" href={m.href}>{m.name}</a><div class="sub mono">{m.model_id}</div></td>
                 <td>{PROVIDERS[m.provider].label.split(" (")[0]}</td>
                 {isChat && <td class="num">{formatContext(m.context_length)}</td>}
+                {showArena && <td class="num">{arenaCell(m)}</td>}
                 <td class="num">{pct(x.rel.share)} <span class="sub">({x.rel.responded}/{x.rel.tested} days)</span></td>
                 <td class="num hide-sm">{x.rel.medianLatencyMs == null ? "–" : `${(x.rel.medianLatencyMs / 1000).toFixed(1)} s`}</td>
                 <td class="hide-sm"><Badges m={m} /></td>
@@ -52,5 +61,8 @@ const pct = (s: number | null) => (s == null ? "–" : `${Math.round(s * 100)}%`
         </tbody>
       </table>
     </div>
+  )}
+  {showArena && (
+    <p class="sub">Arena ratings: <a href={ARENA_DATASET_URL} rel="noopener">{ARENA_ATTRIBUTION}</a>. A dash means the model has no rating there yet.</p>
   )}
 </Base>

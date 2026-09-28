@@ -8,6 +8,7 @@
  */
 
 import { agentReadiness, type AgentReadiness } from "../../pipeline/agent-ready";
+import { scoresFor, type AliasFile, type ArenaFile, type ArenaScores } from "../../pipeline/arena";
 import { PROVIDERS } from "../../pipeline/providers";
 import { isUnreachable } from "../../pipeline/reachability";
 import { withDefaults } from "../../pipeline/store-defaults";
@@ -16,6 +17,8 @@ import type { Offer, RateLimits, Resource, ResourceEvent, SponsorFile, TestHisto
 const resourceFiles = import.meta.glob<Resource[]>("../../data/resources/ai/*.json", { eager: true, import: "default" });
 const eventFiles = import.meta.glob<string>("../../data/events/*.jsonl", { eager: true, query: "?raw", import: "default" });
 const testFiles = import.meta.glob<TestHistory>("../../data/tests/history.json", { eager: true, import: "default" });
+const arenaFiles = import.meta.glob<ArenaFile>("../../data/benchmarks/arena.json", { eager: true, import: "default" });
+const aliasFiles = import.meta.glob<AliasFile>("../../data/aliases.json", { eager: true, import: "default" });
 const offerFiles = import.meta.glob<Offer>("../../data/offers/ai/*.json", { eager: true, import: "default" });
 const sponsorFiles = import.meta.glob<SponsorFile>("../../data/sponsor.json", { eager: true, import: "default" });
 
@@ -30,7 +33,12 @@ export interface ModelView extends Resource {
   indexable: boolean;
   /** Listed by the provider, but "not found" on the last 3 daily tests. */
   unreachable: boolean;
+  /** LMArena ratings through an exact or confirmed alias; chat models only. */
+  arena: ArenaScores | null;
 }
+
+export const arenaFile: ArenaFile | null = Object.values(arenaFiles)[0] ?? null;
+const aliases: AliasFile = Object.values(aliasFiles)[0] ?? {};
 
 const tests: TestHistory = Object.values(testFiles)[0] ?? { updated_at: null, results: {}, observed_limits: {} };
 
@@ -52,6 +60,7 @@ export const models: ModelView[] = resources
       href: `/models/${r.provider}/${r.slug}/`,
       indexable: history.length > 0,
       unreachable: isUnreachable(history),
+      arena: r.kind === "chat" ? scoresFor(r.id, aliases, arenaFile) : null,
     };
   })
   .sort((a, b) => a.name.localeCompare(b.name));

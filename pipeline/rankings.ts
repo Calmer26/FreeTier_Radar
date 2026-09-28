@@ -8,6 +8,7 @@
  */
 
 import { agentReadiness } from "./agent-ready";
+import type { ArenaScores } from "./arena";
 import type { ModelKind, Resource, TestResult } from "./types";
 
 export const RANKING_WINDOW_DAYS = 30;
@@ -38,6 +39,7 @@ export function reliability(history: TestResult[]): Reliability {
 export interface RankInput {
   r: Resource;
   history: TestResult[];
+  arena?: ArenaScores | null;
 }
 
 export interface RankedModel extends RankInput {
@@ -63,17 +65,30 @@ const ofKind = (k: ModelKind) => (x: RankedModel) => x.r.kind === k;
 /** Most reliable first, then fastest. */
 const byReliability = (a: RankedModel, b: RankedModel) => share(b) - share(a) || latency(a) - latency(b);
 
+/** Arena rating for coding: WebDev when rated there, else Text; -1 when unrated. */
+const codingRating = (x: RankedModel) => x.arena?.boards.webdev?.rating ?? x.arena?.boards.text?.rating ?? -1;
+const textRating = (x: RankedModel) => x.arena?.boards.text?.rating ?? -1;
+
 export const RANKINGS: RankingDef[] = [
   {
     slug: "coding-agents",
     title: "Best free models for coding agents",
     intro: "Free chat models that can drive Cline and similar agents: tool calling and at least 64k of context.",
-    order: "Agent-ready models first, then by how often they answered the daily test over the last 30 days, then by context size.",
+    order: "Agent-ready models first; then by LMArena WebDev rating (Text rating when there's no WebDev one; unrated models after rated ones); then by how often they answered the daily test over the last 30 days; then by context size.",
     filter: (x) => usable(x) && ofKind("chat")(x) && agentReadiness(x.r, x.history).level !== "no",
     compare: (a, b) => {
       const level = (x: RankedModel) => (agentReadiness(x.r, x.history).level === "yes" ? 1 : 0);
-      return level(b) - level(a) || share(b) - share(a) || (b.r.context_length ?? 0) - (a.r.context_length ?? 0);
+      return level(b) - level(a) || codingRating(b) - codingRating(a) || share(b) - share(a) ||
+        (b.r.context_length ?? 0) - (a.r.context_length ?? 0);
     },
+  },
+  {
+    slug: "top-rated",
+    title: "Highest-rated free chat models",
+    intro: "Free chat models ranked by their LMArena Text rating: how people rate their answers in blind comparisons.",
+    order: "LMArena Text rating, highest first; only models with a rating. Then reliability over the last 30 days.",
+    filter: (x) => usable(x) && ofKind("chat")(x) && textRating(x) > 0,
+    compare: (a, b) => textRating(b) - textRating(a) || share(b) - share(a),
   },
   {
     slug: "most-reliable",

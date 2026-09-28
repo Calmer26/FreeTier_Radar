@@ -45,6 +45,24 @@ describe("rank", () => {
     expect(out.map((x) => x.r.id)).toEqual(["ready", "partial"]);
   });
 
+  it("orders agent-ready models by Arena WebDev rating, rated before unrated", () => {
+    const arena = (webdev: number) => ({ name: "n", published: null, boards: { webdev: { rating: webdev, rank: 1, of: 1, votes: 1 } } });
+    const out = rank(ranking("coding-agents"), [
+      { r: res("unrated"), history: good },
+      { r: res("low"), history: good, arena: arena(1300) },
+      { r: res("high"), history: good, arena: arena(1600) },
+    ]);
+    expect(out.map((x) => x.r.id)).toEqual(["high", "low", "unrated"]);
+  });
+
+  it("lists only rated models in the top-rated ranking", () => {
+    const out = rank(ranking("top-rated"), [
+      { r: res("rated"), history: good, arena: { name: "n", published: null, boards: { text: { rating: 1400, rank: 1, of: 1, votes: 1 } } } },
+      { r: res("unrated"), history: good },
+    ]);
+    expect(out.map((x) => x.r.id)).toEqual(["rated"]);
+  });
+
   it("keeps speech rankings to their own kind", () => {
     const out = rank(ranking("speech-to-text"), [
       { r: res("whisper", { kind: "stt" }), history: good },

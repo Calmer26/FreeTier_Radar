@@ -65,14 +65,27 @@ import { SITE } from "../../site.config";
     <h2>Rankings</h2>
     <p>
       The <a href="/rankings/">rankings</a> use only what we measure: how often a model answered the daily test over
-      the last {RANKING_WINDOW_DAYS} days (rate-limited days don't count), how fast, and whether it fits the job.
-      Evaluation-only models are left out. There are no benchmark scores yet, so a ranking says “works and fits”,
-      not “is the smartest”.
+      the last {RANKING_WINDOW_DAYS} days (rate-limited days don't count), how fast, whether it fits the job, and,
+      where a model has one, its <a href="#benchmarks">LMArena rating</a>. Evaluation-only models are left out.
     </p>
     <ul>
       {RANKINGS.map((r) => <li><strong>{r.title}:</strong> {r.order}</li>)}
     </ul>
     <p class="sub">The reliability ranking needs at least {MIN_TESTED_DAYS} tested days per model.</p>
+
+    <h2 id="benchmarks">Benchmark ratings</h2>
+    <p>
+      Chat models show their <strong>LMArena</strong> ratings (Text, WebDev, Vision, and the Agent leaderboard's rank)
+      from the <a href="https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset" rel="noopener">LMArena leaderboard dataset</a>,
+      which is published under CC-BY-4.0. We refresh it weekly. Ratings come from people comparing two anonymous
+      answers, so they measure preference, not correctness.
+    </p>
+    <p>
+      Providers and LMArena name models differently. A model is linked automatically when the names match after
+      removing provider prefixes and suffixes like <code>:free</code>, <code>-it</code> or <code>-instruct</code>.
+      Near matches, such as a Gemini model and its "high" reasoning variant, are only shown after we've checked them
+      by hand. Many small or new free models have no rating yet.
+    </p>
 
     <h2>Weekly roundup</h2>
     <p>

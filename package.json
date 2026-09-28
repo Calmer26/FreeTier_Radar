@@ -12,6 +12,7 @@
     "test-models": "tsx pipeline/run-tests.ts",
     "watch": "tsx pipeline/run-watch.ts",
     "roundup": "tsx pipeline/run-roundup.ts",
+    "arena": "tsx pipeline/run-arena.ts",
     "readme": "tsx scripts/generate-readme.ts"
   },
   "engines": {
@@ -24,6 +25,7 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
     "@types/node": "^26.6.3",
+    "hyparquet": "^1.31.2",
     "tsx": "^4.23.15",
     "typescript": "^6.0.3",
     "vitest": "^5.0.2"

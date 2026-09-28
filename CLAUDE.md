@@ -7,19 +7,22 @@ code there was copied and adapted, not shared.
 ## Layout
 
 - `pipeline/`: data pipeline (TypeScript, run with tsx). Pure logic (`diff.ts`, `agent-ready.ts`,
-  `rankings.ts`, `roundup.ts`, `watch.ts`, `reachability.ts`, `probe.ts` helpers, adapter `map*`
+  `rankings.ts`, `roundup.ts`, `watch.ts`, `arena.ts`, `reachability.ts`, `probe.ts` helpers, adapter `map*`
   functions) has tests next to it. Entry points: `run-discovery.ts`, `run-tests.ts`,
-  `run-watch.ts`, `run-roundup.ts`.
+  `run-watch.ts`, `run-roundup.ts`, `run-arena.ts`.
 - `data/`: the database. JSON in git, written only by the pipeline, except the hand-kept
   `sponsor.json` and `offers/ai/*.json`. History = git log. Never store snapshots or full API
   responses or pages.
 - Models have a `kind` (chat, tts, stt); each kind has its own daily test in `probe.ts`.
   OpenRouter's free voices are hand-listed in `adapters.ts` (`OPENROUTER_CURATED_SPEECH`).
+- `data/benchmarks/arena.json` + `data/aliases.json`: LMArena ratings (CC-BY-4.0, attribute it)
+  and the links from our model ids to Arena names. Exact matches are automatic; near matches
+  only count once confirmed through the weekly aliases PR (`pipeline/arena.ts`).
 - `content/roundups/`: published weekly roundups (Markdown), merged from the Monday PR.
 - `fixtures/`: the STT test clip (see its README).
 - `src/`: Astro static site; reads `data/` and `content/` at build time through `src/lib/`.
 - `scripts/generate-readme.ts`: regenerates the list between the README markers.
-- `.github/workflows/`: discovery every 6 h, daily tests, weekly page watch and roundup, CI.
+- `.github/workflows/`: discovery every 6 h, daily tests, weekly page watch, Arena ratings and roundup, CI.
   Data-writing jobs share the `data-writes` concurrency group.
 
 ## Rules

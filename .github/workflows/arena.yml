@@ -1,0 +1,52 @@
+name: Arena ratings
+
+# Weekly: refresh LMArena ratings, link free chat models to Arena names (exact
+# matches directly), and open a PR with near matches for the owner to confirm.
+on:
+  schedule:
+    - cron: "20 6 * * 1"
+  workflow_dispatch:
+
+concurrency:
+  group: data-writes
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  arena:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - run: npm run arena
+      - name: Commit ratings and exact matches
+        run: |
+          git add data/benchmarks data/aliases.json
+          if git diff --cached --quiet; then echo "No changes"; exit 0; fi
+          git config user.name "freetier-radar-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "data: Arena ratings $(date -u +%Y-%m-%d)"
+          git push
+      - name: Open PR with near matches
+        if: hashFiles('out/aliases-suggested.json') != ''
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: |
+          if [ -n "$(gh pr list --label aliases --state open --json number -q '.[].number')" ]; then
+            echo "An aliases PR is already open; not opening another."; exit 0
+          fi
+          branch="aliases/$(date -u +%Y-%m-%d)"
+          git config user.name "freetier-radar-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$branch"
+          cp out/aliases-suggested.json data/aliases.json
+          git add data/aliases.json
+          git commit -m "Arena name matches to review"
+          git push -u origin "$branch"
+          gh label create aliases --color 5319e7 --force
+          gh pr create --title "Arena name matches to review ($(date -u +%Y-%m-%d))" --label aliases --body-file out/alias-suggestions.md
