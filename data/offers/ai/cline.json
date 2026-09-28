@@ -1,0 +1,18 @@
+{
+  "id": "cline",
+  "provider": "Cline",
+  "name": "Cline free model promotions",
+  "offer_type": "trial-credit",
+  "amount": "Selected models free up to a usage quota, rotating and limited-time",
+  "summary": "Cline periodically makes some models free for anyone with a Cline account, up to a limited quota. They're tagged FREE in the model selector of the Cline (usage-billing) provider, and during promotions also under ClinePass. They work only inside the Cline extension and CLI, not through the Cline API, and free usage may be used to improve the models. When the quota runs out: ClinePass ($9.99/month), Cline credits, or your own API keys, e.g. the free models on this site.",
+  "expires": "rotating; limited-time promotions",
+  "usage_terms": "unknown",
+  "card_required": "no",
+  "account_required": "yes",
+  "data_logging": "may-train",
+  "url": "https://docs.cline.bot/getting-started/free-models",
+  "watch_url": "https://docs.cline.bot/getting-started/free-models",
+  "verified_on": "2026-09-28",
+  "source_note": "Cline docs (free models, models API), checked 2026-09-28. Not tracked per model: Cline doesn't publish which models are in the current promotion, and free usage isn't available through its API, so it can't be tested.",
+  "changes": []
+}

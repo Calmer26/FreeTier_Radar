@@ -58,6 +58,12 @@ const actDef = RANKINGS.find((r) => r.slug === "cline-act")!;
   {plan && act && !same && plan.provider !== act.provider && (
     <p class="sub">These come from two providers, so you'll set up two API providers in Cline (one per mode).</p>
   )}
+  <p class="callout info">
+    <strong>Cline's own free models:</strong> Cline also runs rotating free-model promotions for Cline account holders
+    (tagged FREE under the Cline provider), with a usage quota. They only work inside Cline and can't be tested from
+    outside, so they're not in these rankings; see <a href="/offers/#cline">Cline free model promotions</a>. When that
+    quota runs out, the pair above keeps working with your own free keys.
+  </p>
   <p class="sub">
     Evaluation-only models (NVIDIA's own API, LLM7) and models whose free tier refused our test are left out.
     Check the data-use labels before sending private code: some free providers use prompts to improve their models.
