@@ -1,4 +1,14 @@
 {
+  "cline/cline-free/deepseek-v4.1-flash": {
+    "arena": "Deepseek V4.1 Flash (Max)",
+    "status": "confirmed",
+    "on": "2026-09-28"
+  },
+  "cline/cline-free/gemini-3.8-flash": {
+    "arena": "Gemini 3.8 Flash (High)",
+    "status": "confirmed",
+    "on": "2026-09-28"
+  },
   "cline/cline-free/mimo-v2.6-flash": {
     "arena": "mimo-v2.6-flash",
     "status": "exact",
@@ -94,6 +104,11 @@
     "status": "exact",
     "on": "2026-09-28"
   },
+  "kilo/nvidia/nemotron-3.5-lightning:free": {
+    "arena": "nvidia-nemotron-3.5-lightning-30b-a3b-nvfp4",
+    "status": "confirmed",
+    "on": "2026-09-28"
+  },
   "kilo/qwen/qwen3.8-27b:free": {
     "arena": "qwen3.8-27b",
     "status": "exact",
@@ -121,6 +136,11 @@
   },
   "nvidia/databricks/dbrx-instruct": {
     "arena": "dbrx-instruct-preview",
+    "status": "confirmed",
+    "on": "2026-09-28"
+  },
+  "nvidia/deepseek-ai/deepseek-v4.1-flash": {
+    "arena": "Deepseek V4.1 Flash (Max)",
     "status": "confirmed",
     "on": "2026-09-28"
   },
@@ -157,6 +177,11 @@
   "nvidia/microsoft/phi-3-vision-128k-instruct": {
     "arena": "phi-3-vision-128k-instruct",
     "status": "exact",
+    "on": "2026-09-28"
+  },
+  "nvidia/mistralai/mistral-large": {
+    "arena": "mistral-large-3",
+    "status": "confirmed",
     "on": "2026-09-28"
   },
   "nvidia/moonshotai/kimi-k2.6": {
