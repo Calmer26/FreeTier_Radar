@@ -11,7 +11,7 @@ change history and ready-to-paste Cline settings.
 ## The list
 
 <!-- LIST:START -->
-_16 free chat models. Updated automatically; see [FreeTier Radar](https://freetierradar.com) for filters, limits and change history._
+_90 free chat models. Updated automatically; see [FreeTier Radar](https://freetierradar.com) for filters, limits and change history._
 
 🟢 responded to the latest daily test · 🟡 rate-limited or slow · 🔴 failed · 🤖 agent-ready (tool calling, ≥64k context, answered 5 of the last 7 days)
 
@@ -37,6 +37,101 @@ Router over many inference providers. Models with a :free suffix cost nothing, w
 | [Qwen: Qwen3.8 27B (free)](https://freetierradar.com/models/openrouter/qwen-qwen3-8-27b-free/) | `qwen/qwen3.8-27b:free` | 262k | yes | – |  |
 | [Thinking Machines: Inkling (free)](https://freetierradar.com/models/openrouter/thinkingmachines-inkling-free/) | `thinkingmachines/inkling:free` | 1M | yes | – |  |
 | [Thinking Machines: Inkling Small (free)](https://freetierradar.com/models/openrouter/thinkingmachines-inkling-small-free/) | `thinkingmachines/inkling-small:free` | 1M | yes | – |  |
+
+### Groq
+
+Fast inference on Groq hardware. Every active model is usable on the free plan, each with its own limits.
+
+| Model | ID | Context | Tools | Last test | Agent |
+|---|---|---|---|---|---|
+| [allam-2-7b (SDAIA)](https://freetierradar.com/models/groq/allam-2-7b/) | `allam-2-7b` | 4k | ? | – |  |
+| [openai/gpt-oss-120b (OpenAI)](https://freetierradar.com/models/groq/openai-gpt-oss-120b/) | `openai/gpt-oss-120b` | 131k | ? | – |  |
+| [openai/gpt-oss-20b (OpenAI)](https://freetierradar.com/models/groq/openai-gpt-oss-20b/) | `openai/gpt-oss-20b` | 131k | ? | – |  |
+| [qwen/qwen3.8-27b (Alibaba Cloud)](https://freetierradar.com/models/groq/qwen-qwen3-8-27b/) | `qwen/qwen3.8-27b` | 131k | ? | – |  |
+
+### Google AI Studio (Gemini API)
+
+Gemini API with a free tier for some models. The model list does not say which; the daily test on a free-tier key does.
+
+| Model | ID | Context | Tools | Last test | Agent |
+|---|---|---|---|---|---|
+| [Gemini 2.5 Flash](https://freetierradar.com/models/google-ai-studio/gemini-2-5-flash/) | `gemini-2.5-flash` | 1M | ? | – |  |
+| [Gemini 2.5 Flash-Lite](https://freetierradar.com/models/google-ai-studio/gemini-2-5-flash-lite/) | `gemini-2.5-flash-lite` | 1M | ? | – |  |
+| [Gemini 2.5 Pro](https://freetierradar.com/models/google-ai-studio/gemini-2-5-pro/) | `gemini-2.5-pro` | 1M | ? | – |  |
+| [Gemini 3 Flash Preview](https://freetierradar.com/models/google-ai-studio/gemini-3-flash-preview/) | `gemini-3-flash-preview` | 1M | ? | – |  |
+| [Gemini 3.1 Flash Lite](https://freetierradar.com/models/google-ai-studio/gemini-3-1-flash-lite/) | `gemini-3.1-flash-lite` | 1M | ? | – |  |
+| [Gemini 3.1 Flash Lite Preview](https://freetierradar.com/models/google-ai-studio/gemini-3-1-flash-lite-preview/) | `gemini-3.1-flash-lite-preview` | 1M | ? | – |  |
+| [Gemini 3.1 Pro Preview](https://freetierradar.com/models/google-ai-studio/gemini-3-1-pro-preview/) | `gemini-3.1-pro-preview` | 1M | ? | – |  |
+| [Gemini 3.5 Flash](https://freetierradar.com/models/google-ai-studio/gemini-3-5-flash/) | `gemini-3.5-flash` | 1M | ? | – |  |
+| [Gemini 3.5 Flash Lite](https://freetierradar.com/models/google-ai-studio/gemini-3-5-flash-lite/) | `gemini-3.5-flash-lite` | 1M | ? | – |  |
+| [Gemini 3.6 Flash](https://freetierradar.com/models/google-ai-studio/gemini-3-6-flash/) | `gemini-3.6-flash` | 1M | ? | – |  |
+| [Gemini 3.7 Flash](https://freetierradar.com/models/google-ai-studio/gemini-3-7-flash/) | `gemini-3.7-flash` | 1M | ? | – |  |
+| [Gemini 3.8 Flash](https://freetierradar.com/models/google-ai-studio/gemini-3-8-flash/) | `gemini-3.8-flash` | 1M | ? | – |  |
+| [Gemini Omni 1.1 Flash](https://freetierradar.com/models/google-ai-studio/gemini-omni-1-1-flash/) | `gemini-omni-1.1-flash` | 131k | ? | – |  |
+| [Gemini Omni Flash Preview](https://freetierradar.com/models/google-ai-studio/gemini-omni-flash-preview/) | `gemini-omni-flash-preview` | 131k | ? | – |  |
+| [Gemma 4 26B A4B IT](https://freetierradar.com/models/google-ai-studio/gemma-4-26b-a4b-it/) | `gemma-4-26b-a4b-it` | 262k | ? | – |  |
+| [Gemma 4 31B IT](https://freetierradar.com/models/google-ai-studio/gemma-4-31b-it/) | `gemma-4-31b-it` | 262k | ? | – |  |
+
+### NVIDIA API catalog (build.nvidia.com) ⚠ evaluation only
+
+Hosted NVIDIA NIM endpoints for many open models. Free, but only for testing and evaluation.
+
+| Model | ID | Context | Tools | Last test | Agent |
+|---|---|---|---|---|---|
+| [01-ai/yi-large (01-ai)](https://freetierradar.com/models/nvidia/01-ai-yi-large/) | `01-ai/yi-large` | unknown | ? | – |  |
+| [adept/fuyu-8b (adept)](https://freetierradar.com/models/nvidia/adept-fuyu-8b/) | `adept/fuyu-8b` | unknown | ? | – |  |
+| [ai21labs/jamba-1.5-large-instruct (ai21labs)](https://freetierradar.com/models/nvidia/ai21labs-jamba-1-5-large-instruct/) | `ai21labs/jamba-1.5-large-instruct` | unknown | ? | – |  |
+| [aisingapore/sea-lion-7b-instruct (aisingapore)](https://freetierradar.com/models/nvidia/aisingapore-sea-lion-7b-instruct/) | `aisingapore/sea-lion-7b-instruct` | unknown | ? | – |  |
+| [databricks/dbrx-instruct (databricks)](https://freetierradar.com/models/nvidia/databricks-dbrx-instruct/) | `databricks/dbrx-instruct` | unknown | ? | – |  |
+| [deepseek-ai/deepseek-v4.1-flash (deepseek-ai)](https://freetierradar.com/models/nvidia/deepseek-ai-deepseek-v4-1-flash/) | `deepseek-ai/deepseek-v4.1-flash` | unknown | ? | – |  |
+| [google/diffusiongemma-26b-a4b-it (google)](https://freetierradar.com/models/nvidia/google-diffusiongemma-26b-a4b-it/) | `google/diffusiongemma-26b-a4b-it` | unknown | ? | – |  |
+| [google/gemma-2b (google)](https://freetierradar.com/models/nvidia/google-gemma-2b/) | `google/gemma-2b` | unknown | ? | – |  |
+| [google/gemma-3-12b-it (google)](https://freetierradar.com/models/nvidia/google-gemma-3-12b-it/) | `google/gemma-3-12b-it` | unknown | ? | – |  |
+| [google/gemma-3-4b-it (google)](https://freetierradar.com/models/nvidia/google-gemma-3-4b-it/) | `google/gemma-3-4b-it` | unknown | ? | – |  |
+| [google/gemma-4-31b-it (google)](https://freetierradar.com/models/nvidia/google-gemma-4-31b-it/) | `google/gemma-4-31b-it` | unknown | ? | – |  |
+| [google/recurrentgemma-2b (google)](https://freetierradar.com/models/nvidia/google-recurrentgemma-2b/) | `google/recurrentgemma-2b` | unknown | ? | – |  |
+| [ibm/granite-3.0-3b-a800m-instruct (ibm)](https://freetierradar.com/models/nvidia/ibm-granite-3-0-3b-a800m-instruct/) | `ibm/granite-3.0-3b-a800m-instruct` | unknown | ? | – |  |
+| [ibm/granite-3.0-8b-instruct (ibm)](https://freetierradar.com/models/nvidia/ibm-granite-3-0-8b-instruct/) | `ibm/granite-3.0-8b-instruct` | unknown | ? | – |  |
+| [meta/llama-3.2-11b-vision-instruct (meta)](https://freetierradar.com/models/nvidia/meta-llama-3-2-11b-vision-instruct/) | `meta/llama-3.2-11b-vision-instruct` | unknown | ? | – |  |
+| [meta/llama-3.2-90b-vision-instruct (meta)](https://freetierradar.com/models/nvidia/meta-llama-3-2-90b-vision-instruct/) | `meta/llama-3.2-90b-vision-instruct` | unknown | ? | – |  |
+| [meta/llama2-70b (meta)](https://freetierradar.com/models/nvidia/meta-llama2-70b/) | `meta/llama2-70b` | unknown | ? | – |  |
+| [meta/muse-glimmer-30b (meta)](https://freetierradar.com/models/nvidia/meta-muse-glimmer-30b/) | `meta/muse-glimmer-30b` | unknown | ? | – |  |
+| [microsoft/phi-3-vision-128k-instruct (microsoft)](https://freetierradar.com/models/nvidia/microsoft-phi-3-vision-128k-instruct/) | `microsoft/phi-3-vision-128k-instruct` | unknown | ? | – |  |
+| [microsoft/phi-3.5-moe-instruct (microsoft)](https://freetierradar.com/models/nvidia/microsoft-phi-3-5-moe-instruct/) | `microsoft/phi-3.5-moe-instruct` | unknown | ? | – |  |
+| [mistralai/mistral-7b-instruct-v0.3 (mistralai)](https://freetierradar.com/models/nvidia/mistralai-mistral-7b-instruct-v0-3/) | `mistralai/mistral-7b-instruct-v0.3` | unknown | ? | – |  |
+| [mistralai/mistral-large (mistralai)](https://freetierradar.com/models/nvidia/mistralai-mistral-large/) | `mistralai/mistral-large` | unknown | ? | – |  |
+| [mistralai/mistral-large-2-instruct (mistralai)](https://freetierradar.com/models/nvidia/mistralai-mistral-large-2-instruct/) | `mistralai/mistral-large-2-instruct` | unknown | ? | – |  |
+| [mistralai/mistral-nemotron (mistralai)](https://freetierradar.com/models/nvidia/mistralai-mistral-nemotron/) | `mistralai/mistral-nemotron` | unknown | ? | – |  |
+| [mistralai/mixtral-8x22b-v0.1 (mistralai)](https://freetierradar.com/models/nvidia/mistralai-mixtral-8x22b-v0-1/) | `mistralai/mixtral-8x22b-v0.1` | unknown | ? | – |  |
+| [moonshotai/kimi-k2.6 (moonshotai)](https://freetierradar.com/models/nvidia/moonshotai-kimi-k2-6/) | `moonshotai/kimi-k2.6` | unknown | ? | – |  |
+| [moonshotai/kimi-k3 (moonshotai)](https://freetierradar.com/models/nvidia/moonshotai-kimi-k3/) | `moonshotai/kimi-k3` | unknown | ? | – |  |
+| [nv-mistralai/mistral-nemo-12b-instruct (nv-mistralai)](https://freetierradar.com/models/nvidia/nv-mistralai-mistral-nemo-12b-instruct/) | `nv-mistralai/mistral-nemo-12b-instruct` | unknown | ? | – |  |
+| [nvidia/cosmos-reason2-8b (nvidia)](https://freetierradar.com/models/nvidia/nvidia-cosmos-reason2-8b/) | `nvidia/cosmos-reason2-8b` | unknown | ? | – |  |
+| [nvidia/llama-3.1-nemotron-51b-instruct (nvidia)](https://freetierradar.com/models/nvidia/nvidia-llama-3-1-nemotron-51b-instruct/) | `nvidia/llama-3.1-nemotron-51b-instruct` | unknown | ? | – |  |
+| [nvidia/llama-3.1-nemotron-70b-instruct (nvidia)](https://freetierradar.com/models/nvidia/nvidia-llama-3-1-nemotron-70b-instruct/) | `nvidia/llama-3.1-nemotron-70b-instruct` | unknown | ? | – |  |
+| [nvidia/llama-3.1-nemotron-ultra-253b-v1 (nvidia)](https://freetierradar.com/models/nvidia/nvidia-llama-3-1-nemotron-ultra-253b-v1/) | `nvidia/llama-3.1-nemotron-ultra-253b-v1` | unknown | ? | – |  |
+| [nvidia/llama3-chatqa-1.5-70b (nvidia)](https://freetierradar.com/models/nvidia/nvidia-llama3-chatqa-1-5-70b/) | `nvidia/llama3-chatqa-1.5-70b` | unknown | ? | – |  |
+| [nvidia/mistral-nemo-minitron-8b-8k-instruct (nvidia)](https://freetierradar.com/models/nvidia/nvidia-mistral-nemo-minitron-8b-8k-instruct/) | `nvidia/mistral-nemo-minitron-8b-8k-instruct` | unknown | ? | – |  |
+| [nvidia/nemotron-3-nano-omni-30b-a3b-reasoning (nvidia)](https://freetierradar.com/models/nvidia/nvidia-nemotron-3-nano-omni-30b-a3b-reasoning/) | `nvidia/nemotron-3-nano-omni-30b-a3b-reasoning` | unknown | ? | – |  |
+| [nvidia/nemotron-3-super-120b-a12b (nvidia)](https://freetierradar.com/models/nvidia/nvidia-nemotron-3-super-120b-a12b/) | `nvidia/nemotron-3-super-120b-a12b` | unknown | ? | – |  |
+| [nvidia/nemotron-3-ultra-550b-a55b (nvidia)](https://freetierradar.com/models/nvidia/nvidia-nemotron-3-ultra-550b-a55b/) | `nvidia/nemotron-3-ultra-550b-a55b` | unknown | ? | – |  |
+| [nvidia/nemotron-3.5-lightning-30b-a3b (nvidia)](https://freetierradar.com/models/nvidia/nvidia-nemotron-3-5-lightning-30b-a3b/) | `nvidia/nemotron-3.5-lightning-30b-a3b` | unknown | ? | – |  |
+| [nvidia/nemotron-4-340b-instruct (nvidia)](https://freetierradar.com/models/nvidia/nvidia-nemotron-4-340b-instruct/) | `nvidia/nemotron-4-340b-instruct` | unknown | ? | – |  |
+| [nvidia/nemotron-nano-3-30b-a3b (nvidia)](https://freetierradar.com/models/nvidia/nvidia-nemotron-nano-3-30b-a3b/) | `nvidia/nemotron-nano-3-30b-a3b` | unknown | ? | – |  |
+| [nvidia/neva-22b (nvidia)](https://freetierradar.com/models/nvidia/nvidia-neva-22b/) | `nvidia/neva-22b` | unknown | ? | – |  |
+| [nvidia/riva-translate-4b-instruct (nvidia)](https://freetierradar.com/models/nvidia/nvidia-riva-translate-4b-instruct/) | `nvidia/riva-translate-4b-instruct` | unknown | ? | – |  |
+| [nvidia/riva-translate-4b-instruct-v1.1 (nvidia)](https://freetierradar.com/models/nvidia/nvidia-riva-translate-4b-instruct-v1-1/) | `nvidia/riva-translate-4b-instruct-v1.1` | unknown | ? | – |  |
+| [nvidia/riva-translate-4b-instruct-v2 (nvidia)](https://freetierradar.com/models/nvidia/nvidia-riva-translate-4b-instruct-v2/) | `nvidia/riva-translate-4b-instruct-v2` | unknown | ? | – |  |
+| [nvidia/vila (nvidia)](https://freetierradar.com/models/nvidia/nvidia-vila/) | `nvidia/vila` | unknown | ? | – |  |
+| [openai/gpt-oss-20b (openai)](https://freetierradar.com/models/nvidia/openai-gpt-oss-20b/) | `openai/gpt-oss-20b` | unknown | ? | – |  |
+| [poolside/laguna-xs-2.1 (poolside)](https://freetierradar.com/models/nvidia/poolside-laguna-xs-2-1/) | `poolside/laguna-xs-2.1` | unknown | ? | – |  |
+| [writer/palmyra-creative-122b (writer)](https://freetierradar.com/models/nvidia/writer-palmyra-creative-122b/) | `writer/palmyra-creative-122b` | unknown | ? | – |  |
+| [writer/palmyra-fin-70b-32k (writer)](https://freetierradar.com/models/nvidia/writer-palmyra-fin-70b-32k/) | `writer/palmyra-fin-70b-32k` | unknown | ? | – |  |
+| [writer/palmyra-med-70b (writer)](https://freetierradar.com/models/nvidia/writer-palmyra-med-70b/) | `writer/palmyra-med-70b` | unknown | ? | – |  |
+| [writer/palmyra-med-70b-32k (writer)](https://freetierradar.com/models/nvidia/writer-palmyra-med-70b-32k/) | `writer/palmyra-med-70b-32k` | unknown | ? | – |  |
+| [z-ai/glm-5.3 (z-ai)](https://freetierradar.com/models/nvidia/z-ai-glm-5-3/) | `z-ai/glm-5.3` | unknown | ? | – |  |
+| [z-ai/glm-5.3-flash (z-ai)](https://freetierradar.com/models/nvidia/z-ai-glm-5-3-flash/) | `z-ai/glm-5.3-flash` | unknown | ? | – |  |
+| [zyphra/zamba2-7b-instruct (zyphra)](https://freetierradar.com/models/nvidia/zyphra-zamba2-7b-instruct/) | `zyphra/zamba2-7b-instruct` | unknown | ? | – |  |
 
 <!-- LIST:END -->
 
