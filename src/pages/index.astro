@@ -6,7 +6,7 @@ import TestStatus from "../components/TestStatus.astro";
 import { activeModels, events, providersInData } from "../lib/data";
 import { PROVIDERS } from "../../pipeline/providers";
 import { formatContext, KIND_LABELS } from "../../pipeline/templates";
-import { formatUsd, freePerDay, imageCost } from "../../pipeline/cloudflare-pricing";
+import { formatNeurons, formatUsd, freePerDay, imageCost } from "../../pipeline/cloudflare-pricing";
 import { MODEL_KINDS } from "../../pipeline/types";
 import { SITE } from "../../site.config";
 
@@ -60,7 +60,7 @@ const kinds = MODEL_KINDS.map((k) => ({ kind: k, count: activeModels.filter((m) 
           <th data-chat-only>Context</th>
           <th class="hide-sm" data-chat-only>Tools</th>
           <th class="hide-sm num" data-chat-only title="LMArena Text rating">Arena</th>
-          <th class="num" data-image-only hidden title="Paid price per 1024×1024 image at 4 steps, and how many fit in the free daily allowance">Cost / image</th>
+          <th class="num" data-image-only hidden title="Per 1024×1024 image at 4 steps: Neurons used (10,000 free a day), paid price, and how many fit in the free daily allowance">Per image</th>
           <th>Last test</th>
           <th class="hide-sm">Labels</th>
         </tr>
@@ -94,7 +94,7 @@ const kinds = MODEL_KINDS.map((k) => ({ kind: k, count: activeModels.filter((m) 
                 const e = m.kind === "image" && m.pricing ? imageCost(m.pricing) : null;
                 if (!e) return <span class="sub">–</span>;
                 const free = freePerDay(e);
-                return <>{formatUsd(e.usd)}<div class="sub">{free === Infinity ? "$0 listed (beta)" : free != null ? `${free} free/day` : ""}</div></>;
+                return <>{e.neurons != null ? formatNeurons(e.neurons) : formatUsd(e.usd)}<div class="sub">{free === Infinity ? "$0 listed (beta)" : `${formatUsd(e.usd)}${free != null ? ` · ${free} free/day` : ""}`}</div></>;
               })()}
             </td>
             <td class="nowrap"><TestStatus test={m.lastTest} untestable={!m.testable} /></td>

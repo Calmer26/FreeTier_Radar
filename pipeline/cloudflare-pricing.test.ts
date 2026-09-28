@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { audioMinuteCost, catalogueLines, chatCost, formatUsd, freePerDay, imageCost, parsePricingMarkdown } from "./cloudflare-pricing";
+import { audioMinuteCost, catalogueLines, chatCost, costNote, formatUsd, freePerDay, imageCost, parsePricingMarkdown } from "./cloudflare-pricing";
 
 // Rows as published on developers.cloudflare.com/workers-ai/platform/pricing/index.md (2026-09-28).
 const MD = `
@@ -67,5 +67,11 @@ describe("catalogueLines", () => {
     const lines = catalogueLines('[{"unit": "per step", "price": 0, "currency": "USD"}]')!;
     expect(lines).toEqual([{ usd: 0, unit: "step", neurons: 0 }]);
     expect(freePerDay(imageCost(lines))).toBe(Infinity);
+  });
+});
+
+describe("costNote", () => {
+  it("shows dollars and Neurons per image", () => {
+    expect(costNote("image", p("@cf/black-forest-labs/flux-1-schnell"))).toBe("≈ $0.00063 (58 Neurons) per image (1024×1024, 4 steps)");
   });
 });

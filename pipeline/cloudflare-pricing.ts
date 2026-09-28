@@ -160,17 +160,18 @@ export function allowanceNote(kind: ModelKind, lines: PriceLine[] | null | undef
   return per != null ? `≈ ${fmt(per)} audio minutes a day within the free Neurons` : null;
 }
 
-/** The paid price of one typical unit of use, as text, e.g. "≈ $0.00015 per image (1024×1024, 4 steps)". */
+/** "58 Neurons" / "2,592 Neurons"; empty when unknown. */
+export function formatNeurons(n: number | null | undefined): string {
+  if (n == null) return "";
+  return `${n < 10 ? +n.toFixed(1) : Math.round(n).toLocaleString("en")} Neurons`;
+}
+
+/** The paid price of one typical unit of use, e.g. "≈ $0.00063 (58 Neurons) per image (1024×1024, 4 steps)". */
 export function costNote(kind: ModelKind, lines: PriceLine[] | null | undefined): string | null {
   if (!lines?.length) return null;
-  if (kind === "image") {
-    const e = imageCost(lines);
-    return e ? `≈ ${formatUsd(e.usd)} per image (1024×1024, 4 steps)` : null;
-  }
-  if (kind === "chat") {
-    const e = chatCost(lines);
-    return e ? `≈ ${formatUsd(e.usd)} per typical request (2,000 tokens in, 500 out)` : null;
-  }
-  const e = audioMinuteCost(lines);
-  return e ? `≈ ${formatUsd(e.usd)} per audio minute` : null;
+  const e = kind === "image" ? imageCost(lines) : kind === "chat" ? chatCost(lines) : audioMinuteCost(lines);
+  if (!e) return null;
+  const what = kind === "image" ? "image (1024×1024, 4 steps)" : kind === "chat" ? "typical request (2,000 tokens in, 500 out)" : "audio minute";
+  const neurons = e.neurons != null ? ` (${formatNeurons(e.neurons)})` : "";
+  return `≈ ${formatUsd(e.usd)}${neurons} per ${what}`;
 }
