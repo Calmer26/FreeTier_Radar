@@ -8,6 +8,8 @@
  * Names differ between Arena and the providers, so every resource is linked to an Arena
  * name through data/aliases.json:
  *   exact      the names are equal after normalising: accepted automatically
+ *   variant    Arena's name is ours plus only reasoning-effort or size words
+ *              ("-high", "(Max)", "-30b-a3b"): the same model, accepted automatically
  *   confirmed  a near match the owner accepted (by merging the weekly aliases PR)
  *   rejected   a near match the owner turned down; never suggested again
  * Only exact and confirmed links are shown.
@@ -53,7 +55,7 @@ export interface ArenaFile {
 
 export interface Alias {
   arena: string | null;
-  status: "exact" | "confirmed" | "rejected";
+  status: "exact" | "variant" | "confirmed" | "rejected";
   on: string;
 }
 
@@ -106,8 +108,19 @@ export function arenaIndex(file: ArenaFile): Map<string, { name: string; votes: 
   return byNorm;
 }
 
+/** Words that change effort or size, not the model: "high", "max", "thinking", "30b", "a3b". */
+const VARIANT_TOKEN = /^(high|medium|low|max|min|minimal|xhigh|thinking|reasoning|\d+(\.\d+)?b|a\d+(\.\d+)?b)$/;
+
+/** Whether `arenaKey` is `ours` plus only variant words. Exported for tests. */
+export function isVariantOf(ours: string, arenaKey: string): boolean {
+  if (!arenaKey.startsWith(`${ours}-`)) return false;
+  return arenaKey.slice(ours.length + 1).split("-").every((t) => VARIANT_TOKEN.test(t));
+}
+
 export interface MatchResult {
   exact: string | null;
+  /** True when `near` is only an effort or size variant of our model. */
+  variant?: boolean;
   /**
    * Best near match: an Arena name that extends ours at a "-" boundary, i.e. a variant
    * of our model (gemini-3.8-flash → gemini-3.8-flash-high). Never the reverse:
@@ -121,12 +134,16 @@ export function matchModel(modelId: string, index: Map<string, { name: string; v
   const ours = normaliseName(modelId);
   const exact = index.get(ours);
   if (exact?.length) return { exact: exact.sort((a, b) => b.votes - a.votes)[0].name, near: null };
-  let best: { name: string; votes: number } | null = null;
+  // Prefer variants (same model) over other extensions of the name; most votes wins.
+  let best: { name: string; votes: number; variant: boolean } | null = null;
   for (const [key, names] of index) {
     if (!key.startsWith(`${ours}-`)) continue;
-    for (const n of names) if (!best || n.votes > best.votes) best = n;
+    const variant = isVariantOf(ours, key);
+    for (const n of names) {
+      if (!best || (variant && !best.variant) || (variant === best.variant && n.votes > best.votes)) best = { ...n, variant };
+    }
   }
-  return { exact: null, near: best?.name ?? null };
+  return best ? { exact: null, near: best.name, variant: best.variant } : { exact: null, near: null };
 }
 
 export interface AliasUpdate {
@@ -151,6 +168,7 @@ export function updateAliases(
     if (aliases[id]) continue;
     const m = matchModel(model_id, index);
     if (m.exact) aliases[id] = { arena: m.exact, status: "exact", on: today };
+    else if (m.near && m.variant) aliases[id] = { arena: m.near, status: "variant", on: today };
     else if (m.near) suggestions.push({ id, arena: m.near });
   }
   return { aliases: sortKeys(aliases), suggestions };

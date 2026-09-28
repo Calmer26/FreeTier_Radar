@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { arenaIndex, matchModel, normaliseName, scoresFor, updateAliases, type ArenaFile } from "./arena";
+import { arenaIndex, isVariantOf, matchModel, normaliseName, scoresFor, updateAliases, type ArenaFile } from "./arena";
 
 const file: ArenaFile = {
   source: "test",
@@ -45,19 +45,28 @@ describe("matchModel", () => {
     expect(matchModel("nvidia/nemotron-3-ultra-550b-a55b:free", index).exact).toBe("nvidia-nemotron-3-ultra-550b-a55b-nvfp4");
     expect(matchModel("thinkingmachines/inkling-small:free", index).exact).toBe("Inkling Small");
   });
-  it("offers the most-voted variant as a near match", () => {
-    expect(matchModel("gemini-3.8-flash", index)).toEqual({ exact: null, near: "gemini-3.8-flash-high" });
+  it("offers the most-voted effort variant, flagged as a variant", () => {
+    expect(matchModel("gemini-3.8-flash", index)).toEqual({ exact: null, near: "gemini-3.8-flash-high", variant: true });
   });
   it("never offers the shorter name of a different model", () => {
     const idx = arenaIndex({ source: "", fetched_on: "", boards: { text: { published: "", models: [{ name: "gemini-2.5-flash", org: "google", rating: 1, rank: 1, votes: 1 }] } } });
     expect(matchModel("gemini-2.5-flash-lite", idx)).toEqual({ exact: null, near: null });
   });
 
+  it("treats only effort and size words as variants", () => {
+    expect(isVariantOf("kimi-k3", "kimi-k3-max")).toBe(true);
+    expect(isVariantOf("nemotron-3.5-lightning", "nemotron-3.5-lightning-30b-a3b")).toBe(true);
+    expect(isVariantOf("gemini-3-flash", "gemini-3-flash-thinking-minimal")).toBe(true);
+    expect(isVariantOf("llama2-70b", "llama2-70b-steerlm-chat")).toBe(false);
+    expect(isVariantOf("gemini-3.1-flash-lite", "gemini-3.1-flash-lite-preview")).toBe(false);
+    expect(isVariantOf("mistral-large", "mistral-large-3")).toBe(false);
+  });
+
   it("keeps the family name when it equals the organisation", () => {
     const idx = arenaIndex({ source: "", fetched_on: "", boards: { text: { published: "", models: [
       { name: "deepseek-v4.1-flash-max", org: "deepseek", rating: 1465, rank: 5, votes: 900 },
     ] } } });
-    expect(matchModel("deepseek-ai/deepseek-v4.1-flash", idx)).toEqual({ exact: null, near: "deepseek-v4.1-flash-max" });
+    expect(matchModel("deepseek-ai/deepseek-v4.1-flash", idx)).toEqual({ exact: null, near: "deepseek-v4.1-flash-max", variant: true });
     expect(matchModel("cline-free/deepseek-v4.1-flash", idx).near).toBe("deepseek-v4.1-flash-max");
   });
 
@@ -67,7 +76,7 @@ describe("matchModel", () => {
 });
 
 describe("updateAliases", () => {
-  it("adds exact matches, suggests near ones, and never touches existing aliases", () => {
+  it("adds exact matches and variants, suggests other near ones, and never touches existing aliases", () => {
     const { aliases, suggestions } = updateAliases(
       { "groq/qwen/qwen3.8-27b": { arena: null, status: "rejected", on: "2026-09-01" } },
       [
@@ -80,9 +89,10 @@ describe("updateAliases", () => {
     );
     expect(aliases).toEqual({
       "groq/qwen/qwen3.8-27b": { arena: null, status: "rejected", on: "2026-09-01" },
+      "google-ai-studio/gemini-3.8-flash": { arena: "gemini-3.8-flash-high", status: "variant", on: "2026-09-28" },
       "openrouter/google/gemma-4-31b-it:free": { arena: "gemma-4-31b", status: "exact", on: "2026-09-28" },
     });
-    expect(suggestions).toEqual([{ id: "google-ai-studio/gemini-3.8-flash", arena: "gemini-3.8-flash-high" }]);
+    expect(suggestions).toEqual([]);
   });
 });
 

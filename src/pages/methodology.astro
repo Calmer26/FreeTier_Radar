@@ -85,8 +85,10 @@ import { SITE } from "../../site.config";
     <p>
       Providers and LMArena name models differently. A model is linked automatically when the names match after
       removing provider prefixes and suffixes like <code>:free</code>, <code>-it</code> or <code>-instruct</code>.
-      Near matches, such as a Gemini model and its "high" reasoning variant, are only shown after we've checked them
-      by hand. Many small or new free models have no rating yet.
+      When LMArena's name only adds a reasoning-effort or size label (a Gemini model's "high" variant, DeepSeek's
+      "(Max)"), it's the same model and linked automatically; note that LMArena usually rates the highest-effort
+      setting, which a free API may not use by default. Other near matches are only shown after we've checked them by
+      hand. Many small or new free models have no rating yet.
     </p>
 
     <h2>Weekly roundup</h2>

@@ -16,8 +16,9 @@ code there was copied and adapted, not shared.
 - Models have a `kind` (chat, tts, stt); each kind has its own daily test in `probe.ts`.
   OpenRouter's free voices are hand-listed in `adapters.ts` (`OPENROUTER_CURATED_SPEECH`).
 - `data/benchmarks/arena.json` + `data/aliases.json`: LMArena ratings (CC-BY-4.0, attribute it)
-  and the links from our model ids to Arena names. Exact matches are automatic; near matches
-  only count once confirmed through the weekly aliases PR (`pipeline/arena.ts`).
+  and the links from our model ids to Arena names. Exact matches and effort/size variants
+  ("-high", "(Max)", "-30b-a3b") are automatic; other near matches only count once confirmed
+  through the weekly aliases PR (`pipeline/arena.ts`). Rejected ones stay rejected.
 - `content/roundups/`: published weekly roundups (Markdown), merged from the Monday PR.
 - `fixtures/`: the STT test clip (see its README).
 - `src/`: Astro static site; reads `data/` and `content/` at build time through `src/lib/`.
