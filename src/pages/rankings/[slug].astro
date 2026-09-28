@@ -29,6 +29,7 @@ const pct = (s: number | null) => (s == null ? "–" : `${Math.round(s * 100)}%`
   <p class="sub"><a href="/rankings/">Rankings</a>{isCline && <> · <a href="/cline/">Cline setup: best Plan + Act pair</a></>}</p>
   <h1>{def.title}</h1>
   <p class="lede">{def.intro}</p>
+  {def.slug === "image-generation" && <p class="callout info">See every model's sample outputs for the same prompts on <a href="/image-models/">Free image models compared</a>.</p>}
   <p class="sub"><strong>Order:</strong> {def.order} Reliability counts days a model answered out of the days it was tested (rate-limited days don't count), over the last {RANKING_WINDOW_DAYS} days.</p>
   <SponsorSlot />
   {list.length === 0 ? (

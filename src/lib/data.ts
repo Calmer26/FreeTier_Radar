@@ -10,6 +10,7 @@
 import { agentReadiness, type AgentReadiness } from "../../pipeline/agent-ready";
 import { scoresFor, type AliasFile, type ArenaFile, type ArenaScores } from "../../pipeline/arena";
 import { borrowedContext, siblingIds } from "../../pipeline/siblings";
+import type { ShowcaseFile } from "../../pipeline/showcase";
 import { PROVIDERS } from "../../pipeline/providers";
 import { isUnreachable } from "../../pipeline/reachability";
 import { withDefaults } from "../../pipeline/store-defaults";
@@ -20,6 +21,7 @@ const eventFiles = import.meta.glob<string>("../../data/events/*.jsonl", { eager
 const testFiles = import.meta.glob<TestHistory>("../../data/tests/history.json", { eager: true, import: "default" });
 const arenaFiles = import.meta.glob<ArenaFile>("../../data/benchmarks/arena.json", { eager: true, import: "default" });
 const aliasFiles = import.meta.glob<AliasFile>("../../data/aliases.json", { eager: true, import: "default" });
+const showcaseFiles = import.meta.glob<ShowcaseFile>("../../data/showcase.json", { eager: true, import: "default" });
 const offerFiles = import.meta.glob<Offer>("../../data/offers/ai/*.json", { eager: true, import: "default" });
 const sponsorFiles = import.meta.glob<SponsorFile>("../../data/sponsor.json", { eager: true, import: "default" });
 
@@ -153,3 +155,6 @@ export function formatTime(iso: string): string {
     day: "numeric", month: "short", hour: "2-digit", minute: "2-digit", timeZone: "UTC",
   }) + " UTC";
 }
+
+/** Showcase images: every free image model drawing the same test prompts. */
+export const showcase: ShowcaseFile = Object.values(showcaseFiles)[0] ?? { images: {} };

@@ -1,0 +1,38 @@
+name: Image showcase
+
+# Daily, after the tests: make the day's share of missing showcase images (each free
+# image model draws the same test prompts once). Commits nothing once all exist.
+on:
+  schedule:
+    - cron: "30 7 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: data-writes
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  showcase:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - run: npm run showcase
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      - name: Commit new images
+        run: |
+          git add data/showcase.json public/showcase
+          if git diff --cached --quiet; then echo "No changes"; exit 0; fi
+          git config user.name "freetier-radar-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "data: image showcase $(date -u +%Y-%m-%d)"
+          # Code may have been pushed while this job ran: rebase the data commit onto it.
+          for attempt in 1 2 3; do git pull --rebase --quiet && git push && exit 0; sleep $((attempt * 10)); done; exit 1

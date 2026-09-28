@@ -13,6 +13,7 @@
     "watch": "tsx pipeline/run-watch.ts",
     "roundup": "tsx pipeline/run-roundup.ts",
     "arena": "tsx pipeline/run-arena.ts",
+    "showcase": "tsx pipeline/run-showcase.ts",
     "readme": "tsx scripts/generate-readme.ts"
   },
   "engines": {
@@ -26,6 +27,7 @@
     "@astrojs/check": "^0.9.10",
     "@types/node": "^26.6.3",
     "hyparquet": "^1.31.2",
+    "sharp": "^0.35.5",
     "tsx": "^4.23.15",
     "typescript": "^6.0.3",
     "vitest": "^5.0.2"

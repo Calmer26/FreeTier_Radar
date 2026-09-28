@@ -4,7 +4,8 @@ import Badges from "../../../components/Badges.astro";
 import EventList from "../../../components/EventList.astro";
 import SponsorSlot from "../../../components/SponsorSlot.astro";
 import TestStatus from "../../../components/TestStatus.astro";
-import { events, formatDate, formatTime, modelById, models, type ModelView } from "../../../lib/data";
+import { events, formatDate, formatTime, modelById, models, showcase, type ModelView } from "../../../lib/data";
+import { showcaseKey, SHOWCASE_PROMPTS } from "../../../../pipeline/showcase";
 import { PROVIDERS } from "../../../../pipeline/providers";
 import { formatContext, formatLimits, KIND_LABELS } from "../../../../pipeline/templates";
 import { clineFit, clineSnippet } from "../../../lib/cline";
@@ -94,6 +95,25 @@ const description = `${m.name} on ${provider.label}: free-tier status, limits, d
       ) : (
         <p class="sub">No LMArena rating yet. Many small or new free models aren't on its leaderboards.</p>
       )}
+    </>
+  )}
+
+  {m.kind === "image" && (
+    <>
+      <h2>Sample outputs</h2>
+      <p class="sub">The same three test prompts for every free image model; <a href="/image-models/">compare them all</a>.</p>
+      <div class="offers">
+        {SHOWCASE_PROMPTS.map((p) => {
+          const img = showcase.images[showcaseKey(m.id, p.id)];
+          return (
+            <article class="offer sample">
+              {img ? <a href={img.file}><img src={img.file} alt={`${m.name}: ${p.title}`} loading="lazy" width="768" height="768" /></a> : <div class="pending">Not made yet</div>}
+              <h3>{p.title}</h3>
+              <p class="sub">{p.look_for}</p>
+            </article>
+          );
+        })}
+      </div>
     </>
   )}
 
