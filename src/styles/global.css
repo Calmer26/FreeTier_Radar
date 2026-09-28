@@ -51,10 +51,10 @@ h2 { font-size: 1.25rem; margin: 2.2rem 0 0.8rem; }
 .wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
 
 .site-header { border-bottom: 1px solid var(--border); background: var(--surface); }
-.site-header .wrap { display: flex; align-items: center; gap: 24px; min-height: 56px; flex-wrap: wrap; }
+.site-header .wrap { display: flex; align-items: center; gap: 8px 24px; min-height: 56px; flex-wrap: wrap; padding-top: 8px; padding-bottom: 8px; }
 .logo { font-weight: 700; color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 8px; }
 .logo-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
-.nav { display: flex; gap: 18px; flex-wrap: wrap; font-size: 0.95rem; }
+.nav { display: flex; gap: 4px 18px; flex-wrap: wrap; font-size: 0.95rem; }
 .nav a { color: var(--muted); text-decoration: none; }
 .nav a:hover, .nav a[aria-current="page"] { color: var(--text); }
 
@@ -95,7 +95,7 @@ td.num, td.nowrap { white-space: nowrap; font-variant-numeric: tabular-nums; }
 
 .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; vertical-align: 1px; }
 .s-responded { background: var(--ok); }
-.s-slow, .s-rate_limited { background: var(--warn); }
+.s-slow, .s-rate_limited, .s-restricted { background: var(--warn); }
 .s-gone, .s-error, .s-no_free_quota { background: var(--bad); }
 .s-untested { background: var(--border); }
 

@@ -43,6 +43,8 @@ export function classifyFailure(err: unknown): TestStatus {
 
   // Gemini answers a model outside the key's free tier with 429 and "limit: 0".
   if (/limit:\s*0\b/.test(message) || message.includes("free tier is not available")) return "no_free_quota";
+  // OpenRouter serves some free models only through the agent apps it lists (seen 2026-09-28).
+  if (status === 403 && /only available on agentic harnesses|only available (in|on|through) /.test(message)) return "restricted";
   if (status === 429 || /rate limit|too many requests|resource_exhausted/.test(message)) return "rate_limited";
   if (
     status === 404 || status === 410 ||

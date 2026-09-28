@@ -1,0 +1,27 @@
+---
+import Base from "../../layouts/Base.astro";
+import { formatDate } from "../../lib/data";
+import { roundups } from "../../lib/roundups";
+---
+<Base title="Weekly roundups" description="Every week: which AI models became free, which disappeared, and what changed in free tiers and credits.">
+  <h1>Weekly roundups</h1>
+  <p class="lede">
+    Every Monday: what became free, what disappeared, and what changed in free tiers and credits the week before.
+    Follow along with the <a href="/roundups/rss.xml">roundup RSS feed</a>.
+  </p>
+  {roundups.length === 0 ? (
+    <p class="sub">The first roundup is published after the first full week of tracking.</p>
+  ) : (
+    <ul class="feed">
+      {roundups.map((r) => (
+        <li>
+          <time datetime={r.frontmatter.end}>{formatDate(r.frontmatter.end)}</time>
+          <div>
+            <a href={r.href}><strong>{r.frontmatter.title}</strong></a>
+            <div class="sub">{r.frontmatter.events} change(s), {formatDate(r.frontmatter.start)} – {formatDate(r.frontmatter.end)}</div>
+          </div>
+        </li>
+      ))}
+    </ul>
+  )}
+</Base>

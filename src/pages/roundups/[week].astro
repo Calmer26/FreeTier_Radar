@@ -1,0 +1,22 @@
+---
+import Base from "../../layouts/Base.astro";
+import SponsorSlot from "../../components/SponsorSlot.astro";
+import { formatDate } from "../../lib/data";
+import { roundups, type Roundup } from "../../lib/roundups";
+
+export function getStaticPaths() {
+  return roundups.map((r) => ({ params: { week: r.slug }, props: { r } }));
+}
+
+const { r } = Astro.props as { r: Roundup };
+const { Content } = r;
+---
+<Base title={r.frontmatter.title} description={`What changed in free AI models, tiers and credits from ${formatDate(r.frontmatter.start)} to ${formatDate(r.frontmatter.end)}.`}>
+  <p class="sub"><a href="/roundups/">Weekly roundups</a> · {formatDate(r.frontmatter.start)} – {formatDate(r.frontmatter.end)}</p>
+  <h1>{r.frontmatter.title}</h1>
+  <SponsorSlot />
+  <article class="prose">
+    <Content />
+  </article>
+  <p class="sub">Every entry comes from our change feed. <a href="/methodology/">How we track changes</a>.</p>
+</Base>

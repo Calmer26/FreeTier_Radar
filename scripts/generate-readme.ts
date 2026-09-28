@@ -23,7 +23,7 @@ const resources = readResources().filter((r) => r.status !== "removed" && !isUnr
 
 const status = (id: string) => {
   const last = history(id).at(-1);
-  return !last ? "–" : last.status === "responded" ? "🟢" : last.status === "rate_limited" || last.status === "slow" ? "🟡" : "🔴";
+  return !last ? "–" : last.status === "responded" ? "🟢" : last.status === "rate_limited" || last.status === "slow" || last.status === "restricted" ? "🟡" : "🔴";
 };
 const link = (r: Resource) => `[${r.name.replace(/\|/g, "\\|")}](${SITE.url}/models/${r.provider}/${r.slug}/)`;
 

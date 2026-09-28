@@ -1,0 +1,39 @@
+name: Weekly roundup
+
+# Monday: draft last week's roundup and open it as a PR. Merging publishes it.
+on:
+  schedule:
+    - cron: "0 7 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  roundup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - run: npm run roundup
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          SITE_URL: ${{ vars.SITE_URL }}
+      - name: Open PR
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: |
+          file=$(git ls-files --others --exclude-standard content/roundups | head -1)
+          if [ -z "$file" ]; then echo "Nothing new"; exit 0; fi
+          week=$(basename "$file" .md)
+          git config user.name "freetier-radar-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "roundup/$week"
+          git add "$file"
+          git commit -m "Roundup $week (draft)"
+          git push -u origin "roundup/$week"
+          gh label create roundup --color 0f7b5f --force
+          gh pr create --title "Roundup $week" --label roundup --body "Draft of the weekly roundup for $week. The intro was written by a free model from the week's facts only; please check it. Edit the file in this PR if needed, then merge to publish it on the site, in the roundup RSS feed and, once set up, the newsletter."

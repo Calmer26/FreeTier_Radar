@@ -1,0 +1,56 @@
+---
+import Base from "../../layouts/Base.astro";
+import Badges from "../../components/Badges.astro";
+import SponsorSlot from "../../components/SponsorSlot.astro";
+import { activeModels, type ModelView } from "../../lib/data";
+import { MIN_TESTED_DAYS, rank, RANKINGS, RANKING_WINDOW_DAYS, type RankingDef } from "../../../pipeline/rankings";
+import { PROVIDERS } from "../../../pipeline/providers";
+import { formatContext } from "../../../pipeline/templates";
+
+export function getStaticPaths() {
+  return RANKINGS.map((def) => ({ params: { slug: def.slug }, props: { def } }));
+}
+
+const { def } = Astro.props as { def: RankingDef };
+const list = rank(def, activeModels.map((m) => ({ r: m, history: m.tests })));
+const isChat = !["text-to-speech", "speech-to-text"].includes(def.slug);
+const pct = (s: number | null) => (s == null ? "–" : `${Math.round(s * 100)}%`);
+---
+<Base title={def.title} description={`${def.intro} Ranked by daily tests; updated every day.`} noindex={list.length === 0}>
+  <p class="sub"><a href="/rankings/">Rankings</a></p>
+  <h1>{def.title}</h1>
+  <p class="lede">{def.intro}</p>
+  <p class="sub"><strong>Order:</strong> {def.order} Reliability counts days a model answered out of the days it was tested (rate-limited days don't count), over the last {RANKING_WINDOW_DAYS} days.</p>
+  <SponsorSlot />
+  {list.length === 0 ? (
+    <p class="sub">Not enough test data yet. Most rankings need at least {MIN_TESTED_DAYS} days of daily tests.</p>
+  ) : (
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th><th>Model</th><th>Provider</th>
+            {isChat && <th class="num">Context</th>}
+            <th class="num">Answered</th><th class="num hide-sm">Median time</th><th class="hide-sm">Labels</th>
+          </tr>
+        </thead>
+        <tbody>
+          {list.map((x, i) => {
+            const m = x.r as ModelView;
+            return (
+              <tr>
+                <td class="num">{i + 1}</td>
+                <td><a class="model-name" href={m.href}>{m.name}</a><div class="sub mono">{m.model_id}</div></td>
+                <td>{PROVIDERS[m.provider].label.split(" (")[0]}</td>
+                {isChat && <td class="num">{formatContext(m.context_length)}</td>}
+                <td class="num">{pct(x.rel.share)} <span class="sub">({x.rel.responded}/{x.rel.tested} days)</span></td>
+                <td class="num hide-sm">{x.rel.medianLatencyMs == null ? "–" : `${(x.rel.medianLatencyMs / 1000).toFixed(1)} s`}</td>
+                <td class="hide-sm"><Badges m={m} /></td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  )}
+</Base>

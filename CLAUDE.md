@@ -1,19 +1,26 @@
 # FreeTier Radar (resource_miner)
 
 Public site tracking free AI models: what's free, what changed, what works.
-Requirements: `Digital-Resource-Miner.md` (v1.1). Standalone: no dependency on solo_developer;
+Requirements: `Digital-Resource-Miner.md` (v1.2). Standalone: no dependency on solo_developer;
 code there was copied and adapted, not shared.
 
 ## Layout
 
 - `pipeline/`: data pipeline (TypeScript, run with tsx). Pure logic (`diff.ts`, `agent-ready.ts`,
-  `probe.ts` helpers, adapter `map*` functions) has tests next to it.
-- `data/`: the database. JSON in git, written only by the pipeline (and by hand for
-  `sponsor.json`). History = git log. Never store snapshots or full API responses.
-- `src/`: Astro static site; reads `data/` at build time through `src/lib/data.ts`.
+  `rankings.ts`, `roundup.ts`, `watch.ts`, `reachability.ts`, `probe.ts` helpers, adapter `map*`
+  functions) has tests next to it. Entry points: `run-discovery.ts`, `run-tests.ts`,
+  `run-watch.ts`, `run-roundup.ts`.
+- `data/`: the database. JSON in git, written only by the pipeline, except the hand-kept
+  `sponsor.json` and `offers/ai/*.json`. History = git log. Never store snapshots or full API
+  responses or pages.
+- Models have a `kind` (chat, tts, stt); each kind has its own daily test in `probe.ts`.
+  OpenRouter's free voices are hand-listed in `adapters.ts` (`OPENROUTER_CURATED_SPEECH`).
+- `content/roundups/`: published weekly roundups (Markdown), merged from the Monday PR.
+- `fixtures/`: the STT test clip (see its README).
+- `src/`: Astro static site; reads `data/` and `content/` at build time through `src/lib/`.
 - `scripts/generate-readme.ts`: regenerates the list between the README markers.
-- `.github/workflows/`: discovery every 6 h, daily tests, CI. Both data jobs share the
-  `data-writes` concurrency group.
+- `.github/workflows/`: discovery every 6 h, daily tests, weekly page watch and roundup, CI.
+  Data-writing jobs share the `data-writes` concurrency group.
 
 ## Rules
 

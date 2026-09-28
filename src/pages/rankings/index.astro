@@ -1,0 +1,28 @@
+---
+import Base from "../../layouts/Base.astro";
+import { activeModels } from "../../lib/data";
+import { rank, RANKINGS } from "../../../pipeline/rankings";
+
+const inputs = activeModels.map((m) => ({ r: m, history: m.tests }));
+const lists = RANKINGS.map((def) => ({ def, top: rank(def, inputs, 3) }));
+---
+<Base title="Rankings" description="The best free AI models for coding agents, vision, long context, text-to-speech and speech-to-text, ranked by daily tests.">
+  <h1>Rankings</h1>
+  <p class="lede">
+    Ranked on what we measure ourselves: how often a model answers our daily test, how fast, and whether it fits
+    the job. There are no benchmark scores yet, so these lists say "works and fits", not "is the smartest".
+  </p>
+  <div class="offers">
+    {lists.map(({ def, top }) => (
+      <article class="offer">
+        <h3><a href={`/rankings/${def.slug}/`}>{def.title}</a></h3>
+        <p class="sub">{def.intro}</p>
+        {top.length ? (
+          <ol>{top.map((x) => <li>{x.r.name}</li>)}</ol>
+        ) : (
+          <p class="sub">Not enough test data yet.</p>
+        )}
+      </article>
+    ))}
+  </div>
+</Base>

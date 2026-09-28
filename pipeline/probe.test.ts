@@ -9,6 +9,8 @@ describe("classifyFailure", () => {
     [new HttpError(404, "404 No endpoints found for x:free"), "gone"],
     [new HttpError(410, "410 model has reached its end of life"), "gone"],
     [new HttpError(400, "This model is unavailable for free. Use this slug instead: x/y"), "gone"],
+    [new HttpError(403, '403 {"error":{"message":"x:free is only available on agentic harnesses. Try plugging it into a coding agent'), "restricted"],
+    [new HttpError(403, "403 Forbidden"), "error"],
     [new HttpError(500, "500 internal"), "error"],
     [Object.assign(new Error("timed out"), { name: "TimeoutError" }), "slow"],
   ])("%s → %s", (err, expected) => {

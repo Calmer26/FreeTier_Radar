@@ -100,9 +100,11 @@ export interface ResourceEvent {
  *   rate_limited   429 — says nothing about the model
  *   no_free_quota  the provider refused because this key's free tier has no quota for it
  *   gone           404/410/"not found"/moved to paid
+ *   restricted     only served through certain apps (OpenRouter: "only available on
+ *                  agentic harnesses", i.e. the coding agents it lists)
  *   error          anything else
  */
-export type TestStatus = "responded" | "slow" | "rate_limited" | "no_free_quota" | "gone" | "error";
+export type TestStatus = "responded" | "slow" | "rate_limited" | "no_free_quota" | "gone" | "restricted" | "error";
 
 export interface TestResult {
   /** ISO timestamp of the request. */

@@ -1,6 +1,8 @@
 ---
 import Base from "../layouts/Base.astro";
 import { AGENT_MIN_CONTEXT, AGENT_MIN_RESPONDED_DAYS, AGENT_WINDOW_DAYS } from "../../pipeline/agent-ready";
+import { MIN_TESTED_DAYS, RANKINGS, RANKING_WINDOW_DAYS } from "../../pipeline/rankings";
+import { UNREACHABLE_AFTER } from "../../pipeline/reachability";
 import { HIGH_IMPACT_THRESHOLD } from "../../pipeline/scoring";
 import { SITE } from "../../site.config";
 ---
@@ -16,12 +18,17 @@ import { SITE } from "../../site.config";
       automated access is not allowed.
     </p>
     <ul>
-      <li><strong>OpenRouter:</strong> models with the <code>:free</code> suffix.</li>
-      <li><strong>Groq:</strong> every active chat model (all are usable on the free plan).</li>
-      <li><strong>Google AI Studio:</strong> every Gemini chat model. The list does not say which are on the free tier; the daily test with a free-tier key does.</li>
+      <li><strong>OpenRouter:</strong> models with the <code>:free</code> suffix. Its free voices aren't in any OpenRouter list, so we keep those by hand (labelled <em>Hand-listed</em>) and the daily test shows whether they still work.</li>
+      <li><strong>Groq:</strong> every active chat, text-to-speech (Orpheus) and speech-to-text (Whisper) model. All are usable on the free plan.</li>
+      <li><strong>Google AI Studio:</strong> every Gemini chat, text-to-speech and transcription model. The list does not say which are on the free tier; the daily test with a free-tier key does.</li>
       <li><strong>NVIDIA:</strong> every hosted chat model, all labelled evaluation-only.</li>
     </ul>
-    <p>Image, speech and embedding models are not in the directory yet.</p>
+    <p>Image generation and embedding models are not in the directory yet.</p>
+    <p>
+      <strong>Free credits and quotas</strong> (trial credit, monthly credit, daily allowances) are kept by hand on the
+      <a href="/offers/">Free credits</a> page, each with the date we last checked it. Once a week we fetch each
+      provider's source page and compare it with last week's; when it changes, we recheck the record.
+    </p>
 
     <h2>Changes</h2>
     <p>
@@ -37,10 +44,41 @@ import { SITE } from "../../site.config";
 
     <h2>The daily test</h2>
     <p>
-      Once a day we send each free model one tiny request (“Reply with the single word: OK”, 16
-      tokens max) using our own free-tier account. The result is shown as “Responded at 06:10 UTC”.
-      It proves the model answered at that moment, not that it is fast or available all day. A
-      rate-limit answer is not recorded as a failure.
+      Once a day we send each free model one tiny request, using our own free-tier accounts:
+    </p>
+    <ul>
+      <li><strong>Chat:</strong> “Reply with the single word: OK”, 16 tokens max.</li>
+      <li><strong>Text-to-speech:</strong> speak the word “OK”; it passes when audio comes back.</li>
+      <li><strong>Speech-to-text:</strong> transcribe an 18-second narration; it passes when the transcript matches.</li>
+    </ul>
+    <p>
+      The result is shown as “Responded at 06:10 UTC”. It proves the model answered at that moment, not that it is
+      fast or available all day. A rate-limit answer is not recorded as a failure. “Agent apps only” means the
+      provider refused a direct request because it only serves that model through the coding-agent apps it lists.
+    </p>
+    <p>
+      A model its provider lists, but that answers “not found” on {UNREACHABLE_AFTER} daily tests in a row, is
+      left out of the directory and marked <em>Listed but not callable</em> on its page and provider page. It
+      returns as soon as it answers again.
+    </p>
+
+    <h2>Rankings</h2>
+    <p>
+      The <a href="/rankings/">rankings</a> use only what we measure: how often a model answered the daily test over
+      the last {RANKING_WINDOW_DAYS} days (rate-limited days don't count), how fast, and whether it fits the job.
+      Evaluation-only models are left out. There are no benchmark scores yet, so a ranking says “works and fits”,
+      not “is the smartest”.
+    </p>
+    <ul>
+      {RANKINGS.map((r) => <li><strong>{r.title}:</strong> {r.order}</li>)}
+    </ul>
+    <p class="sub">The reliability ranking needs at least {MIN_TESTED_DAYS} tested days per model.</p>
+
+    <h2>Weekly roundup</h2>
+    <p>
+      Every Monday the week's changes are collected into a <a href="/roundups/">roundup</a>. A free model writes a
+      two- or three-sentence intro from a list of the week's facts and is told not to add anything; every entry
+      below it comes straight from the change feed. We read and edit each roundup before it's published.
     </p>
 
     <h2>Labels</h2>
