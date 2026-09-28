@@ -49,7 +49,8 @@ export function classifyFailure(err: unknown): TestStatus {
   if (/limit:\s*0\b/.test(message) || message.includes("free tier is not available")) return "no_free_quota";
   // OpenRouter serves some free models only through the agent apps it lists (seen 2026-09-28).
   if (status === 403 && /only available on agentic harnesses|only available (in|on|through) /.test(message)) return "restricted";
-  if (status === 429 || /rate limit|too many requests|resource_exhausted/.test(message)) return "rate_limited";
+  // Cloudflare's shared daily Neurons running out says nothing about the model either.
+  if (status === 429 || /rate limit|too many requests|resource_exhausted|used up your daily free allocation/.test(message)) return "rate_limited";
   if (
     status === 404 || status === 410 ||
     /not found|end of life|does not exist|no endpoints found|unavailable for free|no longer available as a free model|transitioned to a paid model/.test(message)

@@ -10,6 +10,7 @@ import { formatContext, formatLimits, KIND_LABELS } from "../../../../pipeline/t
 import { clineFit, clineSnippet } from "../../../lib/cline";
 import { toolStats } from "../../../../pipeline/agent-ready";
 import { RANKING_WINDOW_DAYS } from "../../../../pipeline/rankings";
+import { allowanceNote, costNote, formatUsd } from "../../../../pipeline/cloudflare-pricing";
 import { ARENA_ATTRIBUTION, ARENA_BOARD_LABELS, ARENA_BOARDS, ARENA_DATASET_URL } from "../../../../pipeline/arena";
 
 export function getStaticPaths() {
@@ -94,6 +95,35 @@ const description = `${m.name} on ${provider.label}: free-tier status, limits, d
         <p class="sub">No LMArena rating yet. Many small or new free models aren't on its leaderboards.</p>
       )}
     </>
+  )}
+
+  <h2>Cost</h2>
+  {m.pricing?.length ? (
+    <>
+      <p>
+        <strong>Free</strong> within {provider.label}'s free allowance{allowanceNote(m.kind, m.pricing) ? `: ${allowanceNote(m.kind, m.pricing)}` : ""}.
+        {costNote(m.kind, m.pricing) && <> Beyond it: <strong>{costNote(m.kind, m.pricing)}</strong> (needs the paid plan).</>}
+      </p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Price beyond the free allowance</th><th class="num">Neurons</th></tr></thead>
+          <tbody>
+            {m.pricing.map((l) => <tr><td>{formatUsd(l.usd)} per {l.unit}</td><td class="num">{l.neurons ?? "–"}</td></tr>)}
+          </tbody>
+        </table>
+      </div>
+      <p class="sub">Source: <a href="https://developers.cloudflare.com/workers-ai/platform/pricing/" rel="noopener">Cloudflare Workers AI pricing</a>. 10,000 Neurons are free every day; beyond that, $0.011 per 1,000 Neurons on the paid plan.</p>
+    </>
+  ) : (
+    <p>
+      <strong>{m.price_type === "trial-credit" ? "Free within a limited quota" : m.usage_terms === "evaluation-only" ? "Free for evaluation" : "$0"}</strong>
+      {m.price_type !== "trial-credit" && " within the free tier"}{m.limits ? ` (${m.limit_scope === "shared" ? "limits shared across the provider's free models" : "limits per model"})` : ""}.
+      {m.paid_version_pricing?.length ? (
+        <> When you need more: the paid version of this model costs <strong>{m.paid_version_pricing.map((l) => `${formatUsd(l.usd)} per ${l.unit}`).join(", ")}</strong> on {provider.label.split(" (")[0]}.</>
+      ) : (
+        <span class="sub"> We don't track a paid price for this model.</span>
+      )}
+    </p>
   )}
 
   {!m.testable && (

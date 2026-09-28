@@ -27,6 +27,7 @@ export const REMOVAL_GRACE_MS = 12 * 60 * 60 * 1000;
 export const TRACKED_FIELDS = [
   "name", "price_type", "context_length", "input_modalities", "tool_calling",
   "rate_limits", "limit_scope", "usage_terms", "licence", "card_required", "account_required", "data_logging",
+  "pricing",
 ] as const satisfies readonly (keyof ObservedModel)[];
 
 export function resourceId(m: Pick<ObservedModel, "provider" | "model_id">): string {
@@ -35,6 +36,17 @@ export function resourceId(m: Pick<ObservedModel, "provider" | "model_id">): str
 
 export function slugFor(modelId: string): string {
   return modelId.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+}
+
+/**
+ * What a field's value means for change detection. For rate limits only the numbers
+ * count: the explanatory note and its source link are wording, and rewording them is
+ * not a change in the limits (it once produced 21 "limits unknown → limits unknown").
+ */
+function comparable(field: string, v: unknown): unknown {
+  if (field !== "rate_limits" || !v || typeof v !== "object") return v;
+  const { rpm, rph, rpd, tpm, tpd } = v as Record<string, unknown>;
+  return { rpm, rph, rpd, tpm, tpd };
 }
 
 /** Stable JSON: object keys sorted, so key order never changes a fingerprint. */
@@ -47,7 +59,7 @@ function stable(v: unknown): string {
 }
 
 export function fingerprint(m: ObservedModel): string {
-  const tracked = Object.fromEntries(TRACKED_FIELDS.map((f) => [f, m[f]]));
+  const tracked = Object.fromEntries(TRACKED_FIELDS.map((f) => [f, comparable(f, m[f])]));
   return createHash("sha256").update(stable(tracked)).digest("hex").slice(0, 16);
 }
 
@@ -143,7 +155,7 @@ export function diff({ previous, observed, fetched, now }: DiffInput): DiffOutpu
         // A field added to the schema after this record was written is filled in
         // silently: "unknown → logs prompts" on every model is not news.
         if (prev[f] === undefined) continue;
-        if (stable(prev[f]) !== stable(m[f])) {
+        if (stable(comparable(f, prev[f])) !== stable(comparable(f, m[f]))) {
           events.push(makeEvent(now, "CHANGED", m, { field: f, old: prev[f], new: m[f] }));
         }
       }

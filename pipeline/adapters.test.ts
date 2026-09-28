@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { mapGoogle, mapGroq, mapKilo, mapLlm7, mapNvidia, freeAllowance, mapCline, mapCloudflare, mapOpenRouter, mapZai, OPENROUTER_CURATED_SPEECH } from "./adapters";
+import { mapGoogle, mapGroq, mapKilo, mapLlm7, mapNvidia, mapCline, mapCloudflare, mapOpenRouter, mapZai, OPENROUTER_CURATED_SPEECH } from "./adapters";
 import { classifyModel } from "./candidates";
 
 describe("classifyModel", () => {
@@ -175,13 +175,7 @@ describe("Cloudflare", () => {
       ["@cf/myshell-ai/melotts", "tts"],
     ]);
     expect(out[0]).toMatchObject({ name: "openai/gpt-oss-20b", context_length: 128_000, tool_calling: true, limit_scope: "shared" });
-    expect(out[0].rate_limits?.note).toBe("≈ 550k input tokens a day within the free Neurons");
     expect(out[1].terms_url).toBe("https://bfl.ai/legal/terms-of-service");
   });
 
-  it("turns a price into a free-per-day estimate", () => {
-    expect(freeAllowance('[{"unit":"per 512 by 512 tile","price":0.00583}]')).toBe("≈ 18 images (512×512) a day within the free Neurons");
-    expect(freeAllowance('[{"unit":"per step","price":0}]')).toMatch(/No charge listed/);
-    expect(freeAllowance(undefined)).toBeNull();
-  });
 });

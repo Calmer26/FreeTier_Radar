@@ -60,6 +60,17 @@ export interface ObservedModel {
   data_logging: DataLogging;
   /** The model's own terms or licence page, when the provider links one (Cloudflare). */
   terms_url?: string | null;
+  /** What going beyond the free allowance costs (Cloudflare's pricing page). */
+  pricing?: PriceLine[] | null;
+  /** Price of the paid version of a free model (OpenRouter: same id without ":free"). Not tracked. */
+  paid_version_pricing?: PriceLine[] | null;
+}
+
+/** One price: "$0.06 per M input tokens" (= 5,500 Neurons on Cloudflare). */
+export interface PriceLine {
+  usd: number;
+  unit: string;
+  neurons: number | null;
 }
 
 export type ResourceStatus = "active" | "pending_removal" | "removed";

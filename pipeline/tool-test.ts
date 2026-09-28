@@ -79,7 +79,7 @@ export function classifyToolFailure(err: unknown): ToolResult["status"] | null {
   if ((err as Error)?.name === "TimeoutError" || (err as Error)?.name === "AbortError") return "error";
   const status = err instanceof HttpError ? err.status : null;
   const message = String((err as Error)?.message ?? err ?? "").toLowerCase();
-  if (status === 429 || /rate limit|too many requests|resource_exhausted/.test(message)) return null;
+  if (status === 429 || /rate limit|too many requests|resource_exhausted|used up your daily free allocation/.test(message)) return null;
   // A 4xx means the provider or model refused the tool request itself: a fail for Act mode.
   if (status !== null && status >= 400 && status < 500) return "fail";
   return "error";

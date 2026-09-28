@@ -5,6 +5,7 @@ import type { Resource, TestHistory } from "./types";
 describe("classifyFailure", () => {
   it.each([
     [new HttpError(429, "429 Too Many Requests"), "rate_limited"],
+    [new HttpError(400, "AiError: you have used up your daily free allocation of 10,000 neurons"), "rate_limited"],
     [new HttpError(429, 'Quota exceeded for metric: generate_content_free_tier_requests, limit: 0'), "no_free_quota"],
     [new HttpError(404, "404 No endpoints found for x:free"), "gone"],
     [new HttpError(410, "410 model has reached its end of life"), "gone"],

@@ -4,7 +4,7 @@
  */
 
 import { PROVIDERS } from "./providers";
-import type { EventType, ModelKind, ObservedModel, RateLimits } from "./types";
+import type { EventType, ModelKind, ObservedModel, PriceLine, RateLimits } from "./types";
 
 export function formatContext(tokens: number | null): string {
   if (!tokens) return "unknown";
@@ -29,6 +29,7 @@ export function formatValue(field: string, v: unknown): string {
   if (v === null || v === undefined) return "unknown";
   if (field === "context_length") return formatContext(v as number);
   if (field === "rate_limits") return formatLimits(v as RateLimits);
+  if (field === "pricing") return (v as PriceLine[]).map((l) => `$${l.usd} per ${l.unit}`).join(", ") || "none";
   if (Array.isArray(v)) return v.join(", ") || "none";
   if (typeof v === "boolean") return v ? "yes" : "no";
   return String(v);
@@ -54,6 +55,7 @@ const FIELD_LABELS: Record<string, string> = {
   card_required: "card required",
   account_required: "account required",
   data_logging: "data use",
+  pricing: "price",
 };
 
 export function fieldLabel(field: string): string {

@@ -169,3 +169,13 @@ describe("fields added after a record was written", () => {
     expect(later.events.map((e) => e.field)).toEqual(["data_logging"]);
   });
 });
+
+describe("rate limit changes", () => {
+  it("only count when a number changes, not the wording of the note", () => {
+    const first = run(seeded(), [model("seed:free"), model("x:free", { rate_limits: { rpd: 50, note: "old wording" } })], T0).resources;
+    const reworded = run(first, [model("seed:free"), model("x:free", { rate_limits: { rpd: 50, note: "new wording", source: "u" } })], at(6));
+    expect(reworded.events).toEqual([]);
+    const cut = run(reworded.resources, [model("seed:free"), model("x:free", { rate_limits: { rpd: 20, note: "new wording" } })], at(12));
+    expect(cut.events.map((e) => [e.field, e.old_value, e.new_value])).toEqual([["rate_limits", { rpd: 50, note: "new wording", source: "u" }, { rpd: 20, note: "new wording" }]]);
+  });
+});

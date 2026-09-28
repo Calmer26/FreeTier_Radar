@@ -11,8 +11,9 @@
  */
 
 import { classifyModel } from "./candidates";
+import { catalogueLines, fetchCloudflarePricing } from "./cloudflare-pricing";
 import { PROVIDERS } from "./providers";
-import type { ModelKind, ObservedModel, ProviderId } from "./types";
+import type { ModelKind, ObservedModel, PriceLine, ProviderId } from "./types";
 
 const TIMEOUT_MS = 30_000;
 
@@ -82,6 +83,17 @@ export const OPENROUTER_CURATED_SPEECH: Array<{ id: string; name: string; kind: 
  * `openrouter/free` router alias.
  */
 export function mapOpenRouter(models: OpenRouterModel[]): ObservedModel[] {
+  const byId = new Map(models.map((m) => [m.id, m]));
+  const paidVersion = (id: string): PriceLine[] | null => {
+    const p = byId.get(id.replace(/:free$/, ""))?.pricing;
+    const input = Number(p?.prompt);
+    const output = Number(p?.completion);
+    if (!p || !(input > 0)) return null;
+    return [
+      { usd: +(input * 1e6).toFixed(4), unit: "M input tokens", neurons: null },
+      ...(output > 0 ? [{ usd: +(output * 1e6).toFixed(4), unit: "M output tokens", neurons: null }] : []),
+    ];
+  };
   const listed = withKind(models.filter((m) => m.id.endsWith(":free")), (m) => m.id).map(({ item: m, kind }) => ({
     ...base("openrouter", kind),
     model_id: m.id,
@@ -91,6 +103,7 @@ export function mapOpenRouter(models: OpenRouterModel[]): ObservedModel[] {
     context_length: m.context_length ?? null,
     input_modalities: m.architecture?.input_modalities ?? null,
     tool_calling: m.supported_parameters ? m.supported_parameters.includes("tools") : null,
+    paid_version_pricing: paidVersion(m.id),
   }));
   const listedIds = new Set(listed.map((m) => m.model_id));
   const curated = OPENROUTER_CURATED_SPEECH.filter((c) => !listedIds.has(c.id)).map((c) => ({
@@ -394,46 +407,12 @@ const CLOUDFLARE_TASKS: Record<string, ModelKind> = {
   "Text-to-Image": "image",
 };
 
-/** Workers Paid costs $0.011 per 1,000 Neurons, so the free 10,000 Neurons are worth $0.11 a day. */
-export const CLOUDFLARE_FREE_USD_PER_DAY = 0.11;
-
-const UNITS: Array<{ match: RegExp; label: (n: number) => string }> = [
-  { match: /per m input tokens/i, label: (n) => `≈ ${fmt(n * 1_000_000)} input tokens a day` },
-  { match: /per 512 by 512 tile/i, label: (n) => `≈ ${fmt(n)} images (512×512) a day` },
-  { match: /per audio minute/i, label: (n) => `≈ ${fmt(n)} audio minutes a day` },
-  { match: /per 1k characters/i, label: (n) => `≈ ${fmt(n * 1000)} characters a day` },
-];
-
-function fmt(n: number): string {
-  if (n >= 1_000_000) return `${+(n / 1_000_000).toFixed(1)}M`;
-  if (n >= 10_000) return `${Math.round(n / 1000)}k`;
-  return String(Math.floor(n));
-}
-
-/**
- * How far the free daily Neurons go for one model, from its first listed price.
- * Exported for tests. Null when the model lists no price we can convert.
- */
-export function freeAllowance(price: unknown): string | null {
-  let list: Array<{ unit?: string; price?: number }> = [];
-  try {
-    list = typeof price === "string" ? JSON.parse(price) : Array.isArray(price) ? price : [];
-  } catch {
-    return null;
-  }
-  const first = list[0];
-  if (!first || typeof first.price !== "number") return null;
-  if (first.price === 0) return "No charge listed (beta): doesn't use the free Neurons";
-  const unit = UNITS.find((u) => u.match.test(first.unit ?? ""));
-  return unit ? `${unit.label(CLOUDFLARE_FREE_USD_PER_DAY / first.price)} within the free Neurons` : null;
-}
-
 /**
  * Cloudflare's catalogue (models/search) carries task, context, tool support, price and
  * a `require_workers_paid` flag (checked 2026-09-28). Paid-only models are left out,
  * as are realtime and async-queue models (websocket or batch only).
  */
-export function mapCloudflare(models: CloudflareModel[]): ObservedModel[] {
+export function mapCloudflare(models: CloudflareModel[], pricing: Map<string, PriceLine[]> = new Map()): ObservedModel[] {
   return models.flatMap((m) => {
     const kind = CLOUDFLARE_TASKS[m.task?.name ?? ""];
     if (!kind) return [];
@@ -442,7 +421,9 @@ export function mapCloudflare(models: CloudflareModel[]): ObservedModel[] {
     if (kind === "chat" && classifyModel(m.name) !== "chat") return [];
     // Inpainting models edit an existing picture (they need an image and a mask): not text-to-image.
     if (kind === "image" && /inpaint/i.test(m.name)) return [];
-    const allowance = freeAllowance(p.price);
+    // The free-per-day estimate is derived from these prices when the site is built, so
+    // rewording it never counts as a change.
+    const lines = pricing.get(m.name) ?? catalogueLines(p.price);
     return [{
       ...base("cloudflare", kind),
       model_id: m.name,
@@ -452,8 +433,9 @@ export function mapCloudflare(models: CloudflareModel[]): ObservedModel[] {
       context_length: kind === "chat" && p.context_window ? Number(p.context_window) : null,
       input_modalities: kind === "chat" ? (String(p.vision) === "true" ? ["text", "image"] : ["text"]) : kind === "stt" ? ["audio"] : ["text"],
       tool_calling: kind === "chat" ? String(p.function_calling) === "true" : null,
-      rate_limits: { ...PROVIDERS.cloudflare.rate_limits, ...(allowance ? { note: allowance } : {}) },
+      rate_limits: PROVIDERS.cloudflare.rate_limits,
       terms_url: typeof p.terms === "string" ? p.terms : typeof p.info === "string" ? p.info : null,
+      pricing: lines,
     }];
   });
 }
@@ -464,7 +446,11 @@ async function fetchCloudflare(env: Env): Promise<ObservedModel[]> {
     `https://api.cloudflare.com/client/v4/accounts/${env.CLOUDFLARE_ACCOUNT_ID}/ai/models/search?per_page=500`,
     { Authorization: `Bearer ${env.CLOUDFLARE_API_TOKEN}` },
   );
-  return mapCloudflare(json.result ?? []);
+  // Prices come from the pricing page. If it can't be read, the whole fetch fails, so the
+  // provider is skipped this run instead of every model "losing" its price.
+  const pricing = await fetchCloudflarePricing();
+  if (pricing.size === 0) throw new Error("Cloudflare pricing page had no price rows");
+  return mapCloudflare(json.result ?? [], pricing);
 }
 
 // ── Registry ─────────────────────────────────────────────────────────────────────
