@@ -7,9 +7,9 @@
  * Pure: the site passes in resources with their history.
  */
 
-import { agentReadiness } from "./agent-ready";
+import { AGENT_MIN_CONTEXT, agentReadiness, toolStats } from "./agent-ready";
 import type { ArenaScores } from "./arena";
-import type { ModelKind, Resource, TestResult } from "./types";
+import type { ModelKind, Resource, TestResult, ToolResult } from "./types";
 
 export const RANKING_WINDOW_DAYS = 30;
 /** Fewer tested days than this and a model isn't ranked on reliability yet. */
@@ -39,6 +39,7 @@ export function reliability(history: TestResult[]): Reliability {
 export interface RankInput {
   r: Resource;
   history: TestResult[];
+  tools?: ToolResult[];
   arena?: ArenaScores | null;
 }
 
@@ -70,22 +71,31 @@ const ofKind = (k: ModelKind) => (x: RankedModel) => x.r.kind === k;
 /** Most reliable first, then fastest. */
 const byReliability = (a: RankedModel, b: RankedModel) => share(b) - share(a) || latency(a) - latency(b);
 
+/** Tool-call pass share over the whole window; -1 when never tested. */
+const toolShare = (x: RankedModel) => toolStats(x.tools, RANKING_WINDOW_DAYS).share ?? -1;
+const agentLevel = (x: RankedModel) => agentReadiness(x.r, x.history, x.tools).level;
+
 /** Arena rating for coding: WebDev when rated there, else Text; -1 when unrated. */
 const codingRating = (x: RankedModel) => x.arena?.boards.webdev?.rating ?? x.arena?.boards.text?.rating ?? -1;
 const textRating = (x: RankedModel) => x.arena?.boards.text?.rating ?? -1;
 
 export const RANKINGS: RankingDef[] = [
   {
-    slug: "coding-agents",
-    title: "Best free models for coding agents",
-    intro: "Free chat models that can drive Cline and similar agents: tool calling and at least 64k of context.",
-    order: "Agent-ready models first; then by LMArena WebDev rating (Text rating when there's no WebDev one; unrated models after rated ones); then by how often they answered the daily test over the last 30 days; then by context size.",
-    filter: (x) => usable(x) && ofKind("chat")(x) && agentReadiness(x.r, x.history).level !== "no",
-    compare: (a, b) => {
-      const level = (x: RankedModel) => (agentReadiness(x.r, x.history).level === "yes" ? 1 : 0);
-      return level(b) - level(a) || codingRating(b) - codingRating(a) || share(b) - share(a) ||
-        (b.r.context_length ?? 0) - (a.r.context_length ?? 0);
-    },
+    slug: "cline-plan",
+    title: "Best free models for Cline Plan mode",
+    intro: "Plan mode reads your code and works out an approach, so reasoning and coding quality matter most. The model still needs tool calling (to read files) and at least 64k of context.",
+    order: "LMArena WebDev rating (Text rating when there's no WebDev one; unrated models after rated ones), then context size, then how often the model answered the daily test.",
+    filter: (x) => usable(x) && ofKind("chat")(x) && agentLevel(x) !== "no",
+    compare: (a, b) => codingRating(b) - codingRating(a) || (b.r.context_length ?? 0) - (a.r.context_length ?? 0) || share(b) - share(a),
+  },
+  {
+    slug: "cline-act",
+    title: "Best free models for Cline Act mode",
+    intro: "Act mode edits files and runs commands through many tool calls in a row, so reliable tool calling and speed matter most.",
+    order: "Share of days the model passed our tool-call test, then how often it answered the daily test, then median response time, then LMArena WebDev rating. Only models that passed at least half their tool-call tests.",
+    filter: (x) =>
+      usable(x) && ofKind("chat")(x) && (x.r.context_length ?? 0) >= AGENT_MIN_CONTEXT && toolShare(x) >= 0.5,
+    compare: (a, b) => toolShare(b) - toolShare(a) || share(b) - share(a) || latency(a) - latency(b) || codingRating(b) - codingRating(a),
   },
   {
     slug: "top-rated",

@@ -117,10 +117,19 @@ export interface TestResult {
   latency_ms: number | null;
 }
 
+/** Result of the daily tool-call test (chat models only). See tool-test.ts. */
+export interface ToolResult {
+  at: string;
+  status: "pass" | "fail" | "error";
+  latency_ms: number | null;
+}
+
 export interface TestHistory {
   updated_at: string | null;
   /** Rolling window, newest last, at most one entry per UTC day per resource. */
   results: Record<string, TestResult[]>;
+  /** Tool-call test results, same window; absent in files written before it existed. */
+  tool_results?: Record<string, ToolResult[]>;
   /** Limits read from response headers (Groq publishes them), by resource id. */
   observed_limits: Record<string, RateLimits>;
 }

@@ -1,0 +1,98 @@
+---
+import Base from "../layouts/Base.astro";
+import Badges from "../components/Badges.astro";
+import SponsorSlot from "../components/SponsorSlot.astro";
+import { actRanking, clineSnippet, planRanking, suggestedPair } from "../lib/cline";
+import type { ModelView } from "../lib/data";
+import { toolStats } from "../../pipeline/agent-ready";
+import { PROVIDERS } from "../../pipeline/providers";
+import { RANKINGS, RANKING_WINDOW_DAYS } from "../../pipeline/rankings";
+import { formatContext } from "../../pipeline/templates";
+
+const plan = suggestedPair.plan?.r as ModelView | undefined;
+const act = suggestedPair.act?.r as ModelView | undefined;
+const same = plan && act && plan.id === act.id;
+const providerName = (m: ModelView) => PROVIDERS[m.provider].label.split(" (")[0];
+const tools = (m: ModelView) => {
+  const t = toolStats(m.toolTests, RANKING_WINDOW_DAYS);
+  return t.tested ? `passed the tool-call test on ${t.passed} of ${t.tested} days` : "not tool-call tested yet";
+};
+const rating = (m: ModelView) => {
+  const b = m.arena?.boards.webdev ?? m.arena?.boards.text;
+  return b?.rating ? `LMArena ${m.arena?.boards.webdev ? "WebDev" : "Text"} ${Math.round(b.rating)}` : "no LMArena rating yet";
+};
+const planDef = RANKINGS.find((r) => r.slug === "cline-plan")!;
+const actDef = RANKINGS.find((r) => r.slug === "cline-act")!;
+---
+<Base title="Best free models for Cline (Plan + Act)" description="The best free AI models for Cline's Plan and Act modes, picked from daily tool-call tests, reliability and LMArena ratings, with settings to paste.">
+  <h1>Free models for Cline: Plan + Act</h1>
+  <p class="lede">
+    Cline can use a different model for each mode (Settings → “Use different models for Plan and Act modes”).
+    Plan mode needs a strong reasoner; Act mode needs a model that makes tool calls reliably and fast. This pair is
+    picked from our daily tests and LMArena ratings, and updates every day.
+  </p>
+
+  {(!plan && !act) ? (
+    <p class="callout">Not enough test data yet: the Act pick needs tool-call test results, which start with the next daily test.</p>
+  ) : (
+    <div class="offers">
+      {[{ mode: "Plan", m: plan, why: plan && `${rating(plan)}, ${formatContext(plan.context_length)} context` },
+        { mode: "Act", m: act, why: act && `${tools(act)}, ${act.tests.at(-1)?.latency_ms ?? "?"} ms at the last test` }].map(({ mode, m, why }) => (
+        <article class="offer">
+          <p class="sub">{mode} mode{same ? " (and the other mode too)" : ""}</p>
+          {m ? (
+            <>
+              <h3><a href={m.href}>{m.name}</a></h3>
+              <p class="sub">{providerName(m)} · {why}</p>
+              <p><Badges m={m} /></p>
+              <pre><code>{clineSnippet(m)}</code></pre>
+              {m.agent.caveat && <p class="callout"><strong>Limits:</strong> {m.agent.caveat}</p>}
+            </>
+          ) : (
+            <p class="sub">No model qualifies yet.</p>
+          )}
+        </article>
+      ))}
+    </div>
+  )}
+  {plan && act && !same && plan.provider !== act.provider && (
+    <p class="sub">These come from two providers, so you'll set up two API providers in Cline (one per mode).</p>
+  )}
+  <p class="sub">
+    Evaluation-only models (NVIDIA's own API, LLM7) and models whose free tier refused our test are left out.
+    Check the data-use labels before sending private code: some free providers use prompts to improve their models.
+  </p>
+
+  <SponsorSlot />
+
+  {[{ def: planDef, list: planRanking }, { def: actDef, list: actRanking }].map(({ def, list }) => (
+    <>
+      <h2>{def.title}</h2>
+      <p class="sub">{def.order} <a href={`/rankings/${def.slug}/`}>Full list</a></p>
+      {list.length === 0 ? <p class="sub">No models qualify yet.</p> : (
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>#</th><th>Model</th><th>Provider</th><th class="num hide-sm">Arena</th><th class="num">Tool calls</th><th class="num hide-sm">Context</th></tr></thead>
+            <tbody>
+              {list.slice(0, 10).map((x, i) => {
+                const m = x.r as ModelView;
+                const t = toolStats(m.toolTests, RANKING_WINDOW_DAYS);
+                const b = m.arena?.boards.webdev ?? m.arena?.boards.text;
+                return (
+                  <tr>
+                    <td class="num">{i + 1}</td>
+                    <td><a class="model-name" href={m.href}>{m.name}</a></td>
+                    <td>{providerName(m)}</td>
+                    <td class="num hide-sm">{b?.rating ? Math.round(b.rating) : "–"}</td>
+                    <td class="num">{t.tested ? `${t.passed}/${t.tested}` : "–"}</td>
+                    <td class="num hide-sm">{formatContext(m.context_length)}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </>
+  ))}
+</Base>

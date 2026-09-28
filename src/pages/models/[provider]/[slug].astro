@@ -7,6 +7,9 @@ import TestStatus from "../../../components/TestStatus.astro";
 import { events, formatDate, formatTime, models, type ModelView } from "../../../lib/data";
 import { PROVIDERS } from "../../../../pipeline/providers";
 import { formatContext, formatLimits, KIND_LABELS } from "../../../../pipeline/templates";
+import { clineFit, clineSnippet } from "../../../lib/cline";
+import { toolStats } from "../../../../pipeline/agent-ready";
+import { RANKING_WINDOW_DAYS } from "../../../../pipeline/rankings";
 import { ARENA_ATTRIBUTION, ARENA_BOARD_LABELS, ARENA_BOARDS, ARENA_DATASET_URL } from "../../../../pipeline/arena";
 
 export function getStaticPaths() {
@@ -23,9 +26,9 @@ const apiSnippet = m.kind === "tts"
     ? `POST ${provider.base_url}/audio/transcriptions  (multipart)\nfile=@clip.mp3  model=${m.model_id}`
     : "";
 const geminiSpeech = m.kind !== "chat" && m.provider === "google-ai-studio";
-const clineSnippet = m.provider === "openrouter"
-  ? `API Provider: OpenRouter\nModel:        ${m.model_id}`
-  : `API Provider: OpenAI Compatible\nBase URL:     ${provider.base_url}\nAPI Key:      your ${provider.label.split(" (")[0]} key\nModel ID:     ${m.model_id}`;
+const snippet = m.kind === "chat" ? clineSnippet(m) : "";
+const fit = clineFit(m.id);
+const tt = toolStats(m.toolTests, RANKING_WINDOW_DAYS);
 const description = `${m.name} on ${provider.label}: free-tier status, limits, daily test results and change history.`;
 ---
 <Base title={/free/i.test(m.name) ? m.name : `${m.name} (free)`} description={description} noindex={!m.indexable || m.unreachable}>
@@ -117,7 +120,21 @@ const description = `${m.name} on ${provider.label}: free-tier status, limits, d
     {m.agent.level === "partial" && `Has tool calling and enough context, but: ${m.agent.reasons.join("; ")}.`}
     {m.agent.level === "no" && `Not suited to coding agents: ${m.agent.reasons.join("; ")}.`}
   </p>}
-  {m.kind === "chat" && <pre><code>{clineSnippet}</code></pre>}
+  {m.kind === "chat" && (
+    <p>
+      <strong>Tool-call test:</strong> {tt.tested ? `passed on ${tt.passed} of ${tt.tested} days` : "not run yet"}.
+      {" "}<strong>Cline:</strong>{" "}
+      {fit.plan || fit.act ? (
+        <>
+          {fit.plan && <a href="/rankings/cline-plan/">#{fit.plan} for Plan mode</a>}
+          {fit.plan && fit.act && " · "}
+          {fit.act && <a href="/rankings/cline-act/">#{fit.act} for Act mode</a>}
+          {" "}(<a href="/cline/">best pair</a>)
+        </>
+      ) : "not in the Plan or Act rankings yet"}.
+    </p>
+  )}
+  {m.kind === "chat" && <pre><code>{snippet}</code></pre>}
 
   <SponsorSlot />
 

@@ -12,7 +12,7 @@ import { scoresFor, type AliasFile, type ArenaFile, type ArenaScores } from "../
 import { PROVIDERS } from "../../pipeline/providers";
 import { isUnreachable } from "../../pipeline/reachability";
 import { withDefaults } from "../../pipeline/store-defaults";
-import type { Offer, RateLimits, Resource, ResourceEvent, SponsorFile, TestHistory, TestResult } from "../../pipeline/types";
+import type { Offer, RateLimits, Resource, ResourceEvent, SponsorFile, TestHistory, TestResult, ToolResult } from "../../pipeline/types";
 
 const resourceFiles = import.meta.glob<Resource[]>("../../data/resources/ai/*.json", { eager: true, import: "default" });
 const eventFiles = import.meta.glob<string>("../../data/events/*.jsonl", { eager: true, query: "?raw", import: "default" });
@@ -24,6 +24,8 @@ const sponsorFiles = import.meta.glob<SponsorFile>("../../data/sponsor.json", { 
 
 export interface ModelView extends Resource {
   tests: TestResult[];
+  /** Daily tool-call test results (chat models). */
+  toolTests: ToolResult[];
   lastTest: TestResult | null;
   agent: AgentReadiness;
   /** Documented provider limits, or limits read from response headers. */
@@ -52,11 +54,13 @@ if (resources.length === 0) {
 export const models: ModelView[] = resources
   .map((r) => {
     const history = tests.results[r.id] ?? [];
+    const toolTests = tests.tool_results?.[r.id] ?? [];
     return {
       ...r,
       tests: history,
+      toolTests,
       lastTest: history.at(-1) ?? null,
-      agent: agentReadiness(r, history),
+      agent: agentReadiness(r, history, toolTests),
       limits: r.rate_limits ?? tests.observed_limits[r.id] ?? null,
       href: `/models/${r.provider}/${r.slug}/`,
       indexable: history.length > 0,

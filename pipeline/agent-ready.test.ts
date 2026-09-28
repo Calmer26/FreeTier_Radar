@@ -41,3 +41,26 @@ describe("agentReadiness", () => {
     expect(agentReadiness(resource({ provider: "groq", limit_scope: "per-model", rate_limits: null }), days(7)).caveat).toBeNull();
   });
 });
+
+describe("agentReadiness with the tool-call test", () => {
+  const tool = (status: "pass" | "fail" | "error", d: number) => ({ at: `2026-09-${String(d).padStart(2, "0")}T06:01:00Z`, status, latency_ms: 500 });
+
+  it("accepts tool calling shown by the test when the provider publishes none", () => {
+    expect(agentReadiness(resource({ tool_calling: null }), days(7), [tool("pass", 7)]).level).toBe("yes");
+  });
+
+  it("marks a model partial when it keeps failing the tool-call test", () => {
+    const a = agentReadiness(resource(), days(7), [tool("fail", 5), tool("fail", 6), tool("pass", 7)]);
+    expect(a.level).toBe("partial");
+    expect(a.reasons).toContain("passed the tool-call test on 1 of 3 days");
+  });
+
+  it("ignores timeouts and server errors in the tool-call share", () => {
+    expect(agentReadiness(resource(), days(7), [tool("error", 6), tool("pass", 7)]).level).toBe("yes");
+  });
+
+  it("warns about a low hourly limit", () => {
+    const a = agentReadiness(resource({ provider: "llm7", limit_scope: "shared", rate_limits: { rpm: 10, rph: 60 } }), days(7), [tool("pass", 7)]);
+    expect(a.caveat).toMatch(/60 requests\/hour/);
+  });
+});

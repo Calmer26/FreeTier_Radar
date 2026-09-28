@@ -8,6 +8,7 @@
  */
 
 import { testModel, recordResults, type TestOutcome } from "./probe";
+import { testToolCall } from "./tool-test";
 import { PROVIDER_IDS, PROVIDERS } from "./providers";
 import { readResources, readTests, writeTests } from "./store";
 import type { ProviderId, Resource } from "./types";
@@ -44,6 +45,14 @@ async function runProvider(p: ProviderId, models: Resource[], outcomes: Map<stri
     outcomes.set(r.id, outcome);
     if (!outcome.detail) console.log(`  ${p} ${r.model_id}: ${outcome.result.status} (${outcome.result.latency_ms} ms)`);
     await sleep(GAP_MS[p]);
+
+    // Act-mode signal: only for chat models that just answered, and not ones known to lack tools.
+    if (r.kind === "chat" && outcome.result.status === "responded" && r.tool_calling !== false) {
+      const tool = await testToolCall(r, process.env);
+      outcome.tool = tool.result;
+      console.log(`  ${p} ${r.model_id}: tool call ${tool.result?.status ?? "rate-limited"}${tool.detail ? `: ${tool.detail}` : ""}`);
+      await sleep(GAP_MS[p]);
+    }
   }
 }
 

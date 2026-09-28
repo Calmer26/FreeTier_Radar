@@ -51,6 +51,7 @@ import { SITE } from "../../site.config";
       <li><strong>Chat:</strong> “Reply with the single word: OK”, 16 tokens max.</li>
       <li><strong>Text-to-speech:</strong> speak the word “OK”; it passes when audio comes back.</li>
       <li><strong>Speech-to-text:</strong> transcribe an 18-second narration; it passes when the transcript matches.</li>
+      <li><strong>Tool calling</strong> (chat models that just answered): the model gets one tool, <code>get_weather</code>, and is asked for the weather in Paris. It passes only when it calls that tool with a Paris argument. A text answer, the wrong tool or a refused request is a fail; timeouts don't count. This is the main signal for Cline's Act mode, and it shows tool support for providers that don't publish it.</li>
     </ul>
     <p>
       The result is shown as “Responded at 06:10 UTC”. It proves the model answered at that moment, not that it is

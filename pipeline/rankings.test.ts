@@ -35,41 +35,35 @@ describe("rank", () => {
     expect(out.map((x) => x.r.id)).toEqual(["good", "flaky"]);
   });
 
-  it("puts agent-ready models first for coding agents and leaves out non-agent and eval-only models", () => {
-    const out = rank(ranking("coding-agents"), [
-      { r: res("partial"), history: [day(1, "responded")] },
-      { r: res("ready"), history: good },
-      { r: res("no-tools", { tool_calling: false }), history: good },
-      { r: res("eval", { usage_terms: "evaluation-only" }), history: good },
-    ]);
-    expect(out.map((x) => x.r.id)).toEqual(["ready", "partial"]);
-  });
+  const pass = (d: number) => ({ at: `2026-09-${String(d).padStart(2, "0")}T06:01:00Z`, status: "pass" as const, latency_ms: 500 });
+  const fail = (d: number) => ({ ...pass(d), status: "fail" as const });
+  const arena = (webdev: number) => ({ name: "n", published: null, boards: { webdev: { rating: webdev, rank: 1, of: 1, votes: 1 } } });
 
-  it("orders agent-ready models by Arena WebDev rating, rated before unrated", () => {
-    const arena = (webdev: number) => ({ name: "n", published: null, boards: { webdev: { rating: webdev, rank: 1, of: 1, votes: 1 } } });
-    const out = rank(ranking("coding-agents"), [
+  it("orders Plan mode by coding rating, rated before unrated, and needs tool calling", () => {
+    const out = rank(ranking("cline-plan"), [
       { r: res("unrated"), history: good },
       { r: res("low"), history: good, arena: arena(1300) },
-      { r: res("high"), history: good, arena: arena(1600) },
+      { r: res("high"), history: flaky, arena: arena(1600) },
+      { r: res("no-tools", { tool_calling: null }), history: good, arena: arena(1700) },
+      { r: res("eval", { usage_terms: "evaluation-only" }), history: good, arena: arena(1800) },
     ]);
     expect(out.map((x) => x.r.id)).toEqual(["high", "low", "unrated"]);
   });
 
-  it("leaves out models whose latest test found no free quota", () => {
-    const text = { name: "n", published: null, boards: { text: { rating: 1500, rank: 1, of: 1, votes: 1 } } };
-    const out = rank(ranking("top-rated"), [
-      { r: res("paid-only"), history: [...good, day(8, "no_free_quota")], arena: text },
-      { r: res("free"), history: good, arena: text },
-    ]);
-    expect(out.map((x) => x.r.id)).toEqual(["free"]);
+  it("admits a model to Plan mode when the tool-call test shows tools the provider doesn't publish", () => {
+    const out = rank(ranking("cline-plan"), [{ r: res("groq-like", { tool_calling: null }), history: good, tools: [pass(7)] }]);
+    expect(out.map((x) => x.r.id)).toEqual(["groq-like"]);
   });
 
-  it("lists only rated models in the top-rated ranking", () => {
-    const out = rank(ranking("top-rated"), [
-      { r: res("rated"), history: good, arena: { name: "n", published: null, boards: { text: { rating: 1400, rank: 1, of: 1, votes: 1 } } } },
-      { r: res("unrated"), history: good },
+  it("orders Act mode by tool-call pass share, then reliability, then speed", () => {
+    const out = rank(ranking("cline-act"), [
+      { r: res("half"), history: good, tools: [pass(1), fail(2)] },
+      { r: res("always-fast"), history: good, tools: [pass(1), pass(2)] },
+      { r: res("always-flaky"), history: flaky, tools: [pass(1), pass(2)] },
+      { r: res("never"), history: good, tools: [fail(1), fail(2)] },
+      { r: res("untested"), history: good },
     ]);
-    expect(out.map((x) => x.r.id)).toEqual(["rated"]);
+    expect(out.map((x) => x.r.id)).toEqual(["always-fast", "always-flaky", "half"]);
   });
 
   it("keeps speech rankings to their own kind", () => {

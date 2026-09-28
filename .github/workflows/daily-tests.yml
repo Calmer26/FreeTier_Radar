@@ -37,4 +37,5 @@ jobs:
           git config user.name "freetier-radar-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -m "data: daily tests $(date -u +%Y-%m-%d)"
-          git push
+          # Code may have been pushed while this job ran: rebase the data commit onto it.
+          for attempt in 1 2 3; do git pull --rebase --quiet && git push && exit 0; sleep $((attempt * 10)); done; exit 1
