@@ -11,11 +11,11 @@ change history and ready-to-paste Cline settings.
 ## The list
 
 <!-- LIST:START -->
-_102 free models. Updated automatically; see [FreeTier Radar](https://freetierradar.com) for filters, limits and change history._
+_120 free models. Updated automatically; see [FreeTier Radar](https://freetierradar.com) for filters, limits and change history._
 
 🟢 responded to the latest daily test · 🟡 rate-limited or slow · 🔴 failed · 🤖 agent-ready (tool calling, ≥64k context, answered 5 of the last 7 days)
 
-### Chat (90)
+### Chat (108)
 
 #### OpenRouter
 
@@ -126,6 +126,34 @@ _102 free models. Updated automatically; see [FreeTier Radar](https://freetierra
 | [z-ai/glm-5.3 (z-ai)](https://freetierradar.com/models/nvidia/z-ai-glm-5-3/) | `z-ai/glm-5.3` | unknown | ? | 🟢 |  |
 | [z-ai/glm-5.3-flash (z-ai)](https://freetierradar.com/models/nvidia/z-ai-glm-5-3-flash/) | `z-ai/glm-5.3-flash` | unknown | ? | 🟡 |  |
 | [zyphra/zamba2-7b-instruct (zyphra)](https://freetierradar.com/models/nvidia/zyphra-zamba2-7b-instruct/) | `zyphra/zamba2-7b-instruct` | unknown | ? | 🔴 |  |
+
+#### Kilo Code gateway
+
+| Model | ID | Context | Tools | Last test | Agent |
+|---|---|---|---|---|---|
+| [Cohere: North Mini Code (free)](https://freetierradar.com/models/kilo/cohere-north-mini-code-free/) | `cohere/north-mini-code:free` | 256k | yes | – |  |
+| [Dots Studio: Dots3-Note Preview (free)](https://freetierradar.com/models/kilo/dots-studio-dots-3-note-preview-free/) | `dots-studio/dots-3-note-preview:free` | 512k | yes | – |  |
+| [inclusionAI: Ling 3.0 Flash Fin (free)](https://freetierradar.com/models/kilo/inclusionai-ling-3-0-flash-fin-free/) | `inclusionai/ling-3.0-flash-fin:free` | 262k | yes | – |  |
+| [inclusionAI: Ling 3.0 Flash Sante (free)](https://freetierradar.com/models/kilo/inclusionai-ling-3-0-flash-sante-free/) | `inclusionai/ling-3.0-flash-sante:free` | 262k | yes | – |  |
+| [LiquidAI: LFM2.5-2.6B (free)](https://freetierradar.com/models/kilo/liquid-lfm-2-5-2-6b-free/) | `liquid/lfm-2.5-2.6b:free` | 66k | yes | – |  |
+| [NVIDIA: Nemotron 3 Nano Omni (free)](https://freetierradar.com/models/kilo/nvidia-nemotron-3-nano-omni-30b-a3b-reasoning-free/) | `nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free` | 256k | yes | – |  |
+| [NVIDIA: Nemotron 3 Super (free)](https://freetierradar.com/models/kilo/nvidia-nemotron-3-super-120b-a12b-free/) | `nvidia/nemotron-3-super-120b-a12b:free` | 262k | yes | – |  |
+| [NVIDIA: Nemotron 3 Ultra (free)](https://freetierradar.com/models/kilo/nvidia-nemotron-3-ultra-550b-a55b-free/) | `nvidia/nemotron-3-ultra-550b-a55b:free` | 1M | yes | – |  |
+| [NVIDIA: Nemotron 3.5 Lightning (free)](https://freetierradar.com/models/kilo/nvidia-nemotron-3-5-lightning-free/) | `nvidia/nemotron-3.5-lightning:free` | 1M | yes | – |  |
+| [Poolside: Laguna S 2.1 (free)](https://freetierradar.com/models/kilo/poolside-laguna-s-2-1-free/) | `poolside/laguna-s-2.1:free` | 262k | yes | – |  |
+| [Poolside: Laguna XS 2.1 (free)](https://freetierradar.com/models/kilo/poolside-laguna-xs-2-1-free/) | `poolside/laguna-xs-2.1:free` | 262k | yes | – |  |
+| [Qwen: Qwen3.8 27B (free)](https://freetierradar.com/models/kilo/qwen-qwen3-8-27b-free/) | `qwen/qwen3.8-27b:free` | 262k | yes | – |  |
+| [Space Bunny Alpha (new)](https://freetierradar.com/models/kilo/stealth-space-bunny-alpha/) | `stealth/space-bunny-alpha` | 1M | yes | – |  |
+| [StepFun: Step 3.7 Flash (free)](https://freetierradar.com/models/kilo/stepfun-step-3-7-flash-free/) | `stepfun/step-3.7-flash:free` | 262k | yes | – |  |
+| [Thinking Machines: Inkling Small (free)](https://freetierradar.com/models/kilo/thinkingmachines-inkling-small-free/) | `thinkingmachines/inkling-small:free` | 1M | yes | – |  |
+
+#### LLM7.io ⚠ evaluation only
+
+| Model | ID | Context | Tools | Last test | Agent |
+|---|---|---|---|---|---|
+| [GLM-5.3-Flash](https://freetierradar.com/models/llm7/glm-5-3-flash/) | `GLM-5.3-Flash` | 400k | yes | – |  |
+| [minimax-m2.7](https://freetierradar.com/models/llm7/minimax-m2-7/) | `minimax-m2.7` | 180k | yes | – |  |
+| [mistral-Nemo-Instruct-2407](https://freetierradar.com/models/llm7/mistral-nemo-instruct-2407/) | `mistral-Nemo-Instruct-2407` | 128k | no | – |  |
 
 ### Text-to-speech (9)
 
