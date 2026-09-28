@@ -4,9 +4,19 @@
     "status": "exact",
     "on": "2026-09-28"
   },
+  "google-ai-studio/gemini-2.5-flash-lite": {
+    "arena": "gemini-2.5-flash-lite-preview-06-17-thinking",
+    "status": "confirmed",
+    "on": "2026-09-28"
+  },
   "google-ai-studio/gemini-2.5-pro": {
     "arena": "gemini-2.5-pro",
     "status": "exact",
+    "on": "2026-09-28"
+  },
+  "google-ai-studio/gemini-3.1-flash-lite": {
+    "arena": "gemini-3.1-flash-lite-preview",
+    "status": "confirmed",
     "on": "2026-09-28"
   },
   "google-ai-studio/gemini-3.1-flash-lite-preview": {
@@ -19,9 +29,29 @@
     "status": "exact",
     "on": "2026-09-28"
   },
+  "google-ai-studio/gemini-3.5-flash": {
+    "arena": "gemini-3.5-flash-medium",
+    "status": "confirmed",
+    "on": "2026-09-28"
+  },
   "google-ai-studio/gemini-3.5-flash-lite": {
     "arena": "gemini-3.5-flash-lite",
     "status": "exact",
+    "on": "2026-09-28"
+  },
+  "google-ai-studio/gemini-3.6-flash": {
+    "arena": "gemini-3.6-flash-high",
+    "status": "confirmed",
+    "on": "2026-09-28"
+  },
+  "google-ai-studio/gemini-3.7-flash": {
+    "arena": "Gemini 3.7 Flash (High)",
+    "status": "confirmed",
+    "on": "2026-09-28"
+  },
+  "google-ai-studio/gemini-3.8-flash": {
+    "arena": "Gemini 3.8 Flash (High)",
+    "status": "confirmed",
     "on": "2026-09-28"
   },
   "google-ai-studio/gemma-4-26b-a4b-it": {
@@ -54,6 +84,11 @@
     "status": "exact",
     "on": "2026-09-28"
   },
+  "nvidia/databricks/dbrx-instruct": {
+    "arena": "dbrx-instruct-preview",
+    "status": "confirmed",
+    "on": "2026-09-28"
+  },
   "nvidia/google/gemma-2b": {
     "arena": "gemma-2b-it",
     "status": "exact",
@@ -79,6 +114,11 @@
     "status": "exact",
     "on": "2026-09-28"
   },
+  "nvidia/meta/llama2-70b": {
+    "arena": "llama2-70b-steerlm-chat",
+    "status": "confirmed",
+    "on": "2026-09-28"
+  },
   "nvidia/microsoft/phi-3-vision-128k-instruct": {
     "arena": "phi-3-vision-128k-instruct",
     "status": "exact",
@@ -87,6 +127,11 @@
   "nvidia/moonshotai/kimi-k2.6": {
     "arena": "kimi-k2.6",
     "status": "exact",
+    "on": "2026-09-28"
+  },
+  "nvidia/moonshotai/kimi-k3": {
+    "arena": "Kimi K3 (Max)",
+    "status": "confirmed",
     "on": "2026-09-28"
   },
   "nvidia/nvidia/llama-3.1-nemotron-51b-instruct": {
@@ -129,6 +174,11 @@
     "status": "exact",
     "on": "2026-09-28"
   },
+  "nvidia/z-ai/glm-5.3": {
+    "arena": "GLM 5.3 (Max)",
+    "status": "confirmed",
+    "on": "2026-09-28"
+  },
   "nvidia/z-ai/glm-5.3-flash": {
     "arena": "GLM 5.3 Flash",
     "status": "exact",
@@ -152,6 +202,11 @@
   "openrouter/nvidia/nemotron-3-ultra-550b-a55b:free": {
     "arena": "nvidia-nemotron-3-ultra-550b-a55b-nvfp4",
     "status": "exact",
+    "on": "2026-09-28"
+  },
+  "openrouter/nvidia/nemotron-3.5-lightning:free": {
+    "arena": "nvidia-nemotron-3.5-lightning-30b-a3b-nvfp4",
+    "status": "confirmed",
     "on": "2026-09-28"
   },
   "openrouter/qwen/qwen3.8-27b:free": {
