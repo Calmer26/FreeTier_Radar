@@ -54,19 +54,19 @@ _151 free models. Updated automatically; see [FreeTier Radar](https://freetierra
 | [Gemini 2.5 Flash](https://freetierradar.com/models/google-ai-studio/gemini-2-5-flash/) | `gemini-2.5-flash` | 1M | ? | 🟢 |  |
 | [Gemini 2.5 Flash-Lite](https://freetierradar.com/models/google-ai-studio/gemini-2-5-flash-lite/) | `gemini-2.5-flash-lite` | 1M | ? | 🟢 |  |
 | [Gemini 2.5 Pro](https://freetierradar.com/models/google-ai-studio/gemini-2-5-pro/) | `gemini-2.5-pro` | 1M | ? | 🔴 |  |
-| [Gemini 3 Flash Preview](https://freetierradar.com/models/google-ai-studio/gemini-3-flash-preview/) | `gemini-3-flash-preview` | 1M | ? | 🔴 |  |
-| [Gemini 3.1 Flash Lite](https://freetierradar.com/models/google-ai-studio/gemini-3-1-flash-lite/) | `gemini-3.1-flash-lite` | 1M | ? | 🟢 |  |
-| [Gemini 3.1 Flash Lite Preview](https://freetierradar.com/models/google-ai-studio/gemini-3-1-flash-lite-preview/) | `gemini-3.1-flash-lite-preview` | 1M | ? | 🟢 |  |
+| [Gemini 3 Flash Preview](https://freetierradar.com/models/google-ai-studio/gemini-3-flash-preview/) | `gemini-3-flash-preview` | 1M | ? | 🟡 |  |
+| [Gemini 3.1 Flash Lite](https://freetierradar.com/models/google-ai-studio/gemini-3-1-flash-lite/) | `gemini-3.1-flash-lite` | 1M | ? | 🔴 |  |
+| [Gemini 3.1 Flash Lite Preview](https://freetierradar.com/models/google-ai-studio/gemini-3-1-flash-lite-preview/) | `gemini-3.1-flash-lite-preview` | 1M | ? | 🔴 |  |
 | [Gemini 3.1 Pro Preview](https://freetierradar.com/models/google-ai-studio/gemini-3-1-pro-preview/) | `gemini-3.1-pro-preview` | 1M | ? | 🔴 |  |
 | [Gemini 3.5 Flash](https://freetierradar.com/models/google-ai-studio/gemini-3-5-flash/) | `gemini-3.5-flash` | 1M | ? | 🔴 |  |
-| [Gemini 3.5 Flash Lite](https://freetierradar.com/models/google-ai-studio/gemini-3-5-flash-lite/) | `gemini-3.5-flash-lite` | 1M | ? | 🟢 |  |
+| [Gemini 3.5 Flash Lite](https://freetierradar.com/models/google-ai-studio/gemini-3-5-flash-lite/) | `gemini-3.5-flash-lite` | 1M | ? | 🔴 |  |
 | [Gemini 3.6 Flash](https://freetierradar.com/models/google-ai-studio/gemini-3-6-flash/) | `gemini-3.6-flash` | 1M | ? | 🟢 |  |
-| [Gemini 3.7 Flash](https://freetierradar.com/models/google-ai-studio/gemini-3-7-flash/) | `gemini-3.7-flash` | 1M | ? | 🟢 |  |
+| [Gemini 3.7 Flash](https://freetierradar.com/models/google-ai-studio/gemini-3-7-flash/) | `gemini-3.7-flash` | 1M | ? | 🔴 |  |
 | [Gemini 3.8 Flash](https://freetierradar.com/models/google-ai-studio/gemini-3-8-flash/) | `gemini-3.8-flash` | 1M | ? | 🔴 |  |
 | [Gemini Omni 1.1 Flash](https://freetierradar.com/models/google-ai-studio/gemini-omni-1-1-flash/) | `gemini-omni-1.1-flash` | 131k | ? | 🔴 |  |
 | [Gemini Omni Flash Preview](https://freetierradar.com/models/google-ai-studio/gemini-omni-flash-preview/) | `gemini-omni-flash-preview` | 131k | ? | 🔴 |  |
 | [Gemma 4 26B A4B IT](https://freetierradar.com/models/google-ai-studio/gemma-4-26b-a4b-it/) | `gemma-4-26b-a4b-it` | 262k | ? | 🟢 |  |
-| [Gemma 4 31B IT](https://freetierradar.com/models/google-ai-studio/gemma-4-31b-it/) | `gemma-4-31b-it` | 262k | ? | 🟡 |  |
+| [Gemma 4 31B IT](https://freetierradar.com/models/google-ai-studio/gemma-4-31b-it/) | `gemma-4-31b-it` | 262k | ? | 🔴 |  |
 
 #### NVIDIA API catalog (build.nvidia.com) ⚠ evaluation only
 
@@ -86,7 +86,7 @@ _151 free models. Updated automatically; see [FreeTier Radar](https://freetierra
 | [google/recurrentgemma-2b (google)](https://freetierradar.com/models/nvidia/google-recurrentgemma-2b/) | `google/recurrentgemma-2b` | unknown | ? | 🔴 |  |
 | [ibm/granite-3.0-3b-a800m-instruct (ibm)](https://freetierradar.com/models/nvidia/ibm-granite-3-0-3b-a800m-instruct/) | `ibm/granite-3.0-3b-a800m-instruct` | unknown | ? | 🔴 |  |
 | [ibm/granite-3.0-8b-instruct (ibm)](https://freetierradar.com/models/nvidia/ibm-granite-3-0-8b-instruct/) | `ibm/granite-3.0-8b-instruct` | unknown | ? | 🔴 |  |
-| [meta/llama-3.2-11b-vision-instruct (meta)](https://freetierradar.com/models/nvidia/meta-llama-3-2-11b-vision-instruct/) | `meta/llama-3.2-11b-vision-instruct` | unknown | ? | 🟡 |  |
+| [meta/llama-3.2-11b-vision-instruct (meta)](https://freetierradar.com/models/nvidia/meta-llama-3-2-11b-vision-instruct/) | `meta/llama-3.2-11b-vision-instruct` | unknown | ? | 🟢 |  |
 | [meta/llama-3.2-90b-vision-instruct (meta)](https://freetierradar.com/models/nvidia/meta-llama-3-2-90b-vision-instruct/) | `meta/llama-3.2-90b-vision-instruct` | unknown | ? | 🟡 |  |
 | [meta/llama2-70b (meta)](https://freetierradar.com/models/nvidia/meta-llama2-70b/) | `meta/llama2-70b` | unknown | ? | 🔴 |  |
 | [meta/muse-glimmer-30b (meta)](https://freetierradar.com/models/nvidia/meta-muse-glimmer-30b/) | `meta/muse-glimmer-30b` | unknown | ? | 🟢 |  |
@@ -117,13 +117,13 @@ _151 free models. Updated automatically; see [FreeTier Radar](https://freetierra
 | [nvidia/riva-translate-4b-instruct-v1.1 (nvidia)](https://freetierradar.com/models/nvidia/nvidia-riva-translate-4b-instruct-v1-1/) | `nvidia/riva-translate-4b-instruct-v1.1` | unknown | ? | 🟢 |  |
 | [nvidia/riva-translate-4b-instruct-v2 (nvidia)](https://freetierradar.com/models/nvidia/nvidia-riva-translate-4b-instruct-v2/) | `nvidia/riva-translate-4b-instruct-v2` | unknown | ? | 🟡 |  |
 | [nvidia/vila (nvidia)](https://freetierradar.com/models/nvidia/nvidia-vila/) | `nvidia/vila` | unknown | ? | 🔴 |  |
-| [openai/gpt-oss-20b (openai)](https://freetierradar.com/models/nvidia/openai-gpt-oss-20b/) | `openai/gpt-oss-20b` | unknown | ? | 🟢 |  |
+| [openai/gpt-oss-20b (openai)](https://freetierradar.com/models/nvidia/openai-gpt-oss-20b/) | `openai/gpt-oss-20b` | unknown | ? | 🟡 |  |
 | [poolside/laguna-xs-2.1 (poolside)](https://freetierradar.com/models/nvidia/poolside-laguna-xs-2-1/) | `poolside/laguna-xs-2.1` | unknown | ? | 🔴 |  |
 | [writer/palmyra-creative-122b (writer)](https://freetierradar.com/models/nvidia/writer-palmyra-creative-122b/) | `writer/palmyra-creative-122b` | unknown | ? | 🔴 |  |
 | [writer/palmyra-fin-70b-32k (writer)](https://freetierradar.com/models/nvidia/writer-palmyra-fin-70b-32k/) | `writer/palmyra-fin-70b-32k` | unknown | ? | 🔴 |  |
 | [writer/palmyra-med-70b (writer)](https://freetierradar.com/models/nvidia/writer-palmyra-med-70b/) | `writer/palmyra-med-70b` | unknown | ? | 🔴 |  |
 | [writer/palmyra-med-70b-32k (writer)](https://freetierradar.com/models/nvidia/writer-palmyra-med-70b-32k/) | `writer/palmyra-med-70b-32k` | unknown | ? | 🔴 |  |
-| [z-ai/glm-5.3 (z-ai)](https://freetierradar.com/models/nvidia/z-ai-glm-5-3/) | `z-ai/glm-5.3` | unknown | ? | 🟢 |  |
+| [z-ai/glm-5.3 (z-ai)](https://freetierradar.com/models/nvidia/z-ai-glm-5-3/) | `z-ai/glm-5.3` | unknown | ? | 🟡 |  |
 | [z-ai/glm-5.3-flash (z-ai)](https://freetierradar.com/models/nvidia/z-ai-glm-5-3-flash/) | `z-ai/glm-5.3-flash` | unknown | ? | 🟡 |  |
 | [zyphra/zamba2-7b-instruct (zyphra)](https://freetierradar.com/models/nvidia/zyphra-zamba2-7b-instruct/) | `zyphra/zamba2-7b-instruct` | unknown | ? | 🔴 |  |
 
@@ -140,11 +140,11 @@ _151 free models. Updated automatically; see [FreeTier Radar](https://freetierra
 | [NVIDIA: Nemotron 3 Super (free)](https://freetierradar.com/models/kilo/nvidia-nemotron-3-super-120b-a12b-free/) | `nvidia/nemotron-3-super-120b-a12b:free` | 262k | yes | 🟢 |  |
 | [NVIDIA: Nemotron 3 Ultra (free)](https://freetierradar.com/models/kilo/nvidia-nemotron-3-ultra-550b-a55b-free/) | `nvidia/nemotron-3-ultra-550b-a55b:free` | 1M | yes | 🟢 |  |
 | [NVIDIA: Nemotron 3.5 Lightning (free)](https://freetierradar.com/models/kilo/nvidia-nemotron-3-5-lightning-free/) | `nvidia/nemotron-3.5-lightning:free` | 1M | yes | 🟢 |  |
-| [Poolside: Laguna S 2.1 (free)](https://freetierradar.com/models/kilo/poolside-laguna-s-2-1-free/) | `poolside/laguna-s-2.1:free` | 262k | yes | – |  |
+| [Poolside: Laguna S 2.1 (free)](https://freetierradar.com/models/kilo/poolside-laguna-s-2-1-free/) | `poolside/laguna-s-2.1:free` | 262k | yes | 🟢 |  |
 | [Poolside: Laguna XS 2.1 (free)](https://freetierradar.com/models/kilo/poolside-laguna-xs-2-1-free/) | `poolside/laguna-xs-2.1:free` | 262k | yes | – |  |
-| [Qwen: Qwen3.8 27B (free)](https://freetierradar.com/models/kilo/qwen-qwen3-8-27b-free/) | `qwen/qwen3.8-27b:free` | 262k | yes | – |  |
-| [Space Bunny Alpha (new)](https://freetierradar.com/models/kilo/stealth-space-bunny-alpha/) | `stealth/space-bunny-alpha` | 1M | yes | – |  |
-| [StepFun: Step 3.7 Flash (free)](https://freetierradar.com/models/kilo/stepfun-step-3-7-flash-free/) | `stepfun/step-3.7-flash:free` | 262k | yes | – |  |
+| [Qwen: Qwen3.8 27B (free)](https://freetierradar.com/models/kilo/qwen-qwen3-8-27b-free/) | `qwen/qwen3.8-27b:free` | 262k | yes | 🟢 |  |
+| [Space Bunny Alpha (new)](https://freetierradar.com/models/kilo/stealth-space-bunny-alpha/) | `stealth/space-bunny-alpha` | 1M | yes | 🟢 |  |
+| [StepFun: Step 3.7 Flash (free)](https://freetierradar.com/models/kilo/stepfun-step-3-7-flash-free/) | `stepfun/step-3.7-flash:free` | 262k | yes | 🟢 |  |
 | [Thinking Machines: Inkling Small (free)](https://freetierradar.com/models/kilo/thinkingmachines-inkling-small-free/) | `thinkingmachines/inkling-small:free` | 1M | yes | – |  |
 
 #### LLM7.io ⚠ evaluation only
@@ -159,18 +159,18 @@ _151 free models. Updated automatically; see [FreeTier Radar](https://freetierra
 
 | Model | ID | Context | Tools | Last test | Agent |
 |---|---|---|---|---|---|
-| [aisingapore/gemma-sea-lion-v4-27b-it](https://freetierradar.com/models/cloudflare/cf-aisingapore-gemma-sea-lion-v4-27b-it/) | `@cf/aisingapore/gemma-sea-lion-v4-27b-it` | 128k | no | – |  |
-| [deepseek-ai/deepseek-r1-distill-qwen-32b](https://freetierradar.com/models/cloudflare/cf-deepseek-ai-deepseek-r1-distill-qwen-32b/) | `@cf/deepseek-ai/deepseek-r1-distill-qwen-32b` | 80k | no | – |  |
-| [ibm-granite/granite-4.0-h-micro](https://freetierradar.com/models/cloudflare/cf-ibm-granite-granite-4-0-h-micro/) | `@cf/ibm-granite/granite-4.0-h-micro` | 131k | yes | – |  |
-| [meta/llama-3.1-8b-instruct-fp8](https://freetierradar.com/models/cloudflare/cf-meta-llama-3-1-8b-instruct-fp8/) | `@cf/meta/llama-3.1-8b-instruct-fp8` | 32k | no | – |  |
-| [meta/llama-3.2-11b-vision-instruct](https://freetierradar.com/models/cloudflare/cf-meta-llama-3-2-11b-vision-instruct/) | `@cf/meta/llama-3.2-11b-vision-instruct` | 128k | no | – |  |
-| [meta/llama-3.2-1b-instruct](https://freetierradar.com/models/cloudflare/cf-meta-llama-3-2-1b-instruct/) | `@cf/meta/llama-3.2-1b-instruct` | 60k | no | – |  |
-| [meta/llama-3.2-3b-instruct](https://freetierradar.com/models/cloudflare/cf-meta-llama-3-2-3b-instruct/) | `@cf/meta/llama-3.2-3b-instruct` | 80k | no | – |  |
-| [mistralai/mistral-small-3.1-24b-instruct](https://freetierradar.com/models/cloudflare/cf-mistralai-mistral-small-3-1-24b-instruct/) | `@cf/mistralai/mistral-small-3.1-24b-instruct` | 128k | yes | – |  |
-| [nvidia/nemotron-3-120b-a12b](https://freetierradar.com/models/cloudflare/cf-nvidia-nemotron-3-120b-a12b/) | `@cf/nvidia/nemotron-3-120b-a12b` | 256k | yes | – |  |
-| [qwen/qwen2.5-coder-32b-instruct](https://freetierradar.com/models/cloudflare/cf-qwen-qwen2-5-coder-32b-instruct/) | `@cf/qwen/qwen2.5-coder-32b-instruct` | 33k | no | – |  |
-| [qwen/qwq-32b](https://freetierradar.com/models/cloudflare/cf-qwen-qwq-32b/) | `@cf/qwen/qwq-32b` | 24k | no | – |  |
-| [zai-org/glm-4.7-flash](https://freetierradar.com/models/cloudflare/cf-zai-org-glm-4-7-flash/) | `@cf/zai-org/glm-4.7-flash` | 131k | yes | – |  |
+| [aisingapore/gemma-sea-lion-v4-27b-it](https://freetierradar.com/models/cloudflare/cf-aisingapore-gemma-sea-lion-v4-27b-it/) | `@cf/aisingapore/gemma-sea-lion-v4-27b-it` | 128k | no | 🟢 |  |
+| [deepseek-ai/deepseek-r1-distill-qwen-32b](https://freetierradar.com/models/cloudflare/cf-deepseek-ai-deepseek-r1-distill-qwen-32b/) | `@cf/deepseek-ai/deepseek-r1-distill-qwen-32b` | 80k | no | 🟢 |  |
+| [ibm-granite/granite-4.0-h-micro](https://freetierradar.com/models/cloudflare/cf-ibm-granite-granite-4-0-h-micro/) | `@cf/ibm-granite/granite-4.0-h-micro` | 131k | yes | 🟢 |  |
+| [meta/llama-3.1-8b-instruct-fp8](https://freetierradar.com/models/cloudflare/cf-meta-llama-3-1-8b-instruct-fp8/) | `@cf/meta/llama-3.1-8b-instruct-fp8` | 32k | no | 🟢 |  |
+| [meta/llama-3.2-11b-vision-instruct](https://freetierradar.com/models/cloudflare/cf-meta-llama-3-2-11b-vision-instruct/) | `@cf/meta/llama-3.2-11b-vision-instruct` | 128k | no | 🔴 |  |
+| [meta/llama-3.2-1b-instruct](https://freetierradar.com/models/cloudflare/cf-meta-llama-3-2-1b-instruct/) | `@cf/meta/llama-3.2-1b-instruct` | 60k | no | 🟢 |  |
+| [meta/llama-3.2-3b-instruct](https://freetierradar.com/models/cloudflare/cf-meta-llama-3-2-3b-instruct/) | `@cf/meta/llama-3.2-3b-instruct` | 80k | no | 🟢 |  |
+| [mistralai/mistral-small-3.1-24b-instruct](https://freetierradar.com/models/cloudflare/cf-mistralai-mistral-small-3-1-24b-instruct/) | `@cf/mistralai/mistral-small-3.1-24b-instruct` | 128k | yes | 🟢 |  |
+| [nvidia/nemotron-3-120b-a12b](https://freetierradar.com/models/cloudflare/cf-nvidia-nemotron-3-120b-a12b/) | `@cf/nvidia/nemotron-3-120b-a12b` | 256k | yes | 🟢 |  |
+| [qwen/qwen2.5-coder-32b-instruct](https://freetierradar.com/models/cloudflare/cf-qwen-qwen2-5-coder-32b-instruct/) | `@cf/qwen/qwen2.5-coder-32b-instruct` | 33k | no | 🟢 |  |
+| [qwen/qwq-32b](https://freetierradar.com/models/cloudflare/cf-qwen-qwq-32b/) | `@cf/qwen/qwq-32b` | 24k | no | 🟢 |  |
+| [zai-org/glm-4.7-flash](https://freetierradar.com/models/cloudflare/cf-zai-org-glm-4-7-flash/) | `@cf/zai-org/glm-4.7-flash` | 131k | yes | 🟢 |  |
 
 #### Cline (free promotion)
 
@@ -205,7 +205,7 @@ _151 free models. Updated automatically; see [FreeTier Radar](https://freetierra
 |---|---|---|
 | [Gemini 2.5 Flash Preview TTS](https://freetierradar.com/models/google-ai-studio/gemini-2-5-flash-preview-tts/) | `gemini-2.5-flash-preview-tts` | 🟢 |
 | [Gemini 2.5 Pro Preview TTS](https://freetierradar.com/models/google-ai-studio/gemini-2-5-pro-preview-tts/) | `gemini-2.5-pro-preview-tts` | 🔴 |
-| [Gemini 3.1 Flash TTS Preview](https://freetierradar.com/models/google-ai-studio/gemini-3-1-flash-tts-preview/) | `gemini-3.1-flash-tts-preview` | 🟢 |
+| [Gemini 3.1 Flash TTS Preview](https://freetierradar.com/models/google-ai-studio/gemini-3-1-flash-tts-preview/) | `gemini-3.1-flash-tts-preview` | 🔴 |
 | [Gemini 3.8 Flash Lite TTS](https://freetierradar.com/models/google-ai-studio/gemini-3-8-flash-lite-tts/) | `gemini-3.8-flash-lite-tts` | 🟢 |
 | [Gemini 3.8 Flash TTS](https://freetierradar.com/models/google-ai-studio/gemini-3-8-flash-tts/) | `gemini-3.8-flash-tts` | 🟢 |
 
@@ -213,7 +213,7 @@ _151 free models. Updated automatically; see [FreeTier Radar](https://freetierra
 
 | Model | ID | Last test |
 |---|---|---|
-| [myshell-ai/melotts](https://freetierradar.com/models/cloudflare/cf-myshell-ai-melotts/) | `@cf/myshell-ai/melotts` | – |
+| [myshell-ai/melotts](https://freetierradar.com/models/cloudflare/cf-myshell-ai-melotts/) | `@cf/myshell-ai/melotts` | 🟢 |
 
 ### Speech-to-text (5)
 
@@ -234,8 +234,8 @@ _151 free models. Updated automatically; see [FreeTier Radar](https://freetierra
 
 | Model | ID | Last test |
 |---|---|---|
-| [openai/whisper](https://freetierradar.com/models/cloudflare/cf-openai-whisper/) | `@cf/openai/whisper` | – |
-| [openai/whisper-tiny-en](https://freetierradar.com/models/cloudflare/cf-openai-whisper-tiny-en/) | `@cf/openai/whisper-tiny-en` | – |
+| [openai/whisper](https://freetierradar.com/models/cloudflare/cf-openai-whisper/) | `@cf/openai/whisper` | 🟢 |
+| [openai/whisper-tiny-en](https://freetierradar.com/models/cloudflare/cf-openai-whisper-tiny-en/) | `@cf/openai/whisper-tiny-en` | 🟢 |
 
 ### Image (10)
 
@@ -243,16 +243,16 @@ _151 free models. Updated automatically; see [FreeTier Radar](https://freetierra
 
 | Model | ID | Last test |
 |---|---|---|
-| [black-forest-labs/flux-1-schnell](https://freetierradar.com/models/cloudflare/cf-black-forest-labs-flux-1-schnell/) | `@cf/black-forest-labs/flux-1-schnell` | – |
-| [black-forest-labs/flux-2-dev](https://freetierradar.com/models/cloudflare/cf-black-forest-labs-flux-2-dev/) | `@cf/black-forest-labs/flux-2-dev` | – |
-| [black-forest-labs/flux-2-klein-4b](https://freetierradar.com/models/cloudflare/cf-black-forest-labs-flux-2-klein-4b/) | `@cf/black-forest-labs/flux-2-klein-4b` | – |
-| [black-forest-labs/flux-2-klein-9b](https://freetierradar.com/models/cloudflare/cf-black-forest-labs-flux-2-klein-9b/) | `@cf/black-forest-labs/flux-2-klein-9b` | – |
-| [bytedance/stable-diffusion-xl-lightning](https://freetierradar.com/models/cloudflare/cf-bytedance-stable-diffusion-xl-lightning/) | `@cf/bytedance/stable-diffusion-xl-lightning` | – |
-| [leonardo/lucid-origin](https://freetierradar.com/models/cloudflare/cf-leonardo-lucid-origin/) | `@cf/leonardo/lucid-origin` | – |
-| [leonardo/phoenix-1.0](https://freetierradar.com/models/cloudflare/cf-leonardo-phoenix-1-0/) | `@cf/leonardo/phoenix-1.0` | – |
-| [lykon/dreamshaper-8-lcm](https://freetierradar.com/models/cloudflare/cf-lykon-dreamshaper-8-lcm/) | `@cf/lykon/dreamshaper-8-lcm` | – |
-| [runwayml/stable-diffusion-v1-5-inpainting](https://freetierradar.com/models/cloudflare/cf-runwayml-stable-diffusion-v1-5-inpainting/) | `@cf/runwayml/stable-diffusion-v1-5-inpainting` | – |
-| [stabilityai/stable-diffusion-xl-base-1.0](https://freetierradar.com/models/cloudflare/cf-stabilityai-stable-diffusion-xl-base-1-0/) | `@cf/stabilityai/stable-diffusion-xl-base-1.0` | – |
+| [black-forest-labs/flux-1-schnell](https://freetierradar.com/models/cloudflare/cf-black-forest-labs-flux-1-schnell/) | `@cf/black-forest-labs/flux-1-schnell` | 🟢 |
+| [black-forest-labs/flux-2-dev](https://freetierradar.com/models/cloudflare/cf-black-forest-labs-flux-2-dev/) | `@cf/black-forest-labs/flux-2-dev` | 🟡 |
+| [black-forest-labs/flux-2-klein-4b](https://freetierradar.com/models/cloudflare/cf-black-forest-labs-flux-2-klein-4b/) | `@cf/black-forest-labs/flux-2-klein-4b` | 🟢 |
+| [black-forest-labs/flux-2-klein-9b](https://freetierradar.com/models/cloudflare/cf-black-forest-labs-flux-2-klein-9b/) | `@cf/black-forest-labs/flux-2-klein-9b` | 🟢 |
+| [bytedance/stable-diffusion-xl-lightning](https://freetierradar.com/models/cloudflare/cf-bytedance-stable-diffusion-xl-lightning/) | `@cf/bytedance/stable-diffusion-xl-lightning` | 🟢 |
+| [leonardo/lucid-origin](https://freetierradar.com/models/cloudflare/cf-leonardo-lucid-origin/) | `@cf/leonardo/lucid-origin` | 🟢 |
+| [leonardo/phoenix-1.0](https://freetierradar.com/models/cloudflare/cf-leonardo-phoenix-1-0/) | `@cf/leonardo/phoenix-1.0` | 🟢 |
+| [lykon/dreamshaper-8-lcm](https://freetierradar.com/models/cloudflare/cf-lykon-dreamshaper-8-lcm/) | `@cf/lykon/dreamshaper-8-lcm` | 🟢 |
+| [runwayml/stable-diffusion-v1-5-inpainting](https://freetierradar.com/models/cloudflare/cf-runwayml-stable-diffusion-v1-5-inpainting/) | `@cf/runwayml/stable-diffusion-v1-5-inpainting` | 🔴 |
+| [stabilityai/stable-diffusion-xl-base-1.0](https://freetierradar.com/models/cloudflare/cf-stabilityai-stable-diffusion-xl-base-1-0/) | `@cf/stabilityai/stable-diffusion-xl-base-1.0` | 🟢 |
 
 <!-- LIST:END -->
 
