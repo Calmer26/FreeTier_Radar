@@ -3,7 +3,7 @@ import Base from "../../layouts/Base.astro";
 import { activeModels } from "../../lib/data";
 import { rank, RANKINGS } from "../../../pipeline/rankings";
 
-const inputs = activeModels.map((m) => ({ r: m, history: m.tests, arena: m.arena }));
+const inputs = activeModels.map((m) => ({ r: m, history: m.tests, tools: m.toolTests, arena: m.arena }));
 const lists = RANKINGS.map((def) => ({ def, top: rank(def, inputs, 3) }));
 ---
 <Base title="Rankings" description="The best free AI models for coding agents, vision, long context, text-to-speech and speech-to-text, ranked by daily tests.">
@@ -12,6 +12,7 @@ const lists = RANKINGS.map((def) => ({ def, top: rank(def, inputs, 3) }));
     Ranked on how often a model answers our daily test, how fast, whether it fits the job, and, where a model has
     one, its <a href="/methodology/#benchmarks">LMArena rating</a>.
   </p>
+  <p class="callout info">Using Cline? The <a href="/cline/">Cline setup page</a> suggests the best free Plan + Act pair, with settings to paste.</p>
   <div class="offers">
     {lists.map(({ def, top }) => (
       <article class="offer">

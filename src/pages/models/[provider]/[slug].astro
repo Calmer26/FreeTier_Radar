@@ -4,9 +4,12 @@ import Badges from "../../../components/Badges.astro";
 import EventList from "../../../components/EventList.astro";
 import SponsorSlot from "../../../components/SponsorSlot.astro";
 import TestStatus from "../../../components/TestStatus.astro";
-import { events, formatDate, formatTime, models, type ModelView } from "../../../lib/data";
+import { events, formatDate, formatTime, modelById, models, type ModelView } from "../../../lib/data";
 import { PROVIDERS } from "../../../../pipeline/providers";
 import { formatContext, formatLimits, KIND_LABELS } from "../../../../pipeline/templates";
+import { clineFit, clineSnippet } from "../../../lib/cline";
+import { toolStats } from "../../../../pipeline/agent-ready";
+import { RANKING_WINDOW_DAYS } from "../../../../pipeline/rankings";
 import { ARENA_ATTRIBUTION, ARENA_BOARD_LABELS, ARENA_BOARDS, ARENA_DATASET_URL } from "../../../../pipeline/arena";
 
 export function getStaticPaths() {
@@ -23,9 +26,10 @@ const apiSnippet = m.kind === "tts"
     ? `POST ${provider.base_url}/audio/transcriptions  (multipart)\nfile=@clip.mp3  model=${m.model_id}`
     : "";
 const geminiSpeech = m.kind !== "chat" && m.provider === "google-ai-studio";
-const clineSnippet = m.provider === "openrouter"
-  ? `API Provider: OpenRouter\nModel:        ${m.model_id}`
-  : `API Provider: OpenAI Compatible\nBase URL:     ${provider.base_url}\nAPI Key:      your ${provider.label.split(" (")[0]} key\nModel ID:     ${m.model_id}`;
+const snippet = m.kind === "chat" ? clineSnippet(m) : "";
+const siblings = m.siblings.map((id) => modelById.get(id)!).filter(Boolean);
+const fit = clineFit(m.id);
+const tt = toolStats(m.toolTests, RANKING_WINDOW_DAYS);
 const description = `${m.name} on ${provider.label}: free-tier status, limits, daily test results and change history.`;
 ---
 <Base title={/free/i.test(m.name) ? m.name : `${m.name} (free)`} description={description} noindex={!m.indexable || m.unreachable}>
@@ -47,12 +51,14 @@ const description = `${m.name} on ${provider.label}: free-tier status, limits, d
 
   <dl class="facts">
     <div><dt>Price</dt><dd>{m.price_type === "free" ? "$0" : m.price_type === "freemium-quota" ? "$0 within free quota" : "Free tier not confirmed by listing"}</dd></div>
-    {m.kind === "chat" && <div><dt>Context window</dt><dd>{formatContext(m.context_length)}</dd></div>}
+    {m.kind === "chat" && <div><dt>Context window</dt><dd>{formatContext(m.context_length)}{m.context_from && <span class="sub" title="This provider doesn't publish it; taken from the same model elsewhere (smallest known value)"> (from {PROVIDERS[m.context_from].label.split(" (")[0]})</span>}</dd></div>}
     {m.kind === "chat" && <div><dt>Tool calling</dt><dd>{yn(m.tool_calling)}</dd></div>}
     {m.kind === "chat" && <div><dt>Input types</dt><dd>{m.input_modalities?.join(", ") ?? "Unknown"}</dd></div>}
     {m.kind !== "chat" && <div><dt>Type</dt><dd>{KIND_LABELS[m.kind]}</dd></div>}
     <div><dt>Rate limits</dt><dd>{formatLimits(m.limits)}{m.limit_scope === "shared" ? " (shared)" : ""}</dd></div>
     <div><dt>Usage terms</dt><dd>{m.usage_terms === "production-ok" ? "Production use allowed" : m.usage_terms === "evaluation-only" ? "Evaluation only" : "Unknown"}</dd></div>
+    <div><dt>Data use</dt><dd>{m.data_logging === "logs-prompts" ? "Logs prompts" : m.data_logging === "may-train" ? "May use your prompts" : m.data_logging === "none-stated" ? "None stated" : "Unknown"}</dd></div>
+    <div><dt>Account</dt><dd>{m.account_required === "no" ? "Not needed" : m.account_required === "yes" ? "Needed" : "Unknown"}</dd></div>
     <div><dt>Card required</dt><dd>{m.card_required === "yes" ? "Yes" : m.card_required === "no" ? "No" : "Unknown"}</dd></div>
     <div><dt>First seen</dt><dd>{formatDate(m.first_seen)}</dd></div>
   </dl>
@@ -86,17 +92,48 @@ const description = `${m.name} on ${provider.label}: free-tier status, limits, d
     </>
   )}
 
-  <h2>Daily test</h2>
-  <p><TestStatus test={m.lastTest} /></p>
-  {m.tests.length > 0 && (
+  {!m.testable && (
+    <p class="callout info">
+      <strong>Only inside Cline.</strong> {provider.usage_terms_note}
+      {siblings.length > 0 ? " Below you can see how the same model does at other providers." : " We don't track this model at another provider yet."}
+    </p>
+  )}
+
+  {siblings.length > 0 && (
+    <>
+      <h2>Same model at other providers</h2>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Provider</th><th>Last test</th>{m.kind === "chat" && <th class="num">Tool calls</th>}<th class="hide-sm">Labels</th></tr></thead>
+          <tbody>
+            {siblings.map((o) => {
+              const t = toolStats(o.toolTests, RANKING_WINDOW_DAYS);
+              return (
+                <tr>
+                  <td><a class="model-name" href={o.href}>{PROVIDERS[o.provider].label}</a><div class="sub mono">{o.model_id}</div></td>
+                  <td class="nowrap"><TestStatus test={o.lastTest} untestable={!o.testable} /></td>
+                  {m.kind === "chat" && <td class="num">{t.tested ? `${t.passed}/${t.tested}` : "–"}</td>}
+                  <td class="hide-sm"><Badges m={o} /></td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </>
+  )}
+
+  {m.testable && <h2>Daily test</h2>}
+  {m.testable && <p><TestStatus test={m.lastTest} /></p>}
+  {m.testable && m.tests.length > 0 && (
     <div class="history" aria-label="Test results, last 30 days">
       {m.tests.map((t) => <i class={`s-${t.status}`} title={`${formatTime(t.at)}: ${t.status}`}></i>)}
     </div>
   )}
-  <p class="sub">
+  {m.testable && <p class="sub">
     One short request per day{m.kind === "tts" ? ' (speak "OK")' : m.kind === "stt" ? " (transcribe an 18-second sample clip)" : ""}.
     It shows the model answered at that moment, not that it is fast or available all day.
-  </p>
+  </p>}
 
   {m.kind !== "chat" && (
     <>
@@ -109,13 +146,28 @@ const description = `${m.name} on ${provider.label}: free-tier status, limits, d
     </>
   )}
 
-  {m.kind === "chat" && <h2>Coding agents (Cline)</h2>}
-  {m.kind === "chat" && <p>
+  {m.kind === "chat" && m.testable && <h2>Coding agents (Cline)</h2>}
+  {m.kind === "chat" && m.testable && <p>
     {m.agent.level === "yes" && "Meets the agent-ready bar: tool calling, at least 64k context, and it answered on 5 of the last 7 test days."}
     {m.agent.level === "partial" && `Has tool calling and enough context, but: ${m.agent.reasons.join("; ")}.`}
     {m.agent.level === "no" && `Not suited to coding agents: ${m.agent.reasons.join("; ")}.`}
   </p>}
-  {m.kind === "chat" && <pre><code>{clineSnippet}</code></pre>}
+  {m.kind === "chat" && m.testable && (
+    <p>
+      <strong>Tool-call test:</strong> {tt.tested ? `passed on ${tt.passed} of ${tt.tested} days` : "not run yet"}.
+      {" "}<strong>Cline:</strong>{" "}
+      {fit.plan || fit.act ? (
+        <>
+          {fit.plan && <a href="/rankings/cline-plan/">#{fit.plan} for Plan mode</a>}
+          {fit.plan && fit.act && " · "}
+          {fit.act && <a href="/rankings/cline-act/">#{fit.act} for Act mode</a>}
+          {" "}(<a href="/cline/">best pair</a>)
+        </>
+      ) : "not in the Plan or Act rankings yet"}.
+    </p>
+  )}
+  {m.kind === "chat" && m.testable && <pre><code>{snippet}</code></pre>}
+  {!m.testable && <pre><code>{`API Provider: Cline (sign in)\nModel:        pick "${m.name}" (tagged FREE)`}</code></pre>}
 
   <SponsorSlot />
 

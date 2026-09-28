@@ -22,6 +22,7 @@ import { SITE } from "../../site.config";
       <li><strong>Groq:</strong> every active chat, text-to-speech (Orpheus) and speech-to-text (Whisper) model. All are usable on the free plan.</li>
       <li><strong>Google AI Studio:</strong> every Gemini chat, text-to-speech and transcription model. The list does not say which are on the free tier; the daily test with a free-tier key does.</li>
       <li><strong>NVIDIA:</strong> every hosted chat model, all labelled evaluation-only.</li>
+      <li><strong>Kilo Code gateway</strong> and <strong>LLM7.io</strong>: their free models, which work without an account or key. We read their public model lists and test them anonymously. LLM7's terms rule out production use.</li>
     </ul>
     <p>Image generation and embedding models are not in the directory yet.</p>
     <p>
@@ -50,6 +51,7 @@ import { SITE } from "../../site.config";
       <li><strong>Chat:</strong> “Reply with the single word: OK”, 16 tokens max.</li>
       <li><strong>Text-to-speech:</strong> speak the word “OK”; it passes when audio comes back.</li>
       <li><strong>Speech-to-text:</strong> transcribe an 18-second narration; it passes when the transcript matches.</li>
+      <li><strong>Tool calling</strong> (chat models that just answered): the model gets one tool, <code>get_weather</code>, and is asked for the weather in Paris. It passes only when it calls that tool with a Paris argument. A text answer, the wrong tool or a refused request is a fail; timeouts don't count. This is the main signal for Cline's Act mode, and it shows tool support for providers that don't publish it.</li>
     </ul>
     <p>
       The result is shown as “Responded at 06:10 UTC”. It proves the model answered at that moment, not that it is
@@ -98,7 +100,8 @@ import { SITE } from "../../site.config";
     <ul>
       <li><strong>🤖 Agent-ready</strong>: tool calling, at least {AGENT_MIN_CONTEXT / 1000}k context, answered on {AGENT_MIN_RESPONDED_DAYS} of the last {AGENT_WINDOW_DAYS} test days, and not evaluation-only. An asterisk means the free request limit is low and shared across the provider's free models; coding agents send one request per tool step.</li>
       <li><strong>⚠ Eval only</strong>: the provider's terms allow testing and evaluation, not production use.</li>
-      <li><strong>No card</strong>: no payment card needed to use the free tier.</li>
+      <li><strong>No card</strong>: no payment card needed to use the free tier. <strong>No signup</strong>: works without an account.</li>
+      <li><strong>👁 Logs prompts / May use your prompts</strong>: the provider says it logs prompts, or may use them to train or improve its models or service. Kilo publishes this per model. Don't send personal or confidential data to these.</li>
       <li><strong>Unknown</strong> is a real value. If a provider does not publish something, we do not guess.</li>
     </ul>
 

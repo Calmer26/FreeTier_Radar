@@ -1,0 +1,171 @@
+---
+import Base from "../layouts/Base.astro";
+import Badges from "../components/Badges.astro";
+import SponsorSlot from "../components/SponsorSlot.astro";
+import { actRanking, clineSnippet, evalReasoners, planRanking, suggestedPair } from "../lib/cline";
+import { activeModels, modelById, type ModelView } from "../lib/data";
+import TestStatus from "../components/TestStatus.astro";
+import { toolStats } from "../../pipeline/agent-ready";
+import { PROVIDERS } from "../../pipeline/providers";
+import { RANKINGS, RANKING_WINDOW_DAYS } from "../../pipeline/rankings";
+import { formatContext } from "../../pipeline/templates";
+
+const plan = suggestedPair.plan?.r as ModelView | undefined;
+const act = suggestedPair.act?.r as ModelView | undefined;
+const same = plan && act && plan.id === act.id;
+const providerName = (m: ModelView) => PROVIDERS[m.provider].label.split(" (")[0];
+const tools = (m: ModelView) => {
+  const t = toolStats(m.toolTests, RANKING_WINDOW_DAYS);
+  return t.tested ? `passed the tool-call test on ${t.passed} of ${t.tested} days` : "not tool-call tested yet";
+};
+const rating = (m: ModelView) => {
+  const b = m.arena?.boards.webdev ?? m.arena?.boards.text;
+  return b?.rating ? `LMArena ${m.arena?.boards.webdev ? "WebDev" : "Text"} ${Math.round(b.rating)}` : "no LMArena rating yet";
+};
+const clineFree = activeModels.filter((m) => m.provider === "cline");
+const planDef = RANKINGS.find((r) => r.slug === "cline-plan")!;
+const actDef = RANKINGS.find((r) => r.slug === "cline-act")!;
+---
+<Base title="Best free models for Cline (Plan + Act)" description="The best free AI models for Cline's Plan and Act modes, picked from daily tool-call tests, reliability and LMArena ratings, with settings to paste.">
+  <h1>Free models for Cline: Plan + Act</h1>
+  <p class="lede">
+    Cline can use a different model for each mode (Settings → “Use different models for Plan and Act modes”).
+    Plan mode needs a strong reasoner; Act mode needs a model that makes tool calls reliably and fast. This pair is
+    picked from our daily tests and LMArena ratings, and updates every day.
+  </p>
+
+  {(!plan && !act) ? (
+    <p class="callout">Not enough test data yet: the Act pick needs tool-call test results, which start with the next daily test.</p>
+  ) : (
+    <div class="offers">
+      {[{ mode: "Plan", m: plan, why: plan && `${rating(plan)}, ${formatContext(plan.context_length)} context` },
+        { mode: "Act", m: act, why: act && `${tools(act)}, ${act.tests.at(-1)?.latency_ms ?? "?"} ms at the last test` }].map(({ mode, m, why }) => (
+        <article class="offer">
+          <p class="sub">{mode} mode{same ? " (and the other mode too)" : ""}</p>
+          {m ? (
+            <>
+              <h3><a href={m.href}>{m.name}</a></h3>
+              <p class="sub">{providerName(m)} · {why}</p>
+              <p><Badges m={m} /></p>
+              <pre><code>{clineSnippet(m)}</code></pre>
+              {m.agent.caveat && <p class="callout"><strong>Limits:</strong> {m.agent.caveat}</p>}
+            </>
+          ) : (
+            <p class="sub">No model qualifies yet.</p>
+          )}
+        </article>
+      ))}
+    </div>
+  )}
+  {plan && act && !same && plan.provider !== act.provider && (
+    <p class="sub">These come from two providers, so you'll set up two API providers in Cline (one per mode).</p>
+  )}
+  <p class="sub">
+    Cline also gives some models away itself; they're listed below. They only work inside Cline, so they aren't in
+    the Plan and Act rankings. When their quota runs out, the pair above keeps working with your own free keys.
+  </p>
+  <p class="sub">
+    Evaluation-only models (NVIDIA's own API, LLM7) and models whose free tier refused our test are left out.
+    Check the data-use labels before sending private code: some free providers use prompts to improve their models.
+  </p>
+
+  <h2>Stronger reasoners with evaluation-only access</h2>
+  <p class="sub">
+    Some of the best-rated free models are only free for <strong>testing and evaluation</strong>, not production
+    use, and their providers log prompts: mostly NVIDIA's API, plus LLM7. They're left out of the recommendations
+    above, but here they are with their real test record, so you can judge them for your own experiments. Plan mode
+    sends few requests, so a slow provider hurts less there than in Act mode.
+  </p>
+  {evalReasoners.length === 0 ? <p class="sub">None with an LMArena rating right now.</p> : (
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th>Model</th><th>Provider</th><th class="num">Arena</th><th class="num hide-sm">Context</th><th>Daily test</th><th class="num">Tool calls</th></tr>
+        </thead>
+        <tbody>
+          {evalReasoners.map(({ m, rating, board, rel }) => {
+            const t = toolStats(m.toolTests, RANKING_WINDOW_DAYS);
+            return (
+              <tr>
+                <td><a class="model-name" href={m.href}>{m.name}</a><div><Badges m={m} /></div></td>
+                <td>{providerName(m)}</td>
+                <td class="num" title={`LMArena ${board}`}>{Math.round(rating)} <span class="sub">{board}</span></td>
+                <td class="num hide-sm">{formatContext(m.context_length)}</td>
+                <td class="nowrap">
+                  <TestStatus test={m.lastTest} />
+                  <div class="sub">{rel.tested ? `answered ${rel.responded} of ${rel.tested} days` : "no results yet"}</div>
+                </td>
+                <td class="num">{t.tested ? `${t.passed}/${t.tested}` : "–"}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  )}
+
+  <h2>Free inside Cline right now</h2>
+  <p class="sub">
+    Models Cline currently gives away to account holders (tagged FREE under the Cline provider), up to a usage quota.
+    We read this list every 6 hours; changes show up in the <a href="/changes/">change feed</a>. They can't be tested
+    from outside Cline, so each shows how the same model does at other providers. Cline says free usage may be used
+    to improve the models. <a href="/offers/#cline">Conditions</a>.
+  </p>
+  {clineFree.length === 0 ? <p class="sub">No free models listed right now.</p> : (
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Model</th><th class="num">Arena</th><th>Same model elsewhere</th></tr></thead>
+        <tbody>
+          {clineFree.map((m) => {
+            const b = m.arena?.boards.webdev ?? m.arena?.boards.text;
+            const others = m.siblings.map((id) => modelById.get(id)!).filter((o) => o && o.testable);
+            return (
+              <tr>
+                <td><a class="model-name" href={m.href}>{m.name}</a><div class="sub mono">{m.model_id}</div></td>
+                <td class="num" title={b ? `LMArena ${m.arena?.boards.webdev ? "WebDev" : "Text"}` : ""}>{b?.rating ? Math.round(b.rating) : "–"}</td>
+                <td>
+                  {others.length === 0 ? <span class="sub">Not tracked elsewhere</span> : others.map((o) => (
+                    <div><a href={o.href}>{providerName(o)}</a>: <TestStatus test={o.lastTest} /></div>
+                  ))}
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  )}
+
+  <SponsorSlot />
+
+  {[{ def: planDef, list: planRanking }, { def: actDef, list: actRanking }].map(({ def, list }) => (
+    <>
+      <h2>{def.title}</h2>
+      <p class="sub">{def.order} <a href={`/rankings/${def.slug}/`}>Full list</a></p>
+      {list.length === 0 ? <p class="sub">No models qualify yet.</p> : (
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>#</th><th>Model</th><th>Provider</th><th class="num hide-sm">Arena</th><th class="num">Tool calls</th><th class="num hide-sm">Context</th></tr></thead>
+            <tbody>
+              {list.slice(0, 10).map((x, i) => {
+                const m = x.r as ModelView;
+                const t = toolStats(m.toolTests, RANKING_WINDOW_DAYS);
+                const b = m.arena?.boards.webdev ?? m.arena?.boards.text;
+                return (
+                  <tr>
+                    <td class="num">{i + 1}</td>
+                    <td><a class="model-name" href={m.href}>{m.name}</a></td>
+                    <td>{providerName(m)}</td>
+                    <td class="num hide-sm">{b?.rating ? Math.round(b.rating) : "–"}</td>
+                    <td class="num">{t.tested ? `${t.passed}/${t.tested}` : "–"}</td>
+                    <td class="num hide-sm">{formatContext(m.context_length)}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </>
+  ))}
+</Base>

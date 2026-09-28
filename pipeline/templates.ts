@@ -17,6 +17,7 @@ export function formatLimits(l: RateLimits | null): string {
   if (!l) return "limits not published in a form we track";
   const parts = [
     l.rpm != null ? `${l.rpm} req/min` : null,
+    l.rph != null ? `${l.rph} req/hour` : null,
     l.rpd != null ? `${l.rpd} req/day` : null,
     l.tpm != null ? `${l.tpm.toLocaleString("en-US")} tokens/min` : null,
     l.tpd != null ? `${l.tpd.toLocaleString("en-US")} tokens/day` : null,
@@ -51,6 +52,7 @@ const FIELD_LABELS: Record<string, string> = {
   licence: "licence",
   card_required: "card required",
   account_required: "account required",
+  data_logging: "data use",
 };
 
 export function fieldLabel(field: string): string {

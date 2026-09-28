@@ -30,6 +30,7 @@ jobs:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           GOOGLE_AI_STUDIO_API_KEY: ${{ secrets.GOOGLE_AI_STUDIO_API_KEY }}
           NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
+          ZAI_API_KEY: ${{ secrets.ZAI_API_KEY }}
       - run: npm run readme
       - name: Commit changed data
         run: |
@@ -38,7 +39,8 @@ jobs:
           git config user.name "freetier-radar-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -m "data: discovery $(date -u +%Y-%m-%dT%H:%MZ)"
-          git push
+          # Code may have been pushed while this job ran: rebase the data commit onto it.
+          for attempt in 1 2 3; do git pull --rebase --quiet && git push && exit 0; sleep $((attempt * 10)); done; exit 1
       - name: Open issue for high-impact changes
         if: hashFiles('out/high-impact.md') != ''
         env: { GH_TOKEN: "${{ github.token }}" }

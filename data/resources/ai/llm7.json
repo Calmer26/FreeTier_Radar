@@ -1,0 +1,110 @@
+[
+  {
+    "provider": "llm7",
+    "kind": "chat",
+    "listed_by": "api",
+    "limit_scope": "shared",
+    "usage_terms": "evaluation-only",
+    "rate_limits": {
+      "rpm": 10,
+      "rph": 60,
+      "tpd": 500000,
+      "note": "Anonymous; a free token (email sign-in) raises this to 40/minute, 100/hour and 1M tokens/day.",
+      "source": "https://docs.llm7.io/limits"
+    },
+    "card_required": "no",
+    "account_required": "no",
+    "licence": null,
+    "data_logging": "may-train",
+    "model_id": "GLM-5.3-Flash",
+    "name": "GLM-5.3-Flash",
+    "url": "https://docs.llm7.io/guides/models",
+    "price_type": "free",
+    "context_length": 400000,
+    "input_modalities": [
+      "text"
+    ],
+    "tool_calling": true,
+    "id": "llm7/GLM-5.3-Flash",
+    "slug": "glm-5-3-flash",
+    "category": "ai-model",
+    "status": "active",
+    "first_seen": "2026-09-28T11:37:34.966Z",
+    "last_seen": "2026-09-28T11:37:34.966Z",
+    "missing_since": null,
+    "removed_at": null,
+    "fingerprint": "3c28936dc5434702"
+  },
+  {
+    "provider": "llm7",
+    "kind": "chat",
+    "listed_by": "api",
+    "limit_scope": "shared",
+    "usage_terms": "evaluation-only",
+    "rate_limits": {
+      "rpm": 10,
+      "rph": 60,
+      "tpd": 500000,
+      "note": "Anonymous; a free token (email sign-in) raises this to 40/minute, 100/hour and 1M tokens/day.",
+      "source": "https://docs.llm7.io/limits"
+    },
+    "card_required": "no",
+    "account_required": "no",
+    "licence": null,
+    "data_logging": "may-train",
+    "model_id": "minimax-m2.7",
+    "name": "minimax-m2.7",
+    "url": "https://docs.llm7.io/guides/models",
+    "price_type": "free",
+    "context_length": 180000,
+    "input_modalities": [
+      "text"
+    ],
+    "tool_calling": true,
+    "id": "llm7/minimax-m2.7",
+    "slug": "minimax-m2-7",
+    "category": "ai-model",
+    "status": "active",
+    "first_seen": "2026-09-28T11:37:34.966Z",
+    "last_seen": "2026-09-28T11:37:34.966Z",
+    "missing_since": null,
+    "removed_at": null,
+    "fingerprint": "9a4e4c4e5e372105"
+  },
+  {
+    "provider": "llm7",
+    "kind": "chat",
+    "listed_by": "api",
+    "limit_scope": "shared",
+    "usage_terms": "evaluation-only",
+    "rate_limits": {
+      "rpm": 10,
+      "rph": 60,
+      "tpd": 500000,
+      "note": "Anonymous; a free token (email sign-in) raises this to 40/minute, 100/hour and 1M tokens/day.",
+      "source": "https://docs.llm7.io/limits"
+    },
+    "card_required": "no",
+    "account_required": "no",
+    "licence": null,
+    "data_logging": "may-train",
+    "model_id": "mistral-Nemo-Instruct-2407",
+    "name": "mistral-Nemo-Instruct-2407",
+    "url": "https://docs.llm7.io/guides/models",
+    "price_type": "free",
+    "context_length": 128000,
+    "input_modalities": [
+      "text"
+    ],
+    "tool_calling": false,
+    "id": "llm7/mistral-Nemo-Instruct-2407",
+    "slug": "mistral-nemo-instruct-2407",
+    "category": "ai-model",
+    "status": "active",
+    "first_seen": "2026-09-28T11:37:34.966Z",
+    "last_seen": "2026-09-28T11:37:34.966Z",
+    "missing_since": null,
+    "removed_at": null,
+    "fingerprint": "73fe3516a5331e94"
+  }
+]

@@ -20,7 +20,7 @@ type Env = Record<string, string | undefined>;
 
 function base(provider: ProviderId, kind: ModelKind, listed_by: ObservedModel["listed_by"] = "api"): Pick<
   ObservedModel,
-  "provider" | "kind" | "listed_by" | "limit_scope" | "usage_terms" | "rate_limits" | "card_required" | "account_required" | "licence"
+  "provider" | "kind" | "listed_by" | "limit_scope" | "usage_terms" | "rate_limits" | "card_required" | "account_required" | "licence" | "data_logging"
 > {
   const p = PROVIDERS[provider];
   return {
@@ -33,6 +33,7 @@ function base(provider: ProviderId, kind: ModelKind, listed_by: ObservedModel["l
     card_required: p.card_required,
     account_required: p.account_required,
     licence: null,
+    data_logging: p.data_logging,
   };
 }
 
@@ -228,6 +229,156 @@ async function fetchNvidia(env: Env): Promise<ObservedModel[]> {
   return mapNvidia(json.data ?? []);
 }
 
+// ── Kilo Code gateway ────────────────────────────────────────────────────────────
+
+export interface KiloModel {
+  id: string;
+  name: string;
+  isFree?: boolean;
+  mayTrainOnYourPrompts?: boolean;
+  context_length?: number | null;
+  architecture?: { input_modalities?: string[] };
+  supported_parameters?: string[];
+}
+
+/** Routers pick another model per request; they're not models to list. */
+const KILO_ROUTERS = /^(kilo-auto\/|openrouter\/free$)/;
+
+/**
+ * Kilo's free models need no key (200 requests/hour per IP). Each model says whether
+ * its provider may train on prompts; NVIDIA-hosted ones are also trial-only and
+ * logged, per Kilo's docs (checked 2026-09-28).
+ */
+export function mapKilo(models: KiloModel[]): ObservedModel[] {
+  const free = models.filter((m) => (m.isFree || m.id.endsWith(":free")) && !KILO_ROUTERS.test(m.id));
+  return withKind(free, (m) => m.id).map(({ item: m, kind }) => {
+    const nvidia = m.id.startsWith("nvidia/");
+    return {
+      ...base("kilo", kind),
+      model_id: m.id,
+      name: m.name,
+      url: "https://kilo.ai/models",
+      price_type: "free" as const,
+      context_length: m.context_length ?? null,
+      input_modalities: m.architecture?.input_modalities ?? null,
+      tool_calling: m.supported_parameters ? m.supported_parameters.includes("tools") : null,
+      usage_terms: nvidia ? ("evaluation-only" as const) : ("unknown" as const),
+      data_logging: nvidia ? ("logs-prompts" as const) : m.mayTrainOnYourPrompts ? ("may-train" as const) : ("none-stated" as const),
+    };
+  });
+}
+
+async function fetchKilo(): Promise<ObservedModel[]> {
+  const json = await getJson<{ data?: KiloModel[] }>("https://api.kilo.ai/api/gateway/models");
+  return mapKilo(json.data ?? []);
+}
+
+// ── LLM7.io ──────────────────────────────────────────────────────────────────────
+
+export interface Llm7Model {
+  id: string;
+  model_type?: string;
+  tier?: string;
+  usage_based_only?: boolean;
+  context_window?: { tokens?: number | null };
+  modalities?: { input?: string[]; output?: string[] };
+  tools_calling?: boolean;
+}
+
+/**
+ * Only "turbo" models are open to anonymous users, and a turbo model marked
+ * usage_based_only is billed anyway (docs.llm7.io models API, 2026-09-28).
+ */
+export function mapLlm7(models: Llm7Model[]): ObservedModel[] {
+  const free = models.filter((m) => m.tier === "turbo" && !m.usage_based_only && (m.model_type ?? "chat") === "chat");
+  return withKind(free, (m) => m.id).map(({ item: m, kind }) => ({
+    ...base("llm7", kind),
+    model_id: m.id,
+    name: m.id,
+    url: "https://docs.llm7.io/guides/models",
+    price_type: "free" as const,
+    context_length: m.context_window?.tokens ?? null,
+    input_modalities: m.modalities?.input ?? null,
+    tool_calling: m.tools_calling ?? null,
+  }));
+}
+
+async function fetchLlm7(): Promise<ObservedModel[]> {
+  const json = await getJson<{ data?: Llm7Model[] }>("https://api.llm7.io/v1/models");
+  return mapLlm7(json.data ?? []);
+}
+
+// ── Z.ai (Zhipu) ─────────────────────────────────────────────────────────────────
+
+/**
+ * Z.ai's model list carries no prices, so the free models come from its pricing page
+ * (docs.z.ai/guides/overview/pricing, checked 2026-09-28). The weekly page watch on the
+ * "zai" offer flags when that page changes; update this list then.
+ */
+export const ZAI_FREE_MODELS: Record<string, { name: string; input_modalities: string[] }> = {
+  "glm-4.7-flash": { name: "GLM-4.7-Flash", input_modalities: ["text"] },
+  "glm-4.5-flash": { name: "GLM-4.5-Flash", input_modalities: ["text"] },
+  "glm-4.6v-flash": { name: "GLM-4.6V-Flash", input_modalities: ["text", "image"] },
+};
+
+export interface ZaiModel {
+  id: string;
+  context_length?: number | null;
+}
+
+/** Keeps the listed models that the pricing page marks free. */
+export function mapZai(models: ZaiModel[]): ObservedModel[] {
+  return models.flatMap((m) => {
+    const free = ZAI_FREE_MODELS[m.id.toLowerCase()];
+    if (!free) return [];
+    return [{
+      ...base("zai", "chat"),
+      model_id: m.id,
+      name: free.name,
+      url: "https://docs.z.ai/guides/overview/pricing",
+      price_type: "free" as const,
+      context_length: m.context_length ?? null,
+      input_modalities: free.input_modalities,
+      tool_calling: null,
+    }];
+  });
+}
+
+async function fetchZai(env: Env): Promise<ObservedModel[]> {
+  const json = await getJson<{ data?: ZaiModel[] }>("https://api.z.ai/api/paas/v4/models", {
+    Authorization: `Bearer ${env.ZAI_API_KEY}`,
+  });
+  return mapZai(json.data ?? []);
+}
+
+// ── Cline (free promotion) ───────────────────────────────────────────────────────
+
+export interface ClineRecommended {
+  free?: Array<{ id: string; name?: string; description?: string }>;
+}
+
+/**
+ * The "free" list the Cline extension shows under its own provider, from the public
+ * endpoint the extension itself uses (found via cline/cline#12140, 2026-09-28). These
+ * models only work inside Cline, so they're listed, never tested.
+ */
+export function mapCline(json: ClineRecommended): ObservedModel[] {
+  return withKind(json.free ?? [], (m) => m.id).map(({ item: m, kind }) => ({
+    ...base("cline", kind),
+    model_id: m.id,
+    name: m.name && m.name !== m.id ? m.name : m.id.split("/").pop() ?? m.id,
+    url: "https://docs.cline.bot/getting-started/free-models",
+    price_type: "trial-credit" as const,
+    context_length: null,
+    input_modalities: null,
+    tool_calling: null,
+  }));
+}
+
+async function fetchCline(): Promise<ObservedModel[]> {
+  return mapCline(await getJson<ClineRecommended>("https://api.cline.bot/api/v1/ai/cline/recommended-models"));
+}
+
 // ── Registry ─────────────────────────────────────────────────────────────────────
 
 export const FETCHERS: Record<ProviderId, (env: Env) => Promise<ObservedModel[]>> = {
@@ -235,4 +386,8 @@ export const FETCHERS: Record<ProviderId, (env: Env) => Promise<ObservedModel[]>
   groq: fetchGroq,
   "google-ai-studio": fetchGoogle,
   nvidia: fetchNvidia,
+  kilo: () => fetchKilo(),
+  llm7: () => fetchLlm7(),
+  zai: fetchZai,
+  cline: () => fetchCline(),
 };

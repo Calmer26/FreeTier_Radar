@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { mapGoogle, mapGroq, mapNvidia, mapOpenRouter, OPENROUTER_CURATED_SPEECH } from "./adapters";
+import { mapGoogle, mapGroq, mapKilo, mapLlm7, mapNvidia, mapCline, mapOpenRouter, mapZai, OPENROUTER_CURATED_SPEECH } from "./adapters";
 import { classifyModel } from "./candidates";
 
 describe("classifyModel", () => {
@@ -92,5 +92,64 @@ describe("mapNvidia", () => {
     ]);
     expect(out.map((m) => m.model_id)).toEqual(["nvidia/nemotron-3-ultra"]);
     expect(out[0].usage_terms).toBe("evaluation-only");
+  });
+});
+
+describe("mapKilo", () => {
+  it("keeps free models, skips routers, and labels data use per model", () => {
+    const out = mapKilo([
+      { id: "cohere/north-mini-code:free", name: "North Mini Code", isFree: true, mayTrainOnYourPrompts: true, context_length: 256_000, supported_parameters: ["tools"] },
+      { id: "nvidia/nemotron-3-super-120b-a12b:free", name: "Nemotron 3 Super", isFree: true, mayTrainOnYourPrompts: true },
+      { id: "acme/private:free", name: "Private", isFree: true, mayTrainOnYourPrompts: false },
+      { id: "kilo-auto/free", name: "Auto Free", isFree: true },
+      { id: "openrouter/free", name: "Free router", isFree: true },
+      { id: "anthropic/claude-sonnet-4.6", name: "Sonnet", isFree: false },
+    ]);
+    expect(out.map((m) => [m.model_id, m.data_logging, m.usage_terms])).toEqual([
+      ["cohere/north-mini-code:free", "may-train", "unknown"],
+      ["nvidia/nemotron-3-super-120b-a12b:free", "logs-prompts", "evaluation-only"],
+      ["acme/private:free", "none-stated", "unknown"],
+    ]);
+    expect(out[0]).toMatchObject({ provider: "kilo", tool_calling: true, account_required: "no" });
+  });
+});
+
+describe("mapLlm7", () => {
+  it("keeps only turbo chat models that aren't billed by usage", () => {
+    const out = mapLlm7([
+      { id: "GLM-5.3-Flash", tier: "turbo", model_type: "chat", usage_based_only: false, context_window: { tokens: 400_000 }, tools_calling: true },
+      { id: "DeepSeek-V4-Flash-0731", tier: "turbo", model_type: "chat", usage_based_only: true },
+      { id: "gpt-5.4", tier: "pro", model_type: "chat" },
+      { id: "seedance-2.0-mini", tier: "turbo", model_type: "video" },
+    ]);
+    expect(out.map((m) => m.model_id)).toEqual(["GLM-5.3-Flash"]);
+    expect(out[0]).toMatchObject({ usage_terms: "evaluation-only", data_logging: "may-train", context_length: 400_000, tool_calling: true });
+  });
+});
+
+describe("mapZai", () => {
+  it("keeps only the models the pricing page lists as free", () => {
+    const out = mapZai([{ id: "glm-4.7-flash", context_length: 200_000 }, { id: "GLM-4.6V-Flash" }, { id: "glm-5.3" }]);
+    expect(out.map((m) => [m.model_id, m.name, m.input_modalities])).toEqual([
+      ["glm-4.7-flash", "GLM-4.7-Flash", ["text"]],
+      ["GLM-4.6V-Flash", "GLM-4.6V-Flash", ["text", "image"]],
+    ]);
+    expect(out[0]).toMatchObject({ provider: "zai", data_logging: "may-train", context_length: 200_000 });
+  });
+});
+
+describe("mapCline", () => {
+  it("lists Cline's free promotion as untested trial models", () => {
+    const out = mapCline({ free: [
+      { id: "cline-free/deepseek-v4.1-flash", name: "Deepseek-v4.1-Flash" },
+      { id: "stealth/pixel-canary", name: "Pixel Canary" },
+      { id: "cline-free/x", name: "cline-free/x" },
+    ] });
+    expect(out.map((m) => [m.model_id, m.name])).toEqual([
+      ["cline-free/deepseek-v4.1-flash", "Deepseek-v4.1-Flash"],
+      ["stealth/pixel-canary", "Pixel Canary"],
+      ["cline-free/x", "x"],
+    ]);
+    expect(out[0]).toMatchObject({ provider: "cline", price_type: "trial-credit", account_required: "yes", data_logging: "may-train" });
   });
 });

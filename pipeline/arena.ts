@@ -82,7 +82,16 @@ export function normaliseName(raw: string, org?: string): string {
   return s;
 }
 
-/** Every Arena name across boards, with its normalised form and total votes. */
+/**
+ * Both normalised forms of an Arena name: as is, and with a leading organisation
+ * removed. Stripping alone would turn "deepseek-v4.1-flash-max" (org "deepseek")
+ * into "v4.1-flash-max"; keeping alone would miss "nvidia-nemotron-3-ultra…".
+ */
+export function nameForms(name: string, org?: string): string[] {
+  return [...new Set([normaliseName(name), normaliseName(name, org)])];
+}
+
+/** Every Arena name across boards, under each of its normalised forms, with total votes. */
 export function arenaIndex(file: ArenaFile): Map<string, { name: string; votes: number }[]> {
   const totals = new Map<string, { org: string; votes: number }>();
   for (const board of Object.values(file.boards)) {
@@ -92,8 +101,7 @@ export function arenaIndex(file: ArenaFile): Map<string, { name: string; votes: 
   }
   const byNorm = new Map<string, { name: string; votes: number }[]>();
   for (const [name, { org, votes }] of totals) {
-    const key = normaliseName(name, org);
-    byNorm.set(key, [...(byNorm.get(key) ?? []), { name, votes }]);
+    for (const key of nameForms(name, org)) byNorm.set(key, [...(byNorm.get(key) ?? []), { name, votes }]);
   }
   return byNorm;
 }
@@ -167,12 +175,12 @@ export function scoresFor(resourceId: string, aliases: AliasFile, file: ArenaFil
   const alias = aliases[resourceId];
   if (!file || !alias || !alias.arena || alias.status === "rejected") return null;
   const aliasOrg = Object.values(file.boards).flatMap((b) => b?.models ?? []).find((m) => m.name === alias.arena)?.org;
-  const target = normaliseName(alias.arena, aliasOrg);
+  const targets = new Set(nameForms(alias.arena, aliasOrg));
   const boards: ArenaScores["boards"] = {};
   let published: string | null = null;
   for (const b of ARENA_BOARDS) {
     const data = file.boards[b];
-    const entry = data?.models.find((m) => normaliseName(m.name, m.org) === target);
+    const entry = data?.models.find((m) => nameForms(m.name, m.org).some((f) => targets.has(f)));
     if (!data || !entry) continue;
     boards[b] = { rating: entry.rating, rank: entry.rank, of: data.models.length, votes: entry.votes };
     if (!published || data.published > published) published = data.published;

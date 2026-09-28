@@ -17,7 +17,7 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { SITE } from "../site.config";
 import { PROVIDERS } from "./providers";
-import type { RateLimits, Resource, TestHistory, TestResult, TestStatus } from "./types";
+import type { RateLimits, Resource, TestHistory, TestResult, TestStatus, ToolResult } from "./types";
 
 export const TEST_TIMEOUT_MS = 30_000;
 export const SLOW_MS = 20_000;
@@ -72,6 +72,8 @@ export interface TestOutcome {
   limits: RateLimits | null;
   /** First part of the error, for the run log only; never written to data/. */
   detail: string | null;
+  /** Tool-call test result, when one ran and wasn't rate-limited. */
+  tool?: ToolResult | null;
 }
 
 /**
@@ -95,8 +97,9 @@ interface TestRequest {
 /** Exported for tests. */
 export function buildRequest(r: Resource, env: Record<string, string | undefined>): TestRequest {
   const info = PROVIDERS[r.provider];
-  const key = env[info.key_env] ?? "";
-  const auth = { Authorization: `Bearer ${key}` };
+  const key = info.key_env ? env[info.key_env] ?? "" : "";
+  // Keyless providers (Kilo, LLM7) are called anonymously.
+  const auth: Record<string, string> = key ? { Authorization: `Bearer ${key}` } : {};
   const extra: Record<string, string> = r.provider === "openrouter" ? { "HTTP-Referer": SITE.url, "X-Title": SITE.name } : {};
   const drain = async (res: Response) => { await res.body?.cancel(); };
 
@@ -210,20 +213,27 @@ export function recordResults(
   now: string,
 ): TestHistory {
   const cutoff = new Date(Date.parse(now) - HISTORY_DAYS * 86_400_000).toISOString().slice(0, 10);
+  const day = (t: { at: string }) => t.at.slice(0, 10);
+  /** Keep the window, and replace any earlier entry from the new entry's day. */
+  const merge = <T extends { at: string }>(old: T[] | undefined, next: T | null | undefined): T[] => {
+    const kept = (old ?? []).filter((t) => day(t) >= cutoff && (!next || day(t) !== day(next)));
+    return next ? [...kept, next] : kept;
+  };
   const results: TestHistory["results"] = {};
+  const tool_results: NonNullable<TestHistory["tool_results"]> = {};
   const observed_limits: TestHistory["observed_limits"] = {};
+  const oldTools = history.tool_results ?? {};
 
-  for (const id of [...new Set([...Object.keys(history.results), ...outcomes.keys()])].sort()) {
+  const ids = new Set([...Object.keys(history.results), ...Object.keys(oldTools), ...outcomes.keys()]);
+  for (const id of [...ids].sort()) {
     if (!knownIds.has(id)) continue;
-    let list = (history.results[id] ?? []).filter((t) => t.at.slice(0, 10) >= cutoff);
     const outcome = outcomes.get(id);
-    if (outcome) {
-      list = list.filter((t) => t.at.slice(0, 10) !== outcome.result.at.slice(0, 10));
-      list.push(outcome.result);
-    }
+    const list = merge(history.results[id], outcome?.result);
     if (list.length) results[id] = list;
+    const tools = merge(oldTools[id], outcome?.tool);
+    if (tools.length) tool_results[id] = tools;
     const limits = outcome?.limits ?? history.observed_limits[id];
     if (limits) observed_limits[id] = limits;
   }
-  return { updated_at: now, results, observed_limits };
+  return { updated_at: now, results, tool_results, observed_limits };
 }

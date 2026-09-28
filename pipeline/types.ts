@@ -5,7 +5,7 @@
  * pulling in the fetchers.
  */
 
-export type ProviderId = "openrouter" | "groq" | "google-ai-studio" | "nvidia";
+export type ProviderId = "openrouter" | "groq" | "google-ai-studio" | "nvidia" | "kilo" | "llm7" | "zai" | "cline";
 
 /** What a model does. Each kind has its own directory tab and its own daily test. */
 export type ModelKind = "chat" | "tts" | "stt";
@@ -16,9 +16,12 @@ export type PriceType = "free" | "freemium-quota" | "trial-credit" | "paid" | "u
 export type UsageTerms = "production-ok" | "evaluation-only" | "non-commercial" | "unknown";
 export type LimitScope = "per-model" | "shared" | "unknown";
 export type YesNoUnknown = "yes" | "no" | "unknown";
+/** What the provider says it does with prompts. "may-train" includes "to improve the service". */
+export type DataLogging = "none-stated" | "logs-prompts" | "may-train" | "unknown";
 
 export interface RateLimits {
   rpm?: number;
+  rph?: number;
   rpd?: number;
   tpm?: number;
   tpd?: number;
@@ -54,6 +57,7 @@ export interface ObservedModel {
   licence: string | null;
   card_required: YesNoUnknown;
   account_required: YesNoUnknown;
+  data_logging: DataLogging;
 }
 
 export type ResourceStatus = "active" | "pending_removal" | "removed";
@@ -113,10 +117,19 @@ export interface TestResult {
   latency_ms: number | null;
 }
 
+/** Result of the daily tool-call test (chat models only). See tool-test.ts. */
+export interface ToolResult {
+  at: string;
+  status: "pass" | "fail" | "error";
+  latency_ms: number | null;
+}
+
 export interface TestHistory {
   updated_at: string | null;
   /** Rolling window, newest last, at most one entry per UTC day per resource. */
   results: Record<string, TestResult[]>;
+  /** Tool-call test results, same window; absent in files written before it existed. */
+  tool_results?: Record<string, ToolResult[]>;
   /** Limits read from response headers (Groq publishes them), by resource id. */
   observed_limits: Record<string, RateLimits>;
 }
@@ -163,7 +176,7 @@ export interface Offer {
   usage_terms: UsageTerms;
   card_required: YesNoUnknown;
   account_required: "yes" | "no" | "phone-verification" | "unknown";
-  data_logging: "none-stated" | "logs-prompts" | "may-train" | "unknown";
+  data_logging: DataLogging;
   url: string;
   /** Page the watcher fetches weekly; null to skip watching. */
   watch_url: string | null;

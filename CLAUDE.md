@@ -34,6 +34,14 @@ code there was copied and adapted, not shared.
 - Only put rate limits in `pipeline/providers.ts` after reading them on the provider's own
   page; record the URL and date. "Unknown" is a valid value.
 - NVIDIA is evaluation-only (trial terms). Never label it production-ok.
+- Kilo and LLM7 are keyless (`key_env: null`). LLM7's terms: not for production, no
+  proxying/reselling. Label data use (`data_logging`) only from the provider's own statements.
+- A field added to `TRACKED_FIELDS` later is backfilled silently for old records (no events).
+- Chat models that pass the daily test also get a tool-call test (`tool-test.ts`); results live in
+  `tests/history.json` → `tool_results`. It feeds agent readiness and the Cline Plan/Act rankings.
+- Cline (free promotion) is list-only (`testable: false`): its free list comes from the public
+  endpoint the Cline extension uses; models are linked to the same model elsewhere by normalised name.
+- Data workflows rebase before pushing (code pushes can land mid-run); keep that loop when editing them.
 - The methodology page describes scoring and labels; keep it in step with `scoring.ts`
   and `agent-ready.ts`.
 - Never print, copy or commit API keys. The owner adds them as Actions secrets.

@@ -9,10 +9,11 @@
 
 import { agentReadiness, type AgentReadiness } from "../../pipeline/agent-ready";
 import { scoresFor, type AliasFile, type ArenaFile, type ArenaScores } from "../../pipeline/arena";
+import { borrowedContext, siblingIds } from "../../pipeline/siblings";
 import { PROVIDERS } from "../../pipeline/providers";
 import { isUnreachable } from "../../pipeline/reachability";
 import { withDefaults } from "../../pipeline/store-defaults";
-import type { Offer, RateLimits, Resource, ResourceEvent, SponsorFile, TestHistory, TestResult } from "../../pipeline/types";
+import type { Offer, ProviderId, RateLimits, Resource, ResourceEvent, SponsorFile, TestHistory, TestResult, ToolResult } from "../../pipeline/types";
 
 const resourceFiles = import.meta.glob<Resource[]>("../../data/resources/ai/*.json", { eager: true, import: "default" });
 const eventFiles = import.meta.glob<string>("../../data/events/*.jsonl", { eager: true, query: "?raw", import: "default" });
@@ -24,6 +25,8 @@ const sponsorFiles = import.meta.glob<SponsorFile>("../../data/sponsor.json", { 
 
 export interface ModelView extends Resource {
   tests: TestResult[];
+  /** Daily tool-call test results (chat models). */
+  toolTests: ToolResult[];
   lastTest: TestResult | null;
   agent: AgentReadiness;
   /** Documented provider limits, or limits read from response headers. */
@@ -35,6 +38,12 @@ export interface ModelView extends Resource {
   unreachable: boolean;
   /** LMArena ratings through an exact or confirmed alias; chat models only. */
   arena: ArenaScores | null;
+  /** Ids of the same model at other providers (same normalised name, same kind). */
+  siblings: string[];
+  /** False when the provider's free models can't be called from outside (Cline). */
+  testable: boolean;
+  /** Set when context_length was borrowed from the same model at this provider. */
+  context_from: ProviderId | null;
 }
 
 export const arenaFile: ArenaFile | null = Object.values(arenaFiles)[0] ?? null;
@@ -42,28 +51,49 @@ const aliases: AliasFile = Object.values(aliasFiles)[0] ?? {};
 
 const tests: TestHistory = Object.values(testFiles)[0] ?? { updated_at: null, results: {}, observed_limits: {} };
 
-const resources = Object.values(resourceFiles).flat().map(withDefaults);
+// data_logging arrived after the first records were written; show those as "unknown".
+const resources = Object.values(resourceFiles).flat().map(withDefaults).map((r) => ({ ...r, data_logging: r.data_logging ?? "unknown" }));
 if (resources.length === 0) {
   // An empty directory is never a valid build: fail loudly instead of deploying it.
   throw new Error("No resources found under data/resources/ai: refusing to build an empty site");
 }
 
-export const models: ModelView[] = resources
+// The same model at other providers, and context sizes borrowed from them where the
+// provider publishes none (NVIDIA, Z.ai). Done before agent readiness, which needs context.
+const siblingsById = siblingIds(resources);
+const resourceById = new Map(resources.map((r) => [r.id, r]));
+const withContext = resources.map((r) => {
+  const borrowed = borrowedContext(r, (siblingsById.get(r.id) ?? []).map((id) => resourceById.get(id)!));
+  return borrowed ? { ...r, context_length: borrowed.context_length, context_from: borrowed.from } : { ...r, context_from: null };
+});
+
+export const models: ModelView[] = withContext
   .map((r) => {
     const history = tests.results[r.id] ?? [];
+    const toolTests = tests.tool_results?.[r.id] ?? [];
     return {
       ...r,
       tests: history,
+      toolTests,
       lastTest: history.at(-1) ?? null,
-      agent: agentReadiness(r, history),
+      agent: agentReadiness(r, history, toolTests),
       limits: r.rate_limits ?? tests.observed_limits[r.id] ?? null,
       href: `/models/${r.provider}/${r.slug}/`,
       indexable: history.length > 0,
       unreachable: isUnreachable(history),
       arena: r.kind === "chat" ? scoresFor(r.id, aliases, arenaFile) : null,
+      siblings: siblingsById.get(r.id) ?? [],
+      testable: PROVIDERS[r.provider].testable !== false,
     };
   })
   .sort((a, b) => a.name.localeCompare(b.name));
+
+// A model without its own Arena link uses a sibling's (Cline's
+// "cline-free/deepseek-v4.1-flash" is NVIDIA's DeepSeek V4.1 Flash).
+{
+  const byId = new Map(models.map((m) => [m.id, m]));
+  for (const m of models) m.arena ??= m.siblings.map((id) => byId.get(id)?.arena).find(Boolean) ?? null;
+}
 
 /** What the directory shows: not removed, and callable as far as we know. */
 export const activeModels = models.filter((m) => m.status !== "removed" && !m.unreachable);

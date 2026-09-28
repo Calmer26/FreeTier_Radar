@@ -4,6 +4,7 @@ import Badges from "../../components/Badges.astro";
 import SponsorSlot from "../../components/SponsorSlot.astro";
 import { activeModels, type ModelView } from "../../lib/data";
 import { MIN_TESTED_DAYS, rank, RANKINGS, RANKING_WINDOW_DAYS, type RankingDef } from "../../../pipeline/rankings";
+import { toolStats } from "../../../pipeline/agent-ready";
 import { ARENA_ATTRIBUTION, ARENA_DATASET_URL } from "../../../pipeline/arena";
 import { PROVIDERS } from "../../../pipeline/providers";
 import { formatContext } from "../../../pipeline/templates";
@@ -13,9 +14,10 @@ export function getStaticPaths() {
 }
 
 const { def } = Astro.props as { def: RankingDef };
-const list = rank(def, activeModels.map((m) => ({ r: m, history: m.tests, arena: m.arena })));
+const list = rank(def, activeModels.map((m) => ({ r: m, history: m.tests, tools: m.toolTests, arena: m.arena })));
 const isChat = !["text-to-speech", "speech-to-text"].includes(def.slug);
-const arenaBoard = def.slug === "coding-agents" ? "webdev" : def.slug === "vision" ? "vision" : "text";
+const isCline = def.slug.startsWith("cline-");
+const arenaBoard = isCline ? "webdev" : def.slug === "vision" ? "vision" : "text";
 const showArena = isChat && list.some((x) => x.arena);
 const arenaCell = (m: ModelView) => {
   const b = m.arena?.boards[arenaBoard] ?? (arenaBoard === "webdev" ? m.arena?.boards.text : undefined);
@@ -24,7 +26,7 @@ const arenaCell = (m: ModelView) => {
 const pct = (s: number | null) => (s == null ? "–" : `${Math.round(s * 100)}%`);
 ---
 <Base title={def.title} description={`${def.intro} Ranked by daily tests; updated every day.`} noindex={list.length === 0}>
-  <p class="sub"><a href="/rankings/">Rankings</a></p>
+  <p class="sub"><a href="/rankings/">Rankings</a>{isCline && <> · <a href="/cline/">Cline setup: best Plan + Act pair</a></>}</p>
   <h1>{def.title}</h1>
   <p class="lede">{def.intro}</p>
   <p class="sub"><strong>Order:</strong> {def.order} Reliability counts days a model answered out of the days it was tested (rate-limited days don't count), over the last {RANKING_WINDOW_DAYS} days.</p>
@@ -39,6 +41,7 @@ const pct = (s: number | null) => (s == null ? "–" : `${Math.round(s * 100)}%`
             <th>#</th><th>Model</th><th>Provider</th>
             {isChat && <th class="num">Context</th>}
             {showArena && <th class="num" title={`LMArena ${arenaBoard === "webdev" ? "WebDev (or Text)" : arenaBoard === "vision" ? "Vision" : "Text"} rating`}>Arena</th>}
+            {isCline && <th class="num" title="Days it passed our tool-call test, last 30 days">Tool calls</th>}
             <th class="num">Answered</th><th class="num hide-sm">Median time</th><th class="hide-sm">Labels</th>
           </tr>
         </thead>
@@ -52,6 +55,7 @@ const pct = (s: number | null) => (s == null ? "–" : `${Math.round(s * 100)}%`
                 <td>{PROVIDERS[m.provider].label.split(" (")[0]}</td>
                 {isChat && <td class="num">{formatContext(m.context_length)}</td>}
                 {showArena && <td class="num">{arenaCell(m)}</td>}
+                {isCline && (() => { const t = toolStats(m.toolTests, RANKING_WINDOW_DAYS); return <td class="num">{t.tested ? `${t.passed}/${t.tested}` : "–"}</td>; })()}
                 <td class="num">{pct(x.rel.share)} <span class="sub">({x.rel.responded}/{x.rel.tested} days)</span></td>
                 <td class="num hide-sm">{x.rel.medianLatencyMs == null ? "–" : `${(x.rel.medianLatencyMs / 1000).toFixed(1)} s`}</td>
                 <td class="hide-sm"><Badges m={m} /></td>

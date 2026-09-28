@@ -53,6 +53,14 @@ describe("matchModel", () => {
     expect(matchModel("gemini-2.5-flash-lite", idx)).toEqual({ exact: null, near: null });
   });
 
+  it("keeps the family name when it equals the organisation", () => {
+    const idx = arenaIndex({ source: "", fetched_on: "", boards: { text: { published: "", models: [
+      { name: "deepseek-v4.1-flash-max", org: "deepseek", rating: 1465, rank: 5, votes: 900 },
+    ] } } });
+    expect(matchModel("deepseek-ai/deepseek-v4.1-flash", idx)).toEqual({ exact: null, near: "deepseek-v4.1-flash-max" });
+    expect(matchModel("cline-free/deepseek-v4.1-flash", idx).near).toBe("deepseek-v4.1-flash-max");
+  });
+
   it("returns nothing for unknown models", () => {
     expect(matchModel("acme/unknown-7b:free", index)).toEqual({ exact: null, near: null });
   });
