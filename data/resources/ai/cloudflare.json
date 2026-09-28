@@ -6,7 +6,7 @@
     "limit_scope": "shared",
     "usage_terms": "production-ok",
     "rate_limits": {
-      "note": "≈ 313k input tokens a day within the free Neurons",
+      "note": "\u2248 313k input tokens a day within the free Neurons",
       "source": "https://developers.cloudflare.com/workers-ai/platform/pricing/"
     },
     "card_required": "no",
@@ -210,7 +210,7 @@
     "limit_scope": "shared",
     "usage_terms": "production-ok",
     "rate_limits": {
-      "note": "≈ 221k input tokens a day within the free Neurons",
+      "note": "\u2248 221k input tokens a day within the free Neurons",
       "source": "https://developers.cloudflare.com/workers-ai/platform/pricing/"
     },
     "card_required": "no",
@@ -244,7 +244,7 @@
     "limit_scope": "shared",
     "usage_terms": "production-ok",
     "rate_limits": {
-      "note": "≈ 6.5M input tokens a day within the free Neurons",
+      "note": "\u2248 6.5M input tokens a day within the free Neurons",
       "source": "https://developers.cloudflare.com/workers-ai/platform/pricing/"
     },
     "card_required": "no",
@@ -278,7 +278,7 @@
     "limit_scope": "shared",
     "usage_terms": "production-ok",
     "rate_limits": {
-      "note": "≈ 15 images (512×512) a day within the free Neurons",
+      "note": "\u2248 15 images (512\u00d7512) a day within the free Neurons",
       "source": "https://developers.cloudflare.com/workers-ai/platform/pricing/"
     },
     "card_required": "no",
@@ -312,7 +312,7 @@
     "limit_scope": "shared",
     "usage_terms": "production-ok",
     "rate_limits": {
-      "note": "≈ 18 images (512×512) a day within the free Neurons",
+      "note": "\u2248 18 images (512\u00d7512) a day within the free Neurons",
       "source": "https://developers.cloudflare.com/workers-ai/platform/pricing/"
     },
     "card_required": "no",
@@ -380,7 +380,7 @@
     "limit_scope": "shared",
     "usage_terms": "production-ok",
     "rate_limits": {
-      "note": "≈ 724k input tokens a day within the free Neurons",
+      "note": "\u2248 724k input tokens a day within the free Neurons",
       "source": "https://developers.cloudflare.com/workers-ai/platform/pricing/"
     },
     "card_required": "no",
@@ -414,7 +414,7 @@
     "limit_scope": "shared",
     "usage_terms": "production-ok",
     "rate_limits": {
-      "note": "≈ 2.3M input tokens a day within the free Neurons",
+      "note": "\u2248 2.3M input tokens a day within the free Neurons",
       "source": "https://developers.cloudflare.com/workers-ai/platform/pricing/"
     },
     "card_required": "no",
@@ -449,7 +449,7 @@
     "limit_scope": "shared",
     "usage_terms": "production-ok",
     "rate_limits": {
-      "note": "≈ 4.1M input tokens a day within the free Neurons",
+      "note": "\u2248 4.1M input tokens a day within the free Neurons",
       "source": "https://developers.cloudflare.com/workers-ai/platform/pricing/"
     },
     "card_required": "no",
@@ -483,7 +483,7 @@
     "limit_scope": "shared",
     "usage_terms": "production-ok",
     "rate_limits": {
-      "note": "≈ 2.2M input tokens a day within the free Neurons",
+      "note": "\u2248 2.2M input tokens a day within the free Neurons",
       "source": "https://developers.cloudflare.com/workers-ai/platform/pricing/"
     },
     "card_required": "no",
@@ -517,7 +517,7 @@
     "limit_scope": "shared",
     "usage_terms": "production-ok",
     "rate_limits": {
-      "note": "≈ 313k input tokens a day within the free Neurons",
+      "note": "\u2248 313k input tokens a day within the free Neurons",
       "source": "https://developers.cloudflare.com/workers-ai/platform/pricing/"
     },
     "card_required": "no",
@@ -551,7 +551,7 @@
     "limit_scope": "shared",
     "usage_terms": "production-ok",
     "rate_limits": {
-      "note": "≈ 536 audio minutes a day within the free Neurons",
+      "note": "\u2248 536 audio minutes a day within the free Neurons",
       "source": "https://developers.cloudflare.com/workers-ai/platform/pricing/"
     },
     "card_required": "no",
@@ -585,7 +585,7 @@
     "limit_scope": "shared",
     "usage_terms": "production-ok",
     "rate_limits": {
-      "note": "≈ 220k input tokens a day within the free Neurons",
+      "note": "\u2248 220k input tokens a day within the free Neurons",
       "source": "https://developers.cloudflare.com/workers-ai/platform/pricing/"
     },
     "card_required": "no",
@@ -619,7 +619,7 @@
     "limit_scope": "shared",
     "usage_terms": "production-ok",
     "rate_limits": {
-      "note": "≈ 242 audio minutes a day within the free Neurons",
+      "note": "\u2248 242 audio minutes a day within the free Neurons",
       "source": "https://developers.cloudflare.com/workers-ai/platform/pricing/"
     },
     "card_required": "no",
@@ -687,7 +687,7 @@
     "limit_scope": "shared",
     "usage_terms": "production-ok",
     "rate_limits": {
-      "note": "≈ 167k input tokens a day within the free Neurons",
+      "note": "\u2248 167k input tokens a day within the free Neurons",
       "source": "https://developers.cloudflare.com/workers-ai/platform/pricing/"
     },
     "card_required": "no",
@@ -721,7 +721,7 @@
     "limit_scope": "shared",
     "usage_terms": "production-ok",
     "rate_limits": {
-      "note": "≈ 167k input tokens a day within the free Neurons",
+      "note": "\u2248 167k input tokens a day within the free Neurons",
       "source": "https://developers.cloudflare.com/workers-ai/platform/pricing/"
     },
     "card_required": "no",
@@ -747,40 +747,6 @@
     "missing_since": null,
     "removed_at": null,
     "fingerprint": "f1b542aa84698bc7"
-  },
-  {
-    "provider": "cloudflare",
-    "kind": "image",
-    "listed_by": "api",
-    "limit_scope": "shared",
-    "usage_terms": "production-ok",
-    "rate_limits": {
-      "note": "No charge listed (beta): doesn't use the free Neurons",
-      "source": "https://developers.cloudflare.com/workers-ai/platform/pricing/"
-    },
-    "card_required": "no",
-    "account_required": "yes",
-    "licence": null,
-    "data_logging": "unknown",
-    "model_id": "@cf/runwayml/stable-diffusion-v1-5-inpainting",
-    "name": "runwayml/stable-diffusion-v1-5-inpainting",
-    "url": "https://developers.cloudflare.com/workers-ai/models/stable-diffusion-v1-5-inpainting/",
-    "price_type": "freemium-quota",
-    "context_length": null,
-    "input_modalities": [
-      "text"
-    ],
-    "tool_calling": null,
-    "terms_url": "https://github.com/runwayml/stable-diffusion/blob/main/LICENSE",
-    "id": "cloudflare/@cf/runwayml/stable-diffusion-v1-5-inpainting",
-    "slug": "cf-runwayml-stable-diffusion-v1-5-inpainting",
-    "category": "ai-model",
-    "status": "active",
-    "first_seen": "2026-09-28T16:52:45.565Z",
-    "last_seen": "2026-09-28T16:52:45.565Z",
-    "missing_since": null,
-    "removed_at": null,
-    "fingerprint": "72cd7b8f030263a5"
   },
   {
     "provider": "cloudflare",
@@ -823,7 +789,7 @@
     "limit_scope": "shared",
     "usage_terms": "production-ok",
     "rate_limits": {
-      "note": "≈ 1.8M input tokens a day within the free Neurons",
+      "note": "\u2248 1.8M input tokens a day within the free Neurons",
       "source": "https://developers.cloudflare.com/workers-ai/platform/pricing/"
     },
     "card_required": "no",
