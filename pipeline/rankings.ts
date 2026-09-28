@@ -59,7 +59,12 @@ export interface RankingDef {
 const share = (x: RankedModel) => x.rel.share ?? -1;
 const latency = (x: RankedModel) => x.rel.medianLatencyMs ?? Number.MAX_SAFE_INTEGER;
 const enoughTests = (x: RankedModel) => x.rel.tested >= MIN_TESTED_DAYS;
-const usable = (x: RankedModel) => x.r.status === "active" && x.r.usage_terms !== "evaluation-only";
+/**
+ * Rankable: active, not evaluation-only, and not refused by the free tier at the
+ * latest test (Gemini lists paid-only models; the test is what reveals them).
+ */
+const usable = (x: RankedModel) =>
+  x.r.status === "active" && x.r.usage_terms !== "evaluation-only" && x.history.at(-1)?.status !== "no_free_quota";
 const ofKind = (k: ModelKind) => (x: RankedModel) => x.r.kind === k;
 
 /** Most reliable first, then fastest. */

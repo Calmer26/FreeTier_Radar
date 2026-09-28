@@ -55,6 +55,15 @@ describe("rank", () => {
     expect(out.map((x) => x.r.id)).toEqual(["high", "low", "unrated"]);
   });
 
+  it("leaves out models whose latest test found no free quota", () => {
+    const text = { name: "n", published: null, boards: { text: { rating: 1500, rank: 1, of: 1, votes: 1 } } };
+    const out = rank(ranking("top-rated"), [
+      { r: res("paid-only"), history: [...good, day(8, "no_free_quota")], arena: text },
+      { r: res("free"), history: good, arena: text },
+    ]);
+    expect(out.map((x) => x.r.id)).toEqual(["free"]);
+  });
+
   it("lists only rated models in the top-rated ranking", () => {
     const out = rank(ranking("top-rated"), [
       { r: res("rated"), history: good, arena: { name: "n", published: null, boards: { text: { rating: 1400, rank: 1, of: 1, votes: 1 } } } },
