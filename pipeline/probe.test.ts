@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { classifyFailure, HttpError, limitsFromHeaders, recordResults, type TestOutcome } from "./probe";
-import type { TestHistory } from "./types";
+import { buildRequest, classifyFailure, HttpError, limitsFromHeaders, recordResults, ttsVoice, type TestOutcome } from "./probe";
+import type { Resource, TestHistory } from "./types";
 
 describe("classifyFailure", () => {
   it.each([
@@ -29,7 +29,7 @@ describe("limitsFromHeaders", () => {
 describe("recordResults", () => {
   const empty: TestHistory = { updated_at: null, results: {}, observed_limits: {} };
   const outcome = (at: string, status: TestOutcome["result"]["status"] = "responded"): TestOutcome =>
-    ({ result: { at, status, latency_ms: 100 }, limits: null });
+    ({ result: { at, status, latency_ms: 100 }, limits: null, detail: null });
 
   it("keeps one result per UTC day, replacing an earlier one", () => {
     const ids = new Set(["p/m"]);
@@ -50,5 +50,40 @@ describe("recordResults", () => {
     const h = recordResults(old, new Map(), new Set(["p/m"]), "2026-09-28T00:00:00Z");
     expect(h.results).toEqual({ "p/m": [{ at: "2026-09-20T00:00:00Z", status: "responded", latency_ms: 1 }] });
     expect(h.observed_limits).toEqual({});
+  });
+});
+
+describe("buildRequest", () => {
+  const env = { OPENROUTER_API_KEY: "k", GROQ_API_KEY: "k", GOOGLE_AI_STUDIO_API_KEY: "k" };
+  const r = (provider: Resource["provider"], model_id: string, kind: Resource["kind"]) =>
+    ({ provider, model_id, kind } as Resource);
+
+  it("sends chat models to chat completions", () => {
+    expect(buildRequest(r("groq", "openai/gpt-oss-120b", "chat"), env).url).toBe("https://api.groq.com/openai/v1/chat/completions");
+  });
+
+  it("sends TTS to /audio/speech with the voice the model needs", () => {
+    const req = buildRequest(r("groq", "canopylabs/orpheus-v1-english", "tts"), env);
+    expect(req.url).toBe("https://api.groq.com/openai/v1/audio/speech");
+    expect(JSON.parse(req.init.body as string)).toMatchObject({ voice: "troy", input: "OK" });
+    expect(ttsVoice({ provider: "openrouter", model_id: "fish-audio/s2.1-pro-free:free" })).toBeUndefined();
+  });
+
+  it("sends STT to /audio/transcriptions with the sample clip", () => {
+    const req = buildRequest(r("groq", "whisper-large-v3", "stt"), env);
+    expect(req.url).toBe("https://api.groq.com/openai/v1/audio/transcriptions");
+    expect((req.init.body as FormData).get("model")).toBe("whisper-large-v3");
+  });
+
+  it("uses Gemini's native API for its speech models", () => {
+    const req = buildRequest(r("google-ai-studio", "gemini-3-flash-tts", "tts"), env);
+    expect(req.url).toContain("/models/gemini-3-flash-tts:generateContent");
+    expect(JSON.parse(req.init.body as string).generationConfig.responseModalities).toEqual(["AUDIO"]);
+  });
+
+  it("rejects an STT transcript that doesn't match the sample", async () => {
+    const req = buildRequest(r("groq", "whisper-large-v3", "stt"), env);
+    await expect(req.check(new Response(JSON.stringify({ text: "hello there" })))).rejects.toThrow(/did not match/);
+    await expect(req.check(new Response(JSON.stringify({ text: "Olympus Mons is…" })))).resolves.toBeUndefined();
   });
 });

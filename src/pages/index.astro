@@ -5,20 +5,22 @@ import SponsorSlot from "../components/SponsorSlot.astro";
 import TestStatus from "../components/TestStatus.astro";
 import { activeModels, events, providersInData } from "../lib/data";
 import { PROVIDERS } from "../../pipeline/providers";
-import { formatContext } from "../../pipeline/templates";
+import { formatContext, KIND_LABELS } from "../../pipeline/templates";
+import { MODEL_KINDS } from "../../pipeline/types";
 import { SITE } from "../../site.config";
 
 const weekAgo = new Date(Date.now() - 7 * 86_400_000).toISOString();
 const thisWeek = events.filter((e) => e.detected_at >= weekAgo);
 const agentReady = activeModels.filter((m) => m.agent.level === "yes").length;
 const responded = activeModels.filter((m) => m.lastTest?.status === "responded").length;
+const kinds = MODEL_KINDS.map((k) => ({ kind: k, count: activeModels.filter((m) => m.kind === k).length })).filter((k) => k.count > 0);
 ---
 <Base title="Directory">
   <h1>Free AI models that actually work</h1>
   <p class="lede">{SITE.tagline} Every model below is tested once a day, and every change is logged.</p>
 
   <div class="stats">
-    <div class="stat"><b>{activeModels.length}</b><span>free chat models tracked</span></div>
+    <div class="stat"><b>{activeModels.length}</b><span>free models tracked</span></div>
     <div class="stat"><b>{responded}</b><span>responded to the latest test</span></div>
     <div class="stat"><b>{agentReady}</b><span>agent-ready (Cline etc.)</span></div>
     <div class="stat"><b>{thisWeek.length}</b><span><a href="/changes/">changes this week</a></span></div>
@@ -26,15 +28,23 @@ const responded = activeModels.filter((m) => m.lastTest?.status === "responded")
 
   <SponsorSlot />
 
+  <div class="tabs" role="tablist" aria-label="Model type">
+    {kinds.map(({ kind, count }, i) => (
+      <button type="button" role="tab" data-kind={kind} aria-selected={i === 0 ? "true" : "false"}>
+        {KIND_LABELS[kind]} <span class="sub">{count}</span>
+      </button>
+    ))}
+  </div>
+
   <div class="filters" id="filters">
     <input type="search" id="q" placeholder="Search models…" aria-label="Search models" />
     <select id="provider" aria-label="Provider">
       <option value="">All providers</option>
       {providersInData.map((p) => <option value={p.id}>{p.label}</option>)}
     </select>
-    <label><input type="checkbox" id="agent" /> Agent-ready</label>
+    <label data-chat-only><input type="checkbox" id="agent" /> Agent-ready</label>
     <label><input type="checkbox" id="prod" /> Hide eval-only</label>
-    <label><input type="checkbox" id="vision" /> Vision</label>
+    <label data-chat-only><input type="checkbox" id="vision" /> Vision</label>
     <label><input type="checkbox" id="working" /> Responded at last test</label>
   </div>
 
@@ -44,8 +54,8 @@ const responded = activeModels.filter((m) => m.lastTest?.status === "responded")
         <tr>
           <th>Model</th>
           <th>Provider</th>
-          <th>Context</th>
-          <th class="hide-sm">Tools</th>
+          <th data-chat-only>Context</th>
+          <th class="hide-sm" data-chat-only>Tools</th>
           <th>Last test</th>
           <th class="hide-sm">Labels</th>
         </tr>
@@ -53,20 +63,22 @@ const responded = activeModels.filter((m) => m.lastTest?.status === "responded")
       <tbody>
         {activeModels.map((m) => (
           <tr
+            data-kind={m.kind}
             data-search={`${m.name} ${m.model_id}`.toLowerCase()}
             data-provider={m.provider}
             data-agent={m.agent.level === "yes" ? "1" : ""}
             data-eval={m.usage_terms === "evaluation-only" ? "1" : ""}
             data-vision={m.input_modalities?.includes("image") ? "1" : ""}
             data-working={m.lastTest?.status === "responded" ? "1" : ""}
+            hidden={m.kind !== kinds[0]?.kind}
           >
             <td>
               <a class="model-name" href={m.href}>{m.name}</a>
               <div class="sub mono">{m.model_id}</div>
             </td>
             <td>{PROVIDERS[m.provider].label.split(" (")[0]}</td>
-            <td class="num">{formatContext(m.context_length)}</td>
-            <td class="hide-sm">{m.tool_calling === true ? "Yes" : m.tool_calling === false ? "No" : "?"}</td>
+            <td class="num" data-chat-only>{formatContext(m.context_length)}</td>
+            <td class="hide-sm" data-chat-only>{m.tool_calling === true ? "Yes" : m.tool_calling === false ? "No" : "?"}</td>
             <td class="nowrap"><TestStatus test={m.lastTest} /></td>
             <td class="hide-sm"><Badges m={m} /></td>
           </tr>
@@ -75,29 +87,54 @@ const responded = activeModels.filter((m) => m.lastTest?.status === "responded")
     </table>
     <p class="empty" id="no-results" hidden>No models match these filters.</p>
   </div>
-  <p class="sub">* Agent-ready with a caveat: the provider's free request limit is low and shared across its free models. See the model page.</p>
+  <p class="sub">
+    * Agent-ready with a caveat: the provider's free request limit is low and shared across its free models. See the model page.
+    Models a provider lists but that answer "not found" three days running are left out; they're on their <a href="/providers/">provider page</a>.
+  </p>
 
   <script>
     const $ = (id: string) => document.getElementById(id) as HTMLInputElement;
     const rows = [...document.querySelectorAll<HTMLTableRowElement>("#directory tbody tr")];
+    const tabs = [...document.querySelectorAll<HTMLButtonElement>(".tabs [role=tab]")];
+    let kind = tabs[0]?.dataset.kind ?? "chat";
+
     function apply() {
       const q = $("q").value.trim().toLowerCase();
       const provider = $("provider").value;
+      const chat = kind === "chat";
+      for (const el of document.querySelectorAll<HTMLElement>("[data-chat-only]")) el.hidden = !chat;
       let shown = 0;
       for (const r of rows) {
         const d = r.dataset;
         const ok =
+          d.kind === kind &&
           (!q || d.search!.includes(q)) &&
           (!provider || d.provider === provider) &&
-          (!$("agent").checked || d.agent) &&
+          (!chat || !$("agent").checked || d.agent) &&
           (!$("prod").checked || !d.eval) &&
-          (!$("vision").checked || d.vision) &&
+          (!chat || !$("vision").checked || d.vision) &&
           (!$("working").checked || d.working);
         r.hidden = !ok;
         if (ok) shown++;
       }
       document.getElementById("no-results")!.hidden = shown > 0;
     }
+
+    function select(next: string) {
+      kind = next;
+      for (const t of tabs) t.setAttribute("aria-selected", String(t.dataset.kind === kind));
+      history.replaceState(null, "", kind === "chat" ? location.pathname : `#${kind}`);
+      apply();
+    }
+
+    for (const t of tabs) t.addEventListener("click", () => select(t.dataset.kind!));
     document.getElementById("filters")!.addEventListener("input", apply);
+    const fromHash = () => {
+      const h = location.hash.slice(1);
+      if (tabs.some((t) => t.dataset.kind === h)) select(h);
+      else apply();
+    };
+    window.addEventListener("hashchange", fromHash);
+    fromHash();
   </script>
 </Base>

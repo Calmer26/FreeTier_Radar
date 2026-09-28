@@ -14,3 +14,5 @@ const { m } = Astro.props;
 {m.input_modalities?.includes("image") && <span class="badge neutral">Vision</span>}
 {m.status === "pending_removal" && <span class="badge warn">Missing from list</span>}
 {m.status === "removed" && <span class="badge bad">Removed</span>}
+{m.unreachable && <span class="badge bad" title="Listed by the provider, but 'not found' on the last 3 daily tests">Listed but not callable</span>}
+{m.listed_by === "curated" && <span class="badge neutral" title="Not in the provider's model list; kept by hand and tested daily">Hand-listed</span>}

@@ -1,29 +1,32 @@
 /**
- * One fetcher per provider, each returning the provider's free chat models in the
- * shared ObservedModel shape.
+ * One fetcher per provider, each returning the provider's free models (chat, TTS,
+ * STT) in the shared ObservedModel shape.
  *
- * Ported from solo_developer's model-rotation `discovery.ts` (2026-09-28), extended to
- * keep the fields this site shows (pricing, tool calling, licence where published).
+ * Ported from solo_developer's model-rotation `discovery.ts`, `tts-discovery.ts` and
+ * `speech-discovery.ts` (2026-09-28), extended to keep the fields this site shows
+ * (pricing, tool calling, licence where published).
  *
  * A fetcher throws on any failure. The caller then skips that provider's diff for the
  * run, so a failed HTTP call can never look like every model being removed.
  */
 
-import { isChatModel } from "./candidates";
+import { classifyModel } from "./candidates";
 import { PROVIDERS } from "./providers";
-import type { ObservedModel, ProviderId } from "./types";
+import type { ModelKind, ObservedModel, ProviderId } from "./types";
 
 const TIMEOUT_MS = 30_000;
 
 type Env = Record<string, string | undefined>;
 
-function base(provider: ProviderId): Pick<
+function base(provider: ProviderId, kind: ModelKind, listed_by: ObservedModel["listed_by"] = "api"): Pick<
   ObservedModel,
-  "provider" | "limit_scope" | "usage_terms" | "rate_limits" | "card_required" | "account_required" | "licence"
+  "provider" | "kind" | "listed_by" | "limit_scope" | "usage_terms" | "rate_limits" | "card_required" | "account_required" | "licence"
 > {
   const p = PROVIDERS[provider];
   return {
     provider,
+    kind,
+    listed_by,
     limit_scope: p.limit_scope,
     usage_terms: p.usage_terms,
     rate_limits: p.rate_limits,
@@ -42,6 +45,14 @@ async function getJson<T>(url: string | URL, headers: Record<string, string> = {
   return (await res.json()) as T;
 }
 
+/** Keeps the models this site covers and tags each with its kind. */
+function withKind<T>(items: T[], idOf: (t: T) => string): Array<{ item: T; kind: ModelKind }> {
+  return items.flatMap((item) => {
+    const kind = classifyModel(idOf(item));
+    return kind ? [{ item, kind }] : [];
+  });
+}
+
 // ── OpenRouter ───────────────────────────────────────────────────────────────────
 
 export interface OpenRouterModel {
@@ -54,23 +65,44 @@ export interface OpenRouterModel {
 }
 
 /**
+ * OpenRouter's free speech models are in no model list: `/api/v1/models` only
+ * returns chat models, and there is no audio listing (checked in model-admin,
+ * 2026-09-14). So they are kept by hand, and the daily test shows whether each one
+ * still answers. Add or remove entries here when OpenRouter's site changes.
+ */
+export const OPENROUTER_CURATED_SPEECH: Array<{ id: string; name: string; kind: ModelKind }> = [
+  { id: "deepgram/flux-tts:free", name: "Deepgram: Flux TTS (free)", kind: "tts" },
+  { id: "fish-audio/s2.1-pro-free:free", name: "Fish Audio: S2.1 Pro (free)", kind: "tts" },
+];
+
+/**
  * The `:free` suffix is the test, not a zero price: checked 2026-09-07 in
  * model-admin, the zero-priced models without the suffix were music models and the
  * `openrouter/free` router alias.
  */
 export function mapOpenRouter(models: OpenRouterModel[]): ObservedModel[] {
-  return models
-    .filter((m) => m.id.endsWith(":free") && isChatModel(m.id))
-    .map((m) => ({
-      ...base("openrouter"),
-      model_id: m.id,
-      name: m.name,
-      url: `https://openrouter.ai/${m.id}`,
-      price_type: "free" as const,
-      context_length: m.context_length ?? null,
-      input_modalities: m.architecture?.input_modalities ?? null,
-      tool_calling: m.supported_parameters ? m.supported_parameters.includes("tools") : null,
-    }));
+  const listed = withKind(models.filter((m) => m.id.endsWith(":free")), (m) => m.id).map(({ item: m, kind }) => ({
+    ...base("openrouter", kind),
+    model_id: m.id,
+    name: m.name,
+    url: `https://openrouter.ai/${m.id}`,
+    price_type: "free" as const,
+    context_length: m.context_length ?? null,
+    input_modalities: m.architecture?.input_modalities ?? null,
+    tool_calling: m.supported_parameters ? m.supported_parameters.includes("tools") : null,
+  }));
+  const listedIds = new Set(listed.map((m) => m.model_id));
+  const curated = OPENROUTER_CURATED_SPEECH.filter((c) => !listedIds.has(c.id)).map((c) => ({
+    ...base("openrouter", c.kind, "curated"),
+    model_id: c.id,
+    name: c.name,
+    url: `https://openrouter.ai/${c.id.replace(/:free$/, "")}`,
+    price_type: "free" as const,
+    context_length: null,
+    input_modalities: c.kind === "stt" ? ["audio"] : ["text"],
+    tool_calling: null,
+  }));
+  return [...listed, ...curated];
 }
 
 async function fetchOpenRouter(): Promise<ObservedModel[]> {
@@ -87,21 +119,22 @@ export interface GroqModel {
   owned_by?: string;
 }
 
-/** On Groq's free plan every active model is free within its own limits. */
+/**
+ * On Groq's free plan every active model is free within its own limits. Groq lists
+ * speech models next to chat models: Whisper (STT) and Orpheus (TTS).
+ */
 export function mapGroq(models: GroqModel[]): ObservedModel[] {
-  return models
-    .filter((m) => m.active !== false && isChatModel(m.id))
-    .map((m) => ({
-      ...base("groq"),
-      model_id: m.id,
-      name: m.owned_by ? `${m.id} (${m.owned_by})` : m.id,
-      url: "https://console.groq.com/docs/models",
-      price_type: "freemium-quota" as const,
-      context_length: m.context_window ?? null,
-      // Groq publishes neither modalities nor tool support in its list.
-      input_modalities: null,
-      tool_calling: null,
-    }));
+  return withKind(models.filter((m) => m.active !== false), (m) => m.id).map(({ item: m, kind }) => ({
+    ...base("groq", kind),
+    model_id: m.id,
+    name: m.owned_by ? `${m.id} (${m.owned_by})` : m.id,
+    url: kind === "chat" ? "https://console.groq.com/docs/models" : kind === "tts" ? "https://console.groq.com/docs/text-to-speech" : "https://console.groq.com/docs/speech-to-text",
+    price_type: "freemium-quota" as const,
+    context_length: kind === "chat" ? m.context_window ?? null : null,
+    // Groq publishes neither modalities nor tool support in its list.
+    input_modalities: kind === "stt" ? ["audio"] : kind === "tts" ? ["text"] : null,
+    tool_calling: null,
+  }));
 }
 
 async function fetchGroq(env: Env): Promise<ObservedModel[]> {
@@ -122,25 +155,26 @@ export interface GoogleModel {
 
 /**
  * The list does not say which models the free tier covers, so price_type stays
- * "unknown"; the daily test on a free-tier key is what shows it.
+ * "unknown"; the daily test on a free-tier key is what shows it. TTS and transcribe
+ * models are listed like chat models and served through generateContent too.
  *
  * `-latest` aliases are skipped: they silently re-point to another model.
  */
 export function mapGoogle(models: GoogleModel[]): ObservedModel[] {
-  return models
+  const usable = models
     .filter((m) => (m.supportedGenerationMethods ?? []).includes("generateContent"))
     .map((m) => ({ m, id: m.name.replace(/^models\//, "") }))
-    .filter(({ id }) => !id.endsWith("-latest") && isChatModel(id))
-    .map(({ m, id }) => ({
-      ...base("google-ai-studio"),
-      model_id: id,
-      name: m.displayName ?? id,
-      url: "https://ai.google.dev/gemini-api/docs/models",
-      price_type: "unknown" as const,
-      context_length: m.inputTokenLimit ?? null,
-      input_modalities: null,
-      tool_calling: null,
-    }));
+    .filter(({ id }) => !id.endsWith("-latest"));
+  return withKind(usable, ({ id }) => id).map(({ item: { m, id }, kind }) => ({
+    ...base("google-ai-studio", kind),
+    model_id: id,
+    name: m.displayName ?? id,
+    url: kind === "tts" ? "https://ai.google.dev/gemini-api/docs/speech-generation" : "https://ai.google.dev/gemini-api/docs/models",
+    price_type: "unknown" as const,
+    context_length: kind === "chat" ? m.inputTokenLimit ?? null : null,
+    input_modalities: kind === "stt" ? ["audio"] : kind === "tts" ? ["text"] : null,
+    tool_calling: null,
+  }));
 }
 
 async function fetchGoogle(env: Env): Promise<ObservedModel[]> {
@@ -168,12 +202,15 @@ export interface NvidiaModel {
   owned_by?: string;
 }
 
-/** The list carries only id and owner; retired models drop out of it. */
+/**
+ * The list carries only id and owner; retired models drop out of it. Chat only:
+ * NVIDIA's speech models use its own gRPC interface, not an OpenAI-compatible one.
+ */
 export function mapNvidia(models: NvidiaModel[]): ObservedModel[] {
-  return models
-    .filter((m) => isChatModel(m.id))
-    .map((m) => ({
-      ...base("nvidia"),
+  return withKind(models, (m) => m.id)
+    .filter(({ kind }) => kind === "chat")
+    .map(({ item: m }) => ({
+      ...base("nvidia", "chat"),
       model_id: m.id,
       name: m.owned_by ? `${m.id} (${m.owned_by})` : m.id,
       url: `https://build.nvidia.com/${m.id}`,

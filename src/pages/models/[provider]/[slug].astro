@@ -6,7 +6,7 @@ import SponsorSlot from "../../../components/SponsorSlot.astro";
 import TestStatus from "../../../components/TestStatus.astro";
 import { events, formatDate, formatTime, models, type ModelView } from "../../../lib/data";
 import { PROVIDERS } from "../../../../pipeline/providers";
-import { formatContext, formatLimits } from "../../../../pipeline/templates";
+import { formatContext, formatLimits, KIND_LABELS } from "../../../../pipeline/templates";
 
 export function getStaticPaths() {
   return models.map((m) => ({ params: { provider: m.provider, slug: m.slug }, props: { m } }));
@@ -16,17 +16,29 @@ const { m } = Astro.props as { m: ModelView };
 const provider = PROVIDERS[m.provider];
 const history = events.filter((e) => e.resource_id === m.id);
 const yn = (v: boolean | null) => (v === true ? "Yes" : v === false ? "No" : "Unknown");
+const apiSnippet = m.kind === "tts"
+  ? `POST ${provider.base_url}/audio/speech\n{ "model": "${m.model_id}", "input": "Hello!" }`
+  : m.kind === "stt"
+    ? `POST ${provider.base_url}/audio/transcriptions  (multipart)\nfile=@clip.mp3  model=${m.model_id}`
+    : "";
+const geminiSpeech = m.kind !== "chat" && m.provider === "google-ai-studio";
 const clineSnippet = m.provider === "openrouter"
   ? `API Provider: OpenRouter\nModel:        ${m.model_id}`
   : `API Provider: OpenAI Compatible\nBase URL:     ${provider.base_url}\nAPI Key:      your ${provider.label.split(" (")[0]} key\nModel ID:     ${m.model_id}`;
 const description = `${m.name} on ${provider.label}: free-tier status, limits, daily test results and change history.`;
 ---
-<Base title={/free/i.test(m.name) ? m.name : `${m.name} (free)`} description={description} noindex={!m.indexable}>
-  <p class="sub"><a href={`/providers/${m.provider}/`}>{provider.label}</a></p>
+<Base title={/free/i.test(m.name) ? m.name : `${m.name} (free)`} description={description} noindex={!m.indexable || m.unreachable}>
+  <p class="sub"><a href={`/providers/${m.provider}/`}>{provider.label}</a> · {KIND_LABELS[m.kind]}</p>
   <h1>{m.name}</h1>
   <p class="mono sub">{m.model_id}</p>
   <p><Badges m={m} /></p>
 
+  {m.unreachable && (
+    <p class="callout"><strong>Listed but not callable.</strong> {provider.label} lists this model, but our daily test got "not found" on each of the last 3 days. It's left out of the directory until it answers again.</p>
+  )}
+  {m.listed_by === "curated" && (
+    <p class="callout info"><strong>Hand-listed.</strong> {provider.label} doesn't publish a list of these models, so we keep this entry by hand. The daily test shows whether it still works.</p>
+  )}
   {m.usage_terms === "evaluation-only" && (
     <p class="callout"><strong>Evaluation only.</strong> {provider.usage_terms_note}</p>
   )}
@@ -34,9 +46,10 @@ const description = `${m.name} on ${provider.label}: free-tier status, limits, d
 
   <dl class="facts">
     <div><dt>Price</dt><dd>{m.price_type === "free" ? "$0" : m.price_type === "freemium-quota" ? "$0 within free quota" : "Free tier not confirmed by listing"}</dd></div>
-    <div><dt>Context window</dt><dd>{formatContext(m.context_length)}</dd></div>
-    <div><dt>Tool calling</dt><dd>{yn(m.tool_calling)}</dd></div>
-    <div><dt>Input types</dt><dd>{m.input_modalities?.join(", ") ?? "Unknown"}</dd></div>
+    {m.kind === "chat" && <div><dt>Context window</dt><dd>{formatContext(m.context_length)}</dd></div>}
+    {m.kind === "chat" && <div><dt>Tool calling</dt><dd>{yn(m.tool_calling)}</dd></div>}
+    {m.kind === "chat" && <div><dt>Input types</dt><dd>{m.input_modalities?.join(", ") ?? "Unknown"}</dd></div>}
+    {m.kind !== "chat" && <div><dt>Type</dt><dd>{KIND_LABELS[m.kind]}</dd></div>}
     <div><dt>Rate limits</dt><dd>{formatLimits(m.limits)}{m.limit_scope === "shared" ? " (shared)" : ""}</dd></div>
     <div><dt>Usage terms</dt><dd>{m.usage_terms === "production-ok" ? "Production use allowed" : m.usage_terms === "evaluation-only" ? "Evaluation only" : "Unknown"}</dd></div>
     <div><dt>Card required</dt><dd>{m.card_required === "yes" ? "Yes" : m.card_required === "no" ? "No" : "Unknown"}</dd></div>
@@ -51,15 +64,29 @@ const description = `${m.name} on ${provider.label}: free-tier status, limits, d
       {m.tests.map((t) => <i class={`s-${t.status}`} title={`${formatTime(t.at)}: ${t.status}`}></i>)}
     </div>
   )}
-  <p class="sub">One short request per day. It shows the model answered at that moment, not that it is fast or available all day.</p>
+  <p class="sub">
+    One short request per day{m.kind === "tts" ? ' (speak "OK")' : m.kind === "stt" ? " (transcribe an 18-second sample clip)" : ""}.
+    It shows the model answered at that moment, not that it is fast or available all day.
+  </p>
 
-  <h2>Coding agents (Cline)</h2>
-  <p>
+  {m.kind !== "chat" && (
+    <>
+      <h2>How to call it</h2>
+      {geminiSpeech ? (
+        <p>Gemini's speech models use Google's native API (<code>generateContent</code>), not the OpenAI-compatible one. See <a href={m.url} rel="noopener">Google's docs</a>.</p>
+      ) : (
+        <pre><code>{apiSnippet}</code></pre>
+      )}
+    </>
+  )}
+
+  {m.kind === "chat" && <h2>Coding agents (Cline)</h2>}
+  {m.kind === "chat" && <p>
     {m.agent.level === "yes" && "Meets the agent-ready bar: tool calling, at least 64k context, and it answered on 5 of the last 7 test days."}
     {m.agent.level === "partial" && `Has tool calling and enough context, but: ${m.agent.reasons.join("; ")}.`}
     {m.agent.level === "no" && `Not suited to coding agents: ${m.agent.reasons.join("; ")}.`}
-  </p>
-  <pre><code>{clineSnippet}</code></pre>
+  </p>}
+  {m.kind === "chat" && <pre><code>{clineSnippet}</code></pre>}
 
   <SponsorSlot />
 

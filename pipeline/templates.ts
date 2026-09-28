@@ -4,7 +4,7 @@
  */
 
 import { PROVIDERS } from "./providers";
-import type { EventType, ObservedModel, RateLimits } from "./types";
+import type { EventType, ModelKind, ObservedModel, RateLimits } from "./types";
 
 export function formatContext(tokens: number | null): string {
   if (!tokens) return "unknown";
@@ -33,6 +33,12 @@ export function formatValue(field: string, v: unknown): string {
   return String(v);
 }
 
+export const KIND_LABELS: Record<ModelKind, string> = {
+  chat: "Chat",
+  tts: "Text-to-speech",
+  stt: "Speech-to-text",
+};
+
 const FIELD_LABELS: Record<string, string> = {
   name: "name",
   price_type: "price",
@@ -53,12 +59,16 @@ export function fieldLabel(field: string): string {
 
 export function eventText(
   type: EventType,
-  m: Pick<ObservedModel, "provider" | "name" | "context_length" | "tool_calling" | "usage_terms" | "rate_limits" | "input_modalities">,
+  m: Pick<ObservedModel, "provider" | "kind" | "name" | "context_length" | "tool_calling" | "usage_terms" | "rate_limits" | "input_modalities">,
   change?: { field: string; old: unknown; new: unknown },
 ): string {
   const provider = PROVIDERS[m.provider].label;
   switch (type) {
     case "NEW": {
+      if (m.kind !== "chat") {
+        return `${m.name} (${KIND_LABELS[m.kind].toLowerCase()}) is now listed as free on ${provider}.` +
+          (m.usage_terms === "evaluation-only" ? " Evaluation only: not for production use." : "");
+      }
       const bits = [
         `${m.name} is now listed as free on ${provider}.`,
         `Context: ${formatContext(m.context_length)}.`,
@@ -72,6 +82,8 @@ export function eventText(
       return `${m.name} is no longer listed as free on ${provider}. It has been missing for at least 12 hours.`;
     case "RETURNED":
       return `${m.name} is listed as free on ${provider} again.`;
+    case "OFFER":
+      return change ? String(change.new) : `${m.name} changed.`;
     case "CHANGED": {
       if (!change) return `${m.name} on ${provider} changed.`;
       return `${m.name} on ${provider}: ${fieldLabel(change.field)} changed from ${formatValue(change.field, change.old)} to ${formatValue(change.field, change.new)}.`;

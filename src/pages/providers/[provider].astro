@@ -4,9 +4,10 @@ import Badges from "../../components/Badges.astro";
 import EventList from "../../components/EventList.astro";
 import SponsorSlot from "../../components/SponsorSlot.astro";
 import TestStatus from "../../components/TestStatus.astro";
-import { activeModels, events } from "../../lib/data";
+import { activeModels, events, unreachableModels } from "../../lib/data";
 import { PROVIDERS, PROVIDER_IDS, type ProviderInfo } from "../../../pipeline/providers";
-import { formatContext, formatLimits } from "../../../pipeline/templates";
+import { formatContext, formatLimits, KIND_LABELS } from "../../../pipeline/templates";
+import { MODEL_KINDS } from "../../../pipeline/types";
 
 export function getStaticPaths() {
   return PROVIDER_IDS.map((id) => ({ params: { provider: id }, props: { p: PROVIDERS[id] } }));
@@ -14,6 +15,8 @@ export function getStaticPaths() {
 
 const { p } = Astro.props as { p: ProviderInfo };
 const list = activeModels.filter((m) => m.provider === p.id);
+const sections = MODEL_KINDS.map((kind) => ({ kind, models: list.filter((m) => m.kind === kind) })).filter((s) => s.models.length);
+const unreachable = unreachableModels.filter((m) => m.provider === p.id);
 const recent = events.filter((e) => e.provider === p.id).slice(0, 20);
 ---
 <Base title={`${p.label} free tier`} description={`${p.label} free models, limits and changes. ${p.summary}`} noindex={list.length === 0}>
@@ -28,25 +31,37 @@ const recent = events.filter((e) => e.provider === p.id).slice(0, 20);
 
   <SponsorSlot />
 
-  <h2>Free models ({list.length})</h2>
-  {list.length === 0 ? (
-    <p class="sub">Not tracked yet: this provider is checked once its API key is configured.</p>
-  ) : (
-    <div class="table-scroll">
-      <table>
-        <thead><tr><th>Model</th><th>Context</th><th>Last test</th><th class="hide-sm">Labels</th></tr></thead>
-        <tbody>
-          {list.map((m) => (
-            <tr>
-              <td><a class="model-name" href={m.href}>{m.name}</a><div class="sub mono">{m.model_id}</div></td>
-              <td class="num">{formatContext(m.context_length)}</td>
-              <td class="nowrap"><TestStatus test={m.lastTest} /></td>
-              <td class="hide-sm"><Badges m={m} /></td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+  {list.length === 0 && <p class="sub">Not tracked yet: this provider is checked once its API key is configured.</p>}
+
+  {sections.map(({ kind, models }) => (
+    <>
+      <h2>{KIND_LABELS[kind]} ({models.length})</h2>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Model</th>{kind === "chat" && <th>Context</th>}<th>Last test</th><th class="hide-sm">Labels</th></tr></thead>
+          <tbody>
+            {models.map((m) => (
+              <tr>
+                <td><a class="model-name" href={m.href}>{m.name}</a><div class="sub mono">{m.model_id}</div></td>
+                {kind === "chat" && <td class="num">{formatContext(m.context_length)}</td>}
+                <td class="nowrap"><TestStatus test={m.lastTest} /></td>
+                <td class="hide-sm"><Badges m={m} /></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
+  ))}
+
+  {unreachable.length > 0 && (
+    <>
+      <h2>Listed but not callable ({unreachable.length})</h2>
+      <p class="sub">{p.label} lists these models, but each answered "not found" on the last 3 daily tests. They come back into the directory as soon as they answer.</p>
+      <ul>
+        {unreachable.map((m) => <li><a href={m.href}>{m.name}</a> <span class="sub mono">{m.model_id}</span></li>)}
+      </ul>
+    </>
   )}
 
   <h2>Recent changes</h2>

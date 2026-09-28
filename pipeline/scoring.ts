@@ -19,6 +19,7 @@ export function impactScore(
     case "NEW":      score = 50; break;
     case "RETURNED": score = 35; break;
     case "REMOVED":  score = 45; break;
+    case "OFFER":    score = 60; break;
     case "CHANGED":
       score = field === "price_type" || field === "usage_terms" || field === "rate_limits" ? 55 : 25;
       break;

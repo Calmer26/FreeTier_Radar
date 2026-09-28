@@ -1,15 +1,20 @@
 /**
- * The daily test: one tiny chat request per free model.
+ * The daily test: one tiny request per free model, shaped by its kind.
  *
- * Adapted from solo_developer's model-rotation `probe.ts` (2026-09-28). The site shows
- * the result as "responded at 06:10 UTC", not as "available": one request a day
- * proves the model was up, not that it is usable at busy times.
+ *   chat  "Reply with the single word: OK", 16 tokens max. Any HTTP 200 counts, even
+ *         with empty text: a reasoning model can spend 16 tokens thinking.
+ *   tts   speak "OK"; responded when audio comes back.
+ *   stt   transcribe fixtures/stt-sample.mp3 (18 s narration); responded when the
+ *         transcript contains a word from its script.
  *
- * Any HTTP 200 counts as responded, even with empty text. With a 16-token cap a
- * reasoning model can spend everything on thinking and return no content, and that
- * is still a model that answered.
+ * Adapted from solo_developer's model-rotation `probe.ts`, `stt-eval.ts` and the tts
+ * package (2026-09-28). The site shows the result as "responded at 06:10 UTC", not
+ * as "available": one request a day proves the model was up, not that it is usable
+ * at busy times.
  */
 
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import { SITE } from "../site.config";
 import { PROVIDERS } from "./providers";
 import type { RateLimits, Resource, TestHistory, TestResult, TestStatus } from "./types";
@@ -19,6 +24,10 @@ export const SLOW_MS = 20_000;
 export const HISTORY_DAYS = 30;
 
 const PROMPT = "Reply with the single word: OK";
+
+/** The STT sample and a word its transcript must contain. Script in fixtures/README.md. */
+const STT_SAMPLE_PATH = join(process.cwd(), "fixtures", "stt-sample.mp3");
+export const STT_EXPECTED_WORD = "olympus";
 
 export class HttpError extends Error {
   constructor(public status: number, message: string) {
@@ -59,35 +68,132 @@ export function limitsFromHeaders(h: Headers): RateLimits | null {
 export interface TestOutcome {
   result: TestResult;
   limits: RateLimits | null;
+  /** First part of the error, for the run log only; never written to data/. */
+  detail: string | null;
+}
+
+/**
+ * Voice to use per TTS model; undefined sends no voice. Groq's Orpheus and
+ * Deepgram's Flux refuse a request without one; Fish Audio uses its default.
+ */
+export function ttsVoice(r: Pick<Resource, "provider" | "model_id">): string | undefined {
+  const id = r.model_id.toLowerCase();
+  if (id.includes("orpheus")) return id.includes("arabic") ? "fahad" : "troy";
+  if (id.includes("flux-tts")) return "flux-cole-en";
+  return undefined;
+}
+
+interface TestRequest {
+  url: string;
+  init: RequestInit;
+  /** Throws when a 200 response is not the kind of answer asked for. */
+  check: (res: Response) => Promise<void>;
+}
+
+/** Exported for tests. */
+export function buildRequest(r: Resource, env: Record<string, string | undefined>): TestRequest {
+  const info = PROVIDERS[r.provider];
+  const key = env[info.key_env] ?? "";
+  const auth = { Authorization: `Bearer ${key}` };
+  const extra: Record<string, string> = r.provider === "openrouter" ? { "HTTP-Referer": SITE.url, "X-Title": SITE.name } : {};
+  const drain = async (res: Response) => { await res.body?.cancel(); };
+
+  if (r.kind === "chat") {
+    return {
+      url: `${info.base_url}/chat/completions`,
+      init: {
+        method: "POST",
+        headers: { "Content-Type": "application/json", ...auth, ...extra },
+        body: JSON.stringify({ model: r.model_id, messages: [{ role: "user", content: PROMPT }], max_tokens: 16 }),
+      },
+      check: drain,
+    };
+  }
+
+  // Gemini's speech models are only reachable through its native API.
+  if (r.provider === "google-ai-studio") {
+    const parts = r.kind === "tts"
+      ? [{ text: "Say: OK" }]
+      : [{ text: "Transcribe this audio." }, { inline_data: { mime_type: "audio/mp3", data: Buffer.from(readFileSync(STT_SAMPLE_PATH)).toString("base64") } }];
+    return {
+      url: `https://generativelanguage.googleapis.com/v1beta/models/${r.model_id}:generateContent`,
+      init: {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "x-goog-api-key": key },
+        body: JSON.stringify({
+          contents: [{ role: "user", parts }],
+          ...(r.kind === "tts"
+            ? { generationConfig: { responseModalities: ["AUDIO"], speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: "Kore" } } } } }
+            : {}),
+        }),
+      },
+      check: async (res) => {
+        type Part = { text?: string; inlineData?: { data?: string }; audioTranscription?: { text?: string } };
+        const json = (await res.json()) as { candidates?: Array<{ content?: { parts?: Part[] } }> };
+        const out = json.candidates?.[0]?.content?.parts ?? [];
+        if (r.kind === "tts" && !out.some((p) => p.inlineData?.data)) throw new Error("no audio in response");
+        // Transcribe models answer in `audioTranscription`, not `text` (checked 2026-09-28).
+        if (r.kind === "stt") expectTranscript(out.map((p) => p.audioTranscription?.text ?? p.text ?? "").join(" "));
+      },
+    };
+  }
+
+  if (r.kind === "tts") {
+    const voice = ttsVoice(r);
+    return {
+      url: `${info.base_url}/audio/speech`,
+      init: {
+        method: "POST",
+        headers: { "Content-Type": "application/json", ...auth, ...extra },
+        // OpenRouter accepts only mp3 or pcm; Groq's Orpheus only wav (checked 2026-09-28).
+        body: JSON.stringify({ model: r.model_id, input: "OK", response_format: r.provider === "groq" ? "wav" : "mp3", ...(voice ? { voice } : {}) }),
+      },
+      check: async (res) => {
+        const bytes = (await res.arrayBuffer()).byteLength;
+        if (bytes < 200) throw new Error(`audio response too small (${bytes} bytes)`);
+      },
+    };
+  }
+
+  const form = new FormData();
+  form.append("file", new Blob([readFileSync(STT_SAMPLE_PATH)], { type: "audio/mpeg" }), "stt-sample.mp3");
+  form.append("model", r.model_id);
+  return {
+    url: `${info.base_url}/audio/transcriptions`,
+    init: { method: "POST", headers: { ...auth, ...extra }, body: form },
+    check: async (res) => expectTranscript(((await res.json()) as { text?: string }).text ?? ""),
+  };
+}
+
+function expectTranscript(text: string) {
+  if (!text.toLowerCase().includes(STT_EXPECTED_WORD)) {
+    throw new Error(`transcript did not match the sample: "${text.slice(0, 80)}"`);
+  }
 }
 
 export async function testModel(r: Resource, env: Record<string, string | undefined>): Promise<TestOutcome> {
-  const info = PROVIDERS[r.provider];
   const started = Date.now();
   const at = new Date(started).toISOString();
   try {
-    const res = await fetch(`${info.base_url}/chat/completions`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${env[info.key_env]}`,
-        ...(r.provider === "openrouter" ? { "HTTP-Referer": SITE.url, "X-Title": SITE.name } : {}),
-      },
-      body: JSON.stringify({ model: r.model_id, messages: [{ role: "user", content: PROMPT }], max_tokens: 16 }),
-      signal: AbortSignal.timeout(TEST_TIMEOUT_MS),
-    });
-    const latency = Date.now() - started;
+    const { url, init, check } = buildRequest(r, env);
+    const res = await fetch(url, { ...init, signal: AbortSignal.timeout(TEST_TIMEOUT_MS) });
     if (!res.ok) {
       const body = (await res.text().catch(() => "")).slice(0, 500);
       throw new HttpError(res.status, `${res.status} ${body}`);
     }
-    await res.body?.cancel();
+    await check(res);
+    const latency = Date.now() - started;
     return {
       result: { at, status: latency > SLOW_MS ? "slow" : "responded", latency_ms: latency },
       limits: r.provider === "groq" ? limitsFromHeaders(res.headers) : null,
+      detail: null,
     };
   } catch (err) {
-    return { result: { at, status: classifyFailure(err), latency_ms: Date.now() - started }, limits: null };
+    return {
+      result: { at, status: classifyFailure(err), latency_ms: Date.now() - started },
+      limits: null,
+      detail: String((err as Error)?.message ?? err).replace(/\s+/g, " ").slice(0, 200),
+    };
   }
 }
 

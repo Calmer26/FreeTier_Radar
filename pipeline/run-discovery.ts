@@ -19,6 +19,9 @@ import { appendEvents, readResources, readSources, writeResources, writeSources 
 import type { ObservedModel, ProviderId, SourceState } from "./types";
 
 const OUT_DIR = join(process.cwd(), "out");
+
+const summarise = (models: ObservedModel[]) =>
+  Object.entries(Object.groupBy(models, (m) => m.kind)).map(([k, v]) => `${k} ${v?.length}`).join(", ");
 const ALERT_AFTER_FAILURES = 3;
 
 async function main() {
@@ -41,7 +44,7 @@ async function main() {
       observed.push(...models);
       fetched.push(p);
       sources[p] = { last_success: today, consecutive_failures: 0, last_error: null, alerted: false };
-      console.log(`- ${p}: ${models.length} free chat models`);
+      console.log(`- ${p}: ${models.length} free models (${summarise(models)})`);
     } catch (err) {
       const message = String((err as Error)?.message ?? err).slice(0, 300);
       const failures = prev.consecutive_failures + 1;

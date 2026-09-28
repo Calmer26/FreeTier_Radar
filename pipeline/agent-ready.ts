@@ -28,6 +28,7 @@ export interface AgentReadiness {
 }
 
 export function agentReadiness(r: Resource, history: TestResult[] = []): AgentReadiness {
+  if (r.kind !== "chat") return { level: "no", reasons: ["not a chat model"], caveat: null };
   const reasons: string[] = [];
   if (r.tool_calling !== true) reasons.push(r.tool_calling === false ? "no tool calling" : "tool calling not published");
   if ((r.context_length ?? 0) < AGENT_MIN_CONTEXT) reasons.push("context under 64k or unknown");

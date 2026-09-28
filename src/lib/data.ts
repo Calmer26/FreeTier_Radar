@@ -9,6 +9,8 @@
 
 import { agentReadiness, type AgentReadiness } from "../../pipeline/agent-ready";
 import { PROVIDERS } from "../../pipeline/providers";
+import { isUnreachable } from "../../pipeline/reachability";
+import { withDefaults } from "../../pipeline/store-defaults";
 import type { RateLimits, Resource, ResourceEvent, SponsorFile, TestHistory, TestResult } from "../../pipeline/types";
 
 const resourceFiles = import.meta.glob<Resource[]>("../../data/resources/ai/*.json", { eager: true, import: "default" });
@@ -25,11 +27,13 @@ export interface ModelView extends Resource {
   href: string;
   /** A page is indexed once it has a test result; before that it is noindex. */
   indexable: boolean;
+  /** Listed by the provider, but "not found" on the last 3 daily tests. */
+  unreachable: boolean;
 }
 
 const tests: TestHistory = Object.values(testFiles)[0] ?? { updated_at: null, results: {}, observed_limits: {} };
 
-const resources = Object.values(resourceFiles).flat();
+const resources = Object.values(resourceFiles).flat().map(withDefaults);
 if (resources.length === 0) {
   // An empty directory is never a valid build: fail loudly instead of deploying it.
   throw new Error("No resources found under data/resources/ai: refusing to build an empty site");
@@ -46,11 +50,16 @@ export const models: ModelView[] = resources
       limits: r.rate_limits ?? tests.observed_limits[r.id] ?? null,
       href: `/models/${r.provider}/${r.slug}/`,
       indexable: history.length > 0,
+      unreachable: isUnreachable(history),
     };
   })
   .sort((a, b) => a.name.localeCompare(b.name));
 
-export const activeModels = models.filter((m) => m.status !== "removed");
+/** What the directory shows: not removed, and callable as far as we know. */
+export const activeModels = models.filter((m) => m.status !== "removed" && !m.unreachable);
+
+/** Listed by their provider but answering "not found" day after day. */
+export const unreachableModels = models.filter((m) => m.status !== "removed" && m.unreachable);
 
 /** Newest first. Files are named YYYY-MM.jsonl, so sorting by path is chronological. */
 export const events: ResourceEvent[] = Object.keys(eventFiles)

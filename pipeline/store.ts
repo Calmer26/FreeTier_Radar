@@ -8,6 +8,7 @@
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { PROVIDER_IDS } from "./providers";
+import { withDefaults } from "./store-defaults";
 import type { ProviderId, Resource, ResourceEvent, SourcesFile, TestHistory } from "./types";
 
 /** Resolved from the project root: scripts and the Astro build both run there. */
@@ -33,7 +34,7 @@ function writeJsonIfChanged(path: string, value: unknown): boolean {
 }
 
 export function readResources(): Resource[] {
-  return PROVIDER_IDS.flatMap((p) => readJson<Resource[]>(resourcesFile(p), []));
+  return PROVIDER_IDS.flatMap((p) => readJson<Resource[]>(resourcesFile(p), [])).map(withDefaults);
 }
 
 export function writeResources(resources: Resource[]): void {

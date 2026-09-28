@@ -110,8 +110,8 @@ td.num, td.nowrap { white-space: nowrap; font-variant-numeric: tabular-nums; }
 .etype.REMOVED { color: var(--bad); }
 .etype.CHANGED { color: var(--warn); }
 
-.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
-.facts div { background: var(--surface); padding: 10px 14px; }
+.facts { display: flex; flex-wrap: wrap; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+.facts div { background: var(--surface); padding: 10px 14px; flex: 1 1 210px; }
 .facts dt { color: var(--muted); font-size: 0.8rem; }
 .facts dd { margin: 2px 0 0; font-weight: 600; }
 
@@ -124,3 +124,9 @@ pre { background: var(--surface); border: 1px solid var(--border); border-radius
   .feed li { grid-template-columns: 1fr; gap: 2px; }
   .hide-sm { display: none; }
 }
+
+.tabs { display: flex; gap: 4px; flex-wrap: wrap; border-bottom: 1px solid var(--border); margin: 0 0 14px; }
+.tabs button { font: inherit; font-weight: 600; background: none; border: 0; border-bottom: 2px solid transparent; padding: 8px 12px; color: var(--muted); cursor: pointer; margin-bottom: -1px; }
+.tabs button[aria-selected="true"] { color: var(--text); border-bottom-color: var(--accent); }
+.tabs button:hover { color: var(--text); }
+[hidden] { display: none !important; }

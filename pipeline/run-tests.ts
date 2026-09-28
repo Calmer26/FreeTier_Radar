@@ -27,6 +27,7 @@ async function runProvider(p: ProviderId, models: Resource[], outcomes: Map<stri
   let rateLimitedInARow = 0;
   for (const [i, r] of models.entries()) {
     const outcome = await testModel(r, process.env);
+    if (outcome.detail) console.log(`  ${p} ${r.model_id}: ${outcome.result.status}: ${outcome.detail}`);
     if (outcome.result.status === "rate_limited") {
       rateLimitedInARow++;
       if (rateLimitedInARow >= STOP_AFTER_RATE_LIMITS) {
@@ -39,7 +40,7 @@ async function runProvider(p: ProviderId, models: Resource[], outcomes: Map<stri
     }
     rateLimitedInARow = 0;
     outcomes.set(r.id, outcome);
-    console.log(`  ${p} ${r.model_id}: ${outcome.result.status} (${outcome.result.latency_ms} ms)`);
+    if (!outcome.detail) console.log(`  ${p} ${r.model_id}: ${outcome.result.status} (${outcome.result.latency_ms} ms)`);
     await sleep(GAP_MS[p]);
   }
 }

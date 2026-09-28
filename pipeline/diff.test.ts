@@ -9,6 +9,8 @@ function model(id: string, over: Partial<ObservedModel> = {}): ObservedModel {
   return {
     provider: "openrouter",
     model_id: id,
+    kind: "chat",
+    listed_by: "api",
     name: id,
     url: `https://openrouter.ai/${id}`,
     price_type: "free",
@@ -140,5 +142,16 @@ describe("fingerprint", () => {
 describe("slugFor", () => {
   it("makes ids URL-safe", () => {
     expect(slugFor("meta-llama/Llama-3.3-70B-Instruct:free")).toBe("meta-llama-llama-3-3-70b-instruct-free");
+  });
+});
+
+describe("diff baselines per kind", () => {
+  it("records a new kind at a known provider as a baseline, then reports later additions", () => {
+    const chatOnly = run([], [model("a:free")], T0).resources;
+    const speech = model("whisper-x", { kind: "stt" });
+    const first = run(chatOnly, [model("a:free"), speech], at(6));
+    expect(first.events).toEqual([]);
+    const later = run(first.resources, [model("a:free"), speech, model("whisper-y", { kind: "stt" })], at(12));
+    expect(later.events.map((e) => [e.event_type, e.resource_id])).toEqual([["NEW", "openrouter/whisper-y"]]);
   });
 });

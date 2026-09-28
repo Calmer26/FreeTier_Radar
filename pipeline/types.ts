@@ -7,6 +7,11 @@
 
 export type ProviderId = "openrouter" | "groq" | "google-ai-studio" | "nvidia";
 
+/** What a model does. Each kind has its own directory tab and its own daily test. */
+export type ModelKind = "chat" | "tts" | "stt";
+
+export const MODEL_KINDS: readonly ModelKind[] = ["chat", "tts", "stt"];
+
 export type PriceType = "free" | "freemium-quota" | "trial-credit" | "paid" | "unknown";
 export type UsageTerms = "production-ok" | "evaluation-only" | "non-commercial" | "unknown";
 export type LimitScope = "per-model" | "shared" | "unknown";
@@ -30,6 +35,13 @@ export interface RateLimits {
 export interface ObservedModel {
   provider: ProviderId;
   model_id: string;
+  kind: ModelKind;
+  /**
+   * "api" when the provider's model list returned it; "curated" when the provider
+   * publishes no list for this kind (OpenRouter speech) and it is kept by hand. The
+   * daily test is what shows a curated entry still works.
+   */
+  listed_by: "api" | "curated";
   name: string;
   url: string;
   price_type: PriceType;
@@ -61,12 +73,13 @@ export interface Resource extends ObservedModel {
   fingerprint: string;
 }
 
-export type EventType = "NEW" | "CHANGED" | "REMOVED" | "RETURNED";
+export type EventType = "NEW" | "CHANGED" | "REMOVED" | "RETURNED" | "OFFER";
 
 export interface ResourceEvent {
   id: string;
+  /** A model id, or `offer/<id>` for OFFER events. */
   resource_id: string;
-  provider: ProviderId;
+  provider: ProviderId | string;
   name: string;
   detected_at: string;
   event_type: EventType;
@@ -129,4 +142,37 @@ export interface SponsorFile {
   logo: string | null;
   starts: string | null;
   ends: string | null;
+}
+
+/**
+ * A provider's free budget rather than a free model: trial credit, a monthly credit,
+ * or a daily quota pool shared by all its models. Curated by the owner in
+ * data/offers/ai/*.json; a weekly page watcher flags when the source page changes.
+ */
+export interface Offer {
+  id: string;
+  provider: string;
+  name: string;
+  offer_type: "recurring-quota" | "recurring-credit" | "trial-credit" | "retired";
+  /** One line, e.g. "10,000 Neurons per day, shared across all models". */
+  amount: string;
+  summary: string;
+  expires: string | null;
+  usage_terms: UsageTerms;
+  card_required: YesNoUnknown;
+  account_required: "yes" | "no" | "phone-verification" | "unknown";
+  data_logging: "none-stated" | "logs-prompts" | "may-train" | "unknown";
+  url: string;
+  /** Page the watcher fetches weekly; null to skip watching. */
+  watch_url: string | null;
+  verified_on: string;
+  source_note: string;
+  /** Newest last. Each entry appears in the change feed as an OFFER event. */
+  changes: Array<{ date: string; text: string }>;
+}
+
+export interface WatchState {
+  hash: string;
+  checked_on: string;
+  changed_on: string | null;
 }

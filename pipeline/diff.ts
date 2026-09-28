@@ -11,8 +11,9 @@
  *   produce a REMOVED event and a NEW event a few hours later.
  * - An unchanged model is only rewritten when its `last_seen` day changes, so a
  *   quiet run produces no diff in git.
- * - A provider's first successful fetch is a baseline: its models are recorded
- *   without NEW events, because "is now free" would be untrue for all of them.
+ * - The first successful fetch of a provider, or of a model kind at a provider
+ *   (e.g. when speech models were added), is a baseline: those models are
+ *   recorded without NEW events, because "is now free" would be untrue for all.
  */
 
 import { createHash } from "node:crypto";
@@ -97,7 +98,8 @@ export function diff({ previous, observed, fetched, now }: DiffInput): DiffOutpu
   const usedSlugs = new Map<ProviderId, Set<string>>();
   const events: ResourceEvent[] = [];
   const next: Resource[] = [];
-  const baseline = new Set(fetched.filter((p) => !previous.some((r) => r.provider === p)));
+  const known = new Set(previous.map((r) => `${r.provider}|${r.kind}`));
+  const isBaseline = (m: ObservedModel) => fetchedSet.has(m.provider) && !known.has(`${m.provider}|${m.kind}`);
 
   for (const r of previous) {
     if (!usedSlugs.has(r.provider)) usedSlugs.set(r.provider, new Set());
@@ -124,7 +126,7 @@ export function diff({ previous, observed, fetched, now }: DiffInput): DiffOutpu
         ...m, id, slug, category: "ai-model", status: "active",
         first_seen: now, last_seen: now, missing_since: null, removed_at: null, fingerprint: fp,
       });
-      if (!baseline.has(m.provider)) events.push(makeEvent(now, "NEW", m));
+      if (!isBaseline(m)) events.push(makeEvent(now, "NEW", m));
       continue;
     }
 
