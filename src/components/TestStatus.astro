@@ -4,6 +4,8 @@ import type { TestResult } from "../../pipeline/types";
 
 interface Props {
   test: TestResult | null;
+  /** The provider's free models can't be called from outside (Cline). */
+  untestable?: boolean;
 }
 
 const LABELS: Record<TestResult["status"], string> = {
@@ -16,9 +18,11 @@ const LABELS: Record<TestResult["status"], string> = {
   error: "Error",
 };
 
-const { test } = Astro.props;
+const { test, untestable = false } = Astro.props;
 ---
-{test ? (
+{untestable ? (
+  <span class="sub" title="Free only inside the Cline extension; see the same model at other providers"><span class="status-dot s-untested"></span>Only inside Cline</span>
+) : test ? (
   <span title={`${LABELS[test.status]} at ${formatTime(test.at)}${test.latency_ms != null ? `, ${test.latency_ms} ms` : ""}`}>
     <span class={`status-dot s-${test.status}`}></span>{LABELS[test.status]}
     <span class="sub"> {formatTime(test.at)}</span>

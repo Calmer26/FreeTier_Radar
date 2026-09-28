@@ -44,7 +44,7 @@ const recent = events.filter((e) => e.provider === p.id).slice(0, 20);
               <tr>
                 <td><a class="model-name" href={m.href}>{m.name}</a><div class="sub mono">{m.model_id}</div></td>
                 {kind === "chat" && <td class="num">{formatContext(m.context_length)}</td>}
-                <td class="nowrap"><TestStatus test={m.lastTest} /></td>
+                <td class="nowrap"><TestStatus test={m.lastTest} untestable={!m.testable} /></td>
                 <td class="hide-sm"><Badges m={m} /></td>
               </tr>
             ))}

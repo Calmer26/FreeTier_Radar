@@ -21,6 +21,11 @@ export interface ProviderInfo {
   key_env: string | null;
   /** Whether listing models works without a key. */
   list_needs_key: boolean;
+  /**
+   * False when its free models can't be called from outside (Cline serves them only
+   * inside its own extension): listed and tracked, never tested.
+   */
+  testable?: boolean;
   usage_terms: UsageTerms;
   usage_terms_note: string | null;
   limit_scope: LimitScope;
@@ -175,6 +180,25 @@ export const PROVIDERS: Record<ProviderId, ProviderInfo> = {
     data_logging: "may-train",
     limits_url: "https://docs.z.ai/guides/overview/pricing",
     summary: "Zhipu's international API. Three GLM Flash models are priced free, including a vision model.",
+  },
+  cline: {
+    id: "cline",
+    label: "Cline (free promotion)",
+    homepage: "https://cline.bot",
+    base_url: "https://api.cline.bot/api/v1",
+    key_env: null,
+    list_needs_key: false,
+    testable: false,
+    usage_terms: "unknown",
+    // docs.cline.bot/getting-started/free-models, checked 2026-09-28.
+    usage_terms_note: "Free for anyone with a Cline account, up to a usage quota, and only inside the Cline extension and CLI (not the Cline API), so we can't test them. The models rotate. Cline says free usage may be used to improve the models.",
+    limit_scope: "per-model",
+    rate_limits: { note: "Limited free usage quota per Cline account; the amount isn't published.", source: "https://docs.cline.bot/getting-started/free-models" },
+    card_required: "no",
+    account_required: "yes",
+    data_logging: "may-train",
+    limits_url: "https://docs.cline.bot/getting-started/free-models",
+    summary: "The models Cline currently gives away inside its own extension, tagged FREE in its model picker. We list them and show how the same models do elsewhere.",
   },
 };
 

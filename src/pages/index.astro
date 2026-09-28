@@ -87,7 +87,7 @@ const kinds = MODEL_KINDS.map((k) => ({ kind: k, count: activeModels.filter((m) 
             <td class="hide-sm num" data-chat-only>
               {m.arena?.boards.text?.rating ? <a href={m.href} title={`#${m.arena.boards.text.rank} of ${m.arena.boards.text.of} on LMArena Text`}>{Math.round(m.arena.boards.text.rating)}</a> : <span class="sub">–</span>}
             </td>
-            <td class="nowrap"><TestStatus test={m.lastTest} /></td>
+            <td class="nowrap"><TestStatus test={m.lastTest} untestable={!m.testable} /></td>
             <td class="hide-sm"><Badges m={m} /></td>
           </tr>
         ))}

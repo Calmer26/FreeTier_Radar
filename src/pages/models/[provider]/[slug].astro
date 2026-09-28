@@ -4,7 +4,7 @@ import Badges from "../../../components/Badges.astro";
 import EventList from "../../../components/EventList.astro";
 import SponsorSlot from "../../../components/SponsorSlot.astro";
 import TestStatus from "../../../components/TestStatus.astro";
-import { events, formatDate, formatTime, models, type ModelView } from "../../../lib/data";
+import { events, formatDate, formatTime, modelById, models, type ModelView } from "../../../lib/data";
 import { PROVIDERS } from "../../../../pipeline/providers";
 import { formatContext, formatLimits, KIND_LABELS } from "../../../../pipeline/templates";
 import { clineFit, clineSnippet } from "../../../lib/cline";
@@ -27,6 +27,7 @@ const apiSnippet = m.kind === "tts"
     : "";
 const geminiSpeech = m.kind !== "chat" && m.provider === "google-ai-studio";
 const snippet = m.kind === "chat" ? clineSnippet(m) : "";
+const siblings = m.siblings.map((id) => modelById.get(id)!).filter(Boolean);
 const fit = clineFit(m.id);
 const tt = toolStats(m.toolTests, RANKING_WINDOW_DAYS);
 const description = `${m.name} on ${provider.label}: free-tier status, limits, daily test results and change history.`;
@@ -91,17 +92,48 @@ const description = `${m.name} on ${provider.label}: free-tier status, limits, d
     </>
   )}
 
-  <h2>Daily test</h2>
-  <p><TestStatus test={m.lastTest} /></p>
-  {m.tests.length > 0 && (
+  {!m.testable && (
+    <p class="callout info">
+      <strong>Only inside Cline.</strong> {provider.usage_terms_note}
+      {siblings.length > 0 ? " Below you can see how the same model does at other providers." : " We don't track this model at another provider yet."}
+    </p>
+  )}
+
+  {siblings.length > 0 && (
+    <>
+      <h2>Same model at other providers</h2>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Provider</th><th>Last test</th>{m.kind === "chat" && <th class="num">Tool calls</th>}<th class="hide-sm">Labels</th></tr></thead>
+          <tbody>
+            {siblings.map((o) => {
+              const t = toolStats(o.toolTests, RANKING_WINDOW_DAYS);
+              return (
+                <tr>
+                  <td><a class="model-name" href={o.href}>{PROVIDERS[o.provider].label}</a><div class="sub mono">{o.model_id}</div></td>
+                  <td class="nowrap"><TestStatus test={o.lastTest} untestable={!o.testable} /></td>
+                  {m.kind === "chat" && <td class="num">{t.tested ? `${t.passed}/${t.tested}` : "–"}</td>}
+                  <td class="hide-sm"><Badges m={o} /></td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </>
+  )}
+
+  {m.testable && <h2>Daily test</h2>}
+  {m.testable && <p><TestStatus test={m.lastTest} /></p>}
+  {m.testable && m.tests.length > 0 && (
     <div class="history" aria-label="Test results, last 30 days">
       {m.tests.map((t) => <i class={`s-${t.status}`} title={`${formatTime(t.at)}: ${t.status}`}></i>)}
     </div>
   )}
-  <p class="sub">
+  {m.testable && <p class="sub">
     One short request per day{m.kind === "tts" ? ' (speak "OK")' : m.kind === "stt" ? " (transcribe an 18-second sample clip)" : ""}.
     It shows the model answered at that moment, not that it is fast or available all day.
-  </p>
+  </p>}
 
   {m.kind !== "chat" && (
     <>
@@ -114,13 +146,13 @@ const description = `${m.name} on ${provider.label}: free-tier status, limits, d
     </>
   )}
 
-  {m.kind === "chat" && <h2>Coding agents (Cline)</h2>}
-  {m.kind === "chat" && <p>
+  {m.kind === "chat" && m.testable && <h2>Coding agents (Cline)</h2>}
+  {m.kind === "chat" && m.testable && <p>
     {m.agent.level === "yes" && "Meets the agent-ready bar: tool calling, at least 64k context, and it answered on 5 of the last 7 test days."}
     {m.agent.level === "partial" && `Has tool calling and enough context, but: ${m.agent.reasons.join("; ")}.`}
     {m.agent.level === "no" && `Not suited to coding agents: ${m.agent.reasons.join("; ")}.`}
   </p>}
-  {m.kind === "chat" && (
+  {m.kind === "chat" && m.testable && (
     <p>
       <strong>Tool-call test:</strong> {tt.tested ? `passed on ${tt.passed} of ${tt.tested} days` : "not run yet"}.
       {" "}<strong>Cline:</strong>{" "}
@@ -134,7 +166,8 @@ const description = `${m.name} on ${provider.label}: free-tier status, limits, d
       ) : "not in the Plan or Act rankings yet"}.
     </p>
   )}
-  {m.kind === "chat" && <pre><code>{snippet}</code></pre>}
+  {m.kind === "chat" && m.testable && <pre><code>{snippet}</code></pre>}
+  {!m.testable && <pre><code>{`API Provider: Cline (sign in)\nModel:        pick "${m.name}" (tagged FREE)`}</code></pre>}
 
   <SponsorSlot />
 

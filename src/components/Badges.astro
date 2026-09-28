@@ -18,4 +18,5 @@ const { m } = Astro.props;
 {m.status === "pending_removal" && <span class="badge warn">Missing from list</span>}
 {m.status === "removed" && <span class="badge bad">Removed</span>}
 {m.unreachable && <span class="badge bad" title="Listed by the provider, but 'not found' on the last 3 daily tests">Listed but not callable</span>}
+{m.provider === "cline" && <span class="badge neutral" title="Free up to a quota for Cline account holders, only inside Cline">Cline only</span>}
 {m.listed_by === "curated" && <span class="badge neutral" title="Not in the provider's model list; kept by hand and tested daily">Hand-listed</span>}

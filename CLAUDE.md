@@ -39,6 +39,8 @@ code there was copied and adapted, not shared.
 - A field added to `TRACKED_FIELDS` later is backfilled silently for old records (no events).
 - Chat models that pass the daily test also get a tool-call test (`tool-test.ts`); results live in
   `tests/history.json` → `tool_results`. It feeds agent readiness and the Cline Plan/Act rankings.
+- Cline (free promotion) is list-only (`testable: false`): its free list comes from the public
+  endpoint the Cline extension uses; models are linked to the same model elsewhere by normalised name.
 - Data workflows rebase before pushing (code pushes can land mid-run); keep that loop when editing them.
 - The methodology page describes scoring and labels; keep it in step with `scoring.ts`
   and `agent-ready.ts`.

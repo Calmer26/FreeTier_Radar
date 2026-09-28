@@ -22,6 +22,7 @@ const GAP_MS: Record<ProviderId, number> = {
   kilo: 20_000,              // anonymous: 200 requests/hour per IP
   llm7: 7_000,               // anonymous: 10 requests/minute, 60/hour
   zai: 2_000,                // one concurrent request per free model
+  cline: 0,                  // never tested: free models work only inside Cline
 };
 const STOP_AFTER_RATE_LIMITS = 3;
 
@@ -64,6 +65,10 @@ async function main() {
 
   await Promise.all(
     PROVIDER_IDS.map((p) => {
+      if (PROVIDERS[p].testable === false) {
+        console.log(`- ${p}: not testable from outside; listed only`);
+        return Promise.resolve();
+      }
       const keyEnv = PROVIDERS[p].key_env;
       if (keyEnv && !process.env[keyEnv]) {
         console.log(`- ${p}: skipped (${keyEnv} not set)`);

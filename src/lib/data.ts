@@ -8,7 +8,7 @@
  */
 
 import { agentReadiness, type AgentReadiness } from "../../pipeline/agent-ready";
-import { scoresFor, type AliasFile, type ArenaFile, type ArenaScores } from "../../pipeline/arena";
+import { normaliseName, scoresFor, type AliasFile, type ArenaFile, type ArenaScores } from "../../pipeline/arena";
 import { PROVIDERS } from "../../pipeline/providers";
 import { isUnreachable } from "../../pipeline/reachability";
 import { withDefaults } from "../../pipeline/store-defaults";
@@ -37,6 +37,10 @@ export interface ModelView extends Resource {
   unreachable: boolean;
   /** LMArena ratings through an exact or confirmed alias; chat models only. */
   arena: ArenaScores | null;
+  /** Ids of the same model at other providers (same normalised name, same kind). */
+  siblings: string[];
+  /** False when the provider's free models can't be called from outside (Cline). */
+  testable: boolean;
 }
 
 export const arenaFile: ArenaFile | null = Object.values(arenaFiles)[0] ?? null;
@@ -66,9 +70,28 @@ export const models: ModelView[] = resources
       indexable: history.length > 0,
       unreachable: isUnreachable(history),
       arena: r.kind === "chat" ? scoresFor(r.id, aliases, arenaFile) : null,
+      siblings: [] as string[],
+      testable: PROVIDERS[r.provider].testable !== false,
     };
   })
   .sort((a, b) => a.name.localeCompare(b.name));
+
+// Link the same model across providers, and let a model without its own Arena link
+// use a sibling's (Cline's "cline-free/deepseek-v4.1-flash" is NVIDIA's DeepSeek V4.1 Flash).
+{
+  const byKey = new Map<string, ModelView[]>();
+  for (const m of models) {
+    if (m.status === "removed") continue;
+    const key = `${m.kind}|${normaliseName(m.model_id)}`;
+    byKey.set(key, [...(byKey.get(key) ?? []), m]);
+  }
+  for (const group of byKey.values()) {
+    for (const m of group) {
+      m.siblings = group.filter((o) => o.id !== m.id).map((o) => o.id);
+      m.arena ??= group.find((o) => o.arena)?.arena ?? null;
+    }
+  }
+}
 
 /** What the directory shows: not removed, and callable as far as we know. */
 export const activeModels = models.filter((m) => m.status !== "removed" && !m.unreachable);

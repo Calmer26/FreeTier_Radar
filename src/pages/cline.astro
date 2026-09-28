@@ -3,7 +3,8 @@ import Base from "../layouts/Base.astro";
 import Badges from "../components/Badges.astro";
 import SponsorSlot from "../components/SponsorSlot.astro";
 import { actRanking, clineSnippet, planRanking, suggestedPair } from "../lib/cline";
-import type { ModelView } from "../lib/data";
+import { activeModels, modelById, type ModelView } from "../lib/data";
+import TestStatus from "../components/TestStatus.astro";
 import { toolStats } from "../../pipeline/agent-ready";
 import { PROVIDERS } from "../../pipeline/providers";
 import { RANKINGS, RANKING_WINDOW_DAYS } from "../../pipeline/rankings";
@@ -21,6 +22,7 @@ const rating = (m: ModelView) => {
   const b = m.arena?.boards.webdev ?? m.arena?.boards.text;
   return b?.rating ? `LMArena ${m.arena?.boards.webdev ? "WebDev" : "Text"} ${Math.round(b.rating)}` : "no LMArena rating yet";
 };
+const clineFree = activeModels.filter((m) => m.provider === "cline");
 const planDef = RANKINGS.find((r) => r.slug === "cline-plan")!;
 const actDef = RANKINGS.find((r) => r.slug === "cline-act")!;
 ---
@@ -58,16 +60,46 @@ const actDef = RANKINGS.find((r) => r.slug === "cline-act")!;
   {plan && act && !same && plan.provider !== act.provider && (
     <p class="sub">These come from two providers, so you'll set up two API providers in Cline (one per mode).</p>
   )}
-  <p class="callout info">
-    <strong>Cline's own free models:</strong> Cline also runs rotating free-model promotions for Cline account holders
-    (tagged FREE under the Cline provider), with a usage quota. They only work inside Cline and can't be tested from
-    outside, so they're not in these rankings; see <a href="/offers/#cline">Cline free model promotions</a>. When that
-    quota runs out, the pair above keeps working with your own free keys.
+  <p class="sub">
+    Cline also gives some models away itself; they're listed below. They only work inside Cline, so they aren't in
+    the Plan and Act rankings. When their quota runs out, the pair above keeps working with your own free keys.
   </p>
   <p class="sub">
     Evaluation-only models (NVIDIA's own API, LLM7) and models whose free tier refused our test are left out.
     Check the data-use labels before sending private code: some free providers use prompts to improve their models.
   </p>
+
+  <h2>Free inside Cline right now</h2>
+  <p class="sub">
+    Models Cline currently gives away to account holders (tagged FREE under the Cline provider), up to a usage quota.
+    We read this list every 6 hours; changes show up in the <a href="/changes/">change feed</a>. They can't be tested
+    from outside Cline, so each shows how the same model does at other providers. Cline says free usage may be used
+    to improve the models. <a href="/offers/#cline">Conditions</a>.
+  </p>
+  {clineFree.length === 0 ? <p class="sub">No free models listed right now.</p> : (
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Model</th><th class="num">Arena</th><th>Same model elsewhere</th></tr></thead>
+        <tbody>
+          {clineFree.map((m) => {
+            const b = m.arena?.boards.webdev ?? m.arena?.boards.text;
+            const others = m.siblings.map((id) => modelById.get(id)!).filter((o) => o && o.testable);
+            return (
+              <tr>
+                <td><a class="model-name" href={m.href}>{m.name}</a><div class="sub mono">{m.model_id}</div></td>
+                <td class="num" title={b ? `LMArena ${m.arena?.boards.webdev ? "WebDev" : "Text"}` : ""}>{b?.rating ? Math.round(b.rating) : "–"}</td>
+                <td>
+                  {others.length === 0 ? <span class="sub">Not tracked elsewhere</span> : others.map((o) => (
+                    <div><a href={o.href}>{providerName(o)}</a>: <TestStatus test={o.lastTest} /></div>
+                  ))}
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  )}
 
   <SponsorSlot />
 

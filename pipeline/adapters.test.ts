@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { mapGoogle, mapGroq, mapKilo, mapLlm7, mapNvidia, mapOpenRouter, mapZai, OPENROUTER_CURATED_SPEECH } from "./adapters";
+import { mapGoogle, mapGroq, mapKilo, mapLlm7, mapNvidia, mapCline, mapOpenRouter, mapZai, OPENROUTER_CURATED_SPEECH } from "./adapters";
 import { classifyModel } from "./candidates";
 
 describe("classifyModel", () => {
@@ -135,5 +135,21 @@ describe("mapZai", () => {
       ["GLM-4.6V-Flash", "GLM-4.6V-Flash", ["text", "image"]],
     ]);
     expect(out[0]).toMatchObject({ provider: "zai", data_logging: "may-train", context_length: 200_000 });
+  });
+});
+
+describe("mapCline", () => {
+  it("lists Cline's free promotion as untested trial models", () => {
+    const out = mapCline({ free: [
+      { id: "cline-free/deepseek-v4.1-flash", name: "Deepseek-v4.1-Flash" },
+      { id: "stealth/pixel-canary", name: "Pixel Canary" },
+      { id: "cline-free/x", name: "cline-free/x" },
+    ] });
+    expect(out.map((m) => [m.model_id, m.name])).toEqual([
+      ["cline-free/deepseek-v4.1-flash", "Deepseek-v4.1-Flash"],
+      ["stealth/pixel-canary", "Pixel Canary"],
+      ["cline-free/x", "x"],
+    ]);
+    expect(out[0]).toMatchObject({ provider: "cline", price_type: "trial-credit", account_required: "yes", data_logging: "may-train" });
   });
 });

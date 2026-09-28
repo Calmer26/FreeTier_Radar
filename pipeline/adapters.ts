@@ -351,6 +351,34 @@ async function fetchZai(env: Env): Promise<ObservedModel[]> {
   return mapZai(json.data ?? []);
 }
 
+// ── Cline (free promotion) ───────────────────────────────────────────────────────
+
+export interface ClineRecommended {
+  free?: Array<{ id: string; name?: string; description?: string }>;
+}
+
+/**
+ * The "free" list the Cline extension shows under its own provider, from the public
+ * endpoint the extension itself uses (found via cline/cline#12140, 2026-09-28). These
+ * models only work inside Cline, so they're listed, never tested.
+ */
+export function mapCline(json: ClineRecommended): ObservedModel[] {
+  return withKind(json.free ?? [], (m) => m.id).map(({ item: m, kind }) => ({
+    ...base("cline", kind),
+    model_id: m.id,
+    name: m.name && m.name !== m.id ? m.name : m.id.split("/").pop() ?? m.id,
+    url: "https://docs.cline.bot/getting-started/free-models",
+    price_type: "trial-credit" as const,
+    context_length: null,
+    input_modalities: null,
+    tool_calling: null,
+  }));
+}
+
+async function fetchCline(): Promise<ObservedModel[]> {
+  return mapCline(await getJson<ClineRecommended>("https://api.cline.bot/api/v1/ai/cline/recommended-models"));
+}
+
 // ── Registry ─────────────────────────────────────────────────────────────────────
 
 export const FETCHERS: Record<ProviderId, (env: Env) => Promise<ObservedModel[]>> = {
@@ -361,4 +389,5 @@ export const FETCHERS: Record<ProviderId, (env: Env) => Promise<ObservedModel[]>
   kilo: () => fetchKilo(),
   llm7: () => fetchLlm7(),
   zai: fetchZai,
+  cline: () => fetchCline(),
 };
