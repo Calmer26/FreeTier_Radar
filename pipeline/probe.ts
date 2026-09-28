@@ -22,6 +22,8 @@ import { baseUrl, PROVIDERS } from "./providers";
 import type { RateLimits, Resource, TestHistory, TestResult, TestStatus, ToolResult } from "./types";
 
 export const TEST_TIMEOUT_MS = 30_000;
+/** Large image models (FLUX.2 dev) need well over 30 s for one picture. */
+export const IMAGE_TEST_TIMEOUT_MS = 120_000;
 export const SLOW_MS = 20_000;
 export const HISTORY_DAYS = 30;
 
@@ -231,15 +233,18 @@ export async function testModel(r: Resource, env: Record<string, string | undefi
   const at = new Date(started).toISOString();
   try {
     const { url, init, check } = buildRequest(r, env);
-    const res = await fetch(url, { ...init, signal: AbortSignal.timeout(TEST_TIMEOUT_MS) });
+    const timeout = r.kind === "image" ? IMAGE_TEST_TIMEOUT_MS : TEST_TIMEOUT_MS;
+    const res = await fetch(url, { ...init, signal: AbortSignal.timeout(timeout) });
     if (!res.ok) {
       const body = (await res.text().catch(() => "")).slice(0, 500);
       throw new HttpError(res.status, `${res.status} ${body}`);
     }
     await check(res);
     const latency = Date.now() - started;
+    // An image taking 20+ s is normal, not slow.
+    const slow = r.kind === "image" ? latency > IMAGE_TEST_TIMEOUT_MS : latency > SLOW_MS;
     return {
-      result: { at, status: latency > SLOW_MS ? "slow" : "responded", latency_ms: latency },
+      result: { at, status: slow ? "slow" : "responded", latency_ms: latency },
       limits: r.provider === "groq" ? limitsFromHeaders(res.headers) : null,
       detail: null,
     };

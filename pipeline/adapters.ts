@@ -440,6 +440,8 @@ export function mapCloudflare(models: CloudflareModel[]): ObservedModel[] {
     const p = Object.fromEntries((m.properties ?? []).map((x) => [x.property_id, x.value]));
     if (String(p.require_workers_paid) === "true" || String(p.realtime) === "true" || String(p.async_queue) === "true") return [];
     if (kind === "chat" && classifyModel(m.name) !== "chat") return [];
+    // Inpainting models edit an existing picture (they need an image and a mask): not text-to-image.
+    if (kind === "image" && /inpaint/i.test(m.name)) return [];
     const allowance = freeAllowance(p.price);
     return [{
       ...base("cloudflare", kind),

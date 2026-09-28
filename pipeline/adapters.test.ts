@@ -166,6 +166,7 @@ describe("Cloudflare", () => {
       { name: "@cf/deepgram/flux", task: { name: "Automatic Speech Recognition" }, properties: [prop("realtime", "true")] },
       { name: "@cf/google/gemma-2b-it-lora", task: { name: "Text Generation" } },
       { name: "@cf/baai/bge-m3", task: { name: "Text Embeddings" } },
+      { name: "@cf/runwayml/stable-diffusion-v1-5-inpainting", task: { name: "Text-to-Image" } },
     ]);
     expect(out.map((m) => [m.model_id, m.kind])).toEqual([
       ["@cf/openai/gpt-oss-20b", "chat"],
