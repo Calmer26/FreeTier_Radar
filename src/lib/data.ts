@@ -1,13 +1,20 @@
 /**
  * Build-time view of data/: everything the pages render, derived once.
+ *
+ * The data files are bundled with import.meta.glob rather than read with node:fs.
+ * Pages may be prerendered outside Node (Cloudflare's build renders them in its own
+ * runtime, where the disk isn't there), and a missing file read would silently
+ * produce an empty site instead of an error.
  */
 
-import { existsSync, readFileSync } from "node:fs";
-import { join } from "node:path";
 import { agentReadiness, type AgentReadiness } from "../../pipeline/agent-ready";
 import { PROVIDERS } from "../../pipeline/providers";
-import { DATA_DIR, readEvents, readResources, readTests } from "../../pipeline/store";
-import type { RateLimits, Resource, ResourceEvent, SponsorFile, TestResult } from "../../pipeline/types";
+import type { RateLimits, Resource, ResourceEvent, SponsorFile, TestHistory, TestResult } from "../../pipeline/types";
+
+const resourceFiles = import.meta.glob<Resource[]>("../../data/resources/ai/*.json", { eager: true, import: "default" });
+const eventFiles = import.meta.glob<string>("../../data/events/*.jsonl", { eager: true, query: "?raw", import: "default" });
+const testFiles = import.meta.glob<TestHistory>("../../data/tests/history.json", { eager: true, import: "default" });
+const sponsorFiles = import.meta.glob<SponsorFile>("../../data/sponsor.json", { eager: true, import: "default" });
 
 export interface ModelView extends Resource {
   tests: TestResult[];
@@ -20,9 +27,15 @@ export interface ModelView extends Resource {
   indexable: boolean;
 }
 
-const tests = readTests();
+const tests: TestHistory = Object.values(testFiles)[0] ?? { updated_at: null, results: {}, observed_limits: {} };
 
-export const models: ModelView[] = readResources()
+const resources = Object.values(resourceFiles).flat();
+if (resources.length === 0) {
+  // An empty directory is never a valid build: fail loudly instead of deploying it.
+  throw new Error("No resources found under data/resources/ai: refusing to build an empty site");
+}
+
+export const models: ModelView[] = resources
   .map((r) => {
     const history = tests.results[r.id] ?? [];
     return {
@@ -39,8 +52,11 @@ export const models: ModelView[] = readResources()
 
 export const activeModels = models.filter((m) => m.status !== "removed");
 
-/** Newest first. */
-export const events: ResourceEvent[] = readEvents().reverse();
+/** Newest first. Files are named YYYY-MM.jsonl, so sorting by path is chronological. */
+export const events: ResourceEvent[] = Object.keys(eventFiles)
+  .sort()
+  .flatMap((path) => eventFiles[path].split("\n").filter((line) => line.trim()).map((line) => JSON.parse(line) as ResourceEvent))
+  .reverse();
 
 export const modelById = new Map(models.map((m) => [m.id, m]));
 
@@ -49,8 +65,7 @@ export const providersInData = [...new Set(models.map((m) => m.provider))].map((
 export const testsUpdatedAt = tests.updated_at;
 
 export const sponsor: SponsorFile = (() => {
-  const path = join(DATA_DIR, "sponsor.json");
-  const s = existsSync(path) ? (JSON.parse(readFileSync(path, "utf8")) as SponsorFile) : null;
+  const s = Object.values(sponsorFiles)[0] ?? null;
   const today = new Date().toISOString().slice(0, 10);
   const live = s && s.active && (!s.starts || s.starts <= today) && (!s.ends || s.ends >= today);
   return live ? s : { active: false, name: "", text: "", url: "", logo: null, starts: null, ends: null };

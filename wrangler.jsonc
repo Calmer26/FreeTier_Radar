@@ -1,0 +1,11 @@
+// Cloudflare deployment: a static site. `npm run build` writes dist/, and the Worker
+// only serves those files. With this file present, Cloudflare doesn't auto-configure
+// the Astro project (which would render pages in its own runtime).
+{
+  "name": "freetier-radar",
+  "compatibility_date": "2026-09-01",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  }
+}
