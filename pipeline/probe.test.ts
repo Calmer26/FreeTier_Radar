@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { buildRequest, classifyFailure, HttpError, limitsFromHeaders, recordResults, ttsVoice, type TestOutcome } from "./probe";
+import { buildRequest, checkCloudflare, classifyFailure, HttpError, limitsFromHeaders, recordResults, ttsVoice, type TestOutcome } from "./probe";
 import type { Resource, TestHistory } from "./types";
 
 describe("classifyFailure", () => {
@@ -87,5 +87,24 @@ describe("buildRequest", () => {
     const req = buildRequest(r("groq", "whisper-large-v3", "stt"), env);
     await expect(req.check(new Response(JSON.stringify({ text: "hello there" })))).rejects.toThrow(/did not match/);
     await expect(req.check(new Response(JSON.stringify({ text: "Olympus Mons is…" })))).resolves.toBeUndefined();
+  });
+});
+
+describe("Cloudflare requests", () => {
+  const env = { CLOUDFLARE_API_TOKEN: "t", CLOUDFLARE_ACCOUNT_ID: "acc" };
+  const r = (model_id: string, kind: Resource["kind"]) => ({ provider: "cloudflare", model_id, kind } as Resource);
+
+  it("runs chat through the OpenAI-compatible path with the account filled in", () => {
+    expect(buildRequest(r("@cf/openai/gpt-oss-20b", "chat"), env).url).toBe("https://api.cloudflare.com/client/v4/accounts/acc/ai/v1/chat/completions");
+  });
+  it("runs images through /ai/run, FLUX.2 as a form", () => {
+    expect(buildRequest(r("@cf/black-forest-labs/flux-1-schnell", "image"), env).url).toBe("https://api.cloudflare.com/client/v4/accounts/acc/ai/run/@cf/black-forest-labs/flux-1-schnell");
+    expect(buildRequest(r("@cf/black-forest-labs/flux-2-klein-4b", "image"), env).init.body).toBeInstanceOf(FormData);
+  });
+  it("accepts raw or base64 media and rejects empty answers", async () => {
+    await expect(checkCloudflare({ kind: "image" }, new Response(new Uint8Array(2000), { headers: { "content-type": "image/png" } }))).resolves.toBeUndefined();
+    await expect(checkCloudflare({ kind: "image" }, new Response(JSON.stringify({ result: { image: "A".repeat(600) } })))).resolves.toBeUndefined();
+    await expect(checkCloudflare({ kind: "tts" }, new Response(JSON.stringify({ result: {} })))).rejects.toThrow(/no tts/);
+    await expect(checkCloudflare({ kind: "stt" }, new Response(JSON.stringify({ result: { text: "Olympus Mons is" } })))).resolves.toBeUndefined();
   });
 });

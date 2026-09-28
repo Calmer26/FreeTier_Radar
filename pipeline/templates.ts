@@ -38,6 +38,7 @@ export const KIND_LABELS: Record<ModelKind, string> = {
   chat: "Chat",
   tts: "Text-to-speech",
   stt: "Speech-to-text",
+  image: "Image",
 };
 
 const FIELD_LABELS: Record<string, string> = {

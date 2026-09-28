@@ -22,8 +22,8 @@ export const UNCOVERED_PATTERNS = [
   "-image", "robotics", "lyria", "deep-research",
   "computer-use", "antigravity", "nano-banana", "video-understanding",
   "-eap", "embedding",
-  // Tool-calling variant of a model already listed under its base id.
-  "customtools",
+  // Tool-calling variant of a model already listed under its base id; LoRA adapters.
+  "customtools", "-lora",
   // Groq: safety classifiers, and the compound systems (which run their own tools).
   "guard", "compound",
   // NVIDIA: retrieval and task models mixed into the catalogue. Code-only families

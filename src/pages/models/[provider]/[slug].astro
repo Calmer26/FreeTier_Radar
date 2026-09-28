@@ -20,7 +20,10 @@ const { m } = Astro.props as { m: ModelView };
 const provider = PROVIDERS[m.provider];
 const history = events.filter((e) => e.resource_id === m.id);
 const yn = (v: boolean | null) => (v === true ? "Yes" : v === false ? "No" : "Unknown");
-const apiSnippet = m.kind === "tts"
+const runBase = provider.base_url.replace(/\/v1$/, "");
+const apiSnippet = m.provider === "cloudflare" && m.kind !== "chat"
+  ? `POST ${runBase}/run/${m.model_id}\nAuthorization: Bearer <your Workers AI token>\n${m.kind === "image" ? (m.model_id.includes("flux-2") ? "multipart form: prompt=…, width=1024, height=1024" : '{ "prompt": "a red apple on a white table" }') : m.kind === "tts" ? '{ "prompt": "Hello!" }' : "body: the audio file"}`
+  : m.kind === "tts"
   ? `POST ${provider.base_url}/audio/speech\n{ "model": "${m.model_id}", "input": "Hello!" }`
   : m.kind === "stt"
     ? `POST ${provider.base_url}/audio/transcriptions  (multipart)\nfile=@clip.mp3  model=${m.model_id}`
@@ -55,6 +58,7 @@ const description = `${m.name} on ${provider.label}: free-tier status, limits, d
     {m.kind === "chat" && <div><dt>Tool calling</dt><dd>{yn(m.tool_calling)}</dd></div>}
     {m.kind === "chat" && <div><dt>Input types</dt><dd>{m.input_modalities?.join(", ") ?? "Unknown"}</dd></div>}
     {m.kind !== "chat" && <div><dt>Type</dt><dd>{KIND_LABELS[m.kind]}</dd></div>}
+    {m.terms_url && <div><dt>Model terms</dt><dd><a href={m.terms_url} rel="noopener">{m.kind === "image" ? "Licence / commercial use" : "Licence"}</a></dd></div>}
     <div><dt>Rate limits</dt><dd>{formatLimits(m.limits)}{m.limit_scope === "shared" ? " (shared)" : ""}</dd></div>
     <div><dt>Usage terms</dt><dd>{m.usage_terms === "production-ok" ? "Production use allowed" : m.usage_terms === "evaluation-only" ? "Evaluation only" : "Unknown"}</dd></div>
     <div><dt>Data use</dt><dd>{m.data_logging === "logs-prompts" ? "Logs prompts" : m.data_logging === "may-train" ? "May use your prompts" : m.data_logging === "none-stated" ? "None stated" : "Unknown"}</dd></div>
@@ -131,7 +135,7 @@ const description = `${m.name} on ${provider.label}: free-tier status, limits, d
     </div>
   )}
   {m.testable && <p class="sub">
-    One short request per day{m.kind === "tts" ? ' (speak "OK")' : m.kind === "stt" ? " (transcribe an 18-second sample clip)" : ""}.
+    {m.kind === "image" ? "One small image per week (image generation uses much more of a free allowance than chat)." : <>One short request per day{m.kind === "tts" ? ' (speak "OK")' : m.kind === "stt" ? " (transcribe an 18-second sample clip)" : ""}.</>}
     It shows the model answered at that moment, not that it is fast or available all day.
   </p>}
 

@@ -32,6 +32,14 @@ const ACCOUNT: Record<Offer["account_required"], string> = {
   </p>
   <SponsorSlot />
 
+  <p class="callout info">
+    <strong>Image and video generation:</strong> the one real free option for images we've found is
+    <a href="/providers/cloudflare/">Cloudflare Workers AI</a> (FLUX, Stable Diffusion; see the Image tab in the
+    <a href="/#image">directory</a>). Google's Gemini image and Veo video models appear on a free API key, but their
+    free limit is zero. We found <strong>no free video generation API</strong>: only paid APIs and one-off trial
+    credits (checked 28 Sep 2026).
+  </p>
+
   {GROUPS.map((g) => {
     const list = offers.filter((o) => o.offer_type === g.type);
     return list.length > 0 && (

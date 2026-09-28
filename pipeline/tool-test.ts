@@ -14,7 +14,7 @@
 
 import { SITE } from "../site.config";
 import { HttpError } from "./probe";
-import { PROVIDERS } from "./providers";
+import { baseUrl, PROVIDERS } from "./providers";
 import type { Resource, ToolResult } from "./types";
 
 export const TOOL_TEST_TIMEOUT_MS = 60_000;
@@ -40,7 +40,7 @@ export function buildToolRequest(r: Resource, env: Record<string, string | undef
   const info = PROVIDERS[r.provider];
   const key = info.key_env ? env[info.key_env] ?? "" : "";
   return {
-    url: `${info.base_url}/chat/completions`,
+    url: `${baseUrl(r.provider, env)}/chat/completions`,
     init: {
       method: "POST",
       headers: {

@@ -5,12 +5,12 @@
  * pulling in the fetchers.
  */
 
-export type ProviderId = "openrouter" | "groq" | "google-ai-studio" | "nvidia" | "kilo" | "llm7" | "zai" | "cline";
+export type ProviderId = "openrouter" | "groq" | "google-ai-studio" | "nvidia" | "kilo" | "llm7" | "zai" | "cline" | "cloudflare";
 
 /** What a model does. Each kind has its own directory tab and its own daily test. */
-export type ModelKind = "chat" | "tts" | "stt";
+export type ModelKind = "chat" | "tts" | "stt" | "image";
 
-export const MODEL_KINDS: readonly ModelKind[] = ["chat", "tts", "stt"];
+export const MODEL_KINDS: readonly ModelKind[] = ["chat", "tts", "stt", "image"];
 
 export type PriceType = "free" | "freemium-quota" | "trial-credit" | "paid" | "unknown";
 export type UsageTerms = "production-ok" | "evaluation-only" | "non-commercial" | "unknown";
@@ -58,6 +58,8 @@ export interface ObservedModel {
   card_required: YesNoUnknown;
   account_required: YesNoUnknown;
   data_logging: DataLogging;
+  /** The model's own terms or licence page, when the provider links one (Cloudflare). */
+  terms_url?: string | null;
 }
 
 export type ResourceStatus = "active" | "pending_removal" | "removed";

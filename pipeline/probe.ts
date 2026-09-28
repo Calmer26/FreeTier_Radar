@@ -6,6 +6,8 @@
  *   tts   speak "OK"; responded when audio comes back.
  *   stt   transcribe fixtures/stt-sample.mp3 (18 s narration); responded when the
  *         transcript contains a word from its script.
+ *   image generate a small picture; responded when an image comes back. Weekly, not
+ *         daily (see run-tests.ts): image models use much more of a free allowance.
  *
  * Adapted from solo_developer's model-rotation `probe.ts`, `stt-eval.ts` and the tts
  * package (2026-09-28). The site shows the result as "responded at 06:10 UTC", not
@@ -16,7 +18,7 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { SITE } from "../site.config";
-import { PROVIDERS } from "./providers";
+import { baseUrl, PROVIDERS } from "./providers";
 import type { RateLimits, Resource, TestHistory, TestResult, TestStatus, ToolResult } from "./types";
 
 export const TEST_TIMEOUT_MS = 30_000;
@@ -98,6 +100,7 @@ interface TestRequest {
 export function buildRequest(r: Resource, env: Record<string, string | undefined>): TestRequest {
   const info = PROVIDERS[r.provider];
   const key = info.key_env ? env[info.key_env] ?? "" : "";
+  const base = baseUrl(r.provider, env);
   // Keyless providers (Kilo, LLM7) are called anonymously.
   const auth: Record<string, string> = key ? { Authorization: `Bearer ${key}` } : {};
   const extra: Record<string, string> = r.provider === "openrouter" ? { "HTTP-Referer": SITE.url, "X-Title": SITE.name } : {};
@@ -105,7 +108,7 @@ export function buildRequest(r: Resource, env: Record<string, string | undefined
 
   if (r.kind === "chat") {
     return {
-      url: `${info.base_url}/chat/completions`,
+      url: `${base}/chat/completions`,
       init: {
         method: "POST",
         headers: { "Content-Type": "application/json", ...auth, ...extra },
@@ -114,6 +117,10 @@ export function buildRequest(r: Resource, env: Record<string, string | undefined
       check: drain,
     };
   }
+
+  // Cloudflare runs speech and image models through /ai/run, each family with its own
+  // input format (checked 2026-09-28).
+  if (r.provider === "cloudflare") return cloudflareRequest(r, base.replace(/\/v1$/, ""), auth);
 
   // Gemini's speech models are only reachable through its native API.
   if (r.provider === "google-ai-studio") {
@@ -146,7 +153,7 @@ export function buildRequest(r: Resource, env: Record<string, string | undefined
   if (r.kind === "tts") {
     const voice = ttsVoice(r);
     return {
-      url: `${info.base_url}/audio/speech`,
+      url: `${base}/audio/speech`,
       init: {
         method: "POST",
         headers: { "Content-Type": "application/json", ...auth, ...extra },
@@ -164,10 +171,53 @@ export function buildRequest(r: Resource, env: Record<string, string | undefined
   form.append("file", new Blob([readFileSync(STT_SAMPLE_PATH)], { type: "audio/mpeg" }), "stt-sample.mp3");
   form.append("model", r.model_id);
   return {
-    url: `${info.base_url}/audio/transcriptions`,
+    url: `${base}/audio/transcriptions`,
     init: { method: "POST", headers: { ...auth, ...extra }, body: form },
     check: async (res) => expectTranscript(((await res.json()) as { text?: string }).text ?? ""),
   };
+}
+
+const IMAGE_PROMPT = "a red apple on a white table";
+
+function cloudflareRequest(r: Resource, aiBase: string, auth: Record<string, string>): TestRequest {
+  const url = `${aiBase}/run/${r.model_id}`;
+  const json = (body: unknown): RequestInit => ({ method: "POST", headers: { "Content-Type": "application/json", ...auth }, body: JSON.stringify(body) });
+  const sample = () => readFileSync(STT_SAMPLE_PATH);
+  const id = r.model_id.toLowerCase();
+  let init: RequestInit;
+  if (r.kind === "image") {
+    if (id.includes("flux-2")) {
+      const form = new FormData();
+      form.append("prompt", IMAGE_PROMPT);
+      form.append("width", "256");
+      form.append("height", "256");
+      init = { method: "POST", headers: auth, body: form };
+    } else {
+      init = json({ prompt: IMAGE_PROMPT, steps: 4 });
+    }
+  } else if (r.kind === "tts") {
+    init = json(id.includes("deepgram") ? { text: "OK" } : { prompt: "OK" });
+  } else if (id.includes("whisper-large-v3-turbo")) {
+    init = json({ audio: Buffer.from(sample()).toString("base64") });
+  } else {
+    init = { method: "POST", headers: { "Content-Type": "audio/mpeg", ...auth }, body: sample() };
+  }
+  return { url, init, check: (res) => checkCloudflare(r, res) };
+}
+
+/** A Cloudflare answer holds the media asked for, either raw or as base64 in JSON. Exported for tests. */
+export async function checkCloudflare(r: Pick<Resource, "kind">, res: Response): Promise<void> {
+  const type = res.headers.get("content-type") ?? "";
+  const want = r.kind === "image" ? "image/" : r.kind === "tts" ? "audio/" : null;
+  if (want && type.startsWith(want)) {
+    const bytes = (await res.arrayBuffer()).byteLength;
+    if (bytes < 500) throw new Error(`${r.kind} response too small (${bytes} bytes)`);
+    return;
+  }
+  const text = await res.text();
+  if (r.kind === "stt") return expectTranscript(text);
+  const field = r.kind === "image" ? /"image"\s*:\s*"([A-Za-z0-9+/=]{500,})/ : /"audio"\s*:\s*"([A-Za-z0-9+/=]{200,})/;
+  if (!field.test(text)) throw new Error(`no ${r.kind} in response: ${text.slice(0, 120)}`);
 }
 
 function expectTranscript(text: string) {

@@ -138,6 +138,14 @@ export const RANKINGS: RankingDef[] = [
     compare: byReliability,
   },
   {
+    slug: "image-generation",
+    title: "Best free image generation models",
+    intro: "Free text-to-image models (FLUX, Stable Diffusion and more), tested weekly by generating one small picture. Check each model's licence before using images commercially.",
+    order: "Reliability over the last 30 days, then median response time.",
+    filter: (x) => usable(x) && ofKind("image")(x),
+    compare: byReliability,
+  },
+  {
     slug: "speech-to-text",
     title: "Best free speech-to-text models",
     intro: "Free STT models, tested daily by transcribing an 18-second clip.",

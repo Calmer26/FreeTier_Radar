@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { mapGoogle, mapGroq, mapKilo, mapLlm7, mapNvidia, mapCline, mapOpenRouter, mapZai, OPENROUTER_CURATED_SPEECH } from "./adapters";
+import { mapGoogle, mapGroq, mapKilo, mapLlm7, mapNvidia, freeAllowance, mapCline, mapCloudflare, mapOpenRouter, mapZai, OPENROUTER_CURATED_SPEECH } from "./adapters";
 import { classifyModel } from "./candidates";
 
 describe("classifyModel", () => {
@@ -151,5 +151,36 @@ describe("mapCline", () => {
       ["cline-free/x", "x"],
     ]);
     expect(out[0]).toMatchObject({ provider: "cline", price_type: "trial-credit", account_required: "yes", data_logging: "may-train" });
+  });
+});
+
+describe("Cloudflare", () => {
+  const prop = (property_id: string, value: unknown) => ({ property_id, value });
+  it("maps tasks to kinds and drops paid-only, realtime and LoRA models", () => {
+    const out = mapCloudflare([
+      { name: "@cf/openai/gpt-oss-20b", task: { name: "Text Generation" }, properties: [prop("context_window", "128000"), prop("function_calling", "true"), prop("price", '[{"unit":"per M input tokens","price":0.2}]')] },
+      { name: "@cf/black-forest-labs/flux-1-schnell", task: { name: "Text-to-Image" }, properties: [prop("terms", "https://bfl.ai/legal/terms-of-service")] },
+      { name: "@cf/openai/whisper", task: { name: "Automatic Speech Recognition" } },
+      { name: "@cf/myshell-ai/melotts", task: { name: "Text-to-Speech" } },
+      { name: "@cf/moonshotai/kimi-k2.6", task: { name: "Text Generation" }, properties: [prop("require_workers_paid", "true")] },
+      { name: "@cf/deepgram/flux", task: { name: "Automatic Speech Recognition" }, properties: [prop("realtime", "true")] },
+      { name: "@cf/google/gemma-2b-it-lora", task: { name: "Text Generation" } },
+      { name: "@cf/baai/bge-m3", task: { name: "Text Embeddings" } },
+    ]);
+    expect(out.map((m) => [m.model_id, m.kind])).toEqual([
+      ["@cf/openai/gpt-oss-20b", "chat"],
+      ["@cf/black-forest-labs/flux-1-schnell", "image"],
+      ["@cf/openai/whisper", "stt"],
+      ["@cf/myshell-ai/melotts", "tts"],
+    ]);
+    expect(out[0]).toMatchObject({ name: "openai/gpt-oss-20b", context_length: 128_000, tool_calling: true, limit_scope: "shared" });
+    expect(out[0].rate_limits?.note).toBe("≈ 550k input tokens a day within the free Neurons");
+    expect(out[1].terms_url).toBe("https://bfl.ai/legal/terms-of-service");
+  });
+
+  it("turns a price into a free-per-day estimate", () => {
+    expect(freeAllowance('[{"unit":"per 512 by 512 tile","price":0.00583}]')).toBe("≈ 18 images (512×512) a day within the free Neurons");
+    expect(freeAllowance('[{"unit":"per step","price":0}]')).toMatch(/No charge listed/);
+    expect(freeAllowance(undefined)).toBeNull();
   });
 });

@@ -15,7 +15,7 @@ export interface ProviderInfo {
   id: ProviderId;
   label: string;
   homepage: string;
-  /** OpenAI-compatible base URL, for the daily test and for the Cline snippet. */
+  /** OpenAI-compatible base URL, for the daily test and for the Cline snippet. "{account}" is filled in from CLOUDFLARE_ACCOUNT_ID. */
   base_url: string;
   /** Env var holding the key for the daily test (and for listing, where needed); null when no key is used. */
   key_env: string | null;
@@ -181,6 +181,27 @@ export const PROVIDERS: Record<ProviderId, ProviderInfo> = {
     limits_url: "https://docs.z.ai/guides/overview/pricing",
     summary: "Zhipu's international API. Three GLM Flash models are priced free, including a vision model.",
   },
+  cloudflare: {
+    id: "cloudflare",
+    label: "Cloudflare Workers AI",
+    homepage: "https://developers.cloudflare.com/workers-ai/",
+    base_url: "https://api.cloudflare.com/client/v4/accounts/{account}/ai/v1",
+    key_env: "CLOUDFLARE_API_TOKEN",
+    list_needs_key: true,
+    usage_terms: "production-ok",
+    // developers.cloudflare.com/workers-ai/platform/pricing, checked 2026-09-28.
+    usage_terms_note: "Free on the Workers Free plan within 10,000 Neurons a day, shared by all models and reset at 00:00 UTC; going over doesn't bill you, requests just fail. Some large models need the paid plan and are left out. Each model also has its own licence or terms, linked on its page.",
+    limit_scope: "shared",
+    rate_limits: {
+      note: "10,000 Neurons per day across all models (resets 00:00 UTC). How far that goes depends on the model; see the estimate per model.",
+      source: "https://developers.cloudflare.com/workers-ai/platform/pricing/",
+    },
+    card_required: "no",
+    account_required: "yes",
+    data_logging: "unknown",
+    limits_url: "https://developers.cloudflare.com/workers-ai/platform/pricing/",
+    summary: "Cloudflare's hosted models: chat, speech and image generation (FLUX, Stable Diffusion), free within a daily Neuron allowance. One of the few real free options for image generation.",
+  },
   cline: {
     id: "cline",
     label: "Cline (free promotion)",
@@ -203,3 +224,8 @@ export const PROVIDERS: Record<ProviderId, ProviderInfo> = {
 };
 
 export const PROVIDER_IDS = Object.keys(PROVIDERS) as ProviderId[];
+
+/** The provider's base URL with account placeholders filled in. */
+export function baseUrl(p: ProviderId, env: Record<string, string | undefined>): string {
+  return PROVIDERS[p].base_url.replace("{account}", env.CLOUDFLARE_ACCOUNT_ID ?? "{account}");
+}

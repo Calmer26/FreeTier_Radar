@@ -514,6 +514,7 @@ A GitHub issue form (`.github/ISSUE_TEMPLATE/suggest-resource.yml`) with fields 
 - Arena ratings live: 4 leaderboards, 34 models linked automatically on 28 Sep, near matches via a weekly review PR.
 - Keyless providers live: Kilo Code gateway (15 free models) and LLM7.io (3), tested anonymously, with a per-model data-use label. OVHcloud listed as a free-credits entry instead: its per-IP anonymous limit can't be tested reliably from shared CI servers.
 - Chinese providers (28 Sep): Z.ai's three free GLM Flash models get an adapter (waiting on the owner's `ZAI_API_KEY`); SiliconFlow and ModelScope are free-credits entries because both require real-name verification (ModelScope is also non-commercial). Most Chinese models are already tracked through OpenRouter, Kilo, NVIDIA, Groq and LLM7.
+- Cloudflare Workers AI added (28 Sep, owner's token): 25 free-plan models incl. 10 image models (FLUX, Stable Diffusion), each with a free-per-day estimate; image tests run weekly. No free video generation API exists (only trials); Gemini image/Veo have a free limit of 0.
 - **Phase 2a is complete.** Next: 2b (SambaNova, Mistral, Cloudflare Workers AI adapters; needs keys) and 2c (launch).
 
 **2a — no keys needed; can be built before Phase 0**

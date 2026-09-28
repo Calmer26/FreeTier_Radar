@@ -11,7 +11,7 @@ import { testModel, recordResults, type TestOutcome } from "./probe";
 import { testToolCall } from "./tool-test";
 import { PROVIDER_IDS, PROVIDERS } from "./providers";
 import { readResources, readTests, writeTests } from "./store";
-import type { ProviderId, Resource } from "./types";
+import type { ProviderId, Resource, TestHistory } from "./types";
 
 /** Minimum gap between requests per provider, from the published or assumed limits. */
 const GAP_MS: Record<ProviderId, number> = {
@@ -23,14 +23,19 @@ const GAP_MS: Record<ProviderId, number> = {
   llm7: 7_000,               // anonymous: 10 requests/minute, 60/hour
   zai: 2_000,                // one concurrent request per free model
   cline: 0,                  // never tested: free models work only inside Cline
+  cloudflare: 1_000,         // shared daily Neurons; requests are tiny
 };
 const STOP_AFTER_RATE_LIMITS = 3;
+/** Image models are tested weekly: one picture uses far more of a free allowance than a chat reply. */
+const IMAGE_TEST_EVERY_DAYS = 7;
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-async function runProvider(p: ProviderId, models: Resource[], outcomes: Map<string, TestOutcome>) {
+async function runProvider(p: ProviderId, models: Resource[], outcomes: Map<string, TestOutcome>, history: TestHistory) {
   let rateLimitedInARow = 0;
   for (const [i, r] of models.entries()) {
+    const last = history.results[r.id]?.at(-1);
+    if (r.kind === "image" && last && Date.now() - Date.parse(last.at) < (IMAGE_TEST_EVERY_DAYS - 0.5) * 86_400_000) continue;
     const outcome = await testModel(r, process.env);
     if (outcome.detail) console.log(`  ${p} ${r.model_id}: ${outcome.result.status}: ${outcome.detail}`);
     if (outcome.result.status === "rate_limited") {
@@ -61,6 +66,7 @@ async function runProvider(p: ProviderId, models: Resource[], outcomes: Map<stri
 async function main() {
   const now = new Date().toISOString();
   const resources = readResources();
+  const history = readTests();
   const outcomes = new Map<string, TestOutcome>();
 
   await Promise.all(
@@ -76,12 +82,12 @@ async function main() {
       }
       const models = resources.filter((r) => r.provider === p && r.status === "active");
       console.log(`- ${p}: testing ${models.length} model(s)`);
-      return runProvider(p, models, outcomes);
+      return runProvider(p, models, outcomes, history);
     }),
   );
 
   const known = new Set(resources.filter((r) => r.status !== "removed").map((r) => r.id));
-  writeTests(recordResults(readTests(), outcomes, known, now));
+  writeTests(recordResults(history, outcomes, known, now));
   console.log(`\nRecorded ${outcomes.size} result(s).`);
 }
 

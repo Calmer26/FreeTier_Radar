@@ -379,6 +379,92 @@ async function fetchCline(): Promise<ObservedModel[]> {
   return mapCline(await getJson<ClineRecommended>("https://api.cline.bot/api/v1/ai/cline/recommended-models"));
 }
 
+// ── Cloudflare Workers AI ────────────────────────────────────────────────────────
+
+export interface CloudflareModel {
+  name: string;
+  task?: { name?: string };
+  properties?: Array<{ property_id: string; value: unknown }>;
+}
+
+const CLOUDFLARE_TASKS: Record<string, ModelKind> = {
+  "Text Generation": "chat",
+  "Text-to-Speech": "tts",
+  "Automatic Speech Recognition": "stt",
+  "Text-to-Image": "image",
+};
+
+/** Workers Paid costs $0.011 per 1,000 Neurons, so the free 10,000 Neurons are worth $0.11 a day. */
+export const CLOUDFLARE_FREE_USD_PER_DAY = 0.11;
+
+const UNITS: Array<{ match: RegExp; label: (n: number) => string }> = [
+  { match: /per m input tokens/i, label: (n) => `≈ ${fmt(n * 1_000_000)} input tokens a day` },
+  { match: /per 512 by 512 tile/i, label: (n) => `≈ ${fmt(n)} images (512×512) a day` },
+  { match: /per audio minute/i, label: (n) => `≈ ${fmt(n)} audio minutes a day` },
+  { match: /per 1k characters/i, label: (n) => `≈ ${fmt(n * 1000)} characters a day` },
+];
+
+function fmt(n: number): string {
+  if (n >= 1_000_000) return `${+(n / 1_000_000).toFixed(1)}M`;
+  if (n >= 10_000) return `${Math.round(n / 1000)}k`;
+  return String(Math.floor(n));
+}
+
+/**
+ * How far the free daily Neurons go for one model, from its first listed price.
+ * Exported for tests. Null when the model lists no price we can convert.
+ */
+export function freeAllowance(price: unknown): string | null {
+  let list: Array<{ unit?: string; price?: number }> = [];
+  try {
+    list = typeof price === "string" ? JSON.parse(price) : Array.isArray(price) ? price : [];
+  } catch {
+    return null;
+  }
+  const first = list[0];
+  if (!first || typeof first.price !== "number") return null;
+  if (first.price === 0) return "No charge listed (beta): doesn't use the free Neurons";
+  const unit = UNITS.find((u) => u.match.test(first.unit ?? ""));
+  return unit ? `${unit.label(CLOUDFLARE_FREE_USD_PER_DAY / first.price)} within the free Neurons` : null;
+}
+
+/**
+ * Cloudflare's catalogue (models/search) carries task, context, tool support, price and
+ * a `require_workers_paid` flag (checked 2026-09-28). Paid-only models are left out,
+ * as are realtime and async-queue models (websocket or batch only).
+ */
+export function mapCloudflare(models: CloudflareModel[]): ObservedModel[] {
+  return models.flatMap((m) => {
+    const kind = CLOUDFLARE_TASKS[m.task?.name ?? ""];
+    if (!kind) return [];
+    const p = Object.fromEntries((m.properties ?? []).map((x) => [x.property_id, x.value]));
+    if (String(p.require_workers_paid) === "true" || String(p.realtime) === "true" || String(p.async_queue) === "true") return [];
+    if (kind === "chat" && classifyModel(m.name) !== "chat") return [];
+    const allowance = freeAllowance(p.price);
+    return [{
+      ...base("cloudflare", kind),
+      model_id: m.name,
+      name: m.name.replace(/^@cf\//, ""),
+      url: `https://developers.cloudflare.com/workers-ai/models/${m.name.split("/").pop()}/`,
+      price_type: "freemium-quota" as const,
+      context_length: kind === "chat" && p.context_window ? Number(p.context_window) : null,
+      input_modalities: kind === "chat" ? (String(p.vision) === "true" ? ["text", "image"] : ["text"]) : kind === "stt" ? ["audio"] : ["text"],
+      tool_calling: kind === "chat" ? String(p.function_calling) === "true" : null,
+      rate_limits: { ...PROVIDERS.cloudflare.rate_limits, ...(allowance ? { note: allowance } : {}) },
+      terms_url: typeof p.terms === "string" ? p.terms : typeof p.info === "string" ? p.info : null,
+    }];
+  });
+}
+
+async function fetchCloudflare(env: Env): Promise<ObservedModel[]> {
+  if (!env.CLOUDFLARE_ACCOUNT_ID) throw new Error("CLOUDFLARE_ACCOUNT_ID not set");
+  const json = await getJson<{ result?: CloudflareModel[] }>(
+    `https://api.cloudflare.com/client/v4/accounts/${env.CLOUDFLARE_ACCOUNT_ID}/ai/models/search?per_page=500`,
+    { Authorization: `Bearer ${env.CLOUDFLARE_API_TOKEN}` },
+  );
+  return mapCloudflare(json.result ?? []);
+}
+
 // ── Registry ─────────────────────────────────────────────────────────────────────
 
 export const FETCHERS: Record<ProviderId, (env: Env) => Promise<ObservedModel[]>> = {
@@ -390,4 +476,5 @@ export const FETCHERS: Record<ProviderId, (env: Env) => Promise<ObservedModel[]>
   llm7: () => fetchLlm7(),
   zai: fetchZai,
   cline: () => fetchCline(),
+  cloudflare: fetchCloudflare,
 };
