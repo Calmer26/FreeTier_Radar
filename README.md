@@ -24,7 +24,7 @@ _102 free models. Updated automatically; see [FreeTier Radar](https://freetierra
 | [Cohere: North Mini Code (free)](https://freetierradar.com/models/openrouter/cohere-north-mini-code-free/) | `cohere/north-mini-code:free` | 256k | yes | 🟢 |  |
 | [Dots Studio: Dots3-Note Preview (free)](https://freetierradar.com/models/openrouter/dots-studio-dots-3-note-preview-free/) | `dots-studio/dots-3-note-preview:free` | 512k | yes | 🟢 |  |
 | [Google: Gemma 4 26B A4B  (free)](https://freetierradar.com/models/openrouter/google-gemma-4-26b-a4b-it-free/) | `google/gemma-4-26b-a4b-it:free` | 262k | yes | – |  |
-| [Google: Gemma 4 31B (free)](https://freetierradar.com/models/openrouter/google-gemma-4-31b-it-free/) | `google/gemma-4-31b-it:free` | 262k | yes | – |  |
+| [Google: Gemma 4 31B (free)](https://freetierradar.com/models/openrouter/google-gemma-4-31b-it-free/) | `google/gemma-4-31b-it:free` | 262k | yes | 🟢 |  |
 | [inclusionAI: Ling 3.0 Flash Fin (free)](https://freetierradar.com/models/openrouter/inclusionai-ling-3-0-flash-fin-free/) | `inclusionai/ling-3.0-flash-fin:free` | 262k | yes | 🟢 |  |
 | [inclusionAI: Ling 3.0 Flash Sante (free)](https://freetierradar.com/models/openrouter/inclusionai-ling-3-0-flash-sante-free/) | `inclusionai/ling-3.0-flash-sante:free` | 262k | yes | 🟢 |  |
 | [LiquidAI: LFM2.5-2.6B (free)](https://freetierradar.com/models/openrouter/liquid-lfm-2-5-2-6b-free/) | `liquid/lfm-2.5-2.6b:free` | 66k | yes | 🟢 |  |
@@ -54,19 +54,19 @@ _102 free models. Updated automatically; see [FreeTier Radar](https://freetierra
 | [Gemini 2.5 Flash](https://freetierradar.com/models/google-ai-studio/gemini-2-5-flash/) | `gemini-2.5-flash` | 1M | ? | 🟢 |  |
 | [Gemini 2.5 Flash-Lite](https://freetierradar.com/models/google-ai-studio/gemini-2-5-flash-lite/) | `gemini-2.5-flash-lite` | 1M | ? | 🟢 |  |
 | [Gemini 2.5 Pro](https://freetierradar.com/models/google-ai-studio/gemini-2-5-pro/) | `gemini-2.5-pro` | 1M | ? | 🔴 |  |
-| [Gemini 3 Flash Preview](https://freetierradar.com/models/google-ai-studio/gemini-3-flash-preview/) | `gemini-3-flash-preview` | 1M | ? | 🔴 |  |
+| [Gemini 3 Flash Preview](https://freetierradar.com/models/google-ai-studio/gemini-3-flash-preview/) | `gemini-3-flash-preview` | 1M | ? | 🟢 |  |
 | [Gemini 3.1 Flash Lite](https://freetierradar.com/models/google-ai-studio/gemini-3-1-flash-lite/) | `gemini-3.1-flash-lite` | 1M | ? | 🟢 |  |
 | [Gemini 3.1 Flash Lite Preview](https://freetierradar.com/models/google-ai-studio/gemini-3-1-flash-lite-preview/) | `gemini-3.1-flash-lite-preview` | 1M | ? | 🟢 |  |
 | [Gemini 3.1 Pro Preview](https://freetierradar.com/models/google-ai-studio/gemini-3-1-pro-preview/) | `gemini-3.1-pro-preview` | 1M | ? | 🔴 |  |
-| [Gemini 3.5 Flash](https://freetierradar.com/models/google-ai-studio/gemini-3-5-flash/) | `gemini-3.5-flash` | 1M | ? | 🟢 |  |
+| [Gemini 3.5 Flash](https://freetierradar.com/models/google-ai-studio/gemini-3-5-flash/) | `gemini-3.5-flash` | 1M | ? | 🔴 |  |
 | [Gemini 3.5 Flash Lite](https://freetierradar.com/models/google-ai-studio/gemini-3-5-flash-lite/) | `gemini-3.5-flash-lite` | 1M | ? | 🟢 |  |
 | [Gemini 3.6 Flash](https://freetierradar.com/models/google-ai-studio/gemini-3-6-flash/) | `gemini-3.6-flash` | 1M | ? | 🟢 |  |
 | [Gemini 3.7 Flash](https://freetierradar.com/models/google-ai-studio/gemini-3-7-flash/) | `gemini-3.7-flash` | 1M | ? | 🟢 |  |
-| [Gemini 3.8 Flash](https://freetierradar.com/models/google-ai-studio/gemini-3-8-flash/) | `gemini-3.8-flash` | 1M | ? | 🟢 |  |
+| [Gemini 3.8 Flash](https://freetierradar.com/models/google-ai-studio/gemini-3-8-flash/) | `gemini-3.8-flash` | 1M | ? | 🔴 |  |
 | [Gemini Omni 1.1 Flash](https://freetierradar.com/models/google-ai-studio/gemini-omni-1-1-flash/) | `gemini-omni-1.1-flash` | 131k | ? | 🔴 |  |
 | [Gemini Omni Flash Preview](https://freetierradar.com/models/google-ai-studio/gemini-omni-flash-preview/) | `gemini-omni-flash-preview` | 131k | ? | 🔴 |  |
 | [Gemma 4 26B A4B IT](https://freetierradar.com/models/google-ai-studio/gemma-4-26b-a4b-it/) | `gemma-4-26b-a4b-it` | 262k | ? | 🟢 |  |
-| [Gemma 4 31B IT](https://freetierradar.com/models/google-ai-studio/gemma-4-31b-it/) | `gemma-4-31b-it` | 262k | ? | 🟡 |  |
+| [Gemma 4 31B IT](https://freetierradar.com/models/google-ai-studio/gemma-4-31b-it/) | `gemma-4-31b-it` | 262k | ? | 🔴 |  |
 
 #### NVIDIA API catalog (build.nvidia.com) ⚠ evaluation only
 
@@ -82,14 +82,14 @@ _102 free models. Updated automatically; see [FreeTier Radar](https://freetierra
 | [google/gemma-2b (google)](https://freetierradar.com/models/nvidia/google-gemma-2b/) | `google/gemma-2b` | unknown | ? | 🔴 |  |
 | [google/gemma-3-12b-it (google)](https://freetierradar.com/models/nvidia/google-gemma-3-12b-it/) | `google/gemma-3-12b-it` | unknown | ? | 🔴 |  |
 | [google/gemma-3-4b-it (google)](https://freetierradar.com/models/nvidia/google-gemma-3-4b-it/) | `google/gemma-3-4b-it` | unknown | ? | 🔴 |  |
-| [google/gemma-4-31b-it (google)](https://freetierradar.com/models/nvidia/google-gemma-4-31b-it/) | `google/gemma-4-31b-it` | unknown | ? | 🟡 |  |
+| [google/gemma-4-31b-it (google)](https://freetierradar.com/models/nvidia/google-gemma-4-31b-it/) | `google/gemma-4-31b-it` | unknown | ? | 🟢 |  |
 | [google/recurrentgemma-2b (google)](https://freetierradar.com/models/nvidia/google-recurrentgemma-2b/) | `google/recurrentgemma-2b` | unknown | ? | 🔴 |  |
 | [ibm/granite-3.0-3b-a800m-instruct (ibm)](https://freetierradar.com/models/nvidia/ibm-granite-3-0-3b-a800m-instruct/) | `ibm/granite-3.0-3b-a800m-instruct` | unknown | ? | 🔴 |  |
 | [ibm/granite-3.0-8b-instruct (ibm)](https://freetierradar.com/models/nvidia/ibm-granite-3-0-8b-instruct/) | `ibm/granite-3.0-8b-instruct` | unknown | ? | 🔴 |  |
-| [meta/llama-3.2-11b-vision-instruct (meta)](https://freetierradar.com/models/nvidia/meta-llama-3-2-11b-vision-instruct/) | `meta/llama-3.2-11b-vision-instruct` | unknown | ? | 🟡 |  |
+| [meta/llama-3.2-11b-vision-instruct (meta)](https://freetierradar.com/models/nvidia/meta-llama-3-2-11b-vision-instruct/) | `meta/llama-3.2-11b-vision-instruct` | unknown | ? | 🟢 |  |
 | [meta/llama-3.2-90b-vision-instruct (meta)](https://freetierradar.com/models/nvidia/meta-llama-3-2-90b-vision-instruct/) | `meta/llama-3.2-90b-vision-instruct` | unknown | ? | 🟡 |  |
 | [meta/llama2-70b (meta)](https://freetierradar.com/models/nvidia/meta-llama2-70b/) | `meta/llama2-70b` | unknown | ? | 🔴 |  |
-| [meta/muse-glimmer-30b (meta)](https://freetierradar.com/models/nvidia/meta-muse-glimmer-30b/) | `meta/muse-glimmer-30b` | unknown | ? | 🟢 |  |
+| [meta/muse-glimmer-30b (meta)](https://freetierradar.com/models/nvidia/meta-muse-glimmer-30b/) | `meta/muse-glimmer-30b` | unknown | ? | 🟡 |  |
 | [microsoft/phi-3-vision-128k-instruct (microsoft)](https://freetierradar.com/models/nvidia/microsoft-phi-3-vision-128k-instruct/) | `microsoft/phi-3-vision-128k-instruct` | unknown | ? | 🔴 |  |
 | [microsoft/phi-3.5-moe-instruct (microsoft)](https://freetierradar.com/models/nvidia/microsoft-phi-3-5-moe-instruct/) | `microsoft/phi-3.5-moe-instruct` | unknown | ? | 🔴 |  |
 | [mistralai/mistral-7b-instruct-v0.3 (mistralai)](https://freetierradar.com/models/nvidia/mistralai-mistral-7b-instruct-v0-3/) | `mistralai/mistral-7b-instruct-v0.3` | unknown | ? | 🔴 |  |
@@ -118,12 +118,12 @@ _102 free models. Updated automatically; see [FreeTier Radar](https://freetierra
 | [nvidia/riva-translate-4b-instruct-v2 (nvidia)](https://freetierradar.com/models/nvidia/nvidia-riva-translate-4b-instruct-v2/) | `nvidia/riva-translate-4b-instruct-v2` | unknown | ? | 🟡 |  |
 | [nvidia/vila (nvidia)](https://freetierradar.com/models/nvidia/nvidia-vila/) | `nvidia/vila` | unknown | ? | 🔴 |  |
 | [openai/gpt-oss-20b (openai)](https://freetierradar.com/models/nvidia/openai-gpt-oss-20b/) | `openai/gpt-oss-20b` | unknown | ? | 🟢 |  |
-| [poolside/laguna-xs-2.1 (poolside)](https://freetierradar.com/models/nvidia/poolside-laguna-xs-2-1/) | `poolside/laguna-xs-2.1` | unknown | ? | 🔴 |  |
+| [poolside/laguna-xs-2.1 (poolside)](https://freetierradar.com/models/nvidia/poolside-laguna-xs-2-1/) | `poolside/laguna-xs-2.1` | unknown | ? | 🟢 |  |
 | [writer/palmyra-creative-122b (writer)](https://freetierradar.com/models/nvidia/writer-palmyra-creative-122b/) | `writer/palmyra-creative-122b` | unknown | ? | 🔴 |  |
 | [writer/palmyra-fin-70b-32k (writer)](https://freetierradar.com/models/nvidia/writer-palmyra-fin-70b-32k/) | `writer/palmyra-fin-70b-32k` | unknown | ? | 🔴 |  |
 | [writer/palmyra-med-70b (writer)](https://freetierradar.com/models/nvidia/writer-palmyra-med-70b/) | `writer/palmyra-med-70b` | unknown | ? | 🔴 |  |
 | [writer/palmyra-med-70b-32k (writer)](https://freetierradar.com/models/nvidia/writer-palmyra-med-70b-32k/) | `writer/palmyra-med-70b-32k` | unknown | ? | 🔴 |  |
-| [z-ai/glm-5.3 (z-ai)](https://freetierradar.com/models/nvidia/z-ai-glm-5-3/) | `z-ai/glm-5.3` | unknown | ? | 🟡 |  |
+| [z-ai/glm-5.3 (z-ai)](https://freetierradar.com/models/nvidia/z-ai-glm-5-3/) | `z-ai/glm-5.3` | unknown | ? | 🟢 |  |
 | [z-ai/glm-5.3-flash (z-ai)](https://freetierradar.com/models/nvidia/z-ai-glm-5-3-flash/) | `z-ai/glm-5.3-flash` | unknown | ? | 🟡 |  |
 | [zyphra/zamba2-7b-instruct (zyphra)](https://freetierradar.com/models/nvidia/zyphra-zamba2-7b-instruct/) | `zyphra/zamba2-7b-instruct` | unknown | ? | 🔴 |  |
 
@@ -133,25 +133,25 @@ _102 free models. Updated automatically; see [FreeTier Radar](https://freetierra
 
 | Model | ID | Last test |
 |---|---|---|
-| [Deepgram: Flux TTS (free)](https://freetierradar.com/models/openrouter/deepgram-flux-tts-free/) | `deepgram/flux-tts:free` | – |
-| [Fish Audio: S2.1 Pro (free)](https://freetierradar.com/models/openrouter/fish-audio-s2-1-pro-free-free/) | `fish-audio/s2.1-pro-free:free` | – |
+| [Deepgram: Flux TTS (free)](https://freetierradar.com/models/openrouter/deepgram-flux-tts-free/) | `deepgram/flux-tts:free` | 🟢 |
+| [Fish Audio: S2.1 Pro (free)](https://freetierradar.com/models/openrouter/fish-audio-s2-1-pro-free-free/) | `fish-audio/s2.1-pro-free:free` | 🟢 |
 
 #### Groq
 
 | Model | ID | Last test |
 |---|---|---|
-| [canopylabs/orpheus-arabic-saudi (Canopy Labs)](https://freetierradar.com/models/groq/canopylabs-orpheus-arabic-saudi/) | `canopylabs/orpheus-arabic-saudi` | – |
-| [canopylabs/orpheus-v1-english (Canopy Labs)](https://freetierradar.com/models/groq/canopylabs-orpheus-v1-english/) | `canopylabs/orpheus-v1-english` | – |
+| [canopylabs/orpheus-arabic-saudi (Canopy Labs)](https://freetierradar.com/models/groq/canopylabs-orpheus-arabic-saudi/) | `canopylabs/orpheus-arabic-saudi` | 🔴 |
+| [canopylabs/orpheus-v1-english (Canopy Labs)](https://freetierradar.com/models/groq/canopylabs-orpheus-v1-english/) | `canopylabs/orpheus-v1-english` | 🟢 |
 
 #### Google AI Studio (Gemini API)
 
 | Model | ID | Last test |
 |---|---|---|
-| [Gemini 2.5 Flash Preview TTS](https://freetierradar.com/models/google-ai-studio/gemini-2-5-flash-preview-tts/) | `gemini-2.5-flash-preview-tts` | – |
-| [Gemini 2.5 Pro Preview TTS](https://freetierradar.com/models/google-ai-studio/gemini-2-5-pro-preview-tts/) | `gemini-2.5-pro-preview-tts` | – |
-| [Gemini 3.1 Flash TTS Preview](https://freetierradar.com/models/google-ai-studio/gemini-3-1-flash-tts-preview/) | `gemini-3.1-flash-tts-preview` | – |
-| [Gemini 3.8 Flash Lite TTS](https://freetierradar.com/models/google-ai-studio/gemini-3-8-flash-lite-tts/) | `gemini-3.8-flash-lite-tts` | – |
-| [Gemini 3.8 Flash TTS](https://freetierradar.com/models/google-ai-studio/gemini-3-8-flash-tts/) | `gemini-3.8-flash-tts` | – |
+| [Gemini 2.5 Flash Preview TTS](https://freetierradar.com/models/google-ai-studio/gemini-2-5-flash-preview-tts/) | `gemini-2.5-flash-preview-tts` | 🟢 |
+| [Gemini 2.5 Pro Preview TTS](https://freetierradar.com/models/google-ai-studio/gemini-2-5-pro-preview-tts/) | `gemini-2.5-pro-preview-tts` | 🔴 |
+| [Gemini 3.1 Flash TTS Preview](https://freetierradar.com/models/google-ai-studio/gemini-3-1-flash-tts-preview/) | `gemini-3.1-flash-tts-preview` | 🟢 |
+| [Gemini 3.8 Flash Lite TTS](https://freetierradar.com/models/google-ai-studio/gemini-3-8-flash-lite-tts/) | `gemini-3.8-flash-lite-tts` | 🟢 |
+| [Gemini 3.8 Flash TTS](https://freetierradar.com/models/google-ai-studio/gemini-3-8-flash-tts/) | `gemini-3.8-flash-tts` | 🟢 |
 
 ### Speech-to-text (3)
 
@@ -159,14 +159,14 @@ _102 free models. Updated automatically; see [FreeTier Radar](https://freetierra
 
 | Model | ID | Last test |
 |---|---|---|
-| [whisper-large-v3 (OpenAI)](https://freetierradar.com/models/groq/whisper-large-v3/) | `whisper-large-v3` | – |
-| [whisper-large-v3-turbo (OpenAI)](https://freetierradar.com/models/groq/whisper-large-v3-turbo/) | `whisper-large-v3-turbo` | – |
+| [whisper-large-v3 (OpenAI)](https://freetierradar.com/models/groq/whisper-large-v3/) | `whisper-large-v3` | 🟢 |
+| [whisper-large-v3-turbo (OpenAI)](https://freetierradar.com/models/groq/whisper-large-v3-turbo/) | `whisper-large-v3-turbo` | 🟢 |
 
 #### Google AI Studio (Gemini API)
 
 | Model | ID | Last test |
 |---|---|---|
-| [Gemini 3.5 Transcribe](https://freetierradar.com/models/google-ai-studio/gemini-3-5-transcribe/) | `gemini-3.5-transcribe` | – |
+| [Gemini 3.5 Transcribe](https://freetierradar.com/models/google-ai-studio/gemini-3-5-transcribe/) | `gemini-3.5-transcribe` | 🟢 |
 
 <!-- LIST:END -->
 
