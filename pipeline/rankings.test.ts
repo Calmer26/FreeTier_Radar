@@ -10,7 +10,7 @@ const res = (id: string, over: Partial<Resource> = {}): Resource => ({
   removed_at: null, fingerprint: "", provider: "groq", model_id: id, kind: "chat", listed_by: "api", name: id,
   url: "", price_type: "free", context_length: 131_072, input_modalities: ["text"], tool_calling: true,
   rate_limits: null, limit_scope: "per-model", usage_terms: "production-ok", licence: null,
-  card_required: "no", account_required: "yes", ...over,
+  card_required: "no", account_required: "yes", data_logging: "unknown", ...over,
 });
 
 const ranking = (slug: string) => RANKINGS.find((r) => r.slug === slug)!;

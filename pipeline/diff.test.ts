@@ -23,6 +23,7 @@ function model(id: string, over: Partial<ObservedModel> = {}): ObservedModel {
     licence: null,
     card_required: "no",
     account_required: "yes",
+    data_logging: "unknown",
     ...over,
   };
 }
@@ -153,5 +154,18 @@ describe("diff baselines per kind", () => {
     expect(first.events).toEqual([]);
     const later = run(first.resources, [model("a:free"), speech, model("whisper-y", { kind: "stt" })], at(12));
     expect(later.events.map((e) => [e.event_type, e.resource_id])).toEqual([["NEW", "openrouter/whisper-y"]]);
+  });
+});
+
+describe("fields added after a record was written", () => {
+  it("are filled in without CHANGED events", () => {
+    const first = run([], [model("a:free")], T0).resources;
+    const { data_logging: _, ...legacy } = first[0];
+    const next = run([legacy as Resource], [model("a:free", { data_logging: "logs-prompts" })], at(6));
+    expect(next.events).toEqual([]);
+    expect(next.resources[0].data_logging).toBe("logs-prompts");
+    // …and changes to it after that are reported as usual.
+    const later = run(next.resources, [model("a:free", { data_logging: "may-train" })], at(12));
+    expect(later.events.map((e) => e.field)).toEqual(["data_logging"]);
   });
 });

@@ -8,7 +8,7 @@ const resource = (over: Partial<Resource> = {}): Resource => ({
   provider: "openrouter", model_id: "a:free", kind: "chat", listed_by: "api", name: "A", url: "",
   price_type: "free", context_length: 131_072, input_modalities: ["text"], tool_calling: true,
   rate_limits: { rpm: 20, rpd: 50 }, limit_scope: "shared", usage_terms: "production-ok",
-  licence: null, card_required: "no", account_required: "yes",
+  licence: null, card_required: "no", account_required: "yes", data_logging: "unknown",
   ...over,
 });
 

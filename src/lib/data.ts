@@ -42,7 +42,8 @@ const aliases: AliasFile = Object.values(aliasFiles)[0] ?? {};
 
 const tests: TestHistory = Object.values(testFiles)[0] ?? { updated_at: null, results: {}, observed_limits: {} };
 
-const resources = Object.values(resourceFiles).flat().map(withDefaults);
+// data_logging arrived after the first records were written; show those as "unknown".
+const resources = Object.values(resourceFiles).flat().map(withDefaults).map((r) => ({ ...r, data_logging: r.data_logging ?? "unknown" }));
 if (resources.length === 0) {
   // An empty directory is never a valid build: fail loudly instead of deploying it.
   throw new Error("No resources found under data/resources/ai: refusing to build an empty site");

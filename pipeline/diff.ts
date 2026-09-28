@@ -26,7 +26,7 @@ export const REMOVAL_GRACE_MS = 12 * 60 * 60 * 1000;
 /** The fields a change event can be about, in the order events are emitted. */
 export const TRACKED_FIELDS = [
   "name", "price_type", "context_length", "input_modalities", "tool_calling",
-  "rate_limits", "limit_scope", "usage_terms", "licence", "card_required", "account_required",
+  "rate_limits", "limit_scope", "usage_terms", "licence", "card_required", "account_required", "data_logging",
 ] as const satisfies readonly (keyof ObservedModel)[];
 
 export function resourceId(m: Pick<ObservedModel, "provider" | "model_id">): string {
@@ -140,6 +140,9 @@ export function diff({ previous, observed, fetched, now }: DiffInput): DiffOutpu
       events.push(makeEvent(now, "RETURNED", m));
     } else if (prev.fingerprint !== fp) {
       for (const f of TRACKED_FIELDS) {
+        // A field added to the schema after this record was written is filled in
+        // silently: "unknown → logs prompts" on every model is not news.
+        if (prev[f] === undefined) continue;
         if (stable(prev[f]) !== stable(m[f])) {
           events.push(makeEvent(now, "CHANGED", m, { field: f, old: prev[f], new: m[f] }));
         }

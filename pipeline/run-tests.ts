@@ -18,6 +18,8 @@ const GAP_MS: Record<ProviderId, number> = {
   nvidia: 1_600,             // shared limit, commonly around 40 requests/minute
   groq: 500,                 // per-model limits
   "google-ai-studio": 1_000, // per-model limits
+  kilo: 20_000,              // anonymous: 200 requests/hour per IP
+  llm7: 7_000,               // anonymous: 10 requests/minute, 60/hour
 };
 const STOP_AFTER_RATE_LIMITS = 3;
 
@@ -52,8 +54,9 @@ async function main() {
 
   await Promise.all(
     PROVIDER_IDS.map((p) => {
-      if (!process.env[PROVIDERS[p].key_env]) {
-        console.log(`- ${p}: skipped (${PROVIDERS[p].key_env} not set)`);
+      const keyEnv = PROVIDERS[p].key_env;
+      if (keyEnv && !process.env[keyEnv]) {
+        console.log(`- ${p}: skipped (${keyEnv} not set)`);
         return Promise.resolve();
       }
       const models = resources.filter((r) => r.provider === p && r.status === "active");

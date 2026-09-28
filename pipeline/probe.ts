@@ -95,8 +95,9 @@ interface TestRequest {
 /** Exported for tests. */
 export function buildRequest(r: Resource, env: Record<string, string | undefined>): TestRequest {
   const info = PROVIDERS[r.provider];
-  const key = env[info.key_env] ?? "";
-  const auth = { Authorization: `Bearer ${key}` };
+  const key = info.key_env ? env[info.key_env] ?? "" : "";
+  // Keyless providers (Kilo, LLM7) are called anonymously.
+  const auth: Record<string, string> = key ? { Authorization: `Bearer ${key}` } : {};
   const extra: Record<string, string> = r.provider === "openrouter" ? { "HTTP-Referer": SITE.url, "X-Title": SITE.name } : {};
   const drain = async (res: Response) => { await res.body?.cancel(); };
 

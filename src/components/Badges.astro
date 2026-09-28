@@ -10,7 +10,10 @@ const { m } = Astro.props;
 {m.agent.level === "yes" && <span class="badge" title={m.agent.caveat ?? "Tool calling, ≥64k context, answered 5 of the last 7 days"}>🤖 Agent-ready{m.agent.caveat ? "*" : ""}</span>}
 {m.agent.level === "partial" && <span class="badge neutral" title={m.agent.reasons.join("; ")}>Agent-capable</span>}
 {m.usage_terms === "evaluation-only" && <span class="badge bad" title="Free for testing and evaluation only, not production">⚠ Eval only</span>}
+{m.data_logging === "logs-prompts" && <span class="badge warn" title="The provider logs prompts">👁 Logs prompts</span>}
+{m.data_logging === "may-train" && <span class="badge warn" title="The provider may use prompts to train or improve its models or service">👁 May use your prompts</span>}
 {m.card_required === "no" && <span class="badge neutral">No card</span>}
+{m.account_required === "no" && <span class="badge neutral">No signup</span>}
 {m.input_modalities?.includes("image") && <span class="badge neutral">Vision</span>}
 {m.status === "pending_removal" && <span class="badge warn">Missing from list</span>}
 {m.status === "removed" && <span class="badge bad">Removed</span>}

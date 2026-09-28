@@ -9,7 +9,7 @@
  * number copied from a blog post is not.
  */
 
-import type { LimitScope, ProviderId, RateLimits, UsageTerms, YesNoUnknown } from "./types";
+import type { DataLogging, LimitScope, ProviderId, RateLimits, UsageTerms, YesNoUnknown } from "./types";
 
 export interface ProviderInfo {
   id: ProviderId;
@@ -17,8 +17,8 @@ export interface ProviderInfo {
   homepage: string;
   /** OpenAI-compatible base URL, for the daily test and for the Cline snippet. */
   base_url: string;
-  /** Env var holding the key for the daily test (and for listing, where needed). */
-  key_env: string;
+  /** Env var holding the key for the daily test (and for listing, where needed); null when no key is used. */
+  key_env: string | null;
   /** Whether listing models works without a key. */
   list_needs_key: boolean;
   usage_terms: UsageTerms;
@@ -27,6 +27,8 @@ export interface ProviderInfo {
   rate_limits: RateLimits | null;
   card_required: YesNoUnknown;
   account_required: YesNoUnknown;
+  /** Provider default; an adapter may set it per model (Kilo publishes it per model). */
+  data_logging: DataLogging;
   /** Page a visitor should read for current free-tier limits. */
   limits_url: string;
   /** One-line summary for the provider page. */
@@ -53,6 +55,7 @@ export const PROVIDERS: Record<ProviderId, ProviderInfo> = {
     },
     card_required: "no",
     account_required: "yes",
+    data_logging: "unknown",
     limits_url: "https://openrouter.ai/docs/api_reference/limits",
     summary: "Router over many inference providers. Models with a :free suffix cost nothing, within a daily request cap shared by all free models.",
   },
@@ -70,6 +73,7 @@ export const PROVIDERS: Record<ProviderId, ProviderInfo> = {
     rate_limits: null,
     card_required: "no",
     account_required: "yes",
+    data_logging: "unknown",
     limits_url: "https://console.groq.com/docs/rate-limits",
     summary: "Fast inference on Groq hardware. Every active model is usable on the free plan, each with its own limits.",
   },
@@ -86,6 +90,7 @@ export const PROVIDERS: Record<ProviderId, ProviderInfo> = {
     rate_limits: null,
     card_required: "no",
     account_required: "yes",
+    data_logging: "may-train",
     limits_url: "https://ai.google.dev/gemini-api/docs/rate-limits",
     summary: "Gemini API with a free tier for some models. The model list does not say which; the daily test on a free-tier key does.",
   },
@@ -103,8 +108,55 @@ export const PROVIDERS: Record<ProviderId, ProviderInfo> = {
     rate_limits: null,
     card_required: "no",
     account_required: "yes",
+    data_logging: "logs-prompts",
     limits_url: "https://build.nvidia.com",
     summary: "Hosted NVIDIA NIM endpoints for many open models. Free, but only for testing and evaluation.",
+  },
+  kilo: {
+    id: "kilo",
+    label: "Kilo Code gateway",
+    homepage: "https://kilo.ai",
+    base_url: "https://api.kilo.ai/api/gateway",
+    key_env: null,
+    list_needs_key: false,
+    usage_terms: "unknown",
+    // kilo.ai/docs/gateway (authentication, models-and-providers), checked 2026-09-28.
+    usage_terms_note: "Free models work without an account or API key. Kilo marks every free model as possibly training on your prompts, and NVIDIA-hosted ones are trial-only and logged. Don't send personal or confidential data.",
+    limit_scope: "shared",
+    rate_limits: {
+      rph: 200,
+      note: "Anonymous access: 200 requests per hour per IP address, across all free models.",
+      source: "https://kilo.ai/docs/gateway/authentication",
+    },
+    card_required: "no",
+    account_required: "no",
+    data_logging: "may-train",
+    limits_url: "https://kilo.ai/docs/gateway/authentication",
+    summary: "The AI gateway behind the Kilo Code agent. A rotating set of free models, usable anonymously, many shared with OpenRouter's free pool.",
+  },
+  llm7: {
+    id: "llm7",
+    label: "LLM7.io",
+    homepage: "https://llm7.io",
+    base_url: "https://api.llm7.io/v1",
+    key_env: null,
+    list_needs_key: false,
+    usage_terms: "evaluation-only",
+    // docs.llm7.io/limits and TERMS.md, checked 2026-09-28.
+    usage_terms_note: "LLM7's terms say the service is for education, experimentation, development and research, not production, and that prompts may be processed to operate and improve it. It may not be resold or proxied to others.",
+    limit_scope: "shared",
+    rate_limits: {
+      rpm: 10,
+      rph: 60,
+      tpd: 500_000,
+      note: "Anonymous; a free token (email sign-in) raises this to 40/minute, 100/hour and 1M tokens/day.",
+      source: "https://docs.llm7.io/limits",
+    },
+    card_required: "no",
+    account_required: "no",
+    data_logging: "may-train",
+    limits_url: "https://docs.llm7.io/limits",
+    summary: "A gateway with a few fast \"turbo\" models open to anyone without an account; the rest are paid.",
   },
 };
 

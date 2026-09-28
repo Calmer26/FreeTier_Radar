@@ -44,6 +44,8 @@ const kinds = MODEL_KINDS.map((k) => ({ kind: k, count: activeModels.filter((m) 
     </select>
     <label data-chat-only><input type="checkbox" id="agent" /> Agent-ready</label>
     <label><input type="checkbox" id="prod" /> Hide eval-only</label>
+    <label><input type="checkbox" id="private" /> Hide if prompts are used</label>
+    <label><input type="checkbox" id="nosignup" /> No signup</label>
     <label data-chat-only><input type="checkbox" id="vision" /> Vision</label>
     <label><input type="checkbox" id="working" /> Responded at last test</label>
   </div>
@@ -68,6 +70,8 @@ const kinds = MODEL_KINDS.map((k) => ({ kind: k, count: activeModels.filter((m) 
             data-provider={m.provider}
             data-agent={m.agent.level === "yes" ? "1" : ""}
             data-eval={m.usage_terms === "evaluation-only" ? "1" : ""}
+            data-logs={m.data_logging === "logs-prompts" || m.data_logging === "may-train" ? "1" : ""}
+            data-nosignup={m.account_required === "no" ? "1" : ""}
             data-vision={m.input_modalities?.includes("image") ? "1" : ""}
             data-working={m.lastTest?.status === "responded" ? "1" : ""}
             hidden={m.kind !== kinds[0]?.kind}
@@ -112,6 +116,8 @@ const kinds = MODEL_KINDS.map((k) => ({ kind: k, count: activeModels.filter((m) 
           (!provider || d.provider === provider) &&
           (!chat || !$("agent").checked || d.agent) &&
           (!$("prod").checked || !d.eval) &&
+          (!$("private").checked || !d.logs) &&
+          (!$("nosignup").checked || d.nosignup) &&
           (!chat || !$("vision").checked || d.vision) &&
           (!$("working").checked || d.working);
         r.hidden = !ok;

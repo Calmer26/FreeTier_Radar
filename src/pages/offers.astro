@@ -51,7 +51,7 @@ const ACCOUNT: Record<Offer["account_required"], string> = {
                 <span class="badge neutral">{ACCOUNT[o.account_required]}</span>
                 {o.usage_terms !== "evaluation-only" && <span class="badge neutral">{TERMS[o.usage_terms]}</span>}
                 {o.data_logging === "logs-prompts" && <span class="badge warn">👁 Logs prompts</span>}
-                {o.data_logging === "may-train" && <span class="badge warn">May train on your data</span>}
+                {o.data_logging === "may-train" && <span class="badge warn">👁 May use your prompts</span>}
               </p>
               <p class="sub">Verified {formatDate(o.verified_on)}. {o.source_note}</p>
             </article>

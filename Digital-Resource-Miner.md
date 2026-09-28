@@ -512,7 +512,8 @@ A GitHub issue form (`.github/ISSUE_TEMPLATE/suggest-resource.yml`) with fields 
 - Built and live: offers + page watcher, rankings, roundup generator + pages/RSS, issue form.
 - Pulled forward: **TTS and STT models** (Groq, Gemini, OpenRouter hand-listed voices) with their own daily tests.
 - Arena ratings live: 4 leaderboards, 34 models linked automatically on 28 Sep, near matches via a weekly review PR.
-- Still to do in 2a: the keyless providers.
+- Keyless providers live: Kilo Code gateway (15 free models) and LLM7.io (3), tested anonymously, with a per-model data-use label. OVHcloud listed as a free-credits entry instead: its per-IP anonymous limit can't be tested reliably from shared CI servers.
+- **Phase 2a is complete.** Next: 2b (SambaNova, Mistral, Cloudflare Workers AI adapters; needs keys) and 2c (launch).
 
 **2a — no keys needed; can be built before Phase 0**
 1. Offer records + page-change watcher.

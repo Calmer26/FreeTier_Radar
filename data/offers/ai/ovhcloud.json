@@ -1,0 +1,18 @@
+{
+  "id": "ovhcloud",
+  "provider": "OVHcloud",
+  "name": "OVHcloud AI Endpoints anonymous tier",
+  "offer_type": "recurring-quota",
+  "amount": "2 requests per minute, per IP address and per model, without an account or key",
+  "summary": "Keyless access to OVHcloud's hosted models (gpt-oss, Qwen, Mistral, Llama, Whisper and more), served from EU data centres. OVHcloud says prompts are not stored or shared. The allowance is counted per IP address, so on shared networks (offices, CI servers) it can already be used up; in our test from a home connection the first request was refused. With an API key, usage is billed per token.",
+  "expires": null,
+  "usage_terms": "unknown",
+  "card_required": "no",
+  "account_required": "no",
+  "data_logging": "none-stated",
+  "url": "https://www.ovhcloud.com/en/public-cloud/ai-endpoints/",
+  "watch_url": "https://docs.ovhcloud.com/en/guides/public-cloud/ai-machine-learning/ai-endpoints-capabilities",
+  "verified_on": "2026-09-28",
+  "source_note": "OVHcloud AI Endpoints docs, checked 2026-09-28. Not tracked per model: a per-IP limit can't be tested reliably from shared servers.",
+  "changes": []
+}

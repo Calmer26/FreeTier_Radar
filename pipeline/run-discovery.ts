@@ -34,7 +34,7 @@ async function main() {
 
   for (const p of PROVIDER_IDS) {
     const info = PROVIDERS[p];
-    if (info.list_needs_key && !process.env[info.key_env]) {
+    if (info.list_needs_key && info.key_env && !process.env[info.key_env]) {
       console.log(`- ${p}: skipped (${info.key_env} not set)`);
       continue;
     }
