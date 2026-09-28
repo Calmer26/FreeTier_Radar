@@ -21,6 +21,7 @@ const GAP_MS: Record<ProviderId, number> = {
   "google-ai-studio": 1_000, // per-model limits
   kilo: 20_000,              // anonymous: 200 requests/hour per IP
   llm7: 7_000,               // anonymous: 10 requests/minute, 60/hour
+  zai: 2_000,                // one concurrent request per free model
 };
 const STOP_AFTER_RATE_LIMITS = 3;
 

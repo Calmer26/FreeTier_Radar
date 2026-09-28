@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { mapGoogle, mapGroq, mapKilo, mapLlm7, mapNvidia, mapOpenRouter, OPENROUTER_CURATED_SPEECH } from "./adapters";
+import { mapGoogle, mapGroq, mapKilo, mapLlm7, mapNvidia, mapOpenRouter, mapZai, OPENROUTER_CURATED_SPEECH } from "./adapters";
 import { classifyModel } from "./candidates";
 
 describe("classifyModel", () => {
@@ -124,5 +124,16 @@ describe("mapLlm7", () => {
     ]);
     expect(out.map((m) => m.model_id)).toEqual(["GLM-5.3-Flash"]);
     expect(out[0]).toMatchObject({ usage_terms: "evaluation-only", data_logging: "may-train", context_length: 400_000, tool_calling: true });
+  });
+});
+
+describe("mapZai", () => {
+  it("keeps only the models the pricing page lists as free", () => {
+    const out = mapZai([{ id: "glm-4.7-flash", context_length: 200_000 }, { id: "GLM-4.6V-Flash" }, { id: "glm-5.3" }]);
+    expect(out.map((m) => [m.model_id, m.name, m.input_modalities])).toEqual([
+      ["glm-4.7-flash", "GLM-4.7-Flash", ["text"]],
+      ["GLM-4.6V-Flash", "GLM-4.6V-Flash", ["text", "image"]],
+    ]);
+    expect(out[0]).toMatchObject({ provider: "zai", data_logging: "may-train", context_length: 200_000 });
   });
 });

@@ -1,0 +1,20 @@
+{
+  "id": "siliconflow",
+  "provider": "SiliconFlow",
+  "name": "SiliconFlow free models",
+  "offer_type": "recurring-quota",
+  "amount": "Some models free to use, with rate limits; only after real-name identity verification",
+  "summary": "Chinese inference platform with a set of permanently free models (small Qwen and similar). Since 15 May 2026, accounts without real-name verification can't use the platform at all. Verification is built around mainland-Chinese identity documents; international users are reported to need to contact support. Many free-API lists still present it as simply free.",
+  "expires": null,
+  "usage_terms": "unknown",
+  "card_required": "no",
+  "account_required": "yes",
+  "data_logging": "unknown",
+  "url": "https://cloud.siliconflow.cn",
+  "watch_url": "https://api-docs.siliconflow.cn/docs/release-notes/overview",
+  "verified_on": "2026-09-28",
+  "source_note": "SiliconFlow release notes (real-name requirement from 15 May 2026), checked 2026-09-28. Not tracked per model: we can't verify an account.",
+  "changes": [
+    { "date": "2026-05-15", "text": "SiliconFlow now requires real-name identity verification before any platform use, including its free models." }
+  ]
+}

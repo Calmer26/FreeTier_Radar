@@ -1,0 +1,18 @@
+{
+  "id": "modelscope",
+  "provider": "ModelScope (Alibaba)",
+  "name": "ModelScope API-Inference",
+  "offer_type": "recurring-quota",
+  "amount": "1,000 requests per day per model, free",
+  "summary": "Alibaba's model community serves many open models (DeepSeek, Qwen, GLM and more) through a free, OpenAI-compatible API. ModelScope describes it as a non-commercial, non-profit service for developers to try models. Requires an Alibaba Cloud account binding and real-name verification.",
+  "expires": null,
+  "usage_terms": "non-commercial",
+  "card_required": "no",
+  "account_required": "yes",
+  "data_logging": "unknown",
+  "url": "https://modelscope.cn/docs/model-service/API-Inference/intro",
+  "watch_url": "https://modelscope.cn/docs/model-service/API-Inference/limits",
+  "verified_on": "2026-09-28",
+  "source_note": "ModelScope API-Inference limits page, checked 2026-09-28. Not tracked per model: we can't pass real-name verification.",
+  "changes": []
+}
