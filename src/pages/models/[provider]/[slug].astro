@@ -51,7 +51,7 @@ const description = `${m.name} on ${provider.label}: free-tier status, limits, d
 
   <dl class="facts">
     <div><dt>Price</dt><dd>{m.price_type === "free" ? "$0" : m.price_type === "freemium-quota" ? "$0 within free quota" : "Free tier not confirmed by listing"}</dd></div>
-    {m.kind === "chat" && <div><dt>Context window</dt><dd>{formatContext(m.context_length)}</dd></div>}
+    {m.kind === "chat" && <div><dt>Context window</dt><dd>{formatContext(m.context_length)}{m.context_from && <span class="sub" title="This provider doesn't publish it; taken from the same model elsewhere (smallest known value)"> (from {PROVIDERS[m.context_from].label.split(" (")[0]})</span>}</dd></div>}
     {m.kind === "chat" && <div><dt>Tool calling</dt><dd>{yn(m.tool_calling)}</dd></div>}
     {m.kind === "chat" && <div><dt>Input types</dt><dd>{m.input_modalities?.join(", ") ?? "Unknown"}</dd></div>}
     {m.kind !== "chat" && <div><dt>Type</dt><dd>{KIND_LABELS[m.kind]}</dd></div>}

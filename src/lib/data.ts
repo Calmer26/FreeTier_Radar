@@ -8,11 +8,12 @@
  */
 
 import { agentReadiness, type AgentReadiness } from "../../pipeline/agent-ready";
-import { normaliseName, scoresFor, type AliasFile, type ArenaFile, type ArenaScores } from "../../pipeline/arena";
+import { scoresFor, type AliasFile, type ArenaFile, type ArenaScores } from "../../pipeline/arena";
+import { borrowedContext, siblingIds } from "../../pipeline/siblings";
 import { PROVIDERS } from "../../pipeline/providers";
 import { isUnreachable } from "../../pipeline/reachability";
 import { withDefaults } from "../../pipeline/store-defaults";
-import type { Offer, RateLimits, Resource, ResourceEvent, SponsorFile, TestHistory, TestResult, ToolResult } from "../../pipeline/types";
+import type { Offer, ProviderId, RateLimits, Resource, ResourceEvent, SponsorFile, TestHistory, TestResult, ToolResult } from "../../pipeline/types";
 
 const resourceFiles = import.meta.glob<Resource[]>("../../data/resources/ai/*.json", { eager: true, import: "default" });
 const eventFiles = import.meta.glob<string>("../../data/events/*.jsonl", { eager: true, query: "?raw", import: "default" });
@@ -41,6 +42,8 @@ export interface ModelView extends Resource {
   siblings: string[];
   /** False when the provider's free models can't be called from outside (Cline). */
   testable: boolean;
+  /** Set when context_length was borrowed from the same model at this provider. */
+  context_from: ProviderId | null;
 }
 
 export const arenaFile: ArenaFile | null = Object.values(arenaFiles)[0] ?? null;
@@ -55,7 +58,16 @@ if (resources.length === 0) {
   throw new Error("No resources found under data/resources/ai: refusing to build an empty site");
 }
 
-export const models: ModelView[] = resources
+// The same model at other providers, and context sizes borrowed from them where the
+// provider publishes none (NVIDIA, Z.ai). Done before agent readiness, which needs context.
+const siblingsById = siblingIds(resources);
+const resourceById = new Map(resources.map((r) => [r.id, r]));
+const withContext = resources.map((r) => {
+  const borrowed = borrowedContext(r, (siblingsById.get(r.id) ?? []).map((id) => resourceById.get(id)!));
+  return borrowed ? { ...r, context_length: borrowed.context_length, context_from: borrowed.from } : { ...r, context_from: null };
+});
+
+export const models: ModelView[] = withContext
   .map((r) => {
     const history = tests.results[r.id] ?? [];
     const toolTests = tests.tool_results?.[r.id] ?? [];
@@ -70,27 +82,17 @@ export const models: ModelView[] = resources
       indexable: history.length > 0,
       unreachable: isUnreachable(history),
       arena: r.kind === "chat" ? scoresFor(r.id, aliases, arenaFile) : null,
-      siblings: [] as string[],
+      siblings: siblingsById.get(r.id) ?? [],
       testable: PROVIDERS[r.provider].testable !== false,
     };
   })
   .sort((a, b) => a.name.localeCompare(b.name));
 
-// Link the same model across providers, and let a model without its own Arena link
-// use a sibling's (Cline's "cline-free/deepseek-v4.1-flash" is NVIDIA's DeepSeek V4.1 Flash).
+// A model without its own Arena link uses a sibling's (Cline's
+// "cline-free/deepseek-v4.1-flash" is NVIDIA's DeepSeek V4.1 Flash).
 {
-  const byKey = new Map<string, ModelView[]>();
-  for (const m of models) {
-    if (m.status === "removed") continue;
-    const key = `${m.kind}|${normaliseName(m.model_id)}`;
-    byKey.set(key, [...(byKey.get(key) ?? []), m]);
-  }
-  for (const group of byKey.values()) {
-    for (const m of group) {
-      m.siblings = group.filter((o) => o.id !== m.id).map((o) => o.id);
-      m.arena ??= group.find((o) => o.arena)?.arena ?? null;
-    }
-  }
+  const byId = new Map(models.map((m) => [m.id, m]));
+  for (const m of models) m.arena ??= m.siblings.map((id) => byId.get(id)?.arena).find(Boolean) ?? null;
 }
 
 /** What the directory shows: not removed, and callable as far as we know. */

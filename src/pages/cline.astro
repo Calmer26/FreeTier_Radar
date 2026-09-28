@@ -2,7 +2,7 @@
 import Base from "../layouts/Base.astro";
 import Badges from "../components/Badges.astro";
 import SponsorSlot from "../components/SponsorSlot.astro";
-import { actRanking, clineSnippet, planRanking, suggestedPair } from "../lib/cline";
+import { actRanking, clineSnippet, evalReasoners, planRanking, suggestedPair } from "../lib/cline";
 import { activeModels, modelById, type ModelView } from "../lib/data";
 import TestStatus from "../components/TestStatus.astro";
 import { toolStats } from "../../pipeline/agent-ready";
@@ -68,6 +68,41 @@ const actDef = RANKINGS.find((r) => r.slug === "cline-act")!;
     Evaluation-only models (NVIDIA's own API, LLM7) and models whose free tier refused our test are left out.
     Check the data-use labels before sending private code: some free providers use prompts to improve their models.
   </p>
+
+  <h2>Stronger reasoners with evaluation-only access</h2>
+  <p class="sub">
+    Some of the best-rated free models are only free for <strong>testing and evaluation</strong>, not production
+    use, and their providers log prompts: mostly NVIDIA's API, plus LLM7. They're left out of the recommendations
+    above, but here they are with their real test record, so you can judge them for your own experiments. Plan mode
+    sends few requests, so a slow provider hurts less there than in Act mode.
+  </p>
+  {evalReasoners.length === 0 ? <p class="sub">None with an LMArena rating right now.</p> : (
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th>Model</th><th>Provider</th><th class="num">Arena</th><th class="num hide-sm">Context</th><th>Daily test</th><th class="num">Tool calls</th></tr>
+        </thead>
+        <tbody>
+          {evalReasoners.map(({ m, rating, board, rel }) => {
+            const t = toolStats(m.toolTests, RANKING_WINDOW_DAYS);
+            return (
+              <tr>
+                <td><a class="model-name" href={m.href}>{m.name}</a><div><Badges m={m} /></div></td>
+                <td>{providerName(m)}</td>
+                <td class="num" title={`LMArena ${board}`}>{Math.round(rating)} <span class="sub">{board}</span></td>
+                <td class="num hide-sm">{formatContext(m.context_length)}</td>
+                <td class="nowrap">
+                  <TestStatus test={m.lastTest} />
+                  <div class="sub">{rel.tested ? `answered ${rel.responded} of ${rel.tested} days` : "no results yet"}</div>
+                </td>
+                <td class="num">{t.tested ? `${t.passed}/${t.tested}` : "–"}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  )}
 
   <h2>Free inside Cline right now</h2>
   <p class="sub">

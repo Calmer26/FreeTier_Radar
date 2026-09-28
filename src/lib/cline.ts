@@ -4,7 +4,7 @@
  */
 
 import { PROVIDERS } from "../../pipeline/providers";
-import { rank, RANKINGS, type RankedModel } from "../../pipeline/rankings";
+import { rank, RANKINGS, reliability, type RankedModel, type Reliability } from "../../pipeline/rankings";
 import { activeModels, type ModelView } from "./data";
 
 /** What to fill in under Cline's API provider settings for this model. */
@@ -34,3 +34,28 @@ export const suggestedPair: { plan: RankedModel | null; act: RankedModel | null 
   plan: planRanking[0] ?? null,
   act: actRanking[0] ?? null,
 };
+
+export interface EvalReasoner {
+  m: ModelView;
+  /** LMArena WebDev rating, or Text when there's no WebDev one. */
+  rating: number;
+  board: "WebDev" | "Text";
+  rel: Reliability;
+}
+
+/**
+ * Strong reasoners whose free access is evaluation-only (NVIDIA's API, LLM7, NVIDIA
+ * models on Kilo). Not recommended, because the terms rule out production use and
+ * the providers log prompts, but shown with their real test record so a visitor can
+ * judge them for their own experiments. Ordered by coding rating.
+ */
+export const evalReasoners: EvalReasoner[] = activeModels
+  .filter((m) => m.kind === "chat" && m.testable && m.usage_terms === "evaluation-only")
+  .flatMap((m) => {
+    const webdev = m.arena?.boards.webdev?.rating;
+    const text = m.arena?.boards.text?.rating;
+    const rating = webdev ?? text;
+    return rating ? [{ m, rating, board: webdev ? ("WebDev" as const) : ("Text" as const), rel: reliability(m.tests) }] : [];
+  })
+  .sort((a, b) => b.rating - a.rating || (b.rel.share ?? -1) - (a.rel.share ?? -1))
+  .slice(0, 12);

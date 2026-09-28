@@ -1,4 +1,9 @@
 {
+  "cline/cline-free/mimo-v2.6-flash": {
+    "arena": "mimo-v2.6-flash",
+    "status": "exact",
+    "on": "2026-09-28"
+  },
   "google-ai-studio/gemini-2.5-flash": {
     "arena": "gemini-2.5-flash",
     "status": "exact",
@@ -46,6 +51,36 @@
   },
   "groq/qwen/qwen3.8-27b": {
     "arena": "qwen3.8-27b",
+    "status": "exact",
+    "on": "2026-09-28"
+  },
+  "kilo/nvidia/nemotron-3-super-120b-a12b:free": {
+    "arena": "nvidia-nemotron-3-super-120b-a12b",
+    "status": "exact",
+    "on": "2026-09-28"
+  },
+  "kilo/nvidia/nemotron-3-ultra-550b-a55b:free": {
+    "arena": "nvidia-nemotron-3-ultra-550b-a55b-nvfp4",
+    "status": "exact",
+    "on": "2026-09-28"
+  },
+  "kilo/qwen/qwen3.8-27b:free": {
+    "arena": "qwen3.8-27b",
+    "status": "exact",
+    "on": "2026-09-28"
+  },
+  "kilo/thinkingmachines/inkling-small:free": {
+    "arena": "Inkling Small",
+    "status": "exact",
+    "on": "2026-09-28"
+  },
+  "llm7/GLM-5.3-Flash": {
+    "arena": "GLM 5.3 Flash",
+    "status": "exact",
+    "on": "2026-09-28"
+  },
+  "llm7/minimax-m2.7": {
+    "arena": "minimax-m2.7",
     "status": "exact",
     "on": "2026-09-28"
   },
