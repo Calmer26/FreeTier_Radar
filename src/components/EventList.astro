@@ -1,0 +1,33 @@
+---
+import { formatDate, modelById } from "../lib/data";
+import type { ResourceEvent } from "../../pipeline/types";
+
+interface Props {
+  events: ResourceEvent[];
+  empty?: string;
+}
+
+const { events, empty = "No changes recorded yet." } = Astro.props;
+---
+{events.length === 0 ? (
+  <p class="sub">{empty}</p>
+) : (
+  <ul class="feed">
+    {events.map((e) => {
+      const m = modelById.get(e.resource_id);
+      return (
+        <li>
+          <div>
+            <div class={`etype ${e.event_type}`}>{e.event_type}</div>
+            <time datetime={e.detected_at}>{formatDate(e.detected_at)}</time>
+          </div>
+          <div>
+            {m ? <a href={m.href}><strong>{e.name}</strong></a> : <strong>{e.name}</strong>}
+            <div>{e.text}</div>
+            <a class="sub" href={e.source_url} rel="noopener">Source</a>
+          </div>
+        </li>
+      );
+    })}
+  </ul>
+)}

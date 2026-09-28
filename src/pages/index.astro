@@ -1,0 +1,103 @@
+---
+import Base from "../layouts/Base.astro";
+import Badges from "../components/Badges.astro";
+import SponsorSlot from "../components/SponsorSlot.astro";
+import TestStatus from "../components/TestStatus.astro";
+import { activeModels, events, providersInData } from "../lib/data";
+import { PROVIDERS } from "../../pipeline/providers";
+import { formatContext } from "../../pipeline/templates";
+import { SITE } from "../../site.config";
+
+const weekAgo = new Date(Date.now() - 7 * 86_400_000).toISOString();
+const thisWeek = events.filter((e) => e.detected_at >= weekAgo);
+const agentReady = activeModels.filter((m) => m.agent.level === "yes").length;
+const responded = activeModels.filter((m) => m.lastTest?.status === "responded").length;
+---
+<Base title="Directory">
+  <h1>Free AI models that actually work</h1>
+  <p class="lede">{SITE.tagline} Every model below is tested once a day, and every change is logged.</p>
+
+  <div class="stats">
+    <div class="stat"><b>{activeModels.length}</b><span>free chat models tracked</span></div>
+    <div class="stat"><b>{responded}</b><span>responded to the latest test</span></div>
+    <div class="stat"><b>{agentReady}</b><span>agent-ready (Cline etc.)</span></div>
+    <div class="stat"><b>{thisWeek.length}</b><span><a href="/changes/">changes this week</a></span></div>
+  </div>
+
+  <SponsorSlot />
+
+  <div class="filters" id="filters">
+    <input type="search" id="q" placeholder="Search models…" aria-label="Search models" />
+    <select id="provider" aria-label="Provider">
+      <option value="">All providers</option>
+      {providersInData.map((p) => <option value={p.id}>{p.label}</option>)}
+    </select>
+    <label><input type="checkbox" id="agent" /> Agent-ready</label>
+    <label><input type="checkbox" id="prod" /> Hide eval-only</label>
+    <label><input type="checkbox" id="vision" /> Vision</label>
+    <label><input type="checkbox" id="working" /> Responded at last test</label>
+  </div>
+
+  <div class="table-scroll">
+    <table id="directory">
+      <thead>
+        <tr>
+          <th>Model</th>
+          <th>Provider</th>
+          <th>Context</th>
+          <th class="hide-sm">Tools</th>
+          <th>Last test</th>
+          <th class="hide-sm">Labels</th>
+        </tr>
+      </thead>
+      <tbody>
+        {activeModels.map((m) => (
+          <tr
+            data-search={`${m.name} ${m.model_id}`.toLowerCase()}
+            data-provider={m.provider}
+            data-agent={m.agent.level === "yes" ? "1" : ""}
+            data-eval={m.usage_terms === "evaluation-only" ? "1" : ""}
+            data-vision={m.input_modalities?.includes("image") ? "1" : ""}
+            data-working={m.lastTest?.status === "responded" ? "1" : ""}
+          >
+            <td>
+              <a class="model-name" href={m.href}>{m.name}</a>
+              <div class="sub mono">{m.model_id}</div>
+            </td>
+            <td>{PROVIDERS[m.provider].label.split(" (")[0]}</td>
+            <td class="num">{formatContext(m.context_length)}</td>
+            <td class="hide-sm">{m.tool_calling === true ? "Yes" : m.tool_calling === false ? "No" : "?"}</td>
+            <td class="nowrap"><TestStatus test={m.lastTest} /></td>
+            <td class="hide-sm"><Badges m={m} /></td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    <p class="empty" id="no-results" hidden>No models match these filters.</p>
+  </div>
+  <p class="sub">* Agent-ready with a caveat: the provider's free request limit is low and shared across its free models. See the model page.</p>
+
+  <script>
+    const $ = (id: string) => document.getElementById(id) as HTMLInputElement;
+    const rows = [...document.querySelectorAll<HTMLTableRowElement>("#directory tbody tr")];
+    function apply() {
+      const q = $("q").value.trim().toLowerCase();
+      const provider = $("provider").value;
+      let shown = 0;
+      for (const r of rows) {
+        const d = r.dataset;
+        const ok =
+          (!q || d.search!.includes(q)) &&
+          (!provider || d.provider === provider) &&
+          (!$("agent").checked || d.agent) &&
+          (!$("prod").checked || !d.eval) &&
+          (!$("vision").checked || d.vision) &&
+          (!$("working").checked || d.working);
+        r.hidden = !ok;
+        if (ok) shown++;
+      }
+      document.getElementById("no-results")!.hidden = shown > 0;
+    }
+    document.getElementById("filters")!.addEventListener("input", apply);
+  </script>
+</Base>

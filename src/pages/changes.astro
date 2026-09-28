@@ -1,0 +1,16 @@
+---
+import Base from "../layouts/Base.astro";
+import EventList from "../components/EventList.astro";
+import SponsorSlot from "../components/SponsorSlot.astro";
+import { events } from "../lib/data";
+---
+<Base title="Changes" description="Every free AI model that appeared, changed or disappeared, newest first.">
+  <h1>Changes</h1>
+  <p class="lede">
+    Every free model that appeared, changed or disappeared, newest first. A model is only
+    marked removed after it has been missing for at least 12 hours.
+    Follow along with <a href="/rss.xml">RSS</a>.
+  </p>
+  <SponsorSlot />
+  <EventList events={events} empty="No changes yet. The first check of each provider sets the baseline; changes appear from the next run." />
+</Base>

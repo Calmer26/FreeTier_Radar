@@ -1,0 +1,22 @@
+---
+/**
+ * The one sponsor placement. Shows the active sponsor from data/sponsor.json, or a
+ * house ad when there is none. Sponsors never influence any data on the site.
+ */
+import { SITE } from "../../site.config";
+import { sponsor } from "../lib/data";
+---
+{sponsor.active ? (
+  <aside class="sponsor" aria-label="Sponsor">
+    <span class="sponsor-label">Sponsor</span>
+    {sponsor.logo && <img src={sponsor.logo} alt="" />}
+    <a href={sponsor.url} rel="sponsored noopener" target="_blank"><strong>{sponsor.name}</strong></a>
+    <span>{sponsor.text}</span>
+  </aside>
+) : (
+  <aside class="sponsor" aria-label="Sponsor this site">
+    <span class="sponsor-label">Sponsor</span>
+    <span>This spot is open. Reach indie developers who build on free tiers.</span>
+    <a href="/sponsor/">Sponsor {SITE.name}</a>
+  </aside>
+)}

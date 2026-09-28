@@ -1,0 +1,76 @@
+---
+import Base from "../layouts/Base.astro";
+import { AGENT_MIN_CONTEXT, AGENT_MIN_RESPONDED_DAYS, AGENT_WINDOW_DAYS } from "../../pipeline/agent-ready";
+import { HIGH_IMPACT_THRESHOLD } from "../../pipeline/scoring";
+import { SITE } from "../../site.config";
+---
+<Base title="Methodology" description="How FreeTier Radar finds free models, tests them, labels them, and handles sponsors.">
+  <div class="prose">
+    <h1>Methodology</h1>
+    <p class="lede">What we check, how often, what the labels mean, and what we will never do.</p>
+
+    <h2>Sources</h2>
+    <p>
+      We read each provider's own model list through its official API, every 6 hours. We prefer
+      official APIs and machine-readable files over web pages, and we never scrape where
+      automated access is not allowed.
+    </p>
+    <ul>
+      <li><strong>OpenRouter:</strong> models with the <code>:free</code> suffix.</li>
+      <li><strong>Groq:</strong> every active chat model (all are usable on the free plan).</li>
+      <li><strong>Google AI Studio:</strong> every Gemini chat model. The list does not say which are on the free tier; the daily test with a free-tier key does.</li>
+      <li><strong>NVIDIA:</strong> every hosted chat model, all labelled evaluation-only.</li>
+    </ul>
+    <p>Image, speech and embedding models are not in the directory yet.</p>
+
+    <h2>Changes</h2>
+    <p>
+      Every run is compared with the last known state. We record a change only when a tracked field
+      changes: price, context window, input types, tool calling, rate limits, usage terms,
+      licence, or card/account requirements.
+    </p>
+    <ul>
+      <li>A model that disappears is first marked <em>missing</em>. It is only reported as removed after being missing for at least 12 hours, because free capacity often flickers.</li>
+      <li>If a provider's list cannot be fetched, nothing about that provider changes until it can.</li>
+      <li>The first check of a provider sets the baseline and produces no "new" entries.</li>
+    </ul>
+
+    <h2>The daily test</h2>
+    <p>
+      Once a day we send each free model one tiny request (“Reply with the single word: OK”, 16
+      tokens max) using our own free-tier account. The result is shown as “Responded at 06:10 UTC”.
+      It proves the model answered at that moment, not that it is fast or available all day. A
+      rate-limit answer is not recorded as a failure.
+    </p>
+
+    <h2>Labels</h2>
+    <ul>
+      <li><strong>🤖 Agent-ready</strong>: tool calling, at least {AGENT_MIN_CONTEXT / 1000}k context, answered on {AGENT_MIN_RESPONDED_DAYS} of the last {AGENT_WINDOW_DAYS} test days, and not evaluation-only. An asterisk means the free request limit is low and shared across the provider's free models; coding agents send one request per tool step.</li>
+      <li><strong>⚠ Eval only</strong>: the provider's terms allow testing and evaluation, not production use.</li>
+      <li><strong>No card</strong>: no payment card needed to use the free tier.</li>
+      <li><strong>Unknown</strong> is a real value. If a provider does not publish something, we do not guess.</li>
+    </ul>
+
+    <h2>Impact score</h2>
+    <p>
+      Each change gets a score from 0 to 100, used only for sorting and for flagging changes worth
+      a closer look (score {HIGH_IMPACT_THRESHOLD} or higher). New free models start at 50,
+      removals at 45, and changes to price, terms or limits at 55. Tool calling, a context window of
+      128k or more, a context window of 1M or more, and image input each add points;
+      evaluation-only terms subtract 20. It is not an estimate of value.
+    </p>
+
+    <h2>Sponsors</h2>
+    <p>
+      {SITE.name} has one sponsor slot, always labelled “Sponsor”. A sponsor never affects
+      rankings, labels, test results or change text, and a sponsor's own products are shown with the same
+      honest labels as everything else. No tracking scripts, no ad networks.
+    </p>
+
+    <h2>Open data</h2>
+    <p>
+      All data lives in a public <a href={SITE.repo}>GitHub repository</a>, and every change is a commit.
+      You can also use the <a href="/api/resources.json">JSON feed</a> and <a href="/rss.xml">RSS</a>.
+    </p>
+  </div>
+</Base>

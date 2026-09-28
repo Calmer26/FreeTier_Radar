@@ -1,0 +1,28 @@
+---
+import Base from "../../layouts/Base.astro";
+import { activeModels } from "../../lib/data";
+import { PROVIDERS, PROVIDER_IDS } from "../../../pipeline/providers";
+---
+<Base title="Providers" description="Free-tier summary for every AI provider we track.">
+  <h1>Providers</h1>
+  <p class="lede">Every provider we track, with what its free tier means in practice.</p>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Provider</th><th>Free models</th><th>Terms</th><th class="hide-sm">Limits</th></tr></thead>
+      <tbody>
+        {PROVIDER_IDS.map((id) => {
+          const p = PROVIDERS[id];
+          const count = activeModels.filter((m) => m.provider === id).length;
+          return (
+            <tr>
+              <td><a class="model-name" href={`/providers/${id}/`}>{p.label}</a><div class="sub">{p.summary}</div></td>
+              <td class="num">{count || <span class="sub">not tracked yet</span>}</td>
+              <td>{p.usage_terms === "evaluation-only" ? <span class="badge bad">⚠ Eval only</span> : <span class="badge">Production OK</span>}</td>
+              <td class="hide-sm">{p.limit_scope === "shared" ? "Shared across free models" : "Per model"}</td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  </div>
+</Base>

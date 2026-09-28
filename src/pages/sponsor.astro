@@ -1,0 +1,35 @@
+---
+import Base from "../layouts/Base.astro";
+import { activeModels } from "../lib/data";
+import { SITE } from "../../site.config";
+---
+<Base title="Sponsor" description={`Sponsor ${SITE.name} and reach indie developers who build on free tiers.`}>
+  <div class="prose">
+    <h1>Sponsor {SITE.name}</h1>
+    <p class="lede">
+      {SITE.name} is read by indie and solo developers choosing free AI models and free tiers for
+      their projects and coding agents. There is one sponsor at a time.
+    </p>
+
+    <h2>Placements</h2>
+    <ul>
+      <li>One labelled card on the directory, the changes page, and every model and provider page ({activeModels.length}+ pages).</li>
+      <li>One labelled slot in the weekly newsletter and the weekly roundup post (once they launch).</li>
+      <li>Not in the RSS items, the JSON feed or the GitHub list.</li>
+    </ul>
+
+    <h2>Rules</h2>
+    <ul>
+      <li>Always labelled “Sponsor”; links carry <code>rel="sponsored"</code>.</li>
+      <li>Never affects rankings, labels, test results or change text.</li>
+      <li>Text and logo only: no tracking scripts, no third-party ad networks.</li>
+      <li>Developer-relevant products only.</li>
+    </ul>
+
+    <h2>Audience and pricing</h2>
+    <p>Traffic and subscriber numbers will be published here once the site has launched. Pricing is on request.</p>
+
+    <h2>Contact</h2>
+    <p>Contact details will be added before launch.</p>
+  </div>
+</Base>

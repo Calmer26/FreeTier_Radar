@@ -1,0 +1,53 @@
+name: Discovery
+
+# Fetches every provider's model list, commits changed data, and opens issues for
+# high-impact changes and failing sources. Commits only when something changed.
+on:
+  schedule:
+    - cron: "15 */6 * * *"
+  workflow_dispatch:
+
+# Shared with the daily tests so two jobs never write data/ at the same time.
+concurrency:
+  group: data-writes
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - run: npm run discover
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GOOGLE_AI_STUDIO_API_KEY: ${{ secrets.GOOGLE_AI_STUDIO_API_KEY }}
+          NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
+      - run: npm run readme
+      - name: Commit changed data
+        run: |
+          git add data README.md
+          if git diff --cached --quiet; then echo "No changes"; exit 0; fi
+          git config user.name "freetier-radar-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "data: discovery $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push
+      - name: Open issue for high-impact changes
+        if: hashFiles('out/high-impact.md') != ''
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: |
+          gh label create high-impact --color 0f7b5f --force
+          gh issue create --title "High-impact changes $(date -u +%Y-%m-%d)" --label high-impact --body-file out/high-impact.md
+      - name: Open issue for a failing source
+        if: hashFiles('out/source-alert.md') != ''
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: |
+          gh label create source-failing --color b3261e --force
+          gh issue create --title "Source failing $(date -u +%Y-%m-%d)" --label source-failing --body-file out/source-alert.md

@@ -1,0 +1,54 @@
+---
+import Base from "../../layouts/Base.astro";
+import Badges from "../../components/Badges.astro";
+import EventList from "../../components/EventList.astro";
+import SponsorSlot from "../../components/SponsorSlot.astro";
+import TestStatus from "../../components/TestStatus.astro";
+import { activeModels, events } from "../../lib/data";
+import { PROVIDERS, PROVIDER_IDS, type ProviderInfo } from "../../../pipeline/providers";
+import { formatContext, formatLimits } from "../../../pipeline/templates";
+
+export function getStaticPaths() {
+  return PROVIDER_IDS.map((id) => ({ params: { provider: id }, props: { p: PROVIDERS[id] } }));
+}
+
+const { p } = Astro.props as { p: ProviderInfo };
+const list = activeModels.filter((m) => m.provider === p.id);
+const recent = events.filter((e) => e.provider === p.id).slice(0, 20);
+---
+<Base title={`${p.label} free tier`} description={`${p.label} free models, limits and changes. ${p.summary}`} noindex={list.length === 0}>
+  <h1>{p.label} free tier</h1>
+  <p class="lede">{p.summary}</p>
+  {p.usage_terms_note && <p class={`callout ${p.usage_terms === "evaluation-only" ? "" : "info"}`}>{p.usage_terms_note}</p>}
+  <p>
+    Limits: {formatLimits(p.rate_limits)}{p.limit_scope === "shared" ? ", shared across all free models" : p.limit_scope === "per-model" ? ", set per model" : ""}.
+    {p.rate_limits?.note && <span> {p.rate_limits.note}</span>}
+    <a href={p.limits_url} rel="noopener">Official limits page</a>.
+  </p>
+
+  <SponsorSlot />
+
+  <h2>Free models ({list.length})</h2>
+  {list.length === 0 ? (
+    <p class="sub">Not tracked yet: this provider is checked once its API key is configured.</p>
+  ) : (
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Model</th><th>Context</th><th>Last test</th><th class="hide-sm">Labels</th></tr></thead>
+        <tbody>
+          {list.map((m) => (
+            <tr>
+              <td><a class="model-name" href={m.href}>{m.name}</a><div class="sub mono">{m.model_id}</div></td>
+              <td class="num">{formatContext(m.context_length)}</td>
+              <td class="nowrap"><TestStatus test={m.lastTest} /></td>
+              <td class="hide-sm"><Badges m={m} /></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )}
+
+  <h2>Recent changes</h2>
+  <EventList events={recent} />
+</Base>

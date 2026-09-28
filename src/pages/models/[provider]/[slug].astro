@@ -1,0 +1,70 @@
+---
+import Base from "../../../layouts/Base.astro";
+import Badges from "../../../components/Badges.astro";
+import EventList from "../../../components/EventList.astro";
+import SponsorSlot from "../../../components/SponsorSlot.astro";
+import TestStatus from "../../../components/TestStatus.astro";
+import { events, formatDate, formatTime, models, type ModelView } from "../../../lib/data";
+import { PROVIDERS } from "../../../../pipeline/providers";
+import { formatContext, formatLimits } from "../../../../pipeline/templates";
+
+export function getStaticPaths() {
+  return models.map((m) => ({ params: { provider: m.provider, slug: m.slug }, props: { m } }));
+}
+
+const { m } = Astro.props as { m: ModelView };
+const provider = PROVIDERS[m.provider];
+const history = events.filter((e) => e.resource_id === m.id);
+const yn = (v: boolean | null) => (v === true ? "Yes" : v === false ? "No" : "Unknown");
+const clineSnippet = m.provider === "openrouter"
+  ? `API Provider: OpenRouter\nModel:        ${m.model_id}`
+  : `API Provider: OpenAI Compatible\nBase URL:     ${provider.base_url}\nAPI Key:      your ${provider.label.split(" (")[0]} key\nModel ID:     ${m.model_id}`;
+const description = `${m.name} on ${provider.label}: free-tier status, limits, daily test results and change history.`;
+---
+<Base title={/free/i.test(m.name) ? m.name : `${m.name} (free)`} description={description} noindex={!m.indexable}>
+  <p class="sub"><a href={`/providers/${m.provider}/`}>{provider.label}</a></p>
+  <h1>{m.name}</h1>
+  <p class="mono sub">{m.model_id}</p>
+  <p><Badges m={m} /></p>
+
+  {m.usage_terms === "evaluation-only" && (
+    <p class="callout"><strong>Evaluation only.</strong> {provider.usage_terms_note}</p>
+  )}
+  {m.agent.caveat && <p class="callout"><strong>Rate limits for agents:</strong> {m.agent.caveat}</p>}
+
+  <dl class="facts">
+    <div><dt>Price</dt><dd>{m.price_type === "free" ? "$0" : m.price_type === "freemium-quota" ? "$0 within free quota" : "Free tier not confirmed by listing"}</dd></div>
+    <div><dt>Context window</dt><dd>{formatContext(m.context_length)}</dd></div>
+    <div><dt>Tool calling</dt><dd>{yn(m.tool_calling)}</dd></div>
+    <div><dt>Input types</dt><dd>{m.input_modalities?.join(", ") ?? "Unknown"}</dd></div>
+    <div><dt>Rate limits</dt><dd>{formatLimits(m.limits)}{m.limit_scope === "shared" ? " (shared)" : ""}</dd></div>
+    <div><dt>Usage terms</dt><dd>{m.usage_terms === "production-ok" ? "Production use allowed" : m.usage_terms === "evaluation-only" ? "Evaluation only" : "Unknown"}</dd></div>
+    <div><dt>Card required</dt><dd>{m.card_required === "yes" ? "Yes" : m.card_required === "no" ? "No" : "Unknown"}</dd></div>
+    <div><dt>First seen</dt><dd>{formatDate(m.first_seen)}</dd></div>
+  </dl>
+  {m.limits?.note && <p class="sub">{m.limits.note}</p>}
+
+  <h2>Daily test</h2>
+  <p><TestStatus test={m.lastTest} /></p>
+  {m.tests.length > 0 && (
+    <div class="history" aria-label="Test results, last 30 days">
+      {m.tests.map((t) => <i class={`s-${t.status}`} title={`${formatTime(t.at)}: ${t.status}`}></i>)}
+    </div>
+  )}
+  <p class="sub">One short request per day. It shows the model answered at that moment, not that it is fast or available all day.</p>
+
+  <h2>Coding agents (Cline)</h2>
+  <p>
+    {m.agent.level === "yes" && "Meets the agent-ready bar: tool calling, at least 64k context, and it answered on 5 of the last 7 test days."}
+    {m.agent.level === "partial" && `Has tool calling and enough context, but: ${m.agent.reasons.join("; ")}.`}
+    {m.agent.level === "no" && `Not suited to coding agents: ${m.agent.reasons.join("; ")}.`}
+  </p>
+  <pre><code>{clineSnippet}</code></pre>
+
+  <SponsorSlot />
+
+  <h2>Change history</h2>
+  <EventList events={history} empty={`No changes since we started tracking it on ${formatDate(m.first_seen)}.`} />
+
+  <p class="sub"><a href={m.url} rel="noopener">Provider page for this model</a> · <a href={provider.limits_url} rel="noopener">{provider.label} limits</a></p>
+</Base>

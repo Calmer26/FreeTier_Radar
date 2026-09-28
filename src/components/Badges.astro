@@ -1,0 +1,16 @@
+---
+import type { ModelView } from "../lib/data";
+
+interface Props {
+  m: ModelView;
+}
+
+const { m } = Astro.props;
+---
+{m.agent.level === "yes" && <span class="badge" title={m.agent.caveat ?? "Tool calling, ≥64k context, answered 5 of the last 7 days"}>🤖 Agent-ready{m.agent.caveat ? "*" : ""}</span>}
+{m.agent.level === "partial" && <span class="badge neutral" title={m.agent.reasons.join("; ")}>Agent-capable</span>}
+{m.usage_terms === "evaluation-only" && <span class="badge bad" title="Free for testing and evaluation only, not production">⚠ Eval only</span>}
+{m.card_required === "no" && <span class="badge neutral">No card</span>}
+{m.input_modalities?.includes("image") && <span class="badge neutral">Vision</span>}
+{m.status === "pending_removal" && <span class="badge warn">Missing from list</span>}
+{m.status === "removed" && <span class="badge bad">Removed</span>}
