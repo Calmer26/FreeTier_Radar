@@ -11,11 +11,12 @@ import { agentReadiness, type AgentReadiness } from "../../pipeline/agent-ready"
 import { PROVIDERS } from "../../pipeline/providers";
 import { isUnreachable } from "../../pipeline/reachability";
 import { withDefaults } from "../../pipeline/store-defaults";
-import type { RateLimits, Resource, ResourceEvent, SponsorFile, TestHistory, TestResult } from "../../pipeline/types";
+import type { Offer, RateLimits, Resource, ResourceEvent, SponsorFile, TestHistory, TestResult } from "../../pipeline/types";
 
 const resourceFiles = import.meta.glob<Resource[]>("../../data/resources/ai/*.json", { eager: true, import: "default" });
 const eventFiles = import.meta.glob<string>("../../data/events/*.jsonl", { eager: true, query: "?raw", import: "default" });
 const testFiles = import.meta.glob<TestHistory>("../../data/tests/history.json", { eager: true, import: "default" });
+const offerFiles = import.meta.glob<Offer>("../../data/offers/ai/*.json", { eager: true, import: "default" });
 const sponsorFiles = import.meta.glob<SponsorFile>("../../data/sponsor.json", { eager: true, import: "default" });
 
 export interface ModelView extends Resource {
@@ -61,11 +62,34 @@ export const activeModels = models.filter((m) => m.status !== "removed" && !m.un
 /** Listed by their provider but answering "not found" day after day. */
 export const unreachableModels = models.filter((m) => m.status !== "removed" && m.unreachable);
 
-/** Newest first. Files are named YYYY-MM.jsonl, so sorting by path is chronological. */
-export const events: ResourceEvent[] = Object.keys(eventFiles)
-  .sort()
-  .flatMap((path) => eventFiles[path].split("\n").filter((line) => line.trim()).map((line) => JSON.parse(line) as ResourceEvent))
-  .reverse();
+/** Curated offers: free credits, trials and quota pools. */
+export const offers: Offer[] = Object.values(offerFiles).sort((a, b) => a.name.localeCompare(b.name));
+
+/** An offer's `changes` entries, as change-feed events. */
+const offerEvents: ResourceEvent[] = offers.flatMap((o) =>
+  o.changes.map((c, i) => ({
+    id: `offer-${o.id}-${i}`,
+    resource_id: `offer/${o.id}`,
+    provider: o.provider,
+    name: o.name,
+    detected_at: `${c.date}T00:00:00.000Z`,
+    event_type: "OFFER" as const,
+    field: null,
+    old_value: null,
+    new_value: null,
+    impact_score: 60,
+    source_url: o.url,
+    text: c.text,
+  })),
+);
+
+/** Model events (events/YYYY-MM.jsonl) and offer changes, newest first. */
+export const events: ResourceEvent[] = [
+  ...Object.keys(eventFiles)
+    .sort()
+    .flatMap((path) => eventFiles[path].split("\n").filter((line) => line.trim()).map((line) => JSON.parse(line) as ResourceEvent)),
+  ...offerEvents,
+].sort((a, b) => b.detected_at.localeCompare(a.detected_at));
 
 export const modelById = new Map(models.map((m) => [m.id, m]));
 

@@ -1,0 +1,63 @@
+---
+import Base from "../layouts/Base.astro";
+import SponsorSlot from "../components/SponsorSlot.astro";
+import { formatDate, offers } from "../lib/data";
+import type { Offer } from "../../pipeline/types";
+
+const GROUPS: Array<{ type: Offer["offer_type"]; title: string; intro: string }> = [
+  { type: "recurring-quota", title: "Recurring free quotas", intro: "A free allowance that resets every day or month." },
+  { type: "recurring-credit", title: "Recurring free credit", intro: "A small amount of credit that tops up every month." },
+  { type: "trial-credit", title: "Trial credit", intro: "One-time credit that runs out or expires. Useful for trying, not for building on." },
+  { type: "retired", title: "Retired", intro: "Free offers that no longer exist, kept here so the history stays visible." },
+];
+
+const TERMS: Record<Offer["usage_terms"], string> = {
+  "production-ok": "Production use allowed",
+  "evaluation-only": "Evaluation only",
+  "non-commercial": "Non-commercial only",
+  unknown: "Terms not yet checked",
+};
+const ACCOUNT: Record<Offer["account_required"], string> = {
+  yes: "Account needed",
+  no: "No account needed",
+  "phone-verification": "Account + phone verification",
+  unknown: "Account requirements unknown",
+};
+---
+<Base title="Free AI credits and quotas" description="Free AI credits, trials and daily quotas from inference providers, with what they're worth and the conditions attached.">
+  <h1>Free credits and quotas</h1>
+  <p class="lede">
+    Some providers don't offer free models: they offer a free budget. These records are kept by hand, and each
+    provider's page is checked weekly for changes. Changes also appear in the <a href="/changes/">change feed</a>.
+  </p>
+  <SponsorSlot />
+
+  {GROUPS.map((g) => {
+    const list = offers.filter((o) => o.offer_type === g.type);
+    return list.length > 0 && (
+      <>
+        <h2>{g.title}</h2>
+        <p class="sub">{g.intro}</p>
+        <div class="offers">
+          {list.map((o) => (
+            <article class="offer" id={o.id}>
+              <h3><a href={o.url} rel="noopener">{o.name}</a></h3>
+              <p class="amount">{o.amount}</p>
+              <p>{o.summary}</p>
+              <p>
+                {o.offer_type === "retired" ? <span class="badge bad">Retired</span> : null}
+                {o.usage_terms === "evaluation-only" && <span class="badge bad">⚠ Eval only</span>}
+                {o.card_required === "no" && <span class="badge neutral">No card</span>}
+                <span class="badge neutral">{ACCOUNT[o.account_required]}</span>
+                {o.usage_terms !== "evaluation-only" && <span class="badge neutral">{TERMS[o.usage_terms]}</span>}
+                {o.data_logging === "logs-prompts" && <span class="badge warn">👁 Logs prompts</span>}
+                {o.data_logging === "may-train" && <span class="badge warn">May train on your data</span>}
+              </p>
+              <p class="sub">Verified {formatDate(o.verified_on)}. {o.source_note}</p>
+            </article>
+          ))}
+        </div>
+      </>
+    );
+  })}
+</Base>

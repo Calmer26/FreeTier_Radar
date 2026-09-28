@@ -1,0 +1,48 @@
+name: Suggest a free resource
+description: A free AI model, API, credit or developer tier we should track
+title: "Suggestion: "
+labels: ["suggestion"]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks! Please link the provider's own page, so we can check the terms and limits.
+  - type: input
+    id: name
+    attributes:
+      label: Name
+      placeholder: e.g. Example AI free tier
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: Official page (pricing, limits or docs)
+      placeholder: https://
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: What is it?
+      options:
+        - Free AI model or API (chat)
+        - Free text-to-speech or speech-to-text
+        - Free image, video or embedding model
+        - Free credits or trial
+        - Free developer tier (hosting, database, storage…)
+        - Something else
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why is it useful?
+      description: Limits, what you use it for, anything that makes it stand out.
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: What you know about the conditions
+      options:
+        - label: No credit card needed
+        - label: Commercial / production use allowed
+        - label: Needs phone verification

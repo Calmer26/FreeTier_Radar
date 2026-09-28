@@ -1,0 +1,40 @@
+name: Page watch
+
+# Weekly: fetch the pages behind curated offers and open an issue when one changed.
+on:
+  schedule:
+    - cron: "40 5 * * 1"
+  workflow_dispatch:
+
+concurrency:
+  group: data-writes
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - run: npm run watch
+      - name: Commit watch state
+        run: |
+          git add data/watch.json
+          if git diff --cached --quiet; then echo "No changes"; exit 0; fi
+          git config user.name "freetier-radar-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "data: page watch $(date -u +%Y-%m-%d)"
+          git push
+      - name: Open issue for changed pages
+        if: hashFiles('out/watch-alert.md') != ''
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: |
+          gh label create page-changed --color 9a5b00 --force
+          gh issue create --title "Watched pages changed $(date -u +%Y-%m-%d)" --label page-changed --body-file out/watch-alert.md

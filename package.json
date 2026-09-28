@@ -10,6 +10,7 @@
     "test": "vitest run",
     "discover": "tsx pipeline/run-discovery.ts",
     "test-models": "tsx pipeline/run-tests.ts",
+    "watch": "tsx pipeline/run-watch.ts",
     "readme": "tsx scripts/generate-readme.ts"
   },
   "engines": {

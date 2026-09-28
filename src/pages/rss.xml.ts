@@ -13,7 +13,7 @@ export function GET(context: APIContext) {
       title: `${e.event_type}: ${e.name}`,
       description: e.text,
       pubDate: new Date(e.detected_at),
-      link: modelById.get(e.resource_id)?.href ?? "/changes/",
+      link: modelById.get(e.resource_id)?.href ?? (e.resource_id.startsWith("offer/") ? `/offers/#${e.resource_id.slice(6)}` : "/changes/"),
       categories: [e.provider, e.event_type],
     })),
   });

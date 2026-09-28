@@ -9,7 +9,7 @@ import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 
 import { dirname, join } from "node:path";
 import { PROVIDER_IDS } from "./providers";
 import { withDefaults } from "./store-defaults";
-import type { ProviderId, Resource, ResourceEvent, SourcesFile, TestHistory } from "./types";
+import type { Offer, ProviderId, Resource, ResourceEvent, SourcesFile, TestHistory, WatchState } from "./types";
 
 /** Resolved from the project root: scripts and the Astro build both run there. */
 export const DATA_DIR = join(process.cwd(), "data");
@@ -18,6 +18,8 @@ const resourcesFile = (p: ProviderId) => join(DATA_DIR, "resources", "ai", `${p}
 const eventsDir = join(DATA_DIR, "events");
 const testsFile = join(DATA_DIR, "tests", "history.json");
 const sourcesFile = join(DATA_DIR, "sources.json");
+const offersDir = join(DATA_DIR, "offers", "ai");
+const watchFile = join(DATA_DIR, "watch.json");
 
 function readJson<T>(path: string, fallback: T): T {
   if (!existsSync(path)) return fallback;
@@ -90,4 +92,21 @@ export function readSources(): SourcesFile {
 
 export function writeSources(sources: SourcesFile): void {
   writeJsonIfChanged(sourcesFile, sources);
+}
+
+/** Curated offers, one file per offer, sorted by id. */
+export function readOffers(): Offer[] {
+  if (!existsSync(offersDir)) return [];
+  return readdirSync(offersDir)
+    .filter((f) => f.endsWith(".json"))
+    .sort()
+    .map((f) => JSON.parse(readFileSync(join(offersDir, f), "utf8")) as Offer);
+}
+
+export function readWatch(): Record<string, WatchState> {
+  return readJson<Record<string, WatchState>>(watchFile, {});
+}
+
+export function writeWatch(state: Record<string, WatchState>): void {
+  writeJsonIfChanged(watchFile, Object.fromEntries(Object.entries(state).sort(([a], [b]) => a.localeCompare(b))));
 }

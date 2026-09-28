@@ -1,0 +1,18 @@
+{
+  "id": "cloudflare-workers-ai",
+  "provider": "Cloudflare",
+  "name": "Cloudflare Workers AI daily allocation",
+  "offer_type": "recurring-quota",
+  "amount": "10,000 Neurons per day, shared across all models, reset at 00:00 UTC",
+  "summary": "Daily free allocation on the Workers Free plan, covering chat, speech, image and embedding models hosted by Cloudflare. How far 10,000 Neurons go depends on the model. A few large models are excluded from the free plan. Going over doesn't bill you on the Free plan; requests fail instead.",
+  "expires": null,
+  "usage_terms": "production-ok",
+  "card_required": "no",
+  "account_required": "yes",
+  "data_logging": "unknown",
+  "url": "https://developers.cloudflare.com/workers-ai/",
+  "watch_url": "https://developers.cloudflare.com/workers-ai/platform/pricing/",
+  "verified_on": "2026-09-28",
+  "source_note": "Cloudflare Workers AI pricing docs, checked 2026-09-28.",
+  "changes": []
+}

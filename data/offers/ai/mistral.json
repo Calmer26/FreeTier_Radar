@@ -1,0 +1,18 @@
+{
+  "id": "mistral",
+  "provider": "Mistral",
+  "name": "Mistral API Experiment tier",
+  "offer_type": "recurring-quota",
+  "amount": "Free API access to Mistral's models at low rate limits (third-party reports: about 1B tokens/month, 1 request/second)",
+  "summary": "Free tier on Mistral's API platform, described as being for experimentation, evaluation and prototyping. Mistral no longer publishes the limits; they're shown in the account console.",
+  "expires": null,
+  "usage_terms": "unknown",
+  "card_required": "no",
+  "account_required": "phone-verification",
+  "data_logging": "unknown",
+  "url": "https://console.mistral.ai",
+  "watch_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+  "verified_on": "2026-09-28",
+  "source_note": "Mistral docs and third-party reports, 2026-09-28. Usage terms and data use still to be read; model list and daily tests follow once an API key is configured.",
+  "changes": []
+}

@@ -1,0 +1,18 @@
+{
+  "id": "sambanova",
+  "provider": "SambaNova",
+  "name": "SambaNova Cloud free tier",
+  "offer_type": "recurring-quota",
+  "amount": "Most models 20 requests/day and 200k tokens/day; MiniMax 60 requests/minute and 12,000/day",
+  "summary": "Applies while no payment method is linked to the account. Enough to try SambaNova's models, not to build on most of them.",
+  "expires": null,
+  "usage_terms": "unknown",
+  "card_required": "no",
+  "account_required": "yes",
+  "data_logging": "unknown",
+  "url": "https://cloud.sambanova.ai",
+  "watch_url": "https://docs.sambanova.ai/docs/en/models/rate-limits",
+  "verified_on": "2026-09-28",
+  "source_note": "SambaNova rate-limits docs, checked 2026-09-28. Model list and daily tests follow once an API key is configured.",
+  "changes": []
+}
