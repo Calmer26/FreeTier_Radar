@@ -11,11 +11,11 @@ change history and ready-to-paste Cline settings.
 ## The list
 
 <!-- LIST:START -->
-_126 free models. Updated automatically; see [FreeTier Radar](https://freetierradar.com) for filters, limits and change history._
+_151 free models. Updated automatically; see [FreeTier Radar](https://freetierradar.com) for filters, limits and change history._
 
 🟢 responded to the latest daily test · 🟡 rate-limited or slow · 🔴 failed · 🤖 agent-ready (tool calling, ≥64k context, answered 5 of the last 7 days)
 
-### Chat (114)
+### Chat (126)
 
 #### OpenRouter
 
@@ -155,6 +155,23 @@ _126 free models. Updated automatically; see [FreeTier Radar](https://freetierra
 | [minimax-m2.7](https://freetierradar.com/models/llm7/minimax-m2-7/) | `minimax-m2.7` | 180k | yes | 🟢 |  |
 | [mistral-Nemo-Instruct-2407](https://freetierradar.com/models/llm7/mistral-nemo-instruct-2407/) | `mistral-Nemo-Instruct-2407` | 128k | no | 🟢 |  |
 
+#### Cloudflare Workers AI
+
+| Model | ID | Context | Tools | Last test | Agent |
+|---|---|---|---|---|---|
+| [aisingapore/gemma-sea-lion-v4-27b-it](https://freetierradar.com/models/cloudflare/cf-aisingapore-gemma-sea-lion-v4-27b-it/) | `@cf/aisingapore/gemma-sea-lion-v4-27b-it` | 128k | no | – |  |
+| [deepseek-ai/deepseek-r1-distill-qwen-32b](https://freetierradar.com/models/cloudflare/cf-deepseek-ai-deepseek-r1-distill-qwen-32b/) | `@cf/deepseek-ai/deepseek-r1-distill-qwen-32b` | 80k | no | – |  |
+| [ibm-granite/granite-4.0-h-micro](https://freetierradar.com/models/cloudflare/cf-ibm-granite-granite-4-0-h-micro/) | `@cf/ibm-granite/granite-4.0-h-micro` | 131k | yes | – |  |
+| [meta/llama-3.1-8b-instruct-fp8](https://freetierradar.com/models/cloudflare/cf-meta-llama-3-1-8b-instruct-fp8/) | `@cf/meta/llama-3.1-8b-instruct-fp8` | 32k | no | – |  |
+| [meta/llama-3.2-11b-vision-instruct](https://freetierradar.com/models/cloudflare/cf-meta-llama-3-2-11b-vision-instruct/) | `@cf/meta/llama-3.2-11b-vision-instruct` | 128k | no | – |  |
+| [meta/llama-3.2-1b-instruct](https://freetierradar.com/models/cloudflare/cf-meta-llama-3-2-1b-instruct/) | `@cf/meta/llama-3.2-1b-instruct` | 60k | no | – |  |
+| [meta/llama-3.2-3b-instruct](https://freetierradar.com/models/cloudflare/cf-meta-llama-3-2-3b-instruct/) | `@cf/meta/llama-3.2-3b-instruct` | 80k | no | – |  |
+| [mistralai/mistral-small-3.1-24b-instruct](https://freetierradar.com/models/cloudflare/cf-mistralai-mistral-small-3-1-24b-instruct/) | `@cf/mistralai/mistral-small-3.1-24b-instruct` | 128k | yes | – |  |
+| [nvidia/nemotron-3-120b-a12b](https://freetierradar.com/models/cloudflare/cf-nvidia-nemotron-3-120b-a12b/) | `@cf/nvidia/nemotron-3-120b-a12b` | 256k | yes | – |  |
+| [qwen/qwen2.5-coder-32b-instruct](https://freetierradar.com/models/cloudflare/cf-qwen-qwen2-5-coder-32b-instruct/) | `@cf/qwen/qwen2.5-coder-32b-instruct` | 33k | no | – |  |
+| [qwen/qwq-32b](https://freetierradar.com/models/cloudflare/cf-qwen-qwq-32b/) | `@cf/qwen/qwq-32b` | 24k | no | – |  |
+| [zai-org/glm-4.7-flash](https://freetierradar.com/models/cloudflare/cf-zai-org-glm-4-7-flash/) | `@cf/zai-org/glm-4.7-flash` | 131k | yes | – |  |
+
 #### Cline (free promotion)
 
 | Model | ID | Context | Tools | Last test | Agent |
@@ -166,7 +183,7 @@ _126 free models. Updated automatically; see [FreeTier Radar](https://freetierra
 | [Pixel Canary](https://freetierradar.com/models/cline/stealth-pixel-canary/) | `stealth/pixel-canary` | unknown | ? | – |  |
 | [space-bunny-alpha](https://freetierradar.com/models/cline/stealth-space-bunny-alpha/) | `stealth/space-bunny-alpha` | unknown | ? | – |  |
 
-### Text-to-speech (9)
+### Text-to-speech (10)
 
 #### OpenRouter
 
@@ -192,7 +209,13 @@ _126 free models. Updated automatically; see [FreeTier Radar](https://freetierra
 | [Gemini 3.8 Flash Lite TTS](https://freetierradar.com/models/google-ai-studio/gemini-3-8-flash-lite-tts/) | `gemini-3.8-flash-lite-tts` | 🟢 |
 | [Gemini 3.8 Flash TTS](https://freetierradar.com/models/google-ai-studio/gemini-3-8-flash-tts/) | `gemini-3.8-flash-tts` | 🟢 |
 
-### Speech-to-text (3)
+#### Cloudflare Workers AI
+
+| Model | ID | Last test |
+|---|---|---|
+| [myshell-ai/melotts](https://freetierradar.com/models/cloudflare/cf-myshell-ai-melotts/) | `@cf/myshell-ai/melotts` | – |
+
+### Speech-to-text (5)
 
 #### Groq
 
@@ -206,6 +229,30 @@ _126 free models. Updated automatically; see [FreeTier Radar](https://freetierra
 | Model | ID | Last test |
 |---|---|---|
 | [Gemini 3.5 Transcribe](https://freetierradar.com/models/google-ai-studio/gemini-3-5-transcribe/) | `gemini-3.5-transcribe` | 🟢 |
+
+#### Cloudflare Workers AI
+
+| Model | ID | Last test |
+|---|---|---|
+| [openai/whisper](https://freetierradar.com/models/cloudflare/cf-openai-whisper/) | `@cf/openai/whisper` | – |
+| [openai/whisper-tiny-en](https://freetierradar.com/models/cloudflare/cf-openai-whisper-tiny-en/) | `@cf/openai/whisper-tiny-en` | – |
+
+### Image (10)
+
+#### Cloudflare Workers AI
+
+| Model | ID | Last test |
+|---|---|---|
+| [black-forest-labs/flux-1-schnell](https://freetierradar.com/models/cloudflare/cf-black-forest-labs-flux-1-schnell/) | `@cf/black-forest-labs/flux-1-schnell` | – |
+| [black-forest-labs/flux-2-dev](https://freetierradar.com/models/cloudflare/cf-black-forest-labs-flux-2-dev/) | `@cf/black-forest-labs/flux-2-dev` | – |
+| [black-forest-labs/flux-2-klein-4b](https://freetierradar.com/models/cloudflare/cf-black-forest-labs-flux-2-klein-4b/) | `@cf/black-forest-labs/flux-2-klein-4b` | – |
+| [black-forest-labs/flux-2-klein-9b](https://freetierradar.com/models/cloudflare/cf-black-forest-labs-flux-2-klein-9b/) | `@cf/black-forest-labs/flux-2-klein-9b` | – |
+| [bytedance/stable-diffusion-xl-lightning](https://freetierradar.com/models/cloudflare/cf-bytedance-stable-diffusion-xl-lightning/) | `@cf/bytedance/stable-diffusion-xl-lightning` | – |
+| [leonardo/lucid-origin](https://freetierradar.com/models/cloudflare/cf-leonardo-lucid-origin/) | `@cf/leonardo/lucid-origin` | – |
+| [leonardo/phoenix-1.0](https://freetierradar.com/models/cloudflare/cf-leonardo-phoenix-1-0/) | `@cf/leonardo/phoenix-1.0` | – |
+| [lykon/dreamshaper-8-lcm](https://freetierradar.com/models/cloudflare/cf-lykon-dreamshaper-8-lcm/) | `@cf/lykon/dreamshaper-8-lcm` | – |
+| [runwayml/stable-diffusion-v1-5-inpainting](https://freetierradar.com/models/cloudflare/cf-runwayml-stable-diffusion-v1-5-inpainting/) | `@cf/runwayml/stable-diffusion-v1-5-inpainting` | – |
+| [stabilityai/stable-diffusion-xl-base-1.0](https://freetierradar.com/models/cloudflare/cf-stabilityai-stable-diffusion-xl-base-1-0/) | `@cf/stabilityai/stable-diffusion-xl-base-1.0` | – |
 
 <!-- LIST:END -->
 
