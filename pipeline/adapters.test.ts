@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { mapGoogle, mapGroq, mapKilo, mapLlm7, mapNvidia, mapCline, mapCloudflare, mapOpenRouter, mapZai, OPENROUTER_CURATED_SPEECH } from "./adapters";
+import { mapGoogle, mapGroq, mapKilo, mapLlm7, mapNvidia, mapCline, mapCloudflare, mapOpenRouter, mapZai, mapMistral, mistralName, OPENROUTER_CURATED_SPEECH } from "./adapters";
 import { classifyModel } from "./candidates";
 
 describe("classifyModel", () => {
@@ -179,4 +179,31 @@ describe("Cloudflare", () => {
     expect(out[1].terms_url).toBe("https://bfl.ai/legal/terms-of-service");
   });
 
+});
+
+describe("mapMistral", () => {
+  const caps = (c: Record<string, boolean>) => c;
+  const out = mapMistral([
+    { id: "ministral-8b-2512", name: "ministral-8b-2512", max_context_length: 262_144, capabilities: caps({ completion_chat: true, function_calling: true, vision: true }) },
+    { id: "ministral-8b-latest", name: "ministral-8b-2512", capabilities: caps({ completion_chat: true }) },
+    { id: "voxtral-mini-2602", name: "voxtral-mini-2602", capabilities: caps({ audio_transcription: true }) },
+    { id: "voxtral-mini-tts-2603", name: "voxtral-mini-tts-2603", capabilities: caps({ audio_speech: true }) },
+    { id: "labs-leanstral-1-5-1", name: "labs-leanstral-1-5-1", capabilities: caps({ completion_chat: true }) },
+    { id: "mistral-embed-2312", name: "mistral-embed-2312", capabilities: caps({}) },
+    { id: "mistral-ocr-4-0", name: "mistral-ocr-4-0", capabilities: caps({ vision: true, ocr: true }) },
+    { id: "old-2401", name: "old-2401", deprecation: "2026-01-01", capabilities: caps({ completion_chat: true }) },
+  ]);
+
+  it("keeps one entry per model (no aliases), and only chat, transcription and speech", () => {
+    expect(out.map((m) => [m.model_id, m.kind])).toEqual([
+      ["ministral-8b-2512", "chat"],
+      ["voxtral-mini-2602", "stt"],
+      ["voxtral-mini-tts-2603", "tts"],
+    ]);
+  });
+
+  it("maps context, tools and vision from its capabilities", () => {
+    expect(out[0]).toMatchObject({ name: "Ministral 8B 2512", context_length: 262_144, tool_calling: true, input_modalities: ["text", "image"], data_logging: "may-train" });
+    expect(mistralName("voxtral-mini-tts-2603")).toBe("Voxtral Mini TTS 2603");
+  });
 });

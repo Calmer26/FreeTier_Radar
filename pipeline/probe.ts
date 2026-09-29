@@ -60,12 +60,17 @@ export function classifyFailure(err: unknown): TestStatus {
   return "error";
 }
 
-/** Groq sends its per-model limits on every response. Exported for tests. */
+/**
+ * Per-model limits sent on every response. Groq: requests/day and tokens/minute.
+ * Mistral: requests/minute and tokens/minute. Exported for tests.
+ */
 export function limitsFromHeaders(h: Headers): RateLimits | null {
   const rpd = Number(h.get("x-ratelimit-limit-requests"));
-  const tpm = Number(h.get("x-ratelimit-limit-tokens"));
-  if (!rpd && !tpm) return null;
+  const rpm = Number(h.get("x-ratelimit-limit-req-minute"));
+  const tpm = Number(h.get("x-ratelimit-limit-tokens") ?? h.get("x-ratelimit-limit-tokens-minute"));
+  if (!rpd && !rpm && !tpm) return null;
   return {
+    ...(rpm ? { rpm } : {}),
     ...(rpd ? { rpd } : {}),
     ...(tpm ? { tpm } : {}),
     source: "observed (response headers)",
@@ -89,6 +94,8 @@ export function ttsVoice(r: Pick<Resource, "provider" | "model_id">): string | u
   const id = r.model_id.toLowerCase();
   if (id.includes("orpheus")) return id.includes("arabic") ? "fahad" : "troy";
   if (id.includes("flux-tts")) return "flux-cole-en";
+  // Mistral's speech model needs a preset voice (GET /v1/audio/voices, checked 2026-09-29).
+  if (r.provider === "mistral") return "en_paul_neutral";
   return undefined;
 }
 
@@ -238,7 +245,9 @@ export async function testModel(r: Resource, env: Record<string, string | undefi
     const res = await fetch(url, { ...init, signal: AbortSignal.timeout(timeout) });
     if (!res.ok) {
       const body = (await res.text().catch(() => "")).slice(0, 500);
-      throw new HttpError(res.status, `${res.status} ${body}`);
+      // Mistral answers a model outside Free mode with 429 and a per-minute limit of 0.
+      const zero = res.headers.get("x-ratelimit-limit-req-minute") === "0" ? "limit: 0 " : "";
+      throw new HttpError(res.status, `${res.status} ${zero}${body}`);
     }
     await check(res);
     const latency = Date.now() - started;
@@ -246,7 +255,7 @@ export async function testModel(r: Resource, env: Record<string, string | undefi
     const slow = r.kind === "image" ? latency > IMAGE_TEST_TIMEOUT_MS : latency > SLOW_MS;
     return {
       result: { at, status: slow ? "slow" : "responded", latency_ms: latency },
-      limits: r.provider === "groq" ? limitsFromHeaders(res.headers) : null,
+      limits: r.provider === "groq" || r.provider === "mistral" ? limitsFromHeaders(res.headers) : null,
       detail: null,
     };
   } catch (err) {

@@ -3,6 +3,10 @@ import { buildRequest, checkCloudflare, classifyFailure, HttpError, limitsFromHe
 import type { Resource, TestHistory } from "./types";
 
 describe("classifyFailure", () => {
+  it("treats Mistral's zero per-minute limit as no free quota, not a passing rate limit", () => {
+    expect(classifyFailure(new HttpError(429, '429 limit: 0 {"message":"Rate limit exceeded"}'))).toBe("no_free_quota");
+  });
+
   it.each([
     [new HttpError(429, "429 Too Many Requests"), "rate_limited"],
     [new HttpError(400, "AiError: you have used up your daily free allocation of 10,000 neurons"), "rate_limited"],
@@ -20,6 +24,11 @@ describe("classifyFailure", () => {
 });
 
 describe("limitsFromHeaders", () => {
+  it("reads Mistral's per-minute limits", () => {
+    const h = new Headers({ "x-ratelimit-limit-req-minute": "60", "x-ratelimit-limit-tokens-minute": "50000" });
+    expect(limitsFromHeaders(h)).toEqual({ rpm: 60, tpm: 50000, source: "observed (response headers)" });
+  });
+
   it("reads Groq's per-model limits", () => {
     const h = new Headers({ "x-ratelimit-limit-requests": "1000", "x-ratelimit-limit-tokens": "8000" });
     expect(limitsFromHeaders(h)).toEqual({ rpd: 1000, tpm: 8000, source: "observed (response headers)" });

@@ -355,6 +355,55 @@ async function fetchZai(env: Env): Promise<ObservedModel[]> {
   return mapZai();
 }
 
+// ── Mistral ──────────────────────────────────────────────────────────────────────
+
+export interface MistralModel {
+  id: string;
+  name: string;
+  max_context_length?: number;
+  deprecation?: string | null;
+  capabilities?: Record<string, boolean | undefined>;
+}
+
+/** "ministral-3b-2512" → "Ministral 3B 2512"; "voxtral-mini-tts-2603" → "Voxtral Mini TTS 2603". Exported for tests. */
+export function mistralName(id: string): string {
+  return id
+    .split("-")
+    .map((w) => (/^\d+b$/.test(w) ? w.toUpperCase() : /^(tts|ocr)$/.test(w) ? w.toUpperCase() : w[0].toUpperCase() + w.slice(1)))
+    .join(" ");
+}
+
+/**
+ * Mistral lists every alias as its own entry; `name` is the canonical id, so only the
+ * entry whose id equals its name is kept. Chat, transcription and speech models only
+ * (no embeddings, moderation, OCR or realtime), and no Labs models, which need an admin
+ * opt-in. Which ones are free isn't in the list: free mode gives some models a limit
+ * of 0, and the daily test reports those as "no free quota" (checked 2026-09-29).
+ */
+export function mapMistral(models: MistralModel[]): ObservedModel[] {
+  return models.flatMap((m) => {
+    if (m.id !== m.name || m.deprecation || m.id.startsWith("labs-")) return [];
+    const c = m.capabilities ?? {};
+    const kind: ModelKind | null = c.completion_chat ? "chat" : c.audio_transcription ? "stt" : c.audio_speech ? "tts" : null;
+    if (!kind) return [];
+    return [{
+      ...base("mistral", kind),
+      model_id: m.id,
+      name: mistralName(m.id),
+      url: "https://docs.mistral.ai/getting-started/models/",
+      price_type: "free" as const,
+      context_length: kind === "chat" ? m.max_context_length ?? null : null,
+      input_modalities: kind === "chat" ? ["text", ...(c.vision ? ["image"] : []), ...(c.audio ? ["audio"] : [])] : kind === "stt" ? ["audio"] : ["text"],
+      tool_calling: kind === "chat" ? c.function_calling === true : null,
+    }];
+  });
+}
+
+async function fetchMistral(env: Env): Promise<ObservedModel[]> {
+  const json = await getJson<{ data?: MistralModel[] }>("https://api.mistral.ai/v1/models", { Authorization: `Bearer ${env.MISTRAL_API_KEY}` });
+  return mapMistral(json.data ?? []);
+}
+
 // ── Cline (free promotion) ───────────────────────────────────────────────────────
 
 export interface ClineRecommended {
@@ -456,4 +505,5 @@ export const FETCHERS: Record<ProviderId, (env: Env) => Promise<ObservedModel[]>
   zai: fetchZai,
   cline: () => fetchCline(),
   cloudflare: fetchCloudflare,
+  mistral: fetchMistral,
 };

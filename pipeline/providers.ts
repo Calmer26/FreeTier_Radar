@@ -203,6 +203,25 @@ export const PROVIDERS: Record<ProviderId, ProviderInfo> = {
     limits_url: "https://developers.cloudflare.com/workers-ai/platform/pricing/",
     summary: "Cloudflare's hosted models: chat, speech and image generation (FLUX, Stable Diffusion), free within a daily Neuron allowance. One of the few real free options for image generation.",
   },
+  mistral: {
+    id: "mistral",
+    label: "Mistral AI (Free mode)",
+    homepage: "https://mistral.ai",
+    base_url: "https://api.mistral.ai/v1",
+    key_env: "MISTRAL_API_KEY",
+    list_needs_key: true,
+    usage_terms: "unknown",
+    // help.mistral.ai "Do you use my user data to train…" and docs.mistral.ai, checked 2026-09-29.
+    usage_terms_note: "Mistral's Free mode: API access with no credit card, with usage and rate limits. Mistral says it may use Free-mode inputs and outputs to train its models. Some models (Mistral Small, Mistral Medium) have a free limit of 0.",
+    limit_scope: "per-model",
+    // Not published; each response carries the model's per-minute limits, which the daily test records.
+    rate_limits: null,
+    card_required: "no",
+    account_required: "yes",
+    data_logging: "may-train",
+    limits_url: "https://docs.mistral.ai/admin/billing-usage/usage-limits",
+    summary: "Mistral's own API. Free mode covers its smaller models (Ministral, Codestral, Voxtral) within per-minute limits shown in your account; the bigger ones need pay-as-you-go.",
+  },
   cline: {
     id: "cline",
     label: "Cline (free promotion)",
