@@ -11,11 +11,11 @@ change history and ready-to-paste Cline settings.
 ## The list
 
 <!-- LIST:START -->
-_150 free models. Updated automatically; see [FreeTier Radar](https://freetierradar.com) for filters, limits and change history._
+_148 free models. Updated automatically; see [FreeTier Radar](https://freetierradar.com) for filters, limits and change history._
 
 🟢 responded to the latest daily test · 🟡 rate-limited or slow · 🔴 failed · 🤖 agent-ready (tool calling, ≥64k context, answered 5 of the last 7 days)
 
-### Chat (126)
+### Chat (124)
 
 #### OpenRouter
 
@@ -25,7 +25,6 @@ _150 free models. Updated automatically; see [FreeTier Radar](https://freetierra
 | [Dots Studio: Dots3-Note Preview (free)](https://freetierradar.com/models/openrouter/dots-studio-dots-3-note-preview-free/) | `dots-studio/dots-3-note-preview:free` | 512k | yes | 🟢 |  |
 | [Google: Gemma 4 26B A4B  (free)](https://freetierradar.com/models/openrouter/google-gemma-4-26b-a4b-it-free/) | `google/gemma-4-26b-a4b-it:free` | 262k | yes | – |  |
 | [Google: Gemma 4 31B (free)](https://freetierradar.com/models/openrouter/google-gemma-4-31b-it-free/) | `google/gemma-4-31b-it:free` | 262k | yes | 🟢 |  |
-| [inclusionAI: Ling 3.0 Flash Fin (free)](https://freetierradar.com/models/openrouter/inclusionai-ling-3-0-flash-fin-free/) | `inclusionai/ling-3.0-flash-fin:free` | 262k | yes | 🟢 |  |
 | [inclusionAI: Ling 3.0 Flash Sante (free)](https://freetierradar.com/models/openrouter/inclusionai-ling-3-0-flash-sante-free/) | `inclusionai/ling-3.0-flash-sante:free` | 262k | yes | 🟢 |  |
 | [LiquidAI: LFM2.5-2.6B (free)](https://freetierradar.com/models/openrouter/liquid-lfm-2-5-2-6b-free/) | `liquid/lfm-2.5-2.6b:free` | 66k | yes | 🟢 |  |
 | [NVIDIA: Nemotron 3 Nano Omni (free)](https://freetierradar.com/models/openrouter/nvidia-nemotron-3-nano-omni-30b-a3b-reasoning-free/) | `nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free` | 256k | yes | 🟢 |  |
@@ -95,7 +94,6 @@ _150 free models. Updated automatically; see [FreeTier Radar](https://freetierra
 | [mistralai/mistral-7b-instruct-v0.3 (mistralai)](https://freetierradar.com/models/nvidia/mistralai-mistral-7b-instruct-v0-3/) | `mistralai/mistral-7b-instruct-v0.3` | unknown | ? | 🔴 |  |
 | [mistralai/mistral-large (mistralai)](https://freetierradar.com/models/nvidia/mistralai-mistral-large/) | `mistralai/mistral-large` | unknown | ? | 🔴 |  |
 | [mistralai/mistral-large-2-instruct (mistralai)](https://freetierradar.com/models/nvidia/mistralai-mistral-large-2-instruct/) | `mistralai/mistral-large-2-instruct` | unknown | ? | 🔴 |  |
-| [mistralai/mistral-nemotron (mistralai)](https://freetierradar.com/models/nvidia/mistralai-mistral-nemotron/) | `mistralai/mistral-nemotron` | unknown | ? | 🟡 |  |
 | [mistralai/mixtral-8x22b-v0.1 (mistralai)](https://freetierradar.com/models/nvidia/mistralai-mixtral-8x22b-v0-1/) | `mistralai/mixtral-8x22b-v0.1` | unknown | ? | 🔴 |  |
 | [moonshotai/kimi-k2.6 (moonshotai)](https://freetierradar.com/models/nvidia/moonshotai-kimi-k2-6/) | `moonshotai/kimi-k2.6` | unknown | ? | 🔴 |  |
 | [moonshotai/kimi-k3 (moonshotai)](https://freetierradar.com/models/nvidia/moonshotai-kimi-k3/) | `moonshotai/kimi-k3` | unknown | ? | 🟡 |  |
@@ -133,7 +131,6 @@ _150 free models. Updated automatically; see [FreeTier Radar](https://freetierra
 |---|---|---|---|---|---|
 | [Cohere: North Mini Code (free)](https://freetierradar.com/models/kilo/cohere-north-mini-code-free/) | `cohere/north-mini-code:free` | 256k | yes | 🟢 |  |
 | [Dots Studio: Dots3-Note Preview (free)](https://freetierradar.com/models/kilo/dots-studio-dots-3-note-preview-free/) | `dots-studio/dots-3-note-preview:free` | 512k | yes | 🟢 |  |
-| [inclusionAI: Ling 3.0 Flash Fin (free)](https://freetierradar.com/models/kilo/inclusionai-ling-3-0-flash-fin-free/) | `inclusionai/ling-3.0-flash-fin:free` | 262k | yes | 🟢 |  |
 | [inclusionAI: Ling 3.0 Flash Sante (free)](https://freetierradar.com/models/kilo/inclusionai-ling-3-0-flash-sante-free/) | `inclusionai/ling-3.0-flash-sante:free` | 262k | yes | 🟢 |  |
 | [LiquidAI: LFM2.5-2.6B (free)](https://freetierradar.com/models/kilo/liquid-lfm-2-5-2-6b-free/) | `liquid/lfm-2.5-2.6b:free` | 66k | yes | 🟢 |  |
 | [NVIDIA: Nemotron 3 Nano Omni (free)](https://freetierradar.com/models/kilo/nvidia-nemotron-3-nano-omni-30b-a3b-reasoning-free/) | `nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free` | 256k | yes | 🟢 |  |
@@ -151,9 +148,16 @@ _150 free models. Updated automatically; see [FreeTier Radar](https://freetierra
 
 | Model | ID | Context | Tools | Last test | Agent |
 |---|---|---|---|---|---|
-| [GLM-5.3-Flash](https://freetierradar.com/models/llm7/glm-5-3-flash/) | `GLM-5.3-Flash` | 400k | yes | 🟢 |  |
 | [minimax-m2.7](https://freetierradar.com/models/llm7/minimax-m2-7/) | `minimax-m2.7` | 180k | yes | 🟢 |  |
 | [mistral-Nemo-Instruct-2407](https://freetierradar.com/models/llm7/mistral-nemo-instruct-2407/) | `mistral-Nemo-Instruct-2407` | 128k | no | 🟢 |  |
+
+#### Z.ai (Zhipu)
+
+| Model | ID | Context | Tools | Last test | Agent |
+|---|---|---|---|---|---|
+| [GLM-4.5-Flash](https://freetierradar.com/models/zai/glm-4-5-flash/) | `glm-4.5-flash` | unknown | ? | – |  |
+| [GLM-4.6V-Flash](https://freetierradar.com/models/zai/glm-4-6v-flash/) | `glm-4.6v-flash` | unknown | ? | – |  |
+| [GLM-4.7-Flash](https://freetierradar.com/models/zai/glm-4-7-flash/) | `glm-4.7-flash` | unknown | ? | – |  |
 
 #### Cloudflare Workers AI
 
@@ -177,7 +181,6 @@ _150 free models. Updated automatically; see [FreeTier Radar](https://freetierra
 | Model | ID | Context | Tools | Last test | Agent |
 |---|---|---|---|---|---|
 | [Deepseek-v4.1-Flash](https://freetierradar.com/models/cline/cline-free-deepseek-v4-1-flash/) | `cline-free/deepseek-v4.1-flash` | unknown | ? | – |  |
-| [Gemini 3.8 Flash](https://freetierradar.com/models/cline/cline-free-gemini-3-8-flash/) | `cline-free/gemini-3.8-flash` | unknown | ? | – |  |
 | [Mimo V2.6 Flash](https://freetierradar.com/models/cline/cline-free-mimo-v2-6-flash/) | `cline-free/mimo-v2.6-flash` | unknown | ? | – |  |
 | [Muse Spark 1.3 Contributor](https://freetierradar.com/models/cline/cline-free-muse-spark-1-3-contributor/) | `cline-free/muse-spark-1.3-contributor` | unknown | ? | – |  |
 | [Pixel Canary](https://freetierradar.com/models/cline/stealth-pixel-canary/) | `stealth/pixel-canary` | unknown | ? | – |  |
