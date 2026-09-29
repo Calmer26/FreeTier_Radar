@@ -199,6 +199,44 @@ export interface Offer {
   changes: Array<{ date: string; text: string }>;
 }
 
+/**
+ * A consumer app (web or phone) that makes images or videos for free but has no free
+ * API: Gemini app, Meta AI, Dreamina... Hand-kept in data/apps/, like offers.
+ * Allowances only from the app's own pages; "not published" is a valid value.
+ */
+export interface FreeApp {
+  id: string;
+  name: string;
+  maker: string;
+  url: string;
+  summary: string;
+  image: FreeAppMedia | null;
+  video: FreeAppMedia | null;
+  account_required: YesNoUnknown;
+  /** Can you use what you make commercially on the free plan? */
+  commercial_use: "yes" | "no" | "conditions" | "unknown";
+  commercial_note: string | null;
+  /** Free-plan output carries a visible watermark. */
+  watermark: YesNoUnknown;
+  /** Free-plan creations are public (others can see them). */
+  public_by_default: YesNoUnknown;
+  data_logging: DataLogging;
+  /** Page the watcher fetches weekly; null when the site blocks automated reads. */
+  watch_url: string | null;
+  verified_on: string;
+  source_note: string;
+}
+
+export interface FreeAppMedia {
+  /** Model names as the app gives them. */
+  models: string;
+  /** Free allowance in the app's own words, e.g. "120 credits a day, shared by images and video". */
+  allowance: string;
+  /** LMArena name of the model free users get, only when the app's pages make that clear. */
+  arena: string | null;
+  arena_note?: string;
+}
+
 export interface WatchState {
   hash: string;
   checked_on: string;

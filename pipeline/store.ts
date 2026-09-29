@@ -9,7 +9,7 @@ import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 
 import { dirname, join } from "node:path";
 import { PROVIDER_IDS } from "./providers";
 import { withDefaults } from "./store-defaults";
-import type { Offer, ProviderId, Resource, ResourceEvent, SourcesFile, TestHistory, WatchState } from "./types";
+import type { FreeApp, Offer, ProviderId, Resource, ResourceEvent, SourcesFile, TestHistory, WatchState } from "./types";
 
 /** Resolved from the project root: scripts and the Astro build both run there. */
 export const DATA_DIR = join(process.cwd(), "data");
@@ -19,6 +19,7 @@ const eventsDir = join(DATA_DIR, "events");
 const testsFile = join(DATA_DIR, "tests", "history.json");
 const sourcesFile = join(DATA_DIR, "sources.json");
 const offersDir = join(DATA_DIR, "offers", "ai");
+const appsDir = join(DATA_DIR, "apps");
 const watchFile = join(DATA_DIR, "watch.json");
 
 function readJson<T>(path: string, fallback: T): T {
@@ -101,6 +102,14 @@ export function readOffers(): Offer[] {
     .filter((f) => f.endsWith(".json"))
     .sort()
     .map((f) => JSON.parse(readFileSync(join(offersDir, f), "utf8")) as Offer);
+}
+
+export function readApps(): FreeApp[] {
+  if (!existsSync(appsDir)) return [];
+  return readdirSync(appsDir)
+    .filter((f) => f.endsWith(".json"))
+    .sort()
+    .map((f) => JSON.parse(readFileSync(join(appsDir, f), "utf8")) as FreeApp);
 }
 
 export function readWatch(): Record<string, WatchState> {

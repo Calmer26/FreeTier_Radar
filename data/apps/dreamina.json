@@ -1,0 +1,28 @@
+{
+  "id": "dreamina",
+  "name": "Dreamina",
+  "maker": "ByteDance (CapCut)",
+  "url": "https://dreamina.capcut.com",
+  "summary": "ByteDance's image and video app, running its Seedream (image) and Seedance (video) models. Free users get 120 credits a day for images and video; what one generation costs depends on model, length and resolution.",
+  "image": {
+    "models": "Seedream",
+    "allowance": "120 credits a day, shared by images and video.",
+    "arena": null,
+    "arena_note": "Which Seedream version free credits use isn't stated."
+  },
+  "video": {
+    "models": "Seedance",
+    "allowance": "Shares the 120 daily credits; the cost per clip depends on model, length and resolution.",
+    "arena": "dreamina-seedance-2.5-720p",
+    "arena_note": "Rating of Seedance 2.5 at 720p; free credits may not cover it."
+  },
+  "account_required": "yes",
+  "commercial_use": "unknown",
+  "commercial_note": null,
+  "watermark": "unknown",
+  "public_by_default": "unknown",
+  "data_logging": "unknown",
+  "watch_url": "https://dreamina.capcut.com/ai-video/free-image-to-video-generator-credits-faq",
+  "verified_on": "2026-09-29",
+  "source_note": "Dreamina credits FAQ and pricing page, checked 2026-09-29."
+}

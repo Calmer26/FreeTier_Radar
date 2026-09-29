@@ -12,7 +12,7 @@ code there was copied and adapted, not shared.
   `showcase.ts`, `probe.ts` helpers, adapter `map*` functions) has tests next to it. Entry points:
   `run-discovery.ts`, `run-tests.ts`, `run-watch.ts`, `run-roundup.ts`, `run-arena.ts`, `run-showcase.ts`.
 - `data/`: the database. JSON in git, written only by the pipeline, except the hand-kept
-  `sponsor.json` and `offers/ai/*.json`. History = git log. Never store snapshots or full API
+  `sponsor.json`, `offers/ai/*.json` and `apps/*.json`. History = git log. Never store snapshots or full API
   responses or pages.
 - Models have a `kind` (chat, tts, stt, image); each kind has its own test in `probe.ts` (image: weekly,
   120 s timeout). Hand-listed in `adapters.ts`: OpenRouter's free voices (`OPENROUTER_CURATED_SPEECH`) and
@@ -28,6 +28,9 @@ code there was copied and adapted, not shared.
   and the links from our model ids to Arena names. Exact matches and effort/size variants
   ("-high", "(Max)", "-30b-a3b") are automatic; other near matches only count once confirmed
   through the weekly aliases PR (`pipeline/arena.ts`). Rejected ones stay rejected.
+- `data/apps/`: consumer apps with free image/video generation but no free API (`/free-apps/`). Same rules as
+  offers: numbers only from the app's own page, an Arena name only when the app says which model free users
+  get, `watch_url: null` when the page blocks bots (the page flags records older than 60 days).
 - `content/roundups/`: published weekly roundups (Markdown), merged from the Monday PR.
 - `fixtures/`: the STT test clip (see its README).
 - `src/`: Astro static site; reads `data/` and `content/` at build time through `src/lib/`, bundled with

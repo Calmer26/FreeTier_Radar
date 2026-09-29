@@ -124,6 +124,11 @@
     "status": "variant",
     "on": "2026-09-28"
   },
+  "google-ai-studio/gemini-omni-1.1-flash": {
+    "arena": "gemini-omni-1.1-flash",
+    "status": "exact",
+    "on": "2026-09-29"
+  },
   "google-ai-studio/gemma-4-26b-a4b-it": {
     "arena": "gemma-4-26b-a4b",
     "status": "exact",
@@ -338,5 +343,10 @@
     "arena": "inkling",
     "status": "exact",
     "on": "2026-09-28"
+  },
+  "zai/glm-4.7-flash": {
+    "arena": "glm-4.7-flash",
+    "status": "exact",
+    "on": "2026-09-29"
   }
 }

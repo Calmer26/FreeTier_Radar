@@ -1,0 +1,27 @@
+{
+  "id": "google-ai-studio",
+  "name": "Google AI Studio",
+  "maker": "Google",
+  "url": "https://aistudio.google.com",
+  "summary": "Google's developer playground. Google's pricing page says AI Studio usage is free of charge, while the same image and video models have no free API tier. Some of them ask for a paid API key in AI Studio (Nano Banana Pro does).",
+  "image": {
+    "models": "Nano Banana models, Imagen",
+    "allowance": "Not published. Which models work without a paid key isn't listed; try them in the Media section.",
+    "arena": null,
+    "arena_note": "Which image model free users get isn't stated, so no rating is shown."
+  },
+  "video": {
+    "models": "Veo, Gemini Omni",
+    "allowance": "Not published; video models may ask for a paid API key.",
+    "arena": null
+  },
+  "account_required": "yes",
+  "commercial_use": "unknown",
+  "commercial_note": null,
+  "watermark": "unknown",
+  "public_by_default": "no",
+  "data_logging": "may-train",
+  "watch_url": "https://ai.google.dev/gemini-api/docs/pricing",
+  "verified_on": "2026-09-29",
+  "source_note": "Gemini API pricing (\"Google AI Studio usage is free of charge\"; image and video models \"Free tier: Not available\" on the API); Google Cloud blog on Nano Banana Pro needing a paid key in AI Studio. Checked 2026-09-29."
+}

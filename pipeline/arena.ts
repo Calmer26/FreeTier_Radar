@@ -17,7 +17,7 @@
  * Pure helpers here; the run lives in run-arena.ts.
  */
 
-export const ARENA_BOARDS = ["text", "webdev", "vision", "agent", "text_to_image"] as const;
+export const ARENA_BOARDS = ["text", "webdev", "vision", "agent", "text_to_image", "text_to_video"] as const;
 export type ArenaBoard = (typeof ARENA_BOARDS)[number];
 
 export const ARENA_BOARD_LABELS: Record<ArenaBoard, string> = {
@@ -26,6 +26,7 @@ export const ARENA_BOARD_LABELS: Record<ArenaBoard, string> = {
   vision: "Vision",
   agent: "Agent",
   text_to_image: "Image generation",
+  text_to_video: "Video generation",
 };
 
 export const ARENA_ATTRIBUTION = "LMArena leaderboard dataset (CC-BY-4.0)";

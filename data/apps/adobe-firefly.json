@@ -1,0 +1,27 @@
+{
+  "id": "adobe-firefly",
+  "name": "Adobe Firefly",
+  "maker": "Adobe",
+  "url": "https://firefly.adobe.com",
+  "summary": "Adobe's generative app. The free plan gives free daily generations across image, video and audio, including partner models. Adobe says output from its own Firefly models is safe for commercial use.",
+  "image": {
+    "models": "Firefly models plus partner models (e.g. Nano Banana)",
+    "allowance": "Free daily generations; the number isn't published on the plans page.",
+    "arena": null,
+    "arena_note": "Adobe doesn't say which models the free generations cover."
+  },
+  "video": {
+    "models": "Firefly video plus partner models (e.g. Luma Ray)",
+    "allowance": "Shares the free daily generations.",
+    "arena": null
+  },
+  "account_required": "yes",
+  "commercial_use": "conditions",
+  "commercial_note": "Adobe: outputs from Adobe Firefly models are safe for commercial use. Partner models have their own terms.",
+  "watermark": "unknown",
+  "public_by_default": "no",
+  "data_logging": "unknown",
+  "watch_url": "https://www.adobe.com/products/firefly/plans.html",
+  "verified_on": "2026-09-29",
+  "source_note": "Adobe Firefly plans page, checked 2026-09-29."
+}

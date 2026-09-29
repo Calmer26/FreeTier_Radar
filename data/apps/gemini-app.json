@@ -1,0 +1,22 @@
+{
+  "id": "gemini-app",
+  "name": "Gemini app",
+  "maker": "Google",
+  "url": "https://gemini.google.com",
+  "summary": "Google's assistant. Free accounts can generate and edit images with Nano Banana 2; video generation needs a Google AI plan.",
+  "image": {
+    "models": "Nano Banana 2 (Gemini 3.1 Flash Image)",
+    "allowance": "Not published: usage limits are compute-based and media generation uses more of them. Nano Banana Pro needs a paid plan.",
+    "arena": "gemini-3.1-flash-image (nano-banana-2) [web-search]"
+  },
+  "video": null,
+  "account_required": "yes",
+  "commercial_use": "unknown",
+  "commercial_note": null,
+  "watermark": "unknown",
+  "public_by_default": "no",
+  "data_logging": "may-train",
+  "watch_url": "https://support.google.com/gemini/answer/16275805?hl=en",
+  "verified_on": "2026-09-29",
+  "source_note": "Gemini Apps limits & upgrades (support.google.com/gemini/answer/16275805) and gemini.google/subscriptions, checked 2026-09-29."
+}

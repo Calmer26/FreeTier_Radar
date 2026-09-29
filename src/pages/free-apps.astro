@@ -1,0 +1,136 @@
+---
+import Base from "../layouts/Base.astro";
+import SponsorSlot from "../components/SponsorSlot.astro";
+import { arenaFile, formatDate, freeApps } from "../lib/data";
+import { ARENA_ATTRIBUTION, ARENA_DATASET_URL, type ArenaBoard } from "../../pipeline/arena";
+import type { FreeApp, FreeAppMedia } from "../../pipeline/types";
+
+/** Records not rechecked for this long get a "may be out of date" note. */
+const STALE_DAYS = 60;
+
+const rating = (board: ArenaBoard, name: string | null) => {
+  const data = arenaFile?.boards[board];
+  const e = name ? data?.models.find((m) => m.name === name) : undefined;
+  return e?.rating != null ? { rating: e.rating, rank: e.rank, of: data!.models.length } : null;
+};
+
+const TABS = [
+  { key: "image" as const, label: "Images", board: "text_to_image" as ArenaBoard },
+  { key: "video" as const, label: "Video", board: "text_to_video" as ArenaBoard },
+].map((t) => ({
+  ...t,
+  rows: freeApps
+    .filter((a) => a[t.key])
+    .map((a) => ({ a, m: a[t.key] as FreeAppMedia, r: rating(t.board, (a[t.key] as FreeAppMedia).arena) }))
+    // Rated first, highest first; then by name.
+    .sort((x, y) => (y.r?.rating ?? -1) - (x.r?.rating ?? -1) || x.a.name.localeCompare(y.a.name)),
+}));
+
+const COMMERCIAL: Record<FreeApp["commercial_use"], { text: string; cls: string }> = {
+  yes: { text: "Commercial use OK", cls: "" },
+  conditions: { text: "Commercial use: conditions", cls: "warn" },
+  no: { text: "Not for commercial use", cls: "bad" },
+  unknown: { text: "Commercial use: not stated", cls: "neutral" },
+};
+const stale = (a: FreeApp) => Date.now() - Date.parse(a.verified_on) > STALE_DAYS * 86_400_000;
+---
+<Base
+  title="Free AI image and video apps (no API)"
+  description="Apps that make AI images or videos for free without an API key: Gemini, Meta AI, Dreamina, Firefly and more, with their free allowance, LMArena rating and usage rights."
+>
+  <h1>Free image and video apps</h1>
+  <p class="lede">
+    Some of the best image and video models have no free API, but you can use them for free in the maker's own app
+    or website. Useful for one-off pictures and clips (blog images, social posts); not for anything you want to
+    automate.
+  </p>
+  <p class="callout info">
+    Want to generate images from code? See the free <a href="/#image">image generation APIs</a>{" "}and{" "}
+    <a href="/image-models/">their sample outputs</a>.
+  </p>
+  <SponsorSlot />
+
+  <div class="tabs" role="tablist" aria-label="Media type">
+    {TABS.map((t, i) => (
+      <button type="button" role="tab" data-tab={t.key} aria-selected={i === 0 ? "true" : "false"}>
+        {t.label} <span class="sub">{t.rows.length}</span>
+      </button>
+    ))}
+  </div>
+
+  {TABS.map((t, i) => (
+    <div class="table-scroll" data-panel={t.key} hidden={i > 0}>
+      <table>
+        <thead>
+          <tr>
+            <th>App</th><th>Model</th>
+            <th class="num" title={`LMArena ${t.label === "Images" ? "text-to-image" : "text-to-video"} rating`}>Arena</th>
+            <th>Free allowance</th><th class="hide-sm">Labels</th><th class="hide-sm">Checked</th>
+          </tr>
+        </thead>
+        <tbody>
+          {t.rows.map(({ a, m, r }) => (
+            <tr>
+              <td><a class="model-name" href={a.url} rel="noopener">{a.name}</a><div class="sub">{a.maker}</div></td>
+              <td>{m.models}{m.arena_note && <div class="sub">{m.arena_note}</div>}</td>
+              <td class="num">
+                {r ? <span title={`#${r.rank} of ${r.of} on LMArena`}>{Math.round(r.rating)}</span> : <span class="sub">–</span>}
+              </td>
+              <td>{m.allowance}</td>
+              <td class="hide-sm">
+                <span class={`badge ${COMMERCIAL[a.commercial_use].cls}`} title={a.commercial_note ?? undefined}>{COMMERCIAL[a.commercial_use].text}</span>
+                {a.public_by_default === "yes" && <span class="badge warn">Creations are public</span>}
+                {a.watermark === "yes" && <span class="badge warn">Watermark</span>}
+                {a.account_required === "no" && <span class="badge neutral">No signup</span>}
+                {(a.data_logging === "may-train" || a.data_logging === "logs-prompts") && <span class="badge neutral">👁 May use your prompts</span>}
+              </td>
+              <td class="hide-sm nowrap">
+                {formatDate(a.verified_on)}
+                {stale(a) && <div class="sub">may be out of date</div>}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  ))}
+
+  <h2>About each app</h2>
+  <div class="offers">
+    {freeApps.map((a) => (
+      <article class="offer" id={a.id}>
+        <h3><a href={a.url} rel="noopener">{a.name}</a> <span class="sub">{a.maker}</span></h3>
+        <p>{a.summary}</p>
+        {a.commercial_note && <p class="sub"><strong>Usage rights:</strong> {a.commercial_note}</p>}
+        <p class="sub">Source: {a.source_note}</p>
+      </article>
+    ))}
+  </div>
+
+  <h2>How this list works</h2>
+  <ul class="sub">
+    <li>Allowances come only from each app's own pages. Most apps don't publish a number (limits are often based on
+      how much computing a request takes), so "not published" is a real answer here, not a gap.</li>
+    <li>We can't test these apps automatically (they need a login, and their terms don't allow bots), so there's no
+      daily test: the date shows when we last checked the app's pages. Pages that allow it are re-checked weekly
+      for changes.</li>
+    <li>The Arena rating is only shown when the app's pages make clear which model free users get.</li>
+    <li>Checked and left out (29 Sep 2026): Kling (its free plan has no monthly credits and output isn't for
+      commercial use), Hailuo (sign-up credits only), Grok Imagine (no free access we could confirm), Microsoft
+      Copilot (free limits not on Microsoft's own pages yet).</li>
+    <li>Missing one? <a href="https://github.com/Calmer26/FreeTier_Radar/issues/new?template=suggest-resource.yml" rel="noopener">Suggest it</a>.</li>
+  </ul>
+  <p class="sub">Arena ratings: <a href={ARENA_DATASET_URL} rel="noopener">{ARENA_ATTRIBUTION}</a>.</p>
+
+  <script>
+    const tabs = [...document.querySelectorAll<HTMLButtonElement>("[data-tab]")];
+    const panels = [...document.querySelectorAll<HTMLElement>("[data-panel]")];
+    function select(key: string) {
+      for (const t of tabs) t.setAttribute("aria-selected", String(t.dataset.tab === key));
+      for (const p of panels) p.hidden = p.dataset.panel !== key;
+      history.replaceState(null, "", key === "image" ? location.pathname : `#${key}`);
+    }
+    for (const t of tabs) t.addEventListener("click", () => select(t.dataset.tab!));
+    if (location.hash === "#video") select("video");
+  </script>
+</Base>

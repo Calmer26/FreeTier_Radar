@@ -14,7 +14,7 @@ import type { ShowcaseFile } from "../../pipeline/showcase";
 import { PROVIDERS } from "../../pipeline/providers";
 import { isUnreachable } from "../../pipeline/reachability";
 import { withDefaults } from "../../pipeline/store-defaults";
-import type { Offer, ProviderId, RateLimits, Resource, ResourceEvent, SponsorFile, TestHistory, TestResult, ToolResult } from "../../pipeline/types";
+import type { FreeApp, Offer, ProviderId, RateLimits, Resource, ResourceEvent, SponsorFile, TestHistory, TestResult, ToolResult } from "../../pipeline/types";
 
 const resourceFiles = import.meta.glob<Resource[]>("../../data/resources/ai/*.json", { eager: true, import: "default" });
 const eventFiles = import.meta.glob<string>("../../data/events/*.jsonl", { eager: true, query: "?raw", import: "default" });
@@ -102,6 +102,10 @@ export const activeModels = models.filter((m) => m.status !== "removed" && !m.un
 
 /** Listed by their provider but answering "not found" day after day. */
 export const unreachableModels = models.filter((m) => m.status !== "removed" && m.unreachable);
+
+const appFiles = import.meta.glob<FreeApp>("../../data/apps/*.json", { eager: true, import: "default" });
+/** Curated consumer apps with free image or video generation (no free API). */
+export const freeApps: FreeApp[] = Object.values(appFiles).sort((a, b) => a.name.localeCompare(b.name));
 
 /** Curated offers: free credits, trials and quota pools. */
 export const offers: Offer[] = Object.values(offerFiles).sort((a, b) => a.name.localeCompare(b.name));

@@ -527,6 +527,7 @@ A GitHub issue form (`.github/ISSUE_TEMPLATE/suggest-resource.yml`) with fields 
 - **Image showcase** (29 Sep): every free image model draws the same three prompts once (text on a sign, hands, a precise layout), at most 3,500 Neurons a day, cheapest first. Images are stored resized (768 px JPEG) in `public/showcase/`; the comparison page is `/image-models/`. Arena text-to-image ratings shown where available.
 - **Siblings:** the same model at several providers is linked by normalised name; a model without its own Arena link or context size borrows it from a sibling (labelled).
 - **Search basics** (29 Sep): sitemap, robots.txt, canonical links, sharing image, structured data (breadcrumbs, ranking lists), model-page titles like "X free on Provider".
+- **Free image and video apps** (29 Sep): `/free-apps/`, Images and Video tabs. Hand-kept records in `data/apps/` for apps with free generation but no free API (Gemini app, Google AI Studio, ChatGPT, Meta AI, Firefly, Ideogram, Leonardo, Dreamina, Qwen Chat), with allowance, usage-rights labels and the LMArena rating (the video board was added). Weekly page watch where the site allows it.
 - Local playground (owner only, never committed) for trying Cloudflare prompts with a Neuron counter.
 - **Phase 2a is complete.** Cloudflare Workers AI and Z.ai from 2b are done. Next: SambaNova and Mistral (need keys), then 2c (launch, around 12 Oct).
 

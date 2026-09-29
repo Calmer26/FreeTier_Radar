@@ -1,0 +1,27 @@
+{
+  "id": "meta-ai",
+  "name": "Meta AI",
+  "maker": "Meta",
+  "url": "https://www.meta.ai",
+  "summary": "Meta's assistant (app and meta.ai). Image generation is free and runs on Muse Image; you can also make short AI videos (\"vibes\"). Meta One plans raise the limits.",
+  "image": {
+    "models": "Muse Image",
+    "allowance": "Not published.",
+    "arena": "muse-image"
+  },
+  "video": {
+    "models": "Vibes (AI video)",
+    "allowance": "Not published.",
+    "arena": null,
+    "arena_note": "Meta doesn't say whether free accounts get Muse Video."
+  },
+  "account_required": "unknown",
+  "commercial_use": "unknown",
+  "commercial_note": null,
+  "watermark": "unknown",
+  "public_by_default": "unknown",
+  "data_logging": "may-train",
+  "watch_url": "https://ai.meta.com/blog/introducing-muse-image-muse-video-msl/",
+  "verified_on": "2026-09-29",
+  "source_note": "meta.ai (\"create AI-generated images for free\"), Meta AI and Vibes Help Center, and Meta's Muse Image announcement, checked 2026-09-29."
+}
