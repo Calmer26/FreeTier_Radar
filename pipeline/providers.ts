@@ -172,14 +172,15 @@ export const PROVIDERS: Record<ProviderId, ProviderInfo> = {
     list_needs_key: true,
     usage_terms: "unknown",
     // docs.z.ai pricing and privacy policy, checked 2026-09-28.
-    usage_terms_note: "Z.ai's privacy policy says it uses data to improve its services, including training its models. Free models allow one request at a time.",
+    usage_terms_note: "Z.ai's privacy policy says it uses data to improve its services, including training its models.",
     limit_scope: "per-model",
-    rate_limits: { note: "One concurrent request per free model.", source: "https://docs.z.ai/guides/overview/pricing" },
+    // The pricing page (checked 2026-09-29) lists the Flash models as Free but gives no rate limits.
+    rate_limits: null,
     card_required: "no",
     account_required: "yes",
     data_logging: "may-train",
     limits_url: "https://docs.z.ai/guides/overview/pricing",
-    summary: "Zhipu's international API. Three GLM Flash models are priced free, including a vision model.",
+    summary: "Zhipu's international API. Three GLM Flash models are priced free (in the Text and Vision tables of its pricing page), including a vision model.",
   },
   cloudflare: {
     id: "cloudflare",

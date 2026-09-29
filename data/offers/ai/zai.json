@@ -3,8 +3,8 @@
   "provider": "Z.ai (Zhipu)",
   "name": "Z.ai free Flash models",
   "offer_type": "recurring-quota",
-  "amount": "GLM-4.7-Flash, GLM-4.5-Flash and GLM-4.6V-Flash priced free; one request at a time",
-  "summary": "Z.ai prices its three Flash models at $0 on its international API. GLM-4.5-Flash has an announced retirement. An account and API key are needed; overseas phone numbers are reported to work, and the chat API doesn't require real-name verification. Z.ai's privacy policy says it uses data to improve its services, including training its models. The models themselves are tracked in the directory once our key is set up.",
+  "amount": "GLM-4.7-Flash, GLM-4.5-Flash and GLM-4.6V-Flash priced free (input and output); rate limits not published",
+  "summary": "Z.ai prices its three Flash models at $0 on its international API. They're listed further down its pricing page (Text Models and Vision Models tables), not in the Latest Models table at the top, which only has paid GLM-5 models. There's no separate free plan: create an API key and call the model. GLM-4.5-Flash has an announced retirement. Z.ai's privacy policy says it uses data to improve its services, including training its models.",
   "expires": null,
   "usage_terms": "unknown",
   "card_required": "no",
@@ -12,7 +12,7 @@
   "data_logging": "may-train",
   "url": "https://z.ai/model-api",
   "watch_url": "https://docs.z.ai/guides/overview/pricing",
-  "verified_on": "2026-09-28",
-  "source_note": "Z.ai pricing page and privacy policy, checked 2026-09-28. The weekly page check flags changes to the free list.",
+  "verified_on": "2026-09-29",
+  "source_note": "Z.ai pricing page and privacy policy, checked 2026-09-29. The weekly page check flags changes to the free list.",
   "changes": []
 }
