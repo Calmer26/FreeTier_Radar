@@ -9,7 +9,8 @@ import { reliability } from "../../pipeline/rankings";
 
 // Same order as the text-to-speech ranking: most reliable, then fastest.
 const models = activeModels
-  .filter((m) => m.kind === "tts" && !NON_ENGLISH.test(m.model_id))
+  // Models whose free tier refuses them (no free quota) would never get samples.
+  .filter((m) => m.kind === "tts" && !NON_ENGLISH.test(m.model_id) && m.lastTest?.status !== "no_free_quota")
   .map((m) => ({ m, rel: reliability(m.tests) }))
   .sort((a, b) => (b.rel.share ?? -1) - (a.rel.share ?? -1) || (a.rel.medianLatencyMs ?? 1e9) - (b.rel.medianLatencyMs ?? 1e9));
 const done = models.filter(({ m }) => VOICE_SENTENCES.some((s) => voices.samples[voiceKey(m.id, s.id)])).length;
