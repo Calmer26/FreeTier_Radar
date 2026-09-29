@@ -76,6 +76,17 @@ describe("rank", () => {
     expect(out.map((x) => x.r.id)).toEqual(["same-rating-tools", "rated-no-tools", "unrated"]);
   });
 
+  it("breaks long-context ties on Arena rating, then speed, not on name", () => {
+    const text = (rating: number) => ({ name: "n", published: null, boards: { text: { rating, rank: 1, of: 1, votes: 1 } } });
+    const big = { context_length: 1_000_000 };
+    const out = rank(ranking("long-context"), [
+      { r: res("a-older", big), history: good, arena: text(1417) },
+      { r: res("b-unrated-fast", big), history: [day(1, "responded", 100)] },
+      { r: res("c-newer", big), history: good, arena: text(1478) },
+    ]);
+    expect(out.map((x) => x.r.id)).toEqual(["c-newer", "a-older", "b-unrated-fast"]);
+  });
+
   it("keeps speech rankings to their own kind", () => {
     const out = rank(ranking("speech-to-text"), [
       { r: res("whisper", { kind: "stt" }), history: good },

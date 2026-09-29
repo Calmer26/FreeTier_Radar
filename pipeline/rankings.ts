@@ -84,6 +84,7 @@ const agentLevel = (x: RankedModel) => agentReadiness(x.r, x.history, x.tools).l
 /** Arena rating for coding: WebDev when rated there, else Text; -1 when unrated. */
 const codingRating = (x: RankedModel) => x.arena?.boards.webdev?.rating ?? x.arena?.boards.text?.rating ?? -1;
 const textRating = (x: RankedModel) => x.arena?.boards.text?.rating ?? -1;
+const visionRating = (x: RankedModel) => x.arena?.boards.vision?.rating ?? -1;
 const imageRating = (x: RankedModel) => x.arena?.boards.text_to_image?.rating ?? -1;
 /** Neurons per 1024×1024 image; unknown prices sort last. */
 const imageNeurons = (x: RankedModel) => (x.r.pricing ? imageCost(x.r.pricing)?.neurons : null) ?? Number.MAX_SAFE_INTEGER;
@@ -137,17 +138,18 @@ export const RANKINGS: RankingDef[] = [
     slug: "vision",
     title: "Best free vision models",
     intro: "Free chat models that accept images as input.",
-    order: "Reliability over the last 30 days, then median response time.",
+    order: "Reliability over the last 30 days, then LMArena Vision rating, then median response time.",
     filter: (x) => usable(x) && ofKind("chat")(x) && !!x.r.input_modalities?.includes("image"),
-    compare: byReliability,
+    compare: (a, b) => share(b) - share(a) || visionRating(b) - visionRating(a) || latency(a) - latency(b),
   },
   {
     slug: "long-context",
     title: "Best free long-context models",
     intro: "Free chat models with a context window of at least 200k tokens.",
-    order: "Context size, then reliability over the last 30 days.",
+    order: "Context size, then reliability over the last 30 days, then LMArena Text rating, then median response time.",
     filter: (x) => usable(x) && ofKind("chat")(x) && (x.r.context_length ?? 0) >= 200_000,
-    compare: (a, b) => (b.r.context_length ?? 0) - (a.r.context_length ?? 0) || share(b) - share(a),
+    compare: (a, b) =>
+      (b.r.context_length ?? 0) - (a.r.context_length ?? 0) || share(b) - share(a) || textRating(b) - textRating(a) || latency(a) - latency(b),
   },
   {
     slug: "text-to-speech",
