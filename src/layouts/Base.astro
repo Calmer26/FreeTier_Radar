@@ -6,9 +6,11 @@ interface Props {
   title: string;
   description?: string;
   noindex?: boolean;
+  /** schema.org structured data for this page (one object or several). */
+  jsonLd?: object | object[];
 }
 
-const { title, description = SITE.tagline, noindex = false } = Astro.props;
+const { title, description = SITE.tagline, noindex = false, jsonLd } = Astro.props;
 const path = Astro.url.pathname;
 const nav = [
   ["/", "Directory"],
@@ -21,6 +23,15 @@ const nav = [
   ["/methodology/", "Methodology"],
 ];
 const fullTitle = path === "/" ? `${SITE.name}: free AI models that actually work` : `${title} · ${SITE.name}`;
+const canonical = new URL(path, Astro.site).href;
+const ogImage = new URL("/og.png", Astro.site).href;
+// Every page says what site it belongs to; the home page also describes the site itself.
+const structured = [
+  ...(path === "/"
+    ? [{ "@context": "https://schema.org", "@type": "WebSite", name: SITE.name, url: new URL("/", Astro.site).href, description: SITE.tagline }]
+    : []),
+  ...(jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : []),
+];
 ---
 <!doctype html>
 <html lang="en">
@@ -30,11 +41,19 @@ const fullTitle = path === "/" ? `${SITE.name}: free AI models that actually wor
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex" />}
-    <link rel="canonical" href={new URL(path, Astro.site)} />
+    <link rel="canonical" href={canonical} />
     <link rel="alternate" type="application/rss+xml" title={`${SITE.name} changes`} href="/rss.xml" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:url" content={canonical} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    {structured.map((d) => <script type="application/ld+json" set:html={JSON.stringify(d)} />)}
   </head>
   <body>
     <header class="site-header">

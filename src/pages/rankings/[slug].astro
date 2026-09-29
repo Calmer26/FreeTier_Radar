@@ -25,7 +25,17 @@ const arenaCell = (m: ModelView) => {
 };
 const pct = (s: number | null) => (s == null ? "–" : `${Math.round(s * 100)}%`);
 ---
-<Base title={def.title} description={`${def.intro} Ranked by daily tests; updated every day.`} noindex={list.length === 0}>
+<Base
+  title={def.title}
+  description={`${def.intro} Ranked by daily tests; updated every day.`}
+  noindex={list.length === 0}
+  jsonLd={{
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: def.title,
+    itemListElement: list.slice(0, 10).map((x, i) => ({ "@type": "ListItem", position: i + 1, name: x.r.name, url: new URL((x.r as ModelView).href, Astro.site).href })),
+  }}
+>
   <p class="sub"><a href="/rankings/">Rankings</a>{isCline && <> · <a href="/cline/">Cline setup: best Plan + Act pair</a></>}</p>
   <h1>{def.title}</h1>
   <p class="lede">{def.intro}</p>

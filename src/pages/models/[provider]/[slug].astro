@@ -35,9 +35,29 @@ const snippet = m.kind === "chat" ? clineSnippet(m) : "";
 const siblings = m.siblings.map((id) => modelById.get(id)!).filter(Boolean);
 const fit = clineFit(m.id);
 const tt = toolStats(m.toolTests, RANKING_WINDOW_DAYS);
-const description = `${m.name} on ${provider.label}: free-tier status, limits, daily test results and change history.`;
+// Search-friendly title and description: "Qwen3.8 27B free on OpenRouter" plus the key facts.
+const cleanName = m.name.replace(/\s*\(free\)\s*/i, " ").replace(/^[^:]+:\s*/, "").trim() || m.name;
+const providerShort = provider.label.split(" (")[0];
+const pageTitle = `${cleanName} ${m.kind === "chat" ? "" : `(${KIND_LABELS[m.kind].toLowerCase()}) `}free on ${providerShort}`;
+const rel = m.tests.length ? `${m.tests.filter((t) => t.status === "responded").length} of ${m.tests.length} daily tests answered` : "not tested yet";
+const facts = [
+  m.kind === "chat" && m.context_length ? `${formatContext(m.context_length)} context` : null,
+  m.kind === "chat" && (m.tool_calling || m.toolTests.some((t) => t.status === "pass")) ? "tool calling" : null,
+  m.usage_terms === "evaluation-only" ? "evaluation only" : null,
+  m.testable ? rel : "only inside Cline",
+].filter(Boolean).join(", ");
+const description = `Is ${cleanName} free on ${providerShort}? ${facts}. Limits, cost, ${m.kind === "chat" ? "Cline settings" : "how to call it"} and change history, updated daily.`;
+const breadcrumbs = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Providers", item: new URL("/providers/", Astro.site).href },
+    { "@type": "ListItem", position: 2, name: provider.label, item: new URL(`/providers/${m.provider}/`, Astro.site).href },
+    { "@type": "ListItem", position: 3, name: cleanName, item: new URL(m.href, Astro.site).href },
+  ],
+};
 ---
-<Base title={/free/i.test(m.name) ? m.name : `${m.name} (free)`} description={description} noindex={!m.indexable || m.unreachable}>
+<Base title={pageTitle} description={description} noindex={!m.indexable || m.unreachable} jsonLd={breadcrumbs}>
   <p class="sub"><a href={`/providers/${m.provider}/`}>{provider.label}</a> · {KIND_LABELS[m.kind]}</p>
   <h1>{m.name}</h1>
   <p class="mono sub">{m.model_id}</p>
