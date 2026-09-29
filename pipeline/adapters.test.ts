@@ -128,13 +128,14 @@ describe("mapLlm7", () => {
 });
 
 describe("mapZai", () => {
-  it("keeps only the models the pricing page lists as free", () => {
-    const out = mapZai([{ id: "glm-4.7-flash", context_length: 200_000 }, { id: "GLM-4.6V-Flash" }, { id: "glm-5.3" }]);
-    expect(out.map((m) => [m.model_id, m.name, m.input_modalities])).toEqual([
-      ["glm-4.7-flash", "GLM-4.7-Flash", ["text"]],
-      ["GLM-4.6V-Flash", "GLM-4.6V-Flash", ["text", "image"]],
+  it("hand-lists the three free Flash models, which Z.ai's /models list leaves out", () => {
+    const out = mapZai();
+    expect(out.map((m) => [m.model_id, m.input_modalities])).toEqual([
+      ["glm-4.7-flash", ["text"]],
+      ["glm-4.5-flash", ["text"]],
+      ["glm-4.6v-flash", ["text", "image"]],
     ]);
-    expect(out[0]).toMatchObject({ provider: "zai", data_logging: "may-train", context_length: 200_000 });
+    expect(out[0]).toMatchObject({ provider: "zai", listed_by: "curated", price_type: "free", data_logging: "may-train" });
   });
 });
 

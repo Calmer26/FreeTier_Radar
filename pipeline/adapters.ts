@@ -324,44 +324,35 @@ async function fetchLlm7(): Promise<ObservedModel[]> {
 // ── Z.ai (Zhipu) ─────────────────────────────────────────────────────────────────
 
 /**
- * Z.ai's model list carries no prices, so the free models come from its pricing page
- * (docs.z.ai/guides/overview/pricing, checked 2026-09-28). The weekly page watch on the
- * "zai" offer flags when that page changes; update this list then.
+ * Z.ai's free models, from its pricing page (docs.z.ai/guides/overview/pricing, checked
+ * 2026-09-29: "Free" in the Text and Vision tables). Its /models list leaves them out
+ * (it only lists paid models), so they're hand-listed; the daily test shows whether
+ * each still answers, and the weekly watch on the "zai" offer flags pricing changes.
  */
-export const ZAI_FREE_MODELS: Record<string, { name: string; input_modalities: string[] }> = {
-  "glm-4.7-flash": { name: "GLM-4.7-Flash", input_modalities: ["text"] },
-  "glm-4.5-flash": { name: "GLM-4.5-Flash", input_modalities: ["text"] },
-  "glm-4.6v-flash": { name: "GLM-4.6V-Flash", input_modalities: ["text", "image"] },
-};
+export const ZAI_FREE_MODELS: Array<{ id: string; name: string; input_modalities: string[] }> = [
+  { id: "glm-4.7-flash", name: "GLM-4.7-Flash", input_modalities: ["text"] },
+  { id: "glm-4.5-flash", name: "GLM-4.5-Flash", input_modalities: ["text"] },
+  { id: "glm-4.6v-flash", name: "GLM-4.6V-Flash", input_modalities: ["text", "image"] },
+];
 
-export interface ZaiModel {
-  id: string;
-  context_length?: number | null;
-}
-
-/** Keeps the listed models that the pricing page marks free. */
-export function mapZai(models: ZaiModel[]): ObservedModel[] {
-  return models.flatMap((m) => {
-    const free = ZAI_FREE_MODELS[m.id.toLowerCase()];
-    if (!free) return [];
-    return [{
-      ...base("zai", "chat"),
-      model_id: m.id,
-      name: free.name,
-      url: "https://docs.z.ai/guides/overview/pricing",
-      price_type: "free" as const,
-      context_length: m.context_length ?? null,
-      input_modalities: free.input_modalities,
-      tool_calling: null,
-    }];
-  });
+export function mapZai(): ObservedModel[] {
+  return ZAI_FREE_MODELS.map((m) => ({
+    ...base("zai", "chat", "curated"),
+    model_id: m.id,
+    name: m.name,
+    url: "https://docs.z.ai/guides/overview/pricing",
+    price_type: "free" as const,
+    context_length: null,
+    input_modalities: m.input_modalities,
+    tool_calling: null,
+  }));
 }
 
 async function fetchZai(env: Env): Promise<ObservedModel[]> {
-  const json = await getJson<{ data?: ZaiModel[] }>("https://api.z.ai/api/paas/v4/models", {
-    Authorization: `Bearer ${env.ZAI_API_KEY}`,
-  });
-  return mapZai(json.data ?? []);
+  // The list itself isn't used (see above), but calling it checks the key works, so a bad
+  // key shows up as a failing source rather than as three broken models.
+  await getJson("https://api.z.ai/api/paas/v4/models", { Authorization: `Bearer ${env.ZAI_API_KEY}` });
+  return mapZai();
 }
 
 // ── Cline (free promotion) ───────────────────────────────────────────────────────
