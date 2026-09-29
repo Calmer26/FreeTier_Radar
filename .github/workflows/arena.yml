@@ -3,8 +3,7 @@ name: Arena ratings
 # Weekly: refresh LMArena ratings, link free chat models to Arena names (exact
 # matches directly), and open a PR with near matches for the owner to confirm.
 on:
-  schedule:
-    - cron: "20 6 * * 1"
+  # Started on time by the scheduler Worker (scheduler/schedule.ts); GitHub's cron was unreliable.
   workflow_dispatch:
 
 concurrency:

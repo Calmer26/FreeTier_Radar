@@ -45,7 +45,9 @@ code there was copied and adapted, not shared.
   Data-writing jobs share the `data-writes` concurrency group.
 - `scheduler/`: a separate Cloudflare Worker (cron every 10 min) that starts the data workflows on time via
   workflow_dispatch; the times live in `scheduler/schedule.ts`. GitHub's own cron was late or skipped runs.
-  Its `GITHUB_TOKEN` secret is set by the owner with wrangler. Keep workflow times in step with it.
+  The workflows have no GitHub `schedule` of their own. Its `GITHUB_TOKEN` secret (fine-grained, Actions
+  read/write) is set by the owner; deploy from `scheduler/` with `CLOUDFLARE_API_TOKEN` unset (the `.env` one
+  is Workers AI only).
 
 ## Rules
 

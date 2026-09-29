@@ -2,8 +2,7 @@ name: Daily tests
 
 # One tiny request per active free model; results go to data/tests/history.json.
 on:
-  schedule:
-    - cron: "10 6 * * *"
+  # Started on time by the scheduler Worker (scheduler/schedule.ts); GitHub's cron was unreliable.
   workflow_dispatch:
 
 concurrency:

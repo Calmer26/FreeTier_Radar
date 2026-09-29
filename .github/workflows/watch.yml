@@ -2,8 +2,7 @@ name: Page watch
 
 # Weekly: fetch the pages behind curated offers and open an issue when one changed.
 on:
-  schedule:
-    - cron: "40 5 * * 1"
+  # Started on time by the scheduler Worker (scheduler/schedule.ts); GitHub's cron was unreliable.
   workflow_dispatch:
 
 concurrency:

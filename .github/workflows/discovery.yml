@@ -3,8 +3,7 @@ name: Discovery
 # Fetches every provider's model list, commits changed data, and opens issues for
 # high-impact changes and failing sources. Commits only when something changed.
 on:
-  schedule:
-    - cron: "20 3,9,15,21 * * *"
+  # Started on time by the scheduler Worker (scheduler/schedule.ts); GitHub's cron was unreliable.
   workflow_dispatch:
 
 # Shared with the daily tests so two jobs never write data/ at the same time.

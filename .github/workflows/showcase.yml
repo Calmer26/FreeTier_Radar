@@ -1,10 +1,9 @@
 name: Image showcase
 
-# Daily, after the tests: make the day's share of missing showcase images (each free
+# Daily at 00:30 UTC, just after the Neuron reset: make the day's share of missing showcase images (each free
 # image model draws the same test prompts once). Commits nothing once all exist.
 on:
-  schedule:
-    - cron: "30 0 * * *"   # just after the Neuron reset (00:00 UTC)
+  # Started on time by the scheduler Worker (scheduler/schedule.ts); GitHub's cron was unreliable.
   workflow_dispatch:
 
 concurrency:

@@ -2,8 +2,7 @@ name: Weekly roundup
 
 # Monday: draft last week's roundup and open it as a PR. Merging publishes it.
 on:
-  schedule:
-    - cron: "0 7 * * 1"
+  # Started on time by the scheduler Worker (scheduler/schedule.ts); GitHub's cron was unreliable.
   workflow_dispatch:
 
 permissions:
