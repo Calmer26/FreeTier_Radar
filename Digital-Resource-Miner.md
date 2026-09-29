@@ -1,7 +1,7 @@
 # FreeTier Radar (working name; project folder: resource_miner)
 
-**Status:** Requirements v1.2 (26-question clarification + design review + Phase 2 research)
-**Date:** 28 September 2026
+**Status:** Requirements v1.3 (v1.2 + build status: MVP and Phase 2a live, image models, coding rankings, search basics)
+**Date:** 29 September 2026
 **Previous version:** `Digital-Resource-Miner.v0-original.md` (personal digest-bot concept)
 
 ---
@@ -111,7 +111,7 @@ Every resource carries these independent fields. The most important ones appear 
 
 | Phase | Scope | How data is collected |
 |---|---|---|
-| **0 — Setup** | Repo, Cloudflare Pages, secrets, limit checks, domain | — |
+| **0 — Setup** | Repo, Cloudflare (Workers static assets, see §12), secrets, limit checks, domain | — |
 | **1 — MVP** | Free LLMs: OpenRouter, Groq, Google Gemini, NVIDIA (eval-only) | Automated (fetchers exist in model-admin) |
 | **2 — AI radar + launch** | More free-model providers, provider offers (credits, trials, quota pools), Arena scores, rankings, weekly roundup, newsletter, public launch. Details in §18a. | Automated where there's an API; otherwise curated + page-change alerts |
 | **3 — Infra watchlist** | ~15–20 high-value always-free tiers, e.g. Oracle Always Free, Cloudflare (Workers/Pages/R2/D1), Supabase, Neon, Turso, Vercel, Netlify, AWS/GCP/Azure always-free, GitHub Actions/Codespaces | Curated JSON records + weekly page-change detection |
@@ -286,6 +286,8 @@ The limits of this approach:
 
 Pages rebuilds happen only when there are commits: roughly 1–5 per day.
 
+**Hosting as built (29 Sep 2026):** a Cloudflare **Worker with static assets** (`wrangler.jsonc`), built from `main` by Cloudflare's git integration; branches get preview URLs. Live at https://freetier-radar.marcelkanters.workers.dev until there is a domain. Site data is bundled with `import.meta.glob` (Cloudflare prerenders in its own runtime, where `fs` reads come back empty).
+
 **Stack:** TypeScript, npm, Astro, Cloudflare Pages, one small Cloudflare Worker for the form, and GitHub Actions. The **new repo is public** (recommended, see §22); secrets live in Actions only.
 
 ---
@@ -411,7 +413,7 @@ The competitive position still holds: most free-model sites show only a snapshot
 
 **Phase 1 — MVP (private use for 2–4 weeks)**
 
-*Status 28 Sep 2026:* items 1–8 are built locally (pipeline + 35 tests, site, workflows). The site is not deployed yet: that waits on Phase 0. See `CLAUDE.md` for the code layout.
+*Status 29 Sep 2026:* Phase 0 is done and items 1–8 are live (pipeline + 122 tests, site, workflows). Item 9 and the exit criteria run from 28 Sep; the first real change events came in on 29 Sep. See `CLAUDE.md` for the code layout.
 
 1. Port the OpenRouter, Groq, Gemini and NVIDIA adapters and the diff logic, with tests.
 2. JSON data layout, fingerprinting, pending-removal logic and source-failure issues.
@@ -485,9 +487,14 @@ These don't fit one-record-per-model, so they become **offer** records.
 
 Ranking pages work without benchmark scores. Arena ratings refine them where available.
 
-- **Best free models for coding agents:** agent-ready first; then Arena webdev/agent rating (if any), test reliability over 30 days, context, and limits.
+- **Coding** (29 Sep: not tied to one tool; the Cline setup page keeps its best Plan + Act pair):
+  - **Best free models for coding:** Arena WebDev rating (Text as fallback), then tool-call pass share, then reliability; only models that answered on at least half their test days.
+  - **Coding: Plan mode:** Arena WebDev rating, then context, then reliability; needs tool calling and 64k context.
+  - **Coding: Act mode:** tool-call pass share (daily `get_weather` test), then reliability, then speed; only models passing at least half their tool-call tests.
+- **Highest-rated free chat models:** Arena Text rating.
 - **Most reliable free models:** share of days they responded over 30 days, then median latency.
 - **Best free vision models** and **best free long-context models:** filtered by the respective field, same ordering.
+- **Image generation:** Arena text-to-image rating, then fewer Neurons per image, then reliability. **Text-to-speech** and **speech-to-text:** reliability.
 
 The formula is published on the methodology page. Each ranking is one static page, regenerated on build.
 
@@ -515,7 +522,13 @@ A GitHub issue form (`.github/ISSUE_TEMPLATE/suggest-resource.yml`) with fields 
 - Keyless providers live: Kilo Code gateway (15 free models) and LLM7.io (3), tested anonymously, with a per-model data-use label. OVHcloud listed as a free-credits entry instead: its per-IP anonymous limit can't be tested reliably from shared CI servers.
 - Chinese providers (28 Sep): Z.ai's three free GLM Flash models get an adapter (waiting on the owner's `ZAI_API_KEY`); SiliconFlow and ModelScope are free-credits entries because both require real-name verification (ModelScope is also non-commercial). Most Chinese models are already tracked through OpenRouter, Kilo, NVIDIA, Groq and LLM7.
 - Cloudflare Workers AI added (28 Sep, owner's token): 25 free-plan models incl. 10 image models (FLUX, Stable Diffusion), each with a free-per-day estimate; image tests run weekly. No free video generation API exists (only trials); Gemini image/Veo have a free limit of 0.
-- **Phase 2a is complete.** Next: 2b (SambaNova, Mistral, Cloudflare Workers AI adapters; needs keys) and 2c (launch).
+- Z.ai live (29 Sep, owner's key): its `/models` list leaves out the free Flash models, so they are hand-listed from the pricing page. First test: GLM-4.5-Flash answered and passed the tool call; the other two were overloaded (429).
+- **Cloudflare pricing** is read from its pricing page (Markdown version) every discovery run: each model page shows Neurons and dollars per request, image or audio minute, and how many fit in the free 10,000 Neurons a day. Models that need the paid plan are left out.
+- **Image showcase** (29 Sep): every free image model draws the same three prompts once (text on a sign, hands, a precise layout), at most 3,500 Neurons a day, cheapest first. Images are stored resized (768 px JPEG) in `public/showcase/`; the comparison page is `/image-models/`. Arena text-to-image ratings shown where available.
+- **Siblings:** the same model at several providers is linked by normalised name; a model without its own Arena link or context size borrows it from a sibling (labelled).
+- **Search basics** (29 Sep): sitemap, robots.txt, canonical links, sharing image, structured data (breadcrumbs, ranking lists), model-page titles like "X free on Provider".
+- Local playground (owner only, never committed) for trying Cloudflare prompts with a Neuron counter.
+- **Phase 2a is complete.** Cloudflare Workers AI and Z.ai from 2b are done. Next: SambaNova and Mistral (need keys), then 2c (launch, around 12 Oct).
 
 **2a — no keys needed; can be built before Phase 0**
 1. Offer records + page-change watcher.
@@ -527,14 +540,14 @@ A GitHub issue form (`.github/ISSUE_TEMPLATE/suggest-resource.yml`) with fields 
 7. Issue form.
 
 **2b — needs the owner's keys**
-- SambaNova, Mistral and Cloudflare Workers AI adapters.
+- SambaNova and Mistral adapters (Cloudflare Workers AI and Z.ai are done).
 - The first real roundup.
 
 **2c — launch**, once there are ≥ 14 days of test history (so agent-ready tags exist):
 - newsletter provider set up
 - launch posts on Reddit and Hacker News
 
-**Later, if there's demand:** image, speech and embedding models as their own categories (speech code exists in model-admin).
+**Later, if there's demand:** embedding models. (Speech and image models were pulled forward and are live.) Free video generation: no free API exists (checked 28 Sep 2026); revisit.
 
 ---
 
@@ -582,9 +595,9 @@ A GitHub issue form (`.github/ISSUE_TEMPLATE/suggest-resource.yml`) with fields 
 
 ## 22. Open decisions
 
-1. Domain for FreeTier Radar.
+1. Domain for FreeTier Radar. freetierradar.com is registered by someone else (parked, checked 29 Sep 2026); .dev, .io, .app and freetier-radar.com had no DNS records, so may be free. Until then canonical links use the workers.dev address (`site.config.ts`).
 2. Newsletter provider: needs a free tier with RSS-to-email.
 3. Public repo (recommended: transparency, contributions, free Actions minutes) or private.
-4. Which free, production-ok LLM writes the weekly roundup draft (Groq or an OpenRouter free model).
+4. ~~Which LLM writes the roundup draft~~: decided, Groq `openai/gpt-oss-120b` (production use allowed), template intro as fallback.
 5. The exact list for the infra watchlist (Phase 3).
 6. Usage terms for Mistral's Experiment tier and SambaNova's free tier, and the logging and terms statements of the keyless providers (Kilo, LLM7, OVHcloud). To read before each is added.

@@ -1,29 +1,44 @@
 # FreeTier Radar (resource_miner)
 
 Public site tracking free AI models: what's free, what changed, what works.
-Requirements: `Digital-Resource-Miner.md` (v1.2). Standalone: no dependency on solo_developer;
+Requirements: `Digital-Resource-Miner.md` (v1.3; §18a has the build status).
+Live: https://freetier-radar.marcelkanters.workers.dev (Cloudflare Worker with static assets, built from main). Standalone: no dependency on solo_developer;
 code there was copied and adapted, not shared.
 
 ## Layout
 
 - `pipeline/`: data pipeline (TypeScript, run with tsx). Pure logic (`diff.ts`, `agent-ready.ts`,
-  `rankings.ts`, `roundup.ts`, `watch.ts`, `arena.ts`, `reachability.ts`, `probe.ts` helpers, adapter `map*`
-  functions) has tests next to it. Entry points: `run-discovery.ts`, `run-tests.ts`,
-  `run-watch.ts`, `run-roundup.ts`, `run-arena.ts`.
+  `rankings.ts`, `roundup.ts`, `watch.ts`, `arena.ts`, `siblings.ts`, `reachability.ts`, `cloudflare-pricing.ts`,
+  `showcase.ts`, `probe.ts` helpers, adapter `map*` functions) has tests next to it. Entry points:
+  `run-discovery.ts`, `run-tests.ts`, `run-watch.ts`, `run-roundup.ts`, `run-arena.ts`, `run-showcase.ts`.
 - `data/`: the database. JSON in git, written only by the pipeline, except the hand-kept
   `sponsor.json` and `offers/ai/*.json`. History = git log. Never store snapshots or full API
   responses or pages.
-- Models have a `kind` (chat, tts, stt); each kind has its own daily test in `probe.ts`.
-  OpenRouter's free voices are hand-listed in `adapters.ts` (`OPENROUTER_CURATED_SPEECH`).
+- Models have a `kind` (chat, tts, stt, image); each kind has its own test in `probe.ts` (image: weekly,
+  120 s timeout). Hand-listed in `adapters.ts`: OpenRouter's free voices (`OPENROUTER_CURATED_SPEECH`) and
+  Z.ai's free Flash models (`ZAI_FREE_MODELS`; its `/models` leaves them out).
+- Cloudflare Workers AI: `base_url` has an `{account}` placeholder (`baseUrl()`). Prices come from its pricing
+  page (`cloudflare-pricing.ts`, fetched each discovery; a failed fetch throws rather than wiping prices);
+  paid-plan-only models are left out. Costs are shown in Neurons against the 10,000 free a day.
+- `showcase.ts`: every free image model draws the same three prompts once, within a daily Neuron budget;
+  images in `public/showcase/` (768 px JPEG), metadata in `data/showcase.json`.
+- `siblings.ts`: the same model at several providers, by normalised name. A model without its own Arena
+  link or context size borrows it from a sibling (shown as borrowed).
 - `data/benchmarks/arena.json` + `data/aliases.json`: LMArena ratings (CC-BY-4.0, attribute it)
   and the links from our model ids to Arena names. Exact matches and effort/size variants
   ("-high", "(Max)", "-30b-a3b") are automatic; other near matches only count once confirmed
   through the weekly aliases PR (`pipeline/arena.ts`). Rejected ones stay rejected.
 - `content/roundups/`: published weekly roundups (Markdown), merged from the Monday PR.
 - `fixtures/`: the STT test clip (see its README).
-- `src/`: Astro static site; reads `data/` and `content/` at build time through `src/lib/`.
+- `src/`: Astro static site; reads `data/` and `content/` at build time through `src/lib/`, bundled with
+  `import.meta.glob` (Cloudflare prerenders in its own runtime; `fs` reads come back empty there).
+- `site.config.ts`: `SITE.url` must be the address the site is really served from (canonical links,
+  sitemap, RSS, README). Change it in the same push as adding a domain.
+- `playground/`: local-only Cloudflare prompt tester (`npx tsx playground/server.mjs`, port 4400). Never
+  commit it (it's in `.git/info/exclude`).
 - `scripts/generate-readme.ts`: regenerates the list between the README markers.
-- `.github/workflows/`: discovery every 6 h, daily tests, weekly page watch, Arena ratings and roundup, CI.
+- `.github/workflows/`: discovery every 6 h, daily tests, daily showcase, weekly page watch, Arena ratings
+  and roundup (opens a PR), CI.
   Data-writing jobs share the `data-writes` concurrency group.
 
 ## Rules
@@ -39,7 +54,8 @@ code there was copied and adapted, not shared.
   proxying/reselling. Label data use (`data_logging`) only from the provider's own statements.
 - A field added to `TRACKED_FIELDS` later is backfilled silently for old records (no events).
 - Chat models that pass the daily test also get a tool-call test (`tool-test.ts`); results live in
-  `tests/history.json` → `tool_results`. It feeds agent readiness and the Cline Plan/Act rankings.
+  `tests/history.json` → `tool_results`. It feeds agent readiness and the coding rankings (`coding`,
+  `coding-plan`, `coding-act`). Rankings aren't tied to one tool; the Cline pair lives on `/cline/`.
 - Cline (free promotion) is list-only (`testable: false`): its free list comes from the public
   endpoint the Cline extension uses; models are linked to the same model elsewhere by normalised name.
 - Data workflows rebase before pushing (code pushes can land mid-run); keep that loop when editing them.
