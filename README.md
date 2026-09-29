@@ -11,11 +11,11 @@ change history and ready-to-paste Cline settings.
 ## The list
 
 <!-- LIST:START -->
-_149 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
+_158 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
 
 🟢 responded to the latest daily test · 🟡 rate-limited or slow · 🔴 failed · 🤖 agent-ready (tool calling, ≥64k context, answered 5 of the last 7 days)
 
-### Chat (125)
+### Chat (132)
 
 #### OpenRouter
 
@@ -177,6 +177,18 @@ _149 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [qwen/qwq-32b](https://freetier-radar.marcelkanters.workers.dev/models/cloudflare/cf-qwen-qwq-32b/) | `@cf/qwen/qwq-32b` | 24k | no | 🟢 |  |
 | [zai-org/glm-4.7-flash](https://freetier-radar.marcelkanters.workers.dev/models/cloudflare/cf-zai-org-glm-4-7-flash/) | `@cf/zai-org/glm-4.7-flash` | 131k | yes | 🟢 |  |
 
+#### Mistral AI (Free mode)
+
+| Model | ID | Context | Tools | Last test | Agent |
+|---|---|---|---|---|---|
+| [Codestral 2508](https://freetier-radar.marcelkanters.workers.dev/models/mistral/codestral-2508/) | `codestral-2508` | 256k | yes | – |  |
+| [Ministral 14B 2512](https://freetier-radar.marcelkanters.workers.dev/models/mistral/ministral-14b-2512/) | `ministral-14b-2512` | 262k | yes | – |  |
+| [Ministral 3B 2512](https://freetier-radar.marcelkanters.workers.dev/models/mistral/ministral-3b-2512/) | `ministral-3b-2512` | 131k | yes | – |  |
+| [Ministral 8B 2512](https://freetier-radar.marcelkanters.workers.dev/models/mistral/ministral-8b-2512/) | `ministral-8b-2512` | 262k | yes | – |  |
+| [Mistral Medium Latest](https://freetier-radar.marcelkanters.workers.dev/models/mistral/mistral-medium-latest/) | `mistral-medium-latest` | 262k | yes | – |  |
+| [Mistral Small 2603](https://freetier-radar.marcelkanters.workers.dev/models/mistral/mistral-small-2603/) | `mistral-small-2603` | 262k | yes | – |  |
+| [Voxtral Small 2507](https://freetier-radar.marcelkanters.workers.dev/models/mistral/voxtral-small-2507/) | `voxtral-small-2507` | 33k | yes | – |  |
+
 #### Cline (free promotion)
 
 | Model | ID | Context | Tools | Last test | Agent |
@@ -187,7 +199,7 @@ _149 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [Pixel Canary](https://freetier-radar.marcelkanters.workers.dev/models/cline/stealth-pixel-canary/) | `stealth/pixel-canary` | unknown | ? | – |  |
 | [space-bunny-alpha](https://freetier-radar.marcelkanters.workers.dev/models/cline/stealth-space-bunny-alpha/) | `stealth/space-bunny-alpha` | unknown | ? | – |  |
 
-### Text-to-speech (10)
+### Text-to-speech (11)
 
 #### OpenRouter
 
@@ -219,7 +231,13 @@ _149 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 |---|---|---|
 | [myshell-ai/melotts](https://freetier-radar.marcelkanters.workers.dev/models/cloudflare/cf-myshell-ai-melotts/) | `@cf/myshell-ai/melotts` | 🟢 |
 
-### Speech-to-text (5)
+#### Mistral AI (Free mode)
+
+| Model | ID | Last test |
+|---|---|---|
+| [Voxtral Mini TTS 2603](https://freetier-radar.marcelkanters.workers.dev/models/mistral/voxtral-mini-tts-2603/) | `voxtral-mini-tts-2603` | – |
+
+### Speech-to-text (6)
 
 #### Groq
 
@@ -240,6 +258,12 @@ _149 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 |---|---|---|
 | [openai/whisper](https://freetier-radar.marcelkanters.workers.dev/models/cloudflare/cf-openai-whisper/) | `@cf/openai/whisper` | 🟢 |
 | [openai/whisper-tiny-en](https://freetier-radar.marcelkanters.workers.dev/models/cloudflare/cf-openai-whisper-tiny-en/) | `@cf/openai/whisper-tiny-en` | 🟢 |
+
+#### Mistral AI (Free mode)
+
+| Model | ID | Last test |
+|---|---|---|
+| [Voxtral Mini 2602](https://freetier-radar.marcelkanters.workers.dev/models/mistral/voxtral-mini-2602/) | `voxtral-mini-2602` | – |
 
 ### Image (9)
 
