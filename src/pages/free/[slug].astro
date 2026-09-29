@@ -1,0 +1,117 @@
+---
+import Base from "../../layouts/Base.astro";
+import Badges from "../../components/Badges.astro";
+import SponsorSlot from "../../components/SponsorSlot.astro";
+import TestStatus from "../../components/TestStatus.astro";
+import { sharedFamilies, type ModelFamily } from "../../lib/families";
+import { usableNow } from "../../../pipeline/families";
+import { toolStats } from "../../../pipeline/agent-ready";
+import { ARENA_ATTRIBUTION, ARENA_BOARD_LABELS, ARENA_DATASET_URL, ARENA_BOARDS } from "../../../pipeline/arena";
+import { PROVIDERS } from "../../../pipeline/providers";
+import { RANKING_WINDOW_DAYS, reliability } from "../../../pipeline/rankings";
+import { formatContext, formatLimits, KIND_LABELS } from "../../../pipeline/templates";
+
+export function getStaticPaths() {
+  return sharedFamilies.map((f) => ({ params: { slug: f.slug }, props: { f } }));
+}
+
+const { f } = Astro.props as { f: ModelFamily };
+const provider = (p: keyof typeof PROVIDERS) => PROVIDERS[p].label.split(" (")[0];
+const places = [...new Set(f.members.map((m) => provider(m.provider)))];
+const best = f.members.find(usableNow) ?? null;
+const bestRel = best ? reliability(best.tests) : null;
+const bestTools = best ? toolStats(best.toolTests, RANKING_WINDOW_DAYS) : null;
+const arena = f.members.find((m) => m.arena)?.arena ?? null;
+const kindWord = f.kind === "chat" ? "" : ` (${KIND_LABELS[f.kind].toLowerCase()})`;
+const isChat = f.kind === "chat";
+const pct = (s: number | null) => (s == null ? "–" : `${Math.round(s * 100)}%`);
+
+const answer =
+  `${f.name}${kindWord} is free at ${places.length} providers: ${places.join(", ")}. ` +
+  (best
+    ? `The best place to use it right now is ${provider(best.provider)}: it answered ${bestRel!.responded} of ${bestRel!.tested} daily tests` +
+      (bestTools?.tested ? ` and passed the tool-call test on ${bestTools.passed} of ${bestTools.tested} days` : "") +
+      "."
+    : "None of them answered our latest daily test.");
+const caveats = [
+  f.members.some((m) => m.usage_terms === "evaluation-only") && "some places are for testing and evaluation only",
+  f.members.some((m) => !m.testable) && "Cline's copy only works inside the Cline extension",
+].filter(Boolean);
+---
+<Base
+  title={`Is ${f.name} free? Where to use it free`}
+  description={`${answer} Compare limits, daily test results and terms at each provider; updated daily.`}
+  jsonLd={{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [{ "@type": "Question", name: `Is ${f.name} free?`, acceptedAnswer: { "@type": "Answer", text: answer } }],
+  }}
+>
+  <p class="sub"><a href="/free/">Where each model is free</a></p>
+  <h1>Where is {f.name} free?</h1>
+  <p class="lede">{answer}{caveats.length > 0 && ` Note: ${caveats.join("; ")}.`}</p>
+
+  {best && (
+    <div class="callout info">
+      <strong>Best place right now: <a href={best.href}>{PROVIDERS[best.provider].label}</a></strong>
+      <span class="mono"> {best.model_id}</span>
+      <div class="sub">
+        Answered {bestRel!.responded} of {bestRel!.tested} days
+        {bestRel!.medianLatencyMs != null && `, median ${(bestRel!.medianLatencyMs / 1000).toFixed(1)} s`}
+        {best.limits && `; limits: ${formatLimits(best.limits)}`}. Setup and snippets are on its <a href={best.href}>model page</a>.
+      </div>
+    </div>
+  )}
+  <SponsorSlot />
+
+  <h2>Every free place, best first</h2>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th>Provider</th>
+          {isChat && <th class="num">Context</th>}
+          <th>Limits</th>
+          <th>Last test</th>
+          <th class="num">Answered</th>
+          {isChat && <th class="num" title={`Days it passed our tool-call test, last ${RANKING_WINDOW_DAYS} days`}>Tool calls</th>}
+          <th class="hide-sm">Labels</th>
+        </tr>
+      </thead>
+      <tbody>
+        {f.members.map((m) => {
+          const rel = reliability(m.tests);
+          const t = toolStats(m.toolTests, RANKING_WINDOW_DAYS);
+          return (
+            <tr>
+              <td><a class="model-name" href={m.href}>{PROVIDERS[m.provider].label}</a><div class="sub mono">{m.model_id}</div></td>
+              {isChat && <td class="num">{formatContext(m.context_length)}</td>}
+              <td>{formatLimits(m.limits)}{m.limit_scope === "shared" && m.limits ? <div class="sub">shared across its free models</div> : null}</td>
+              <td class="nowrap"><TestStatus test={m.lastTest} untestable={!m.testable} /></td>
+              <td class="num">{m.testable ? <>{pct(rel.share)} <span class="sub">({rel.responded}/{rel.tested})</span></> : <span class="sub">–</span>}</td>
+              {isChat && <td class="num">{t.tested ? `${t.passed}/${t.tested}` : "–"}</td>}
+              <td class="hide-sm"><Badges m={m} /></td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  </div>
+  <p class="sub">
+    Order: places you can use in an app today first (not evaluation-only, answered the latest test), then how often
+    each answered over the last {RANKING_WINDOW_DAYS} days, then tool calls, then speed.
+  </p>
+
+  {arena && (
+    <>
+      <h2>How good is it?</h2>
+      <p>
+        LMArena ratings ({arena.name}):
+        {ARENA_BOARDS.filter((b) => arena.boards[b]?.rating).map((b, i) => (
+          <>{i ? " · " : " "}{ARENA_BOARD_LABELS[b]} <strong>{Math.round(arena.boards[b]!.rating!)}</strong> <span class="sub">(#{arena.boards[b]!.rank} of {arena.boards[b]!.of})</span></>
+        ))}
+      </p>
+      <p class="sub">Source: <a href={ARENA_DATASET_URL} rel="noopener">{ARENA_ATTRIBUTION}</a>. Ratings measure what people prefer in blind comparisons, not correctness.</p>
+    </>
+  )}
+</Base>

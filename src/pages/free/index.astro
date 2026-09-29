@@ -1,0 +1,45 @@
+---
+import Base from "../../layouts/Base.astro";
+import SponsorSlot from "../../components/SponsorSlot.astro";
+import { allFamilies } from "../../lib/families";
+import { usableNow } from "../../../pipeline/families";
+import { PROVIDERS } from "../../../pipeline/providers";
+import { KIND_LABELS } from "../../../pipeline/templates";
+import { MODEL_KINDS } from "../../../pipeline/types";
+
+const provider = (p: keyof typeof PROVIDERS) => PROVIDERS[p].label.split(" (")[0];
+const multi = (f: (typeof allFamilies)[number]) => new Set(f.members.map((m) => m.provider)).size > 1;
+const sections = MODEL_KINDS.map((k) => ({ kind: k, list: allFamilies.filter((f) => f.kind === k) })).filter((s) => s.list.length);
+---
+<Base title="Where each AI model is free" description="Every free AI model we track and every provider where it's free right now, with the best place to use each one. Updated daily.">
+  <h1>Where each model is free</h1>
+  <p class="lede">
+    The same model is often free at more than one provider, with different limits and terms. Models free at
+    several places have a comparison page; the rest link straight to their only free place.
+  </p>
+  <SponsorSlot />
+  {sections.map(({ kind, list }) => (
+    <>
+      <h2>{KIND_LABELS[kind]}</h2>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Model</th><th>Free at</th><th class="hide-sm">Best place now</th></tr></thead>
+          <tbody>
+            {list.map((f) => {
+              const best = f.members.find(usableNow);
+              return (
+                <tr>
+                  <td>
+                    {multi(f) ? <a class="model-name" href={`/free/${f.slug}/`}>{f.name}</a> : <a class="model-name" href={f.members[0].href}>{f.name}</a>}
+                  </td>
+                  <td>{[...new Set(f.members.map((m) => provider(m.provider)))].join(", ")}</td>
+                  <td class="hide-sm">{best ? provider(best.provider) : <span class="sub">none answered the latest test</span>}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </>
+  ))}
+</Base>

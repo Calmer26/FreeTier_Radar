@@ -1,0 +1,96 @@
+---
+import Base from "../layouts/Base.astro";
+import { activeModels } from "../lib/data";
+import { workingFeed } from "../../pipeline/working";
+import { SITE } from "../../site.config";
+
+const feed = workingFeed(activeModels, SITE.url, new Date().toISOString());
+const counts = Object.entries(feed.lists).map(([k, v]) => `${k} ${v.length}`).join(" · ");
+const feedUrl = new URL("/api/working.json", SITE.url).href;
+
+const js = `// Pick a free model that answered today's test, and fall back to the next on failure.
+const feed = await (await fetch("${feedUrl}")).json();
+
+async function ask(prompt, list = feed.lists.chat) {
+  for (const m of list) {
+    if (m.api !== "openai") continue;
+    const key = m.key_env ? process.env[m.key_env] : "none";
+    if (!key) continue; // no key for this provider: skip it
+    const res = await fetch(m.endpoint.replace("{account}", process.env.CLOUDFLARE_ACCOUNT_ID ?? ""), {
+      method: "POST",
+      headers: { Authorization: \`Bearer \${key}\`, "Content-Type": "application/json" },
+      body: JSON.stringify({ model: m.model_id, messages: [{ role: "user", content: prompt }] }),
+    });
+    if (res.ok) return (await res.json()).choices[0].message.content;
+    // 429 or 5xx: try the next model
+  }
+  throw new Error("no free model answered");
+}`;
+
+const py = `import os, requests
+
+feed = requests.get("${feedUrl}", timeout=10).json()
+
+def ask(prompt, models=feed["lists"]["chat"]):
+    for m in models:
+        if m["api"] != "openai":
+            continue
+        key = os.environ.get(m["key_env"]) if m["key_env"] else "none"
+        if not key:
+            continue  # no key for this provider
+        url = m["endpoint"].replace("{account}", os.environ.get("CLOUDFLARE_ACCOUNT_ID", ""))
+        r = requests.post(url, timeout=60, headers={"Authorization": f"Bearer {key}"},
+                          json={"model": m["model_id"], "messages": [{"role": "user", "content": prompt}]})
+        if r.ok:
+            return r.json()["choices"][0]["message"]["content"]
+    raise RuntimeError("no free model answered")`;
+
+const sample = JSON.stringify(feed.lists.agent[0] ?? feed.lists.chat[0] ?? {}, null, 2);
+---
+<Base title="Working free models feed for developers" description="A JSON feed of free AI models that answered today's test, per use (chat, agent, vision, speech, images), with endpoints, limits and fallbacks. Updated daily.">
+  <div class="prose">
+    <h1>Working-models feed</h1>
+    <p class="lede">
+      Free models change every week. Instead of hard-coding one, let your app read this feed and fall back through
+      the models that answered <em>today</em>.
+    </p>
+    <p><a href="/api/working.json"><code>{feedUrl}</code></a> <span class="sub">(right now: {counts})</span></p>
+
+    <h2>What's in it</h2>
+    <ul>
+      <li><code>lists.chat</code>: chat models, most reliable first (then higher LMArena rating, then faster).</li>
+      <li><code>lists.agent</code>: chat models that pass our tool-call test at least half the time, with at least 64k context; best tool-caller first. Use these for agents.</li>
+      <li><code>lists.vision</code>: chat models that accept images.</li>
+      <li><code>lists.tts</code>, <code>lists.stt</code>, <code>lists.image</code>: speech and image models.</li>
+    </ul>
+    <p>
+      Only models that answered the latest daily test and that an app may use. Evaluation-only providers (NVIDIA's
+      API, LLM7) and Cline's in-extension models are left out; everything is in the
+      <a href="/api/resources.json">full feed</a>.
+    </p>
+    <p>
+      Each entry has an <code>endpoint</code> and an <code>api</code> style. <code>"openai"</code> means a standard
+      OpenAI request to that URL. <code>"cloudflare-run"</code> and <code>"gemini-native"</code> use the provider's own
+      format; the model's <code>page</code> links to its details. <code>key_env</code> is the environment variable
+      name we use for that provider's key (null: no key needed). Cloudflare endpoints contain <code>{"{account}"}</code>:
+      put your account id there.
+    </p>
+
+    <h2>Example: fall back through free models</h2>
+    <p class="sub">JavaScript (Node 18+ or any runtime with fetch):</p>
+    <pre><code>{js}</code></pre>
+    <p class="sub">Python:</p>
+    <pre><code>{py}</code></pre>
+
+    <h2>One entry</h2>
+    <pre><code>{sample}</code></pre>
+
+    <h2>Good to know</h2>
+    <ul>
+      <li>The feed updates after each daily test (06:10 UTC) and discovery run. Fetch it at startup or once an hour, not per request.</li>
+      <li>"Answered the test" means it replied to one small request at test time: not a promise it's up all day. That's why the examples fall back.</li>
+      <li>Check <code>data_logging</code> before sending private data: several free providers may use prompts to improve their models.</li>
+      <li>Limits are per provider; <code>limit_scope: "shared"</code> means all of that provider's free models share one allowance, so falling back within the same provider may not help.</li>
+    </ul>
+  </div>
+</Base>

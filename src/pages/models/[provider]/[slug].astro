@@ -9,6 +9,7 @@ import { showcaseKey, SHOWCASE_PROMPTS } from "../../../../pipeline/showcase";
 import { PROVIDERS } from "../../../../pipeline/providers";
 import { formatContext, formatLimits, KIND_LABELS } from "../../../../pipeline/templates";
 import { codingFit, clineSnippet } from "../../../lib/cline";
+import { familyFor } from "../../../lib/families";
 import { toolStats } from "../../../../pipeline/agent-ready";
 import { RANKING_WINDOW_DAYS } from "../../../../pipeline/rankings";
 import { allowanceNote, costNote, formatUsd } from "../../../../pipeline/cloudflare-pricing";
@@ -34,6 +35,7 @@ const geminiSpeech = m.kind !== "chat" && m.provider === "google-ai-studio";
 const snippet = m.kind === "chat" ? clineSnippet(m) : "";
 const siblings = m.siblings.map((id) => modelById.get(id)!).filter(Boolean);
 const fit = codingFit(m.id);
+const family = familyFor(m.id);
 const tt = toolStats(m.toolTests, RANKING_WINDOW_DAYS);
 // Search-friendly title and description: "Qwen3.8 27B free on OpenRouter" plus the key facts.
 const cleanName = m.name.replace(/\s*\(free\)\s*/i, " ").replace(/^[^:]+:\s*/, "").trim() || m.name;
@@ -176,6 +178,7 @@ const breadcrumbs = {
   {siblings.length > 0 && (
     <>
       <h2>Same model at other providers</h2>
+      {family && <p class="sub">Compare every free place side by side: <a href={`/free/${family.slug}/`}>Where is {family.name} free?</a></p>}
       <div class="table-scroll">
         <table>
           <thead><tr><th>Provider</th><th>Last test</th>{m.kind === "chat" && <th class="num">Tool calls</th>}<th class="hide-sm">Labels</th></tr></thead>

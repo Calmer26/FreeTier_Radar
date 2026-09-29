@@ -28,6 +28,9 @@ code there was copied and adapted, not shared.
   and the links from our model ids to Arena names. Exact matches and effort/size variants
   ("-high", "(Max)", "-30b-a3b") are automatic; other near matches only count once confirmed
   through the weekly aliases PR (`pipeline/arena.ts`). Rejected ones stay rejected.
+- `families.ts`: the same model at every free provider (sibling groups) → `/free/<model>/` pages for models free at
+  2+ providers, best place first (`placeOrder`). `working.ts`: `/api/working.json`, the models an app can use
+  that answered the latest test, per use; documented on `/developers/`. Keep that page in step with the feed.
 - `data/apps/`: consumer apps with free image/video generation but no free API (`/free-apps/`). Same rules as
   offers: numbers only from the app's own page, an Arena name only when the app says which model free users
   get, `watch_url: null` when the page blocks bots (the page flags records older than 60 days).

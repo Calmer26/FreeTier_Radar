@@ -3,6 +3,7 @@ import { PROVIDER_IDS } from "../../pipeline/providers";
 import { rank, RANKINGS } from "../../pipeline/rankings";
 import { activeModels } from "../lib/data";
 import { roundups } from "../lib/roundups";
+import { sharedFamilies } from "../lib/families";
 
 /**
  * Only pages we want indexed: model pages once they have a test result (and aren't
@@ -12,7 +13,7 @@ import { roundups } from "../lib/roundups";
 export function GET() {
   const url = (path: string) => new URL(path, SITE.url).href;
   const entries: Array<{ loc: string; lastmod?: string }> = [
-    "/", "/changes/", "/rankings/", "/cline/", "/image-models/", "/free-apps/", "/offers/", "/providers/", "/roundups/", "/methodology/", "/sponsor/",
+    "/", "/changes/", "/rankings/", "/cline/", "/image-models/", "/free-apps/", "/free/", "/developers/", "/offers/", "/providers/", "/roundups/", "/methodology/", "/sponsor/",
   ].map((p) => ({ loc: url(p) }));
 
   const inputs = activeModels.map((m) => ({ r: m, history: m.tests, tools: m.toolTests, arena: m.arena }));
@@ -25,6 +26,7 @@ export function GET() {
     if (!m.indexable) continue;
     entries.push({ loc: url(m.href), lastmod: (m.lastTest?.at ?? m.last_seen).slice(0, 10) });
   }
+  for (const f of sharedFamilies) if (f.members.some((m) => m.indexable)) entries.push({ loc: url(`/free/${f.slug}/`) });
   for (const r of roundups) entries.push({ loc: url(r.href), lastmod: r.frontmatter.end });
 
   const body = entries
