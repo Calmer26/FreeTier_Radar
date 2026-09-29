@@ -43,6 +43,9 @@ code there was copied and adapted, not shared.
 - `.github/workflows/`: discovery every 6 h, daily tests, daily showcase, weekly page watch, Arena ratings
   and roundup (opens a PR), CI.
   Data-writing jobs share the `data-writes` concurrency group.
+- `scheduler/`: a separate Cloudflare Worker (cron every 10 min) that starts the data workflows on time via
+  workflow_dispatch; the times live in `scheduler/schedule.ts`. GitHub's own cron was late or skipped runs.
+  Its `GITHUB_TOKEN` secret is set by the owner with wrangler. Keep workflow times in step with it.
 
 ## Rules
 

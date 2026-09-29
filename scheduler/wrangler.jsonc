@@ -1,0 +1,11 @@
+// The scheduler Worker (separate from the site). Deploy from the repo root with:
+//   npx wrangler deploy -c scheduler/wrangler.jsonc
+{
+  "name": "freetier-radar-scheduler",
+  "main": "index.ts",
+  "compatibility_date": "2026-09-01",
+  // Cron only: no public URL.
+  "workers_dev": false,
+  "triggers": { "crons": ["*/10 * * * *"] },
+  "observability": { "enabled": true }
+}

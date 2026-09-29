@@ -4,7 +4,7 @@ name: Discovery
 # high-impact changes and failing sources. Commits only when something changed.
 on:
   schedule:
-    - cron: "15 */6 * * *"
+    - cron: "20 3,9,15,21 * * *"
   workflow_dispatch:
 
 # Shared with the daily tests so two jobs never write data/ at the same time.

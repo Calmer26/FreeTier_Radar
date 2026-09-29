@@ -4,7 +4,7 @@ name: Image showcase
 # image model draws the same test prompts once). Commits nothing once all exist.
 on:
   schedule:
-    - cron: "30 7 * * *"
+    - cron: "30 0 * * *"   # just after the Neuron reset (00:00 UTC)
   workflow_dispatch:
 
 concurrency:
