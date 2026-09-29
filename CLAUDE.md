@@ -56,6 +56,9 @@ code there was copied and adapted, not shared.
 - Chat models that pass the daily test also get a tool-call test (`tool-test.ts`); results live in
   `tests/history.json` → `tool_results`. It feeds agent readiness and the coding rankings (`coding`,
   `coding-plan`, `coding-act`). Rankings aren't tied to one tool; the Cline pair lives on `/cline/`.
+- Paid subscriptions (`subscriptions.ts`): opt-in on `/settings/` (localStorage only). Rankings with a `paid`
+  board show those makers' top Arena models as shaded, unranked rows; never tested, never counted as free.
+  A paid model that's also free and in the list isn't repeated.
 - Cline (free promotion) is list-only (`testable: false`): its free list comes from the public
   endpoint the Cline extension uses; models are linked to the same model elsewhere by normalised name.
 - Data workflows rebase before pushing (code pushes can land mid-run); keep that loop when editing them.

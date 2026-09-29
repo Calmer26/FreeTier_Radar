@@ -2,12 +2,13 @@
 import Base from "../../layouts/Base.astro";
 import Badges from "../../components/Badges.astro";
 import SponsorSlot from "../../components/SponsorSlot.astro";
-import { activeModels, type ModelView } from "../../lib/data";
+import { activeModels, arenaFile, type ModelView } from "../../lib/data";
 import { MIN_TESTED_DAYS, rank, RANKINGS, RANKING_WINDOW_DAYS, type RankingDef } from "../../../pipeline/rankings";
 import { toolStats } from "../../../pipeline/agent-ready";
 import { ARENA_ATTRIBUTION, ARENA_DATASET_URL } from "../../../pipeline/arena";
 import { PROVIDERS } from "../../../pipeline/providers";
 import { formatContext } from "../../../pipeline/templates";
+import { baseModel, interleave, SUBSCRIPTIONS, SUBSCRIPTIONS_STORAGE_KEY, subscriptionModels, type SubscriptionModel } from "../../../pipeline/subscriptions";
 
 export function getStaticPaths() {
   return RANKINGS.map((def) => ({ params: { slug: def.slug }, props: { def } }));
@@ -17,12 +18,36 @@ const { def } = Astro.props as { def: RankingDef };
 const list = rank(def, activeModels.map((m) => ({ r: m, history: m.tests, tools: m.toolTests, arena: m.arena })));
 const isChat = !["text-to-speech", "speech-to-text"].includes(def.slug);
 const isCoding = def.slug.startsWith("coding");
-const arenaBoard = isCoding ? "webdev" : def.slug === "vision" ? "vision" : "text";
-const showArena = isChat && list.some((x) => x.arena);
+const arenaBoard = def.paid?.board ?? (def.slug === "vision" ? "vision" : "text");
 const arenaCell = (m: ModelView) => {
   const b = m.arena?.boards[arenaBoard] ?? (arenaBoard === "webdev" ? m.arena?.boards.text : undefined);
   return b?.rating ? Math.round(b.rating) : "–";
 };
+
+// Paid subscription models (opt-in on /settings/): hidden rows, shown by the script below.
+// A paid model that's also free somewhere isn't repeated when that free model is already
+// in the list; the free row gets a note instead.
+const freeByArena = new Map<string, ModelView[]>();
+// Keyed by model without effort words: an alias may use another board's name ("Gemini 3.8 Flash (High)").
+for (const m of activeModels) {
+  if (!m.arena?.name) continue;
+  const key = baseModel(m.arena.name);
+  freeByArena.set(key, [...(freeByArena.get(key) ?? []), m]);
+}
+const inList = new Set(list.map((x) => x.r.id));
+const alsoInSub = new Map<string, string[]>();
+const paid: { p: SubscriptionModel; alsoFree: ModelView | null }[] = [];
+for (const p of def.paid ? subscriptionModels(arenaFile, def.paid.board) : []) {
+  const free = freeByArena.get(p.base) ?? [];
+  const listed = free.filter((m) => inList.has(m.id));
+  for (const m of listed) alsoInSub.set(m.id, [...(alsoInSub.get(m.id) ?? []), p.sub.id]);
+  if (!listed.length) paid.push({ p, alsoFree: free.find((m) => m.lastTest?.status === "responded") ?? null });
+}
+const showArena = isChat && (list.some((x) => x.arena) || paid.length > 0);
+const alsoFreeFor = new Map(paid.map((x) => [x.p, x.alsoFree]));
+const rows = def.paid ? interleave(list, paid.map((x) => x.p), def.paid.rating) : list.map((free) => ({ free }));
+const freePos = new Map(list.map((x, i) => [x.r.id, i + 1]));
+const subLabel = (id: string) => SUBSCRIPTIONS.find((s) => s.id === id)!.label;
 const pct = (s: number | null) => (s == null ? "–" : `${Math.round(s * 100)}%`);
 ---
 <Base
@@ -42,6 +67,12 @@ const pct = (s: number | null) => (s == null ? "–" : `${Math.round(s * 100)}%`
   {def.slug === "image-generation" && <p class="callout info">See every model's sample outputs for the same prompts on <a href="/image-models/">Free image models compared</a>.</p>}
   <p class="sub"><strong>Order:</strong> {def.order} Reliability counts days a model answered out of the days it was tested (rate-limited days don't count), over the last {RANKING_WINDOW_DAYS} days.</p>
   {isCoding && <p class="callout info">Using Cline? The <a href="/cline/">Cline setup page</a> suggests the best free Plan + Act pair, with settings to paste.</p>}
+  {def.paid && (
+    <p class="sub" id="paid-note">
+      <span data-paid-none>Have a Claude, ChatGPT or Google AI subscription? <a href="/settings/">Pick it in Settings</a> to see its best models here, by Arena rating, for comparison.</span>
+      <span data-paid-some hidden>Showing paid models from your <span data-paid-names></span> <span data-paid-plural>subscription</span>, shaded, for comparison: not free, not tested by us, not ranked. <a href="/settings/">Change</a></span>
+    </p>
+  )}
   <SponsorSlot />
   {list.length === 0 ? (
     <p class="sub">Not enough test data yet. Most rankings need at least {MIN_TESTED_DAYS} days of daily tests.</p>
@@ -58,12 +89,35 @@ const pct = (s: number | null) => (s == null ? "–" : `${Math.round(s * 100)}%`
           </tr>
         </thead>
         <tbody>
-          {list.map((x, i) => {
+          {rows.map((row) => {
+            if ("paid" in row) {
+              const p = row.paid;
+              const alsoFree = alsoFreeFor.get(p);
+              return (
+                <tr class="paid-row" data-sub={p.sub.id} hidden>
+                  <td class="num sub">–</td>
+                  <td><span class="model-name mono">{p.name}</span><div><span class="badge paid">Your {p.sub.label} subscription</span></div></td>
+                  <td>{p.sub.label} ({p.sub.plans})</td>
+                  {isChat && <td class="num sub">–</td>}
+                  {showArena && <td class="num" title={`#${p.rank} of ${p.of} on LMArena`}>{Math.round(p.rating)}</td>}
+                  {isCoding && <td class="num sub">–</td>}
+                  <td colspan="3" class="sub">
+                    Paid, not tested by us.{" "}
+                    {alsoFree && <>Also free: <a href={alsoFree.href}>{PROVIDERS[alsoFree.provider].label.split(" (")[0]}</a>.</>}
+                  </td>
+                </tr>
+              );
+            }
+            const x = row.free;
             const m = x.r as ModelView;
+            const subs = alsoInSub.get(m.id) ?? [];
             return (
               <tr>
-                <td class="num">{i + 1}</td>
-                <td><a class="model-name" href={m.href}>{m.name}</a><div class="sub mono">{m.model_id}</div></td>
+                <td class="num">{freePos.get(m.id)}</td>
+                <td>
+                  <a class="model-name" href={m.href}>{m.name}</a><div class="sub mono">{m.model_id}</div>
+                  {subs.map((id) => <span class="badge paid" data-sub-note={id} hidden>Also in your {subLabel(id)} subscription</span>)}
+                </td>
                 <td>{PROVIDERS[m.provider].label.split(" (")[0]}</td>
                 {isChat && <td class="num">{formatContext(m.context_length)}</td>}
                 {showArena && <td class="num">{arenaCell(m)}</td>}
@@ -79,6 +133,21 @@ const pct = (s: number | null) => (s == null ? "–" : `${Math.round(s * 100)}%`
     </div>
   )}
   {showArena && (
-    <p class="sub">Arena ratings: <a href={ARENA_DATASET_URL} rel="noopener">{ARENA_ATTRIBUTION}</a>. A dash means the model has no rating there yet.</p>
+    <p class="sub">Arena ratings: <a href={ARENA_DATASET_URL} rel="noopener">{ARENA_ATTRIBUTION}</a>. A dash means the model has no rating there yet.{def.paid && " Paid models show their best-rated setting (often the highest effort level, which may need a higher plan)."}</p>
+  )}
+  {def.paid && (
+    <script is:inline define:vars={{ key: SUBSCRIPTIONS_STORAGE_KEY, labels: Object.fromEntries(SUBSCRIPTIONS.map((x) => [x.id, x.label])) }}>
+      let chosen = [];
+      try { chosen = JSON.parse(localStorage.getItem(key) || "[]"); } catch {}
+      chosen = Array.isArray(chosen) ? chosen.filter((id) => labels[id]) : [];
+      for (const el of document.querySelectorAll("[data-sub]")) el.hidden = !chosen.includes(el.dataset.sub);
+      for (const el of document.querySelectorAll("[data-sub-note]")) el.hidden = !chosen.includes(el.dataset.subNote);
+      if (chosen.length) {
+        document.querySelector("[data-paid-none]").hidden = true;
+        document.querySelector("[data-paid-some]").hidden = false;
+        document.querySelector("[data-paid-names]").textContent = chosen.map((id) => labels[id]).join(" and ").replace(/ and (?=.* and )/g, ", ");
+        if (chosen.length > 1) document.querySelector("[data-paid-plural]").textContent = "subscriptions";
+      }
+    </script>
   )}
 </Base>

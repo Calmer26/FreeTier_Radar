@@ -8,7 +8,7 @@
  */
 
 import { AGENT_MIN_CONTEXT, agentReadiness, toolStats } from "./agent-ready";
-import type { ArenaScores } from "./arena";
+import type { ArenaBoard, ArenaScores } from "./arena";
 import { imageCost } from "./cloudflare-pricing";
 import type { ModelKind, Resource, TestResult, ToolResult } from "./types";
 
@@ -56,6 +56,11 @@ export interface RankingDef {
   order: string;
   filter: (x: RankedModel) => boolean;
   compare: (a: RankedModel, b: RankedModel) => number;
+  /**
+   * For rankings led by an Arena rating: the board and the rating the order uses, so
+   * paid subscription models (opt-in, /settings/) can be slotted in at their height.
+   */
+  paid?: { board: ArenaBoard; rating: (x: RankedModel) => number };
 }
 
 const share = (x: RankedModel) => x.rel.share ?? -1;
@@ -91,6 +96,7 @@ export const RANKINGS: RankingDef[] = [
     order: "LMArena WebDev rating (Text rating when there's no WebDev one; unrated models after rated ones), then share of days it passed our tool-call test, then how often it answered the daily test. Only models that answered on at least half their test days.",
     filter: (x) => usable(x) && ofKind("chat")(x) && (x.rel.share ?? 0) >= 0.5,
     compare: (a, b) => codingRating(b) - codingRating(a) || toolShare(b) - toolShare(a) || share(b) - share(a),
+    paid: { board: "webdev", rating: codingRating },
   },
   {
     slug: "coding-plan",
@@ -99,6 +105,7 @@ export const RANKINGS: RankingDef[] = [
     order: "LMArena WebDev rating (Text rating when there's no WebDev one; unrated models after rated ones), then context size, then how often the model answered the daily test.",
     filter: (x) => usable(x) && ofKind("chat")(x) && agentLevel(x) !== "no",
     compare: (a, b) => codingRating(b) - codingRating(a) || (b.r.context_length ?? 0) - (a.r.context_length ?? 0) || share(b) - share(a),
+    paid: { board: "webdev", rating: codingRating },
   },
   {
     slug: "coding-act",
@@ -116,6 +123,7 @@ export const RANKINGS: RankingDef[] = [
     order: "LMArena Text rating, highest first; only models with a rating. Then reliability over the last 30 days.",
     filter: (x) => usable(x) && ofKind("chat")(x) && textRating(x) > 0,
     compare: (a, b) => textRating(b) - textRating(a) || share(b) - share(a),
+    paid: { board: "text", rating: textRating },
   },
   {
     slug: "most-reliable",
@@ -156,6 +164,7 @@ export const RANKINGS: RankingDef[] = [
     order: "LMArena text-to-image rating (unrated models after rated ones), then fewer Neurons per image, then reliability over the last 30 days.",
     filter: (x) => usable(x) && ofKind("image")(x),
     compare: (a, b) => imageRating(b) - imageRating(a) || imageNeurons(a) - imageNeurons(b) || byReliability(a, b),
+    paid: { board: "text_to_image", rating: imageRating },
   },
   {
     slug: "speech-to-text",

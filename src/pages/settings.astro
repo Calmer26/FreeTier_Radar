@@ -1,0 +1,50 @@
+---
+import Base from "../layouts/Base.astro";
+import { RANKINGS } from "../../pipeline/rankings";
+import { SUBSCRIPTIONS, SUBSCRIPTIONS_STORAGE_KEY } from "../../pipeline/subscriptions";
+
+const withPaid = RANKINGS.filter((r) => r.paid);
+---
+<Base title="Settings" description="Show the models of your paid AI subscriptions next to the free ones in the rankings." noindex>
+  <div class="prose">
+    <h1>Settings</h1>
+    <p class="lede">Already paying for Claude, ChatGPT or Google AI? See how its best models compare with the free ones.</p>
+
+    <h2>Your subscriptions</h2>
+    <form id="subs">
+      {SUBSCRIPTIONS.map((s) => (
+        <p>
+          <label><input type="checkbox" name="sub" value={s.id} /> <strong>{s.label}</strong> <span class="sub">({s.plans})</span></label>
+          <br /><span class="sub">Covers {s.covers} <a href={s.url} rel="noopener">Plans</a></span>
+        </p>
+      ))}
+    </form>
+    <p class="sub" id="saved" aria-live="polite"></p>
+
+    <h2>What this changes</h2>
+    <ul>
+      <li>
+        The rankings led by an LMArena rating ({withPaid.map((r, i) => <>{i ? ", " : ""}<a href={`/rankings/${r.slug}/`}>{r.title.replace(/^Best free models for |^Best free /, "").replace(/^./, (c) => c.toUpperCase())}</a></>)})
+        show up to five of each subscription's best-rated models, <span class="badge paid">shaded like this</span>, at the height of their rating.
+      </li>
+      <li>They're paid, so they get no rank number, and we don't test them: only their LMArena rating is shown.</li>
+      <li>We can't tell which plan includes which model; the best-rated ones may need a higher plan, and LMArena usually rates the highest effort setting.</li>
+      <li>When the same model is also free somewhere (some Gemini models are free through Google AI Studio), the free one is shown instead, with a note that it's in your subscription too.</li>
+    </ul>
+    <p class="sub">Saved in this browser only. Nothing is sent anywhere, and there are no accounts.</p>
+  </div>
+
+  <script is:inline define:vars={{ key: SUBSCRIPTIONS_STORAGE_KEY }}>
+    const form = document.getElementById("subs");
+    const boxes = [...form.querySelectorAll("input[name=sub]")];
+    let chosen = [];
+    try { chosen = JSON.parse(localStorage.getItem(key) || "[]"); } catch {}
+    for (const b of boxes) b.checked = Array.isArray(chosen) && chosen.includes(b.value);
+    form.addEventListener("change", () => {
+      const ids = boxes.filter((b) => b.checked).map((b) => b.value);
+      let msg = ids.length ? "Saved. The rankings now show these subscriptions." : "Saved. The rankings show free models only.";
+      try { localStorage.setItem(key, JSON.stringify(ids)); } catch { msg = "Couldn't save: this browser blocks site storage."; }
+      document.getElementById("saved").textContent = msg;
+    });
+  </script>
+</Base>

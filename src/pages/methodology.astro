@@ -76,6 +76,12 @@ import { SITE } from "../../site.config";
       {RANKINGS.map((r) => <li><strong>{r.title}:</strong> {r.order}</li>)}
     </ul>
     <p class="sub">The reliability ranking needs at least {MIN_TESTED_DAYS} tested days per model.</p>
+    <p>
+      <strong>Paid subscriptions, for comparison:</strong> on <a href="/settings/">Settings</a> you can pick the
+      subscriptions you already have (Claude, ChatGPT, Google AI). The rankings led by an LMArena rating then show up
+      to five of each one's best-rated models, shaded, with no rank number. We don't test them and they never change
+      the free ranking. The choice is saved in your browser only.
+    </p>
 
     <h2 id="benchmarks">Benchmark ratings</h2>
     <p>
