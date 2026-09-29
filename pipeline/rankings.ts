@@ -85,17 +85,25 @@ const imageNeurons = (x: RankedModel) => (x.r.pricing ? imageCost(x.r.pricing)?.
 
 export const RANKINGS: RankingDef[] = [
   {
-    slug: "cline-plan",
-    title: "Best free models for Cline Plan mode",
-    intro: "Plan mode reads your code and works out an approach, so reasoning and coding quality matter most. The model still needs tool calling (to read files) and at least 64k of context.",
+    slug: "coding",
+    title: "Best free models for coding",
+    intro: "Free chat models for writing and fixing code: in a chat, an editor plugin or a coding agent. Coding quality comes first, then whether the model can call tools and keeps answering.",
+    order: "LMArena WebDev rating (Text rating when there's no WebDev one; unrated models after rated ones), then share of days it passed our tool-call test, then how often it answered the daily test. Only models that answered on at least half their test days.",
+    filter: (x) => usable(x) && ofKind("chat")(x) && (x.rel.share ?? 0) >= 0.5,
+    compare: (a, b) => codingRating(b) - codingRating(a) || toolShare(b) - toolShare(a) || share(b) - share(a),
+  },
+  {
+    slug: "coding-plan",
+    title: "Best free models for coding: Plan mode",
+    intro: "Coding agents with a plan step (Cline, Roo Code, Kilo Code and others) read your code and work out an approach before changing anything, so reasoning and coding quality matter most. The model still needs tool calling (to read files) and at least 64k of context.",
     order: "LMArena WebDev rating (Text rating when there's no WebDev one; unrated models after rated ones), then context size, then how often the model answered the daily test.",
     filter: (x) => usable(x) && ofKind("chat")(x) && agentLevel(x) !== "no",
     compare: (a, b) => codingRating(b) - codingRating(a) || (b.r.context_length ?? 0) - (a.r.context_length ?? 0) || share(b) - share(a),
   },
   {
-    slug: "cline-act",
-    title: "Best free models for Cline Act mode",
-    intro: "Act mode edits files and runs commands through many tool calls in a row, so reliable tool calling and speed matter most.",
+    slug: "coding-act",
+    title: "Best free models for coding: Act mode",
+    intro: "In act mode a coding agent edits files and runs commands through many tool calls in a row, so reliable tool calling and speed matter most.",
     order: "Share of days the model passed our tool-call test, then how often it answered the daily test, then median response time, then LMArena WebDev rating. Only models that passed at least half their tool-call tests.",
     filter: (x) =>
       usable(x) && ofKind("chat")(x) && (x.r.context_length ?? 0) >= AGENT_MIN_CONTEXT && toolShare(x) >= 0.5,

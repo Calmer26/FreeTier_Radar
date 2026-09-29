@@ -1,6 +1,6 @@
 /**
- * Cline helpers: the settings snippet for a model, and the Plan/Act rankings and
- * suggested pair, computed once per build.
+ * Coding helpers: the Cline settings snippet for a model, and the coding, Plan and Act
+ * rankings and suggested pair, computed once per build.
  */
 
 import { PROVIDERS } from "../../pipeline/providers";
@@ -18,15 +18,18 @@ export function clineSnippet(m: ModelView): string {
 const inputs = activeModels.map((m) => ({ r: m, history: m.tests, tools: m.toolTests, arena: m.arena }));
 const def = (slug: string) => RANKINGS.find((r) => r.slug === slug)!;
 
-export const planRanking = rank(def("cline-plan"), inputs);
-export const actRanking = rank(def("cline-act"), inputs);
+export const planRanking = rank(def("coding-plan"), inputs);
+export const actRanking = rank(def("coding-act"), inputs);
 
+export const codingRanking = rank(def("coding"), inputs);
+
+const codingPos = new Map(codingRanking.map((x, i) => [x.r.id, i + 1]));
 const planPos = new Map(planRanking.map((x, i) => [x.r.id, i + 1]));
 const actPos = new Map(actRanking.map((x, i) => [x.r.id, i + 1]));
 
-/** 1-based positions in the Plan and Act rankings, when the model is in them. */
-export function clineFit(id: string): { plan: number | null; act: number | null } {
-  return { plan: planPos.get(id) ?? null, act: actPos.get(id) ?? null };
+/** 1-based positions in the coding, Plan and Act rankings, when the model is in them. */
+export function codingFit(id: string): { coding: number | null; plan: number | null; act: number | null } {
+  return { coding: codingPos.get(id) ?? null, plan: planPos.get(id) ?? null, act: actPos.get(id) ?? null };
 }
 
 /** The strongest Plan model and the strongest Act model, from any provider. */

@@ -23,8 +23,8 @@ const rating = (m: ModelView) => {
   return b?.rating ? `LMArena ${m.arena?.boards.webdev ? "WebDev" : "Text"} ${Math.round(b.rating)}` : "no LMArena rating yet";
 };
 const clineFree = activeModels.filter((m) => m.provider === "cline");
-const planDef = RANKINGS.find((r) => r.slug === "cline-plan")!;
-const actDef = RANKINGS.find((r) => r.slug === "cline-act")!;
+const planDef = RANKINGS.find((r) => r.slug === "coding-plan")!;
+const actDef = RANKINGS.find((r) => r.slug === "coding-act")!;
 ---
 <Base title="Best free models for Cline (Plan + Act)" description="The best free AI models for Cline's Plan and Act modes, picked from daily tool-call tests, reliability and LMArena ratings, with settings to paste.">
   <h1>Free models for Cline: Plan + Act</h1>

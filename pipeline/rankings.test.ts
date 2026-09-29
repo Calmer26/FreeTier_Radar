@@ -40,7 +40,7 @@ describe("rank", () => {
   const arena = (webdev: number) => ({ name: "n", published: null, boards: { webdev: { rating: webdev, rank: 1, of: 1, votes: 1 } } });
 
   it("orders Plan mode by coding rating, rated before unrated, and needs tool calling", () => {
-    const out = rank(ranking("cline-plan"), [
+    const out = rank(ranking("coding-plan"), [
       { r: res("unrated"), history: good },
       { r: res("low"), history: good, arena: arena(1300) },
       { r: res("high"), history: flaky, arena: arena(1600) },
@@ -51,12 +51,12 @@ describe("rank", () => {
   });
 
   it("admits a model to Plan mode when the tool-call test shows tools the provider doesn't publish", () => {
-    const out = rank(ranking("cline-plan"), [{ r: res("groq-like", { tool_calling: null }), history: good, tools: [pass(7)] }]);
+    const out = rank(ranking("coding-plan"), [{ r: res("groq-like", { tool_calling: null }), history: good, tools: [pass(7)] }]);
     expect(out.map((x) => x.r.id)).toEqual(["groq-like"]);
   });
 
   it("orders Act mode by tool-call pass share, then reliability, then speed", () => {
-    const out = rank(ranking("cline-act"), [
+    const out = rank(ranking("coding-act"), [
       { r: res("half"), history: good, tools: [pass(1), fail(2)] },
       { r: res("always-fast"), history: good, tools: [pass(1), pass(2)] },
       { r: res("always-flaky"), history: flaky, tools: [pass(1), pass(2)] },
@@ -64,6 +64,16 @@ describe("rank", () => {
       { r: res("untested"), history: good },
     ]);
     expect(out.map((x) => x.r.id)).toEqual(["always-fast", "always-flaky", "half"]);
+  });
+
+  it("orders coding by coding rating, then tool calls, and drops models that mostly don't answer", () => {
+    const out = rank(ranking("coding"), [
+      { r: res("rated-no-tools", { tool_calling: null }), history: good, arena: arena(1500) },
+      { r: res("same-rating-tools"), history: good, tools: [pass(1)], arena: arena(1500) },
+      { r: res("unrated"), history: good, tools: [pass(1)] },
+      { r: res("dead"), history: [day(1, "error"), day(2, "error"), day(3, "responded")], arena: arena(1700) },
+    ]);
+    expect(out.map((x) => x.r.id)).toEqual(["same-rating-tools", "rated-no-tools", "unrated"]);
   });
 
   it("keeps speech rankings to their own kind", () => {

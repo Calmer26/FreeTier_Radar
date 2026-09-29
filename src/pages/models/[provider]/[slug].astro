@@ -8,7 +8,7 @@ import { events, formatDate, formatTime, modelById, models, showcase, type Model
 import { showcaseKey, SHOWCASE_PROMPTS } from "../../../../pipeline/showcase";
 import { PROVIDERS } from "../../../../pipeline/providers";
 import { formatContext, formatLimits, KIND_LABELS } from "../../../../pipeline/templates";
-import { clineFit, clineSnippet } from "../../../lib/cline";
+import { codingFit, clineSnippet } from "../../../lib/cline";
 import { toolStats } from "../../../../pipeline/agent-ready";
 import { RANKING_WINDOW_DAYS } from "../../../../pipeline/rankings";
 import { allowanceNote, costNote, formatUsd } from "../../../../pipeline/cloudflare-pricing";
@@ -33,7 +33,7 @@ const apiSnippet = m.provider === "cloudflare" && m.kind !== "chat"
 const geminiSpeech = m.kind !== "chat" && m.provider === "google-ai-studio";
 const snippet = m.kind === "chat" ? clineSnippet(m) : "";
 const siblings = m.siblings.map((id) => modelById.get(id)!).filter(Boolean);
-const fit = clineFit(m.id);
+const fit = codingFit(m.id);
 const tt = toolStats(m.toolTests, RANKING_WINDOW_DAYS);
 // Search-friendly title and description: "Qwen3.8 27B free on OpenRouter" plus the key facts.
 const cleanName = m.name.replace(/\s*\(free\)\s*/i, " ").replace(/^[^:]+:\s*/, "").trim() || m.name;
@@ -220,7 +220,7 @@ const breadcrumbs = {
     </>
   )}
 
-  {m.kind === "chat" && m.testable && <h2>Coding agents (Cline)</h2>}
+  {m.kind === "chat" && m.testable && <h2>Coding and agents</h2>}
   {m.kind === "chat" && m.testable && <p>
     {m.agent.level === "yes" && "Meets the agent-ready bar: tool calling, at least 64k context, and it answered on 5 of the last 7 test days."}
     {m.agent.level === "partial" && `Has tool calling and enough context, but: ${m.agent.reasons.join("; ")}.`}
@@ -229,15 +229,16 @@ const breadcrumbs = {
   {m.kind === "chat" && m.testable && (
     <p>
       <strong>Tool-call test:</strong> {tt.tested ? `passed on ${tt.passed} of ${tt.tested} days` : "not run yet"}.
-      {" "}<strong>Cline:</strong>{" "}
-      {fit.plan || fit.act ? (
+      {" "}<strong>Coding rankings:</strong>{" "}
+      {fit.coding || fit.plan || fit.act ? (
         <>
-          {fit.plan && <a href="/rankings/cline-plan/">#{fit.plan} for Plan mode</a>}
-          {fit.plan && fit.act && " · "}
-          {fit.act && <a href="/rankings/cline-act/">#{fit.act} for Act mode</a>}
-          {" "}(<a href="/cline/">best pair</a>)
+          {[
+            fit.coding && <a href="/rankings/coding/">#{fit.coding} for coding</a>,
+            fit.plan && <a href="/rankings/coding-plan/">#{fit.plan} in Plan mode</a>,
+            fit.act && <a href="/rankings/coding-act/">#{fit.act} in Act mode</a>,
+          ].filter(Boolean).flatMap((el, i) => (i ? [" · ", el] : [el]))}
         </>
-      ) : "not in the Plan or Act rankings yet"}.
+      ) : "not ranked yet"}.
     </p>
   )}
   {m.kind === "chat" && m.testable && <pre><code>{snippet}</code></pre>}
