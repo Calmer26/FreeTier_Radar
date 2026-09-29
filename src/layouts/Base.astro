@@ -55,6 +55,10 @@ const structured = [
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     {structured.map((d) => <script type="application/ld+json" set:html={JSON.stringify(d)} />)}
+    {/* Visit counts: Cloudflare Web Analytics, cookieless. Production builds only, so local runs aren't counted. */}
+    {import.meta.env.PROD && (
+      <script is:inline type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "91ed2ffe2f9f44afaaa11052e2d760a8"}'></script>
+    )}
   </head>
   <body>
     <header class="site-header">
