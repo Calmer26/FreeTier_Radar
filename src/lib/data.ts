@@ -11,6 +11,7 @@ import { agentReadiness, type AgentReadiness } from "../../pipeline/agent-ready"
 import { scoresFor, type AliasFile, type ArenaFile, type ArenaScores } from "../../pipeline/arena";
 import { borrowedContext, siblingIds } from "../../pipeline/siblings";
 import type { ShowcaseFile } from "../../pipeline/showcase";
+import type { VoicesFile } from "../../pipeline/voices";
 import { PROVIDERS } from "../../pipeline/providers";
 import { isUnreachable } from "../../pipeline/reachability";
 import { withDefaults } from "../../pipeline/store-defaults";
@@ -22,6 +23,7 @@ const testFiles = import.meta.glob<TestHistory>("../../data/tests/history.json",
 const arenaFiles = import.meta.glob<ArenaFile>("../../data/benchmarks/arena.json", { eager: true, import: "default" });
 const aliasFiles = import.meta.glob<AliasFile>("../../data/aliases.json", { eager: true, import: "default" });
 const showcaseFiles = import.meta.glob<ShowcaseFile>("../../data/showcase.json", { eager: true, import: "default" });
+const voiceFiles = import.meta.glob<VoicesFile>("../../data/voices.json", { eager: true, import: "default" });
 const offerFiles = import.meta.glob<Offer>("../../data/offers/ai/*.json", { eager: true, import: "default" });
 const sponsorFiles = import.meta.glob<SponsorFile>("../../data/sponsor.json", { eager: true, import: "default" });
 
@@ -162,3 +164,6 @@ export function formatTime(iso: string): string {
 
 /** Showcase images: every free image model drawing the same test prompts. */
 export const showcase: ShowcaseFile = Object.values(showcaseFiles)[0] ?? { images: {} };
+
+/** Voice samples: each free TTS model reading the same sentences. Empty until the first run. */
+export const voices: VoicesFile = Object.values(voiceFiles)[0] ?? { samples: {} };

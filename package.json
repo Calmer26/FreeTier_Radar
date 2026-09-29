@@ -14,6 +14,7 @@
     "roundup": "tsx pipeline/run-roundup.ts",
     "arena": "tsx pipeline/run-arena.ts",
     "showcase": "tsx pipeline/run-showcase.ts",
+    "voices": "tsx pipeline/run-voices.ts",
     "readme": "tsx scripts/generate-readme.ts"
   },
   "engines": {

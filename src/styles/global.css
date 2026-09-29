@@ -149,3 +149,4 @@ pre { background: var(--surface); border: 1px solid var(--border); border-radius
 
 .sample img { width: 100%; height: auto; display: block; border-radius: 6px; margin-bottom: 8px; background: var(--border); }
 .sample .pending { aspect-ratio: 1; display: grid; place-items: center; border: 1px dashed var(--border); border-radius: 6px; color: var(--muted); margin-bottom: 8px; }
+audio { width: 100%; min-width: 220px; max-width: 360px; height: 36px; }

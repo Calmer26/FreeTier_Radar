@@ -20,6 +20,9 @@ code there was copied and adapted, not shared.
 - Cloudflare Workers AI: `base_url` has an `{account}` placeholder (`baseUrl()`). Prices come from its pricing
   page (`cloudflare-pricing.ts`, fetched each discovery; a failed fetch throws rather than wiping prices);
   paid-plan-only models are left out. Costs are shown in Neurons against the 10,000 free a day.
+- `voices.ts` / `run-voices.ts`: every free English TTS model reads three sentences once (`/voice-models/`); requests
+  reuse the daily test's `buildRequest` with the sentence; ffmpeg (installed in the showcase workflow) stores MP3s
+  in `public/voices/`, metadata in `data/voices.json`. Runs in the same daily job as the image showcase.
 - `showcase.ts`: every free image model draws the same three prompts once, within a daily Neuron budget;
   images in `public/showcase/` (768 px JPEG), metadata in `data/showcase.json`.
 - `siblings.ts`: the same model at several providers, by normalised name. A model without its own Arena

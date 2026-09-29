@@ -13,7 +13,7 @@ import { sharedFamilies } from "../lib/families";
 export function GET() {
   const url = (path: string) => new URL(path, SITE.url).href;
   const entries: Array<{ loc: string; lastmod?: string }> = [
-    "/", "/changes/", "/rankings/", "/cline/", "/image-models/", "/free-apps/", "/free/", "/developers/", "/offers/", "/providers/", "/roundups/", "/methodology/", "/sponsor/",
+    "/", "/changes/", "/rankings/", "/cline/", "/image-models/", "/voice-models/", "/free-apps/", "/free/", "/developers/", "/offers/", "/providers/", "/roundups/", "/methodology/", "/sponsor/",
   ].map((p) => ({ loc: url(p) }));
 
   const inputs = activeModels.map((m) => ({ r: m, history: m.tests, tools: m.toolTests, arena: m.arena }));

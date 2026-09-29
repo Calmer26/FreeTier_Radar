@@ -1,0 +1,65 @@
+---
+import Base from "../layouts/Base.astro";
+import SponsorSlot from "../components/SponsorSlot.astro";
+import Badges from "../components/Badges.astro";
+import { activeModels, formatDate, voices } from "../lib/data";
+import { NON_ENGLISH, voiceKey, VOICE_SENTENCES } from "../../pipeline/voices";
+import { PROVIDERS } from "../../pipeline/providers";
+import { reliability } from "../../pipeline/rankings";
+
+// Same order as the text-to-speech ranking: most reliable, then fastest.
+const models = activeModels
+  .filter((m) => m.kind === "tts" && !NON_ENGLISH.test(m.model_id))
+  .map((m) => ({ m, rel: reliability(m.tests) }))
+  .sort((a, b) => (b.rel.share ?? -1) - (a.rel.share ?? -1) || (a.rel.medianLatencyMs ?? 1e9) - (b.rel.medianLatencyMs ?? 1e9));
+const done = models.filter(({ m }) => VOICE_SENTENCES.some((s) => voices.samples[voiceKey(m.id, s.id)])).length;
+const provider = (m: (typeof models)[number]["m"]) => PROVIDERS[m.provider].label.split(" (")[0];
+---
+<Base title="Free text-to-speech voices compared" description="Listen to every free text-to-speech model read the same three sentences: natural reading, numbers and dates, and a question with emotion. Side by side.">
+  <h1>Free text-to-speech voices compared</h1>
+  <p class="lede">
+    There's no public quality benchmark for voices, so listen for yourself: every free text-to-speech model reads the same
+    three sentences, each aimed at a common weakness.
+  </p>
+  <p class="sub">
+    {done} of {models.length} models have samples so far; new models get theirs the day after they appear. Samples use
+    each model's default voice (the one named below) through its free tier, and are made once. Check a model's terms before
+    using its audio commercially. English voices only.
+  </p>
+  <SponsorSlot />
+
+  {VOICE_SENTENCES.map((s) => (
+    <>
+      <h2 id={s.id}>{s.title}</h2>
+      <p class="sub"><strong>Text:</strong> “{s.text}”</p>
+      <p class="sub"><strong>Listen for:</strong> {s.listen_for}</p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Model</th><th>Listen</th><th class="hide-sm">Labels</th></tr></thead>
+          <tbody>
+            {models.map(({ m }) => {
+              const sample = voices.samples[voiceKey(m.id, s.id)];
+              return (
+                <tr>
+                  <td>
+                    <a class="model-name" href={m.href}>{m.name.replace(/\s*\(free\)$/i, "")}</a>
+                    <div class="sub">{provider(m)}{sample?.voice && <> · voice “{sample.voice}”</>}</div>
+                  </td>
+                  <td>
+                    {sample ? (
+                      <>
+                        <audio controls preload="none" src={sample.file}></audio>
+                        <div class="sub">Made {formatDate(sample.generated_on)}</div>
+                      </>
+                    ) : <span class="sub">Not made yet</span>}
+                  </td>
+                  <td class="hide-sm"><Badges m={m} /></td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </>
+  ))}
+</Base>

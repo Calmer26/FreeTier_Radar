@@ -107,7 +107,8 @@ interface TestRequest {
 }
 
 /** Exported for tests. */
-export function buildRequest(r: Resource, env: Record<string, string | undefined>): TestRequest {
+/** `speech` is what a TTS model is asked to say: "OK" for the test, a sentence for the voice samples. */
+export function buildRequest(r: Resource, env: Record<string, string | undefined>, speech = "OK"): TestRequest {
   const info = PROVIDERS[r.provider];
   const key = info.key_env ? env[info.key_env] ?? "" : "";
   const base = baseUrl(r.provider, env);
@@ -130,12 +131,12 @@ export function buildRequest(r: Resource, env: Record<string, string | undefined
 
   // Cloudflare runs speech and image models through /ai/run, each family with its own
   // input format (checked 2026-09-28).
-  if (r.provider === "cloudflare") return cloudflareRequest(r, base.replace(/\/v1$/, ""), auth);
+  if (r.provider === "cloudflare") return cloudflareRequest(r, base.replace(/\/v1$/, ""), auth, speech);
 
   // Gemini's speech models are only reachable through its native API.
   if (r.provider === "google-ai-studio") {
     const parts = r.kind === "tts"
-      ? [{ text: "Say: OK" }]
+      ? [{ text: `Say: ${speech}` }]
       : [{ text: "Transcribe this audio." }, { inline_data: { mime_type: "audio/mp3", data: Buffer.from(readFileSync(STT_SAMPLE_PATH)).toString("base64") } }];
     return {
       url: `https://generativelanguage.googleapis.com/v1beta/models/${r.model_id}:generateContent`,
@@ -168,7 +169,7 @@ export function buildRequest(r: Resource, env: Record<string, string | undefined
         method: "POST",
         headers: { "Content-Type": "application/json", ...auth, ...extra },
         // OpenRouter accepts only mp3 or pcm; Groq's Orpheus only wav (checked 2026-09-28).
-        body: JSON.stringify({ model: r.model_id, input: "OK", response_format: r.provider === "groq" ? "wav" : "mp3", ...(voice ? { voice } : {}) }),
+        body: JSON.stringify({ model: r.model_id, input: speech, response_format: r.provider === "groq" ? "wav" : "mp3", ...(voice ? { voice } : {}) }),
       },
       check: async (res) => {
         const bytes = (await res.arrayBuffer()).byteLength;
@@ -189,7 +190,7 @@ export function buildRequest(r: Resource, env: Record<string, string | undefined
 
 const IMAGE_PROMPT = "a red apple on a white table";
 
-function cloudflareRequest(r: Resource, aiBase: string, auth: Record<string, string>): TestRequest {
+function cloudflareRequest(r: Resource, aiBase: string, auth: Record<string, string>, speech: string): TestRequest {
   const url = `${aiBase}/run/${r.model_id}`;
   const json = (body: unknown): RequestInit => ({ method: "POST", headers: { "Content-Type": "application/json", ...auth }, body: JSON.stringify(body) });
   const sample = () => readFileSync(STT_SAMPLE_PATH);
@@ -206,7 +207,7 @@ function cloudflareRequest(r: Resource, aiBase: string, auth: Record<string, str
       init = json({ prompt: IMAGE_PROMPT, steps: 4 });
     }
   } else if (r.kind === "tts") {
-    init = json(id.includes("deepgram") ? { text: "OK" } : { prompt: "OK" });
+    init = json(id.includes("deepgram") ? { text: speech } : { prompt: speech });
   } else if (id.includes("whisper-large-v3-turbo")) {
     init = json({ audio: Buffer.from(sample()).toString("base64") });
   } else {
