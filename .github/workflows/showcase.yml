@@ -29,7 +29,8 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
       - name: Commit new images
         run: |
-          git add data/showcase.json public/showcase
+          # Nothing exists yet on a day that made no images (e.g. the free Neurons were already used).
+          for f in data/showcase.json public/showcase; do if [ -e "$f" ]; then git add "$f"; fi; done
           if git diff --cached --quiet; then echo "No changes"; exit 0; fi
           git config user.name "freetier-radar-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
