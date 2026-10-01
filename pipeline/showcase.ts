@@ -43,7 +43,7 @@ export const SHOWCASE_PROMPTS: ShowcasePrompt[] = [
 ];
 
 /** Neurons the showcase may spend per day (of the free 10,000), leaving room for tests and other use. */
-export const SHOWCASE_DAILY_BUDGET = 3_500;
+export const SHOWCASE_DAILY_BUDGET = 6_000;
 
 export interface ShowcaseImage {
   file: string;
