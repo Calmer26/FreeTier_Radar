@@ -289,6 +289,90 @@
     "account_required": "yes",
     "licence": null,
     "data_logging": "unknown",
+    "model_id": "@cf/cloudflare/clef",
+    "name": "cloudflare/clef",
+    "url": "https://developers.cloudflare.com/workers-ai/models/clef/",
+    "price_type": "freemium-quota",
+    "context_length": 65536,
+    "input_modalities": [
+      "text",
+      "image"
+    ],
+    "tool_calling": false,
+    "terms_url": "https://huggingface.co/Cloudflare/clef/blob/main/LICENSE",
+    "pricing": [
+      {
+        "usd": 0.24,
+        "unit": "M input tokens",
+        "neurons": null
+      }
+    ],
+    "id": "cloudflare/@cf/cloudflare/clef",
+    "slug": "cf-cloudflare-clef",
+    "category": "ai-model",
+    "status": "active",
+    "first_seen": "2026-10-01T15:20:38.314Z",
+    "last_seen": "2026-10-01T15:20:38.314Z",
+    "missing_since": null,
+    "removed_at": null,
+    "fingerprint": "0c8ef5ea11927490"
+  },
+  {
+    "provider": "cloudflare",
+    "kind": "chat",
+    "listed_by": "api",
+    "limit_scope": "shared",
+    "usage_terms": "production-ok",
+    "rate_limits": {
+      "note": "10,000 Neurons per day across all models (resets 00:00 UTC). How far that goes depends on the model; see the estimate per model.",
+      "source": "https://developers.cloudflare.com/workers-ai/platform/pricing/"
+    },
+    "card_required": "no",
+    "account_required": "yes",
+    "licence": null,
+    "data_logging": "unknown",
+    "model_id": "@cf/cloudflare/clef-flash",
+    "name": "cloudflare/clef-flash",
+    "url": "https://developers.cloudflare.com/workers-ai/models/clef-flash/",
+    "price_type": "freemium-quota",
+    "context_length": 65536,
+    "input_modalities": [
+      "text",
+      "image"
+    ],
+    "tool_calling": false,
+    "terms_url": "https://huggingface.co/Cloudflare/clef-flash/blob/main/LICENSE",
+    "pricing": [
+      {
+        "usd": 0.09,
+        "unit": "M input tokens",
+        "neurons": null
+      }
+    ],
+    "id": "cloudflare/@cf/cloudflare/clef-flash",
+    "slug": "cf-cloudflare-clef-flash",
+    "category": "ai-model",
+    "status": "active",
+    "first_seen": "2026-10-01T15:20:38.314Z",
+    "last_seen": "2026-10-01T15:20:38.314Z",
+    "missing_since": null,
+    "removed_at": null,
+    "fingerprint": "270c68254a66b6a8"
+  },
+  {
+    "provider": "cloudflare",
+    "kind": "chat",
+    "listed_by": "api",
+    "limit_scope": "shared",
+    "usage_terms": "production-ok",
+    "rate_limits": {
+      "note": "10,000 Neurons per day across all models (resets 00:00 UTC). How far that goes depends on the model; see the estimate per model.",
+      "source": "https://developers.cloudflare.com/workers-ai/platform/pricing/"
+    },
+    "card_required": "no",
+    "account_required": "yes",
+    "licence": null,
+    "data_logging": "unknown",
     "model_id": "@cf/deepseek-ai/deepseek-r1-distill-qwen-32b",
     "name": "deepseek-ai/deepseek-r1-distill-qwen-32b",
     "url": "https://developers.cloudflare.com/workers-ai/models/deepseek-r1-distill-qwen-32b/",
