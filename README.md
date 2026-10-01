@@ -11,11 +11,11 @@ change history and ready-to-paste Cline settings.
 ## The list
 
 <!-- LIST:START -->
-_123 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
+_125 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
 
 🟢 responded to the latest daily test · 🟡 rate-limited or slow · 🔴 failed · 🤖 agent-ready (tool calling, ≥64k context, answered 5 of the last 7 days)
 
-### Chat (97)
+### Chat (99)
 
 #### OpenRouter
 
@@ -104,7 +104,7 @@ _123 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [Poolside: Laguna S 2.1 (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/poolside-laguna-s-2-1-free/) | `poolside/laguna-s-2.1:free` | 262k | yes | 🟢 |  |
 | [Poolside: Laguna XS 2.1 (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/poolside-laguna-xs-2-1-free/) | `poolside/laguna-xs-2.1:free` | 262k | yes | – |  |
 | [Qwen: Qwen3.8 27B (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/qwen-qwen3-8-27b-free/) | `qwen/qwen3.8-27b:free` | 262k | yes | 🟢 |  |
-| [Space Bunny Alpha](https://freetier-radar.marcelkanters.workers.dev/models/kilo/stealth-space-bunny-alpha/) | `stealth/space-bunny-alpha` | 1M | yes | 🟢 |  |
+| [Space Bunny Alpha (retires Oct 5)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/stealth-space-bunny-alpha/) | `stealth/space-bunny-alpha` | 1M | yes | 🟢 |  |
 | [StepFun: Step 3.7 Flash (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/stepfun-step-3-7-flash-free/) | `stepfun/step-3.7-flash:free` | 262k | yes | 🟢 |  |
 | [Thinking Machines: Inkling Small (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/thinkingmachines-inkling-small-free/) | `thinkingmachines/inkling-small:free` | 1M | yes | – |  |
 
@@ -140,6 +140,8 @@ _123 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [nvidia/nemotron-3-120b-a12b](https://freetier-radar.marcelkanters.workers.dev/models/cloudflare/cf-nvidia-nemotron-3-120b-a12b/) | `@cf/nvidia/nemotron-3-120b-a12b` | 256k | yes | 🟢 |  |
 | [qwen/qwen2.5-coder-32b-instruct](https://freetier-radar.marcelkanters.workers.dev/models/cloudflare/cf-qwen-qwen2-5-coder-32b-instruct/) | `@cf/qwen/qwen2.5-coder-32b-instruct` | 33k | no | 🟢 |  |
 | [qwen/qwq-32b](https://freetier-radar.marcelkanters.workers.dev/models/cloudflare/cf-qwen-qwq-32b/) | `@cf/qwen/qwq-32b` | 24k | no | 🟢 |  |
+| [swiss-ai/apertus-v1.5-8b](https://freetier-radar.marcelkanters.workers.dev/models/cloudflare/cf-swiss-ai-apertus-v1-5-8b/) | `@cf/swiss-ai/apertus-v1.5-8b` | 262k | yes | – |  |
+| [utter-project/eurollm-9b-it](https://freetier-radar.marcelkanters.workers.dev/models/cloudflare/cf-utter-project-eurollm-9b-it/) | `@cf/utter-project/eurollm-9b-it` | 32k | yes | – |  |
 | [zai-org/glm-4.7-flash](https://freetier-radar.marcelkanters.workers.dev/models/cloudflare/cf-zai-org-glm-4-7-flash/) | `@cf/zai-org/glm-4.7-flash` | 131k | yes | 🟢 |  |
 
 #### Mistral AI (Free mode)
