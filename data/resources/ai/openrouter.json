@@ -1,6 +1,42 @@
 [
   {
     "provider": "openrouter",
+    "kind": "chat",
+    "listed_by": "api",
+    "limit_scope": "shared",
+    "usage_terms": "production-ok",
+    "rate_limits": {
+      "rpm": 20,
+      "rpd": 50,
+      "note": "Shared across all free models. 1,000 requests/day after a one-time purchase of 10 credits.",
+      "source": "https://openrouter.ai/docs/faq"
+    },
+    "card_required": "no",
+    "account_required": "yes",
+    "licence": null,
+    "data_logging": "unknown",
+    "model_id": "apodex/apodex-1.1-mini:free",
+    "name": "Apodex: Apodex 1.1 Mini (free)",
+    "url": "https://openrouter.ai/apodex/apodex-1.1-mini:free",
+    "price_type": "free",
+    "context_length": 262144,
+    "input_modalities": [
+      "text"
+    ],
+    "tool_calling": true,
+    "paid_version_pricing": null,
+    "id": "openrouter/apodex/apodex-1.1-mini:free",
+    "slug": "apodex-apodex-1-1-mini-free",
+    "category": "ai-model",
+    "status": "active",
+    "first_seen": "2026-10-01T21:20:33.669Z",
+    "last_seen": "2026-10-01T21:20:33.669Z",
+    "missing_since": null,
+    "removed_at": null,
+    "fingerprint": "fb1d414b3d2ada97"
+  },
+  {
+    "provider": "openrouter",
     "limit_scope": "shared",
     "usage_terms": "production-ok",
     "rate_limits": {
@@ -180,12 +216,12 @@
     "data_logging": "unknown",
     "paid_version_pricing": [
       {
-        "usd": 0.09,
+        "usd": 0.0765,
         "unit": "M input tokens",
         "neurons": null
       },
       {
-        "usd": 0.3,
+        "usd": 0.255,
         "unit": "M output tokens",
         "neurons": null
       }
