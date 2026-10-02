@@ -11,11 +11,11 @@ change history and ready-to-paste Cline settings.
 ## The list
 
 <!-- LIST:START -->
-_122 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
+_140 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
 
 🟢 responded to the latest daily test · 🟡 rate-limited or slow · 🔴 failed · 🤖 agent-ready (tool calling, ≥64k context, answered every test on 5 of the last 7 days)
 
-### Chat (97)
+### Chat (115)
 
 #### OpenRouter
 
@@ -94,6 +94,7 @@ _122 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [Cohere: North Mini Code (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/cohere-north-mini-code-free/) | `cohere/north-mini-code:free` | 256k | yes | 🟢 | 🤖 |
 | [Dots Studio: Dots3-Note Preview (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/dots-studio-dots-3-note-preview-free/) | `dots-studio/dots-3-note-preview:free` | 512k | yes | 🟢 | 🤖 |
 | [inclusionAI: Ling 3.0 Flash Sante (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/inclusionai-ling-3-0-flash-sante-free/) | `inclusionai/ling-3.0-flash-sante:free` | 262k | yes | 🟢 | 🤖 |
+| [inclusionAI: Ling 3.1 Flash](https://freetier-radar.marcelkanters.workers.dev/models/kilo/inclusionai-ling-3-1-flash/) | `inclusionai/ling-3.1-flash` | 262k | yes | – |  |
 | [LiquidAI: LFM2.5-2.6B (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/liquid-lfm-2-5-2-6b-free/) | `liquid/lfm-2.5-2.6b:free` | 66k | yes | 🟢 | 🤖 |
 | [NVIDIA: Nemotron 3 Nano Omni (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/nvidia-nemotron-3-nano-omni-30b-a3b-reasoning-free/) | `nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free` | 256k | yes | 🟢 |  |
 | [NVIDIA: Nemotron 3 Super (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/nvidia-nemotron-3-super-120b-a12b-free/) | `nvidia/nemotron-3-super-120b-a12b:free` | 262k | yes | 🟢 |  |
@@ -154,6 +155,28 @@ _122 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [Ministral 3B 2512](https://freetier-radar.marcelkanters.workers.dev/models/mistral/ministral-3b-2512/) | `ministral-3b-2512` | 131k | yes | 🟢 |  |
 | [Ministral 8B 2512](https://freetier-radar.marcelkanters.workers.dev/models/mistral/ministral-8b-2512/) | `ministral-8b-2512` | 262k | yes | 🟢 |  |
 | [Voxtral Small 2507](https://freetier-radar.marcelkanters.workers.dev/models/mistral/voxtral-small-2507/) | `voxtral-small-2507` | 33k | yes | 🟢 |  |
+
+#### Ollama Cloud (Free plan)
+
+| Model | ID | Context | Tools | Last test | Agent |
+|---|---|---|---|---|---|
+| [deepseek-v4-pro:0813](https://freetier-radar.marcelkanters.workers.dev/models/ollama/deepseek-v4-pro-0813/) | `deepseek-v4-pro:0813` | unknown | ? | – |  |
+| [deepseek-v4.1-flash](https://freetier-radar.marcelkanters.workers.dev/models/ollama/deepseek-v4-1-flash/) | `deepseek-v4.1-flash` | unknown | ? | – |  |
+| [gemma4:31b](https://freetier-radar.marcelkanters.workers.dev/models/ollama/gemma4-31b/) | `gemma4:31b` | unknown | ? | – |  |
+| [glm-5.2](https://freetier-radar.marcelkanters.workers.dev/models/ollama/glm-5-2/) | `glm-5.2` | unknown | ? | – |  |
+| [glm-5.3](https://freetier-radar.marcelkanters.workers.dev/models/ollama/glm-5-3/) | `glm-5.3` | unknown | ? | – |  |
+| [glm-5.3-flash](https://freetier-radar.marcelkanters.workers.dev/models/ollama/glm-5-3-flash/) | `glm-5.3-flash` | unknown | ? | – |  |
+| [gpt-oss:120b](https://freetier-radar.marcelkanters.workers.dev/models/ollama/gpt-oss-120b/) | `gpt-oss:120b` | unknown | ? | – |  |
+| [gpt-oss:20b](https://freetier-radar.marcelkanters.workers.dev/models/ollama/gpt-oss-20b/) | `gpt-oss:20b` | unknown | ? | – |  |
+| [kimi-k2.6](https://freetier-radar.marcelkanters.workers.dev/models/ollama/kimi-k2-6/) | `kimi-k2.6` | unknown | ? | – |  |
+| [kimi-k2.7-code](https://freetier-radar.marcelkanters.workers.dev/models/ollama/kimi-k2-7-code/) | `kimi-k2.7-code` | unknown | ? | – |  |
+| [kimi-k3](https://freetier-radar.marcelkanters.workers.dev/models/ollama/kimi-k3/) | `kimi-k3` | unknown | ? | – |  |
+| [minimax-m2.7](https://freetier-radar.marcelkanters.workers.dev/models/ollama/minimax-m2-7/) | `minimax-m2.7` | unknown | ? | – |  |
+| [minimax-m3](https://freetier-radar.marcelkanters.workers.dev/models/ollama/minimax-m3/) | `minimax-m3` | unknown | ? | – |  |
+| [mistral-large-3:675b](https://freetier-radar.marcelkanters.workers.dev/models/ollama/mistral-large-3-675b/) | `mistral-large-3:675b` | unknown | ? | – |  |
+| [nemotron-3-nano:30b](https://freetier-radar.marcelkanters.workers.dev/models/ollama/nemotron-3-nano-30b/) | `nemotron-3-nano:30b` | unknown | ? | – |  |
+| [nemotron-3-super](https://freetier-radar.marcelkanters.workers.dev/models/ollama/nemotron-3-super/) | `nemotron-3-super` | unknown | ? | – |  |
+| [nemotron-3-ultra](https://freetier-radar.marcelkanters.workers.dev/models/ollama/nemotron-3-ultra/) | `nemotron-3-ultra` | unknown | ? | – |  |
 
 #### Cline (free promotion)
 
