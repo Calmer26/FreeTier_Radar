@@ -1,18 +1,23 @@
 {
   "id": "sambanova",
   "provider": "SambaNova",
-  "name": "SambaNova Cloud free tier",
-  "offer_type": "recurring-quota",
-  "amount": "Most models 20 requests/day and 200k tokens/day; MiniMax 60 requests/minute and 12,000/day",
-  "summary": "Applies while no payment method is linked to the account. Enough to try SambaNova's models, not to build on most of them.",
+  "name": "SambaNova Cloud free tier (ended)",
+  "offer_type": "retired",
+  "amount": "No free API use any more: a payment method and purchased credits are needed before the first request",
+  "summary": "SambaNova's Free plan used to work without a card (with per-model daily limits and, until August 2026, $5 of free credit). Its plans page now says to add a payment method and purchase credits to run your first requests, and the API answers a key without a card with \"A payment method is required\" (our test, 2 Oct 2026). Its docs still describe a no-card free tier.",
   "expires": null,
   "usage_terms": "unknown",
-  "card_required": "no",
+  "card_required": "yes",
   "account_required": "yes",
   "data_logging": "unknown",
   "url": "https://cloud.sambanova.ai",
-  "watch_url": "https://docs.sambanova.ai/docs/en/models/rate-limits",
-  "verified_on": "2026-09-28",
-  "source_note": "SambaNova rate-limits docs, checked 2026-09-28. Model list and daily tests follow once an API key is configured.",
-  "changes": []
+  "watch_url": "https://cloud.sambanova.ai/plans",
+  "verified_on": "2026-10-02",
+  "source_note": "cloud.sambanova.ai/plans and a test request with a new no-card key (HTTP 402 PAYMENT_METHOD_REQUIRED), 2026-10-02. The rate-limits docs page still describes the old free tier.",
+  "changes": [
+    {
+      "date": "2026-10-02",
+      "text": "Free tier ended: SambaNova now needs a payment method and purchased credits before any API request."
+    }
+  ]
 }

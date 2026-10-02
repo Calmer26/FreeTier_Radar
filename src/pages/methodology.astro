@@ -24,6 +24,7 @@ import { SITE } from "../../site.config";
       <li><strong>NVIDIA:</strong> every hosted chat model, all labelled evaluation-only.</li>
       <li><strong>Kilo Code gateway</strong> and <strong>LLM7.io</strong>: their free models, which work without an account or key. We read their public model lists and test them anonymously. LLM7's terms rule out production use.</li>
       <li><strong>Mistral AI</strong> (Free mode): its chat, transcription and speech models. Its list doesn't say which are free; some answer with a limit of 0, which we show as “No free quota”. Mistral may use Free-mode prompts for training.</li>
+      <li><strong>Ollama Cloud</strong> (Free plan): every cloud model on its list. Only a few “starter models” are free and Ollama doesn't say which; the others answer that they're not included in free usage, and we show those as not on the free tier. Ollama states it never logs or trains on prompts.</li>
     </ul>
     <p>
       <strong>Free image and video apps</strong> (Gemini app, Meta AI, Dreamina and others) have no free API, so
@@ -119,6 +120,8 @@ import { SITE } from "../../site.config";
       <li><strong>⚠ Eval only</strong>: the provider's terms allow testing and evaluation, not production use.</li>
       <li><strong>No card</strong>: no payment card needed to use the free tier. <strong>No signup</strong>: works without an account.</li>
       <li><strong>👁 Logs prompts / May use your prompts</strong>: the provider says it logs prompts, or may use them to train or improve its models or service. Kilo publishes this per model. Don't send personal or confidential data to these.</li>
+      <li><strong>🔒 Prompts not kept</strong>: the provider states it never logs or trains on prompts (Ollama Cloud). That's the provider's statement, not something we can check.</li>
+      <li><strong>Not on the free tier</strong>: the provider lists the model but refused it on its free tier at our latest test (“limit 0”, “not included in your free usage”). These leave the directory and the counts, and stay listed on their provider page; they return as soon as they answer for free.</li>
       <li><strong>Unknown</strong> is a real value. If a provider does not publish something, we do not guess.</li>
     </ul>
 

@@ -5,7 +5,7 @@
  * pulling in the fetchers.
  */
 
-export type ProviderId = "openrouter" | "groq" | "google-ai-studio" | "nvidia" | "kilo" | "llm7" | "zai" | "cline" | "cloudflare" | "mistral";
+export type ProviderId = "openrouter" | "groq" | "google-ai-studio" | "nvidia" | "kilo" | "llm7" | "zai" | "cline" | "cloudflare" | "mistral" | "ollama";
 
 /** What a model does. Each kind has its own directory tab and its own daily test. */
 export type ModelKind = "chat" | "tts" | "stt" | "image";
@@ -17,7 +17,8 @@ export type UsageTerms = "production-ok" | "evaluation-only" | "non-commercial" 
 export type LimitScope = "per-model" | "shared" | "unknown";
 export type YesNoUnknown = "yes" | "no" | "unknown";
 /** What the provider says it does with prompts. "may-train" includes "to improve the service". */
-export type DataLogging = "none-stated" | "logs-prompts" | "may-train" | "unknown";
+/** "not-used": the provider states it never logs or trains on prompts (Ollama Cloud). "none-stated": it publishes data use and states nothing. */
+export type DataLogging = "not-used" | "none-stated" | "logs-prompts" | "may-train" | "unknown";
 
 export interface RateLimits {
   rpm?: number;

@@ -207,3 +207,14 @@ describe("mapMistral", () => {
     expect(mistralName("voxtral-mini-tts-2603")).toBe("Voxtral Mini TTS 2603");
   });
 });
+
+describe("mapOllama", () => {
+  it("lists every cloud model as chat, with Ollama's no-logging statement", async () => {
+    const { mapOllama } = await import("./adapters");
+    const out = mapOllama([{ name: "gpt-oss:120b" }, { name: "nemotron-3-super" }]);
+    expect(out.map((m) => [m.model_id, m.kind, m.url, m.data_logging])).toEqual([
+      ["gpt-oss:120b", "chat", "https://ollama.com/library/gpt-oss", "not-used"],
+      ["nemotron-3-super", "chat", "https://ollama.com/library/nemotron-3-super", "not-used"],
+    ]);
+  });
+});

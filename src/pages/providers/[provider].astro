@@ -4,7 +4,7 @@ import Badges from "../../components/Badges.astro";
 import EventList from "../../components/EventList.astro";
 import SponsorSlot from "../../components/SponsorSlot.astro";
 import TestStatus from "../../components/TestStatus.astro";
-import { activeModels, events, unreachableModels } from "../../lib/data";
+import { activeModels, events, paidOnlyModels, unreachableModels } from "../../lib/data";
 import { PROVIDERS, PROVIDER_IDS, type ProviderInfo } from "../../../pipeline/providers";
 import { formatContext, formatLimits, KIND_LABELS } from "../../../pipeline/templates";
 import { MODEL_KINDS } from "../../../pipeline/types";
@@ -17,6 +17,7 @@ const { p } = Astro.props as { p: ProviderInfo };
 const list = activeModels.filter((m) => m.provider === p.id);
 const sections = MODEL_KINDS.map((kind) => ({ kind, models: list.filter((m) => m.kind === kind) })).filter((s) => s.models.length);
 const unreachable = unreachableModels.filter((m) => m.provider === p.id);
+const paidOnly = paidOnlyModels.filter((m) => m.provider === p.id);
 const recent = events.filter((e) => e.provider === p.id).slice(0, 20);
 ---
 <Base title={`${p.label} free tier`} description={`${p.label} free models, limits and changes. ${p.summary}`} noindex={list.length === 0}>
@@ -60,6 +61,16 @@ const recent = events.filter((e) => e.provider === p.id).slice(0, 20);
       <p class="sub">{p.label} lists these models, but each answered "not found" on the last 3 daily tests. They come back into the directory as soon as they answer.</p>
       <ul>
         {unreachable.map((m) => <li><a href={m.href}>{m.name}</a> <span class="sub mono">{m.model_id}</span></li>)}
+      </ul>
+    </>
+  )}
+
+  {paidOnly.length > 0 && (
+    <>
+      <h2>Listed, but not on the free tier ({paidOnly.length})</h2>
+      <p class="sub">{p.label} lists these models, but refused them on its free tier at our latest test (no free quota). They come back into the directory as soon as they answer for free.</p>
+      <ul>
+        {paidOnly.map((m) => <li><a href={m.href}>{m.name}</a> <span class="sub mono">{m.model_id}</span></li>)}
       </ul>
     </>
   )}

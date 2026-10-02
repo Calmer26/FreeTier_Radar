@@ -222,6 +222,27 @@ export const PROVIDERS: Record<ProviderId, ProviderInfo> = {
     limits_url: "https://docs.mistral.ai/admin/billing-usage/usage-limits",
     summary: "Mistral's own API. Free mode covers its smaller models (Ministral, Codestral, Voxtral) within per-minute limits shown in your account; the bigger ones need pay-as-you-go.",
   },
+  ollama: {
+    id: "ollama",
+    label: "Ollama Cloud (Free plan)",
+    homepage: "https://ollama.com",
+    base_url: "https://ollama.com/v1",
+    key_env: "OLLAMA_API_KEY",
+    list_needs_key: true,
+    usage_terms: "unknown",
+    // ollama.com/pricing, checked 2026-10-02.
+    usage_terms_note: "Ollama's Free plan includes a starter amount of cloud usage for a smaller set of starter models, reset monthly from your signup date, one request at a time. Ollama says prompt and response data is never logged or trained on. Other cloud models need paid usage credits.",
+    limit_scope: "shared",
+    rate_limits: {
+      note: "A starter amount of usage per month (not published as a number), reset monthly from signup; 1 concurrent request.",
+      source: "https://ollama.com/pricing",
+    },
+    card_required: "unknown",
+    account_required: "yes",
+    data_logging: "not-used",
+    limits_url: "https://ollama.com/pricing",
+    summary: "Ollama's hosted models, called with an API key. The Free plan covers a few starter models (Nemotron, gpt-oss, Gemma) and Ollama says it never logs or trains on prompts.",
+  },
   cline: {
     id: "cline",
     label: "Cline (free promotion)",

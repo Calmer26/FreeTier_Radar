@@ -49,6 +49,8 @@ export function classifyFailure(err: unknown): TestStatus {
 
   // Gemini answers a model outside the key's free tier with 429 and "limit: 0".
   if (/limit:\s*0\b/.test(message) || message.includes("free tier is not available")) return "no_free_quota";
+  // Ollama Cloud answers a model outside the Free plan's starter set with 402 (seen 2026-10-02).
+  if (/not included in your free usage|payment method is required/.test(message)) return "no_free_quota";
   // OpenRouter serves some free models only through the agent apps it lists (seen 2026-09-28).
   if (status === 403 && /only available on agentic harnesses|only available (in|on|through) /.test(message)) return "restricted";
   // Cloudflare's shared daily Neurons running out says nothing about the model either.

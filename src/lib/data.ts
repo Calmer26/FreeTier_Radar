@@ -13,7 +13,7 @@ import { borrowedContext, siblingIds } from "../../pipeline/siblings";
 import type { ShowcaseFile } from "../../pipeline/showcase";
 import type { VoicesFile } from "../../pipeline/voices";
 import { PROVIDERS } from "../../pipeline/providers";
-import { isUnreachable } from "../../pipeline/reachability";
+import { isPaidOnly, isUnreachable } from "../../pipeline/reachability";
 import { withDefaults } from "../../pipeline/store-defaults";
 import type { FreeApp, Offer, ProviderId, RateLimits, Resource, ResourceEvent, SponsorFile, TestHistory, TestResult, ToolResult } from "../../pipeline/types";
 
@@ -40,6 +40,8 @@ export interface ModelView extends Resource {
   indexable: boolean;
   /** Listed by the provider, but "not found" on the last 3 daily tests. */
   unreachable: boolean;
+  /** The provider refused it on its free tier at the latest test: listed, but not free. */
+  paidOnly: boolean;
   /** LMArena ratings through an exact or confirmed alias; chat models only. */
   arena: ArenaScores | null;
   /** Ids of the same model at other providers (same normalised name, same kind). */
@@ -85,6 +87,7 @@ export const models: ModelView[] = withContext
       href: `/models/${r.provider}/${r.slug}/`,
       indexable: history.length > 0,
       unreachable: isUnreachable(history),
+      paidOnly: isPaidOnly(history),
       arena: r.kind === "chat" || r.kind === "image" ? scoresFor(r.id, aliases, arenaFile) : null,
       siblings: siblingsById.get(r.id) ?? [],
       testable: PROVIDERS[r.provider].testable !== false,
@@ -100,10 +103,13 @@ export const models: ModelView[] = withContext
 }
 
 /** What the directory shows: not removed, and callable as far as we know. */
-export const activeModels = models.filter((m) => m.status !== "removed" && !m.unreachable);
+export const activeModels = models.filter((m) => m.status !== "removed" && !m.unreachable && !m.paidOnly);
 
 /** Listed by their provider but answering "not found" day after day. */
 export const unreachableModels = models.filter((m) => m.status !== "removed" && m.unreachable);
+
+/** Listed by their provider, but refused on the free tier (paid only). */
+export const paidOnlyModels = models.filter((m) => m.status !== "removed" && !m.unreachable && m.paidOnly);
 
 const appFiles = import.meta.glob<FreeApp>("../../data/apps/*.json", { eager: true, import: "default" });
 /** Curated consumer apps with free image or video generation (no free API). */

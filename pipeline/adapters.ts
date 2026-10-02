@@ -404,6 +404,36 @@ async function fetchMistral(env: Env): Promise<ObservedModel[]> {
   return mapMistral(json.data ?? []);
 }
 
+// ── Ollama Cloud ─────────────────────────────────────────────────────────────────
+
+export interface OllamaModel {
+  name: string;
+  model?: string;
+}
+
+/**
+ * Every cloud model on the account's list. Which are "starter models" on the Free plan
+ * isn't published; the others answer 402 "not included in your free usage", which the
+ * daily test records as "no free quota" (checked 2026-10-02: 6 of 17 free).
+ */
+export function mapOllama(models: OllamaModel[]): ObservedModel[] {
+  return models.map((m) => ({
+    ...base("ollama", "chat"),
+    model_id: m.name,
+    name: m.name,
+    url: `https://ollama.com/library/${m.name.split(":")[0]}`,
+    price_type: "free" as const,
+    context_length: null,
+    input_modalities: ["text"],
+    tool_calling: null,
+  }));
+}
+
+async function fetchOllama(env: Env): Promise<ObservedModel[]> {
+  const json = await getJson<{ models?: OllamaModel[] }>("https://ollama.com/api/tags", { Authorization: `Bearer ${env.OLLAMA_API_KEY}` });
+  return mapOllama(json.models ?? []);
+}
+
 // ── Cline (free promotion) ───────────────────────────────────────────────────────
 
 export interface ClineRecommended {
@@ -506,4 +536,5 @@ export const FETCHERS: Record<ProviderId, (env: Env) => Promise<ObservedModel[]>
   cline: () => fetchCline(),
   cloudflare: fetchCloudflare,
   mistral: fetchMistral,
+  ollama: fetchOllama,
 };

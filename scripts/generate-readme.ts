@@ -8,7 +8,7 @@ import { join } from "node:path";
 import { agentReadiness } from "../pipeline/agent-ready";
 import { PROVIDER_IDS, PROVIDERS } from "../pipeline/providers";
 import { readResources, readTests } from "../pipeline/store";
-import { isUnreachable } from "../pipeline/reachability";
+import { isPaidOnly, isUnreachable } from "../pipeline/reachability";
 import { formatContext, KIND_LABELS } from "../pipeline/templates";
 import { MODEL_KINDS, type Resource } from "../pipeline/types";
 import { SITE } from "../site.config";
@@ -19,7 +19,7 @@ const README = join(process.cwd(), "README.md");
 
 const tests = readTests();
 const history = (id: string) => tests.results[id] ?? [];
-const resources = readResources().filter((r) => r.status !== "removed" && !isUnreachable(history(r.id)));
+const resources = readResources().filter((r) => r.status !== "removed" && !isUnreachable(history(r.id)) && !isPaidOnly(history(r.id)));
 
 const status = (id: string) => {
   const last = history(id).at(-1);

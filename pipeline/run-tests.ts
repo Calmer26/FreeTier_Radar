@@ -29,6 +29,7 @@ const GAP_MS: Record<ProviderId, number> = {
   cline: 0,                  // never tested: free models work only inside Cline
   cloudflare: 1_000,         // shared daily Neurons; requests are tiny
   mistral: 2_000,            // per-model limits (30+ requests/minute seen); stay gentle
+  ollama: 3_000,             // one request at a time on the Free plan
 };
 const STOP_AFTER_RATE_LIMITS = 3;
 /** Image models are tested weekly: one picture uses far more of a free allowance than a chat reply. */

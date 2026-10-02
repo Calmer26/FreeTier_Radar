@@ -4,6 +4,10 @@ import type { Resource, TestHistory } from "./types";
 import { STT_REFERENCE } from "./wer";
 
 describe("classifyFailure", () => {
+  it("treats Ollama's 402 for non-starter models as no free quota", () => {
+    expect(classifyFailure(new HttpError(402, '402 {"error":{"message":"this model is not included in your free usage, add usage credits"}}'))).toBe("no_free_quota");
+  });
+
   it("treats Mistral's zero per-minute limit as no free quota, not a passing rate limit", () => {
     expect(classifyFailure(new HttpError(429, '429 limit: 0 {"message":"Rate limit exceeded"}'))).toBe("no_free_quota");
   });
