@@ -1,0 +1,70 @@
+---
+/**
+ * "Help me choose": three questions, the top 3 free models for the answers. All
+ * candidates are embedded at build time (src/lib/picker.ts); the script only filters.
+ */
+import { PICKER_USES, pickerData } from "../lib/picker";
+---
+<section class="picker" aria-labelledby="picker-title">
+  <h2 id="picker-title">Help me choose</h2>
+  <form id="picker">
+    <label>
+      <span>What for?</span>
+      <select name="use">
+        {PICKER_USES.map((u) => <option value={u.id}>{u.label}</option>)}
+      </select>
+    </label>
+    <label>
+      <span>Where will you use it?</span>
+      <select name="where">
+        <option value="production">In a real product</option>
+        <option value="experiment">Testing or personal projects</option>
+      </select>
+    </label>
+    <label>
+      <span>Your prompts</span>
+      <select name="privacy">
+        <option value="any">Fine if the provider uses them</option>
+        <option value="private">Keep them private</option>
+      </select>
+    </label>
+  </form>
+  <ol class="picks" id="picks" aria-live="polite"></ol>
+  <p class="sub" id="picker-note"></p>
+</section>
+
+<script is:inline define:vars={{ data: pickerData }}>
+  const form = document.getElementById("picker");
+  const picks = document.getElementById("picks");
+  const note = document.getElementById("picker-note");
+  const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+
+  function render() {
+    const f = new FormData(form);
+    const use = data[f.get("use")];
+    const ok = use[f.get("where")].filter((c) => f.get("privacy") !== "private" || !c.usesPrompts);
+    // One entry per model: the best place first, other places as "also on".
+    const seen = new Map();
+    for (const c of ok) {
+      if (seen.has(c.family)) seen.get(c.family).also.push(c.provider);
+      else seen.set(c.family, { ...c, also: [] });
+    }
+    const list = [...seen.values()].slice(0, 3);
+    picks.innerHTML = list.length
+      ? list.map((c) => {
+          const tags = [
+            c.eval && '<span class="badge bad">⚠ Eval only</span>',
+            c.usesPrompts && '<span class="badge warn">👁 May use your prompts</span>',
+            c.dataUnknown && f.get("privacy") === "private" && '<span class="badge neutral">Data use not stated</span>',
+            c.noSignup && '<span class="badge neutral">No signup</span>',
+          ].filter(Boolean).join("");
+          const also = c.also.length ? ` (also on ${esc([...new Set(c.also)].join(", "))})` : "";
+          return `<li><a class="model-name" href="${c.href}">${esc(c.name)}</a> <span class="sub">on ${esc(c.provider)}${also}</span>`
+            + `<div class="sub">${esc(c.why)}</div>${tags ? `<div>${tags}</div>` : ""}</li>`;
+        }).join("")
+      : "<li class=\"sub\">Nothing fits all three right now. Try “Testing or personal projects” or allow prompt use.</li>";
+    note.innerHTML = `From our daily tests and rankings. Setup and limits are on each model's page. <a href="${use.ranking}">Full ranking</a>`;
+  }
+  form.addEventListener("change", render);
+  render();
+</script>

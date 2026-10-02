@@ -1,0 +1,47 @@
+---
+/**
+ * The last N test days at a glance: one column per day, the morning test on top and
+ * the peak-hours test below. Green answered, amber slow or rate-limited, red failed,
+ * grey not callable here; an empty outline means no test in that half of the day.
+ */
+import { half, testDays } from "../../pipeline/test-days";
+import type { TestResult } from "../../pipeline/types";
+
+interface Props {
+  tests: TestResult[];
+  days?: number;
+}
+const { tests, days = 14 } = Astro.props;
+const recent = testDays(tests).slice(-days);
+
+const LABEL: Record<TestResult["status"], string> = {
+  responded: "answered",
+  slow: "slow or timed out",
+  rate_limited: "rate-limited",
+  no_free_quota: "no free quota",
+  gone: "not found",
+  restricted: "agent apps only",
+  error: "error",
+};
+const tone = (s: TestResult["status"]) =>
+  s === "responded" ? "ok" : s === "slow" || s === "rate_limited" ? "warn" : s === "restricted" || s === "no_free_quota" ? "off" : "bad";
+const cell = (d: (typeof recent)[number], h: "am" | "pm") => {
+  const t = d.tests.find((x) => half(x) === h);
+  const when = `${d.day} ${h === "am" ? "morning" : "peak hours"}`;
+  return t
+    ? { cls: tone(t.status), title: `${when}: ${LABEL[t.status]}${t.latency_ms != null && t.status === "responded" ? ` (${(t.latency_ms / 1000).toFixed(1)} s)` : ""}` }
+    : { cls: "none", title: `${when}: not tested` };
+};
+---
+{recent.length > 0 && (
+  <span class="strip" role="img" aria-label={`Test results for the last ${recent.length} test days: ${recent.filter((d) => d.answered).length} days with every test answered`}>
+    {recent.map((d) => (
+      <span class="d">
+        {(["am", "pm"] as const).map((h) => {
+          const c = cell(d, h);
+          return <i class={c.cls} title={c.title}></i>;
+        })}
+      </span>
+    ))}
+  </span>
+)}

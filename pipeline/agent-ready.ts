@@ -3,7 +3,8 @@
  * the resource and its test history. Not stored, so it never creates change events
  * or commits of its own.
  *
- *   yes      tool calling, ≥ 64k context, responded on ≥ 5 of the last 7 test days,
+ *   yes      tool calling, ≥ 64k context, answered every test (morning and peak hours) on
+ *            ≥ 5 of the last 7 test days,
  *            passed at least half its recent tool-call tests, and not evaluation-only
  *   partial  tool calling and ≥ 64k context, but the test history or terms fall short
  *   no       otherwise (including "tool support unknown")
@@ -16,6 +17,7 @@
  */
 
 import { PROVIDERS } from "./providers";
+import { testDays } from "./test-days";
 import type { Resource, TestResult, ToolResult } from "./types";
 
 export const AGENT_MIN_CONTEXT = 64_000;
@@ -54,10 +56,10 @@ export function agentReadiness(r: Resource, history: TestResult[] = [], tools: T
   if ((r.context_length ?? 0) < AGENT_MIN_CONTEXT) reasons.push("context under 64k or unknown");
   if (reasons.length) return { level: "no", reasons, caveat: null };
 
-  const recent = history.slice(-AGENT_WINDOW_DAYS);
-  const responded = recent.filter((t) => t.status === "responded").length;
+  const recent = testDays(history).slice(-AGENT_WINDOW_DAYS);
+  const answered = recent.filter((d) => d.answered).length;
   if (recent.length === 0) reasons.push("not tested yet");
-  else if (responded < AGENT_MIN_RESPONDED_DAYS) reasons.push(`responded on ${responded} of the last ${recent.length} test days`);
+  else if (answered < AGENT_MIN_RESPONDED_DAYS) reasons.push(`answered every test on ${answered} of the last ${recent.length} test days`);
   if (ts.share !== null && ts.share < 0.5) reasons.push(`passed the tool-call test on ${ts.passed} of ${ts.tested} days`);
   if (r.usage_terms === "evaluation-only") reasons.push("evaluation-only terms");
 

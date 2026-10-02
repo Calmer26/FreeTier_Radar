@@ -93,7 +93,7 @@ const actDef = RANKINGS.find((r) => r.slug === "coding-act")!;
                 <td class="num hide-sm">{formatContext(m.context_length)}</td>
                 <td class="nowrap">
                   <TestStatus test={m.lastTest} />
-                  <div class="sub">{rel.tested ? `answered ${rel.responded} of ${rel.tested} days` : "no results yet"}</div>
+                  <div class="sub">{rel.tested ? `answered ${rel.responded} of ${rel.tested} tests` : "no results yet"}</div>
                 </td>
                 <td class="num">{t.tested ? `${t.passed}/${t.tested}` : "–"}</td>
               </tr>

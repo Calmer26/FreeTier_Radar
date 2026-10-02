@@ -15,6 +15,8 @@
  * at busy times.
  */
 
+import { slotKey } from "./test-days";
+import { wordErrorRate } from "./wer";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { SITE } from "../site.config";
@@ -103,7 +105,8 @@ interface TestRequest {
   url: string;
   init: RequestInit;
   /** Throws when a 200 response is not the kind of answer asked for. */
-  check: (res: Response) => Promise<void>;
+  /** Speech-to-text checks return the transcript's word error rate. */
+  check: (res: Response) => Promise<void | number>;
 }
 
 /** Exported for tests. */
@@ -156,7 +159,7 @@ export function buildRequest(r: Resource, env: Record<string, string | undefined
         const out = json.candidates?.[0]?.content?.parts ?? [];
         if (r.kind === "tts" && !out.some((p) => p.inlineData?.data)) throw new Error("no audio in response");
         // Transcribe models answer in `audioTranscription`, not `text` (checked 2026-09-28).
-        if (r.kind === "stt") expectTranscript(out.map((p) => p.audioTranscription?.text ?? p.text ?? "").join(" "));
+        if (r.kind === "stt") return expectTranscript(out.map((p) => p.audioTranscription?.text ?? p.text ?? "").join(" "));
       },
     };
   }
@@ -217,7 +220,7 @@ function cloudflareRequest(r: Resource, aiBase: string, auth: Record<string, str
 }
 
 /** A Cloudflare answer holds the media asked for, either raw or as base64 in JSON. Exported for tests. */
-export async function checkCloudflare(r: Pick<Resource, "kind">, res: Response): Promise<void> {
+export async function checkCloudflare(r: Pick<Resource, "kind">, res: Response): Promise<void | number> {
   const type = res.headers.get("content-type") ?? "";
   const want = r.kind === "image" ? "image/" : r.kind === "tts" ? "audio/" : null;
   if (want && type.startsWith(want)) {
@@ -226,15 +229,25 @@ export async function checkCloudflare(r: Pick<Resource, "kind">, res: Response):
     return;
   }
   const text = await res.text();
-  if (r.kind === "stt") return expectTranscript(text);
+  if (r.kind === "stt") {
+    // Whisper on Cloudflare answers {"result":{"text":…}}; score the text, not the JSON around it.
+    let transcript = text;
+    try {
+      const json = JSON.parse(text) as { result?: { text?: string }; text?: string };
+      transcript = json.result?.text ?? json.text ?? text;
+    } catch { /* not JSON: the body is the transcript */ }
+    return expectTranscript(transcript);
+  }
   const field = r.kind === "image" ? /"image"\s*:\s*"([A-Za-z0-9+/=]{500,})/ : /"audio"\s*:\s*"([A-Za-z0-9+/=]{200,})/;
   if (!field.test(text)) throw new Error(`no ${r.kind} in response: ${text.slice(0, 120)}`);
 }
 
-function expectTranscript(text: string) {
+/** Throws when the transcript isn't of our clip; otherwise its word error rate (3 decimals). */
+function expectTranscript(text: string): number {
   if (!text.toLowerCase().includes(STT_EXPECTED_WORD)) {
     throw new Error(`transcript did not match the sample: "${text.slice(0, 80)}"`);
   }
+  return Math.round(wordErrorRate(text) * 1000) / 1000;
 }
 
 export async function testModel(r: Resource, env: Record<string, string | undefined>): Promise<TestOutcome> {
@@ -250,12 +263,12 @@ export async function testModel(r: Resource, env: Record<string, string | undefi
       const zero = res.headers.get("x-ratelimit-limit-req-minute") === "0" ? "limit: 0 " : "";
       throw new HttpError(res.status, `${res.status} ${zero}${body}`);
     }
-    await check(res);
+    const wer = await check(res);
     const latency = Date.now() - started;
     // An image taking 20+ s is normal, not slow.
     const slow = r.kind === "image" ? latency > IMAGE_TEST_TIMEOUT_MS : latency > SLOW_MS;
     return {
-      result: { at, status: slow ? "slow" : "responded", latency_ms: latency },
+      result: { at, status: slow ? "slow" : "responded", latency_ms: latency, ...(typeof wer === "number" ? { wer } : {}) },
       limits: r.provider === "groq" || r.provider === "mistral" ? limitsFromHeaders(res.headers) : null,
       detail: null,
     };
@@ -280,9 +293,12 @@ export function recordResults(
 ): TestHistory {
   const cutoff = new Date(Date.parse(now) - HISTORY_DAYS * 86_400_000).toISOString().slice(0, 10);
   const day = (t: { at: string }) => t.at.slice(0, 10);
-  /** Keep the window, and replace any earlier entry from the new entry's day. */
-  const merge = <T extends { at: string }>(old: T[] | undefined, next: T | null | undefined): T[] => {
-    const kept = (old ?? []).filter((t) => day(t) >= cutoff && (!next || day(t) !== day(next)));
+  /**
+   * Keep the window, and replace an earlier entry from the same slot: test results keep
+   * one per half-day (morning and peak hours), tool results one per day.
+   */
+  const merge = <T extends { at: string }>(old: T[] | undefined, next: T | null | undefined, key: (t: { at: string }) => string = slotKey): T[] => {
+    const kept = (old ?? []).filter((t) => day(t) >= cutoff && (!next || key(t) !== key(next)));
     return next ? [...kept, next] : kept;
   };
   const results: TestHistory["results"] = {};
@@ -296,7 +312,7 @@ export function recordResults(
     const outcome = outcomes.get(id);
     const list = merge(history.results[id], outcome?.result);
     if (list.length) results[id] = list;
-    const tools = merge(oldTools[id], outcome?.tool);
+    const tools = merge(oldTools[id], outcome?.tool, day);
     if (tools.length) tool_results[id] = tools;
     const limits = outcome?.limits ?? history.observed_limits[id];
     if (limits) observed_limits[id] = limits;

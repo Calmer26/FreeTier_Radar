@@ -3,6 +3,7 @@ import Base from "../../layouts/Base.astro";
 import Badges from "../../components/Badges.astro";
 import SponsorSlot from "../../components/SponsorSlot.astro";
 import TestStatus from "../../components/TestStatus.astro";
+import HistoryStrip from "../../components/HistoryStrip.astro";
 import { sharedFamilies, type ModelFamily } from "../../lib/families";
 import { usableNow } from "../../../pipeline/families";
 import { toolStats } from "../../../pipeline/agent-ready";
@@ -29,7 +30,7 @@ const pct = (s: number | null) => (s == null ? "–" : `${Math.round(s * 100)}%`
 const answer =
   `${f.name}${kindWord} is free at ${places.length} providers: ${places.join(", ")}. ` +
   (best
-    ? `The best place to use it right now is ${provider(best.provider)}: it answered ${bestRel!.responded} of ${bestRel!.tested} daily tests` +
+    ? `The best place to use it right now is ${provider(best.provider)}: it answered ${bestRel!.responded} of its last ${bestRel!.tested} tests` +
       (bestTools?.tested ? ` and passed the tool-call test on ${bestTools.passed} of ${bestTools.tested} days` : "") +
       "."
     : "None of them answered our latest daily test.");
@@ -56,7 +57,7 @@ const caveats = [
       <strong>Best place right now: <a href={best.href}>{PROVIDERS[best.provider].label}</a></strong>
       <span class="mono"> {best.model_id}</span>
       <div class="sub">
-        Answered {bestRel!.responded} of {bestRel!.tested} days
+        Answered {bestRel!.responded} of {bestRel!.tested} tests
         {bestRel!.medianLatencyMs != null && `, median ${(bestRel!.medianLatencyMs / 1000).toFixed(1)} s`}
         {best.limits && `; limits: ${formatLimits(best.limits)}`}. Setup and snippets are on its <a href={best.href}>model page</a>.
       </div>
@@ -88,7 +89,7 @@ const caveats = [
               {isChat && <td class="num">{formatContext(m.context_length)}</td>}
               <td>{formatLimits(m.limits)}{m.limit_scope === "shared" && m.limits ? <div class="sub">shared across its free models</div> : null}</td>
               <td class="nowrap"><TestStatus test={m.lastTest} untestable={!m.testable} /></td>
-              <td class="num">{m.testable ? <>{pct(rel.share)} <span class="sub">({rel.responded}/{rel.tested})</span></> : <span class="sub">–</span>}</td>
+              <td class="num">{m.testable ? <>{pct(rel.share)} <span class="sub">({rel.responded}/{rel.tested})</span><div><HistoryStrip tests={m.tests} /></div></> : <span class="sub">–</span>}</td>
               {isChat && <td class="num">{t.tested ? `${t.passed}/${t.tested}` : "–"}</td>}
               <td class="hide-sm"><Badges m={m} /></td>
             </tr>

@@ -2,6 +2,7 @@
 import Base from "../layouts/Base.astro";
 import Badges from "../components/Badges.astro";
 import SponsorSlot from "../components/SponsorSlot.astro";
+import Picker from "../components/Picker.astro";
 import TestStatus from "../components/TestStatus.astro";
 import { activeModels, events, providersInData } from "../lib/data";
 import { PROVIDERS } from "../../pipeline/providers";
@@ -27,7 +28,7 @@ const kinds = MODEL_KINDS.map((k) => ({ kind: k, count: activeModels.filter((m) 
 ---
 <Base title="Directory">
   <h1>Free AI models that actually work</h1>
-  <p class="lede">{SITE.tagline} Every model below is tested once a day, and every change is logged.</p>
+  <p class="lede">{SITE.tagline} Every model below is tested every day (chat models twice: morning and peak hours), and every change is logged.</p>
 
   <div class="stats">
     <div class="stat"><b>{activeModels.length}</b><span>free models tracked</span></div>
@@ -41,6 +42,8 @@ const kinds = MODEL_KINDS.map((k) => ({ kind: k, count: activeModels.filter((m) 
     )}
     <div class="stat"><b>{thisWeek.length}</b><span><a href="/changes/">changes this week</a></span></div>
   </div>
+
+  <Picker />
 
   <SponsorSlot />
 

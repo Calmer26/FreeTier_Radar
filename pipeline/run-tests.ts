@@ -1,5 +1,9 @@
 /**
- * Daily test run (GitHub Actions, once a day): one request per active free model.
+ * Daily test run (GitHub Actions, twice a day): one request per active free model.
+ *
+ * Morning (06:10 UTC): every kind, plus the tool-call test. Peak hours (18:10 UTC, any run
+ * after 12:00): chat models only and no tool test, to see which free models still answer
+ * when they're busiest. Each half-day keeps its own result (test-days.ts).
  *
  * Providers run in parallel; models within a provider run one at a time with a gap
  * that keeps us well inside the free limits. After three rate-limit answers in a row
@@ -32,6 +36,8 @@ const IMAGE_TEST_EVERY_DAYS = 7;
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
+const EVENING = new Date().getUTCHours() >= 12;
+
 async function runProvider(p: ProviderId, models: Resource[], outcomes: Map<string, TestOutcome>, history: TestHistory) {
   let rateLimitedInARow = 0;
   for (const [i, r] of models.entries()) {
@@ -55,7 +61,7 @@ async function runProvider(p: ProviderId, models: Resource[], outcomes: Map<stri
     await sleep(GAP_MS[p]);
 
     // Act-mode signal: only for chat models that just answered, and not ones known to lack tools.
-    if (r.kind === "chat" && outcome.result.status === "responded" && r.tool_calling !== false) {
+    if (!EVENING && r.kind === "chat" && outcome.result.status === "responded" && r.tool_calling !== false) {
       const tool = await testToolCall(r, process.env);
       outcome.tool = tool.result;
       console.log(`  ${p} ${r.model_id}: tool call ${tool.result?.status ?? "rate-limited"}${tool.detail ? `: ${tool.detail}` : ""}`);
@@ -66,6 +72,7 @@ async function runProvider(p: ProviderId, models: Resource[], outcomes: Map<stri
 
 async function main() {
   const now = new Date().toISOString();
+  console.log(EVENING ? "Peak-hours test: chat models only, no tool test." : "Morning test: every model, plus tool calls.");
   const resources = readResources();
   const history = readTests();
   const outcomes = new Map<string, TestOutcome>();
@@ -81,7 +88,7 @@ async function main() {
         console.log(`- ${p}: skipped (${keyEnv} not set)`);
         return Promise.resolve();
       }
-      const models = resources.filter((r) => r.provider === p && r.status === "active");
+      const models = resources.filter((r) => r.provider === p && r.status === "active" && (!EVENING || r.kind === "chat"));
       console.log(`- ${p}: testing ${models.length} model(s)`);
       return runProvider(p, models, outcomes, history);
     }),

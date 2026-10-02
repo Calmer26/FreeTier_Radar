@@ -4,6 +4,8 @@ import Badges from "../../../components/Badges.astro";
 import EventList from "../../../components/EventList.astro";
 import SponsorSlot from "../../../components/SponsorSlot.astro";
 import TestStatus from "../../../components/TestStatus.astro";
+import HistoryStrip from "../../../components/HistoryStrip.astro";
+import { accuracyText, transcriptAccuracy } from "../../../../pipeline/wer";
 import { events, formatDate, formatTime, modelById, models, showcase, type ModelView } from "../../../lib/data";
 import { showcaseKey, SHOWCASE_PROMPTS } from "../../../../pipeline/showcase";
 import { PROVIDERS } from "../../../../pipeline/providers";
@@ -66,7 +68,7 @@ const breadcrumbs = {
   <p><Badges m={m} /></p>
 
   {m.unreachable && (
-    <p class="callout"><strong>Listed but not callable.</strong> {provider.label} lists this model, but our daily test got "not found" on each of the last 3 days. It's left out of the directory until it answers again.</p>
+    <p class="callout"><strong>Listed but not callable.</strong> {provider.label} lists this model, but our test got "not found" on each of its last 3 tests. It's left out of the directory until it answers again.</p>
   )}
   {m.listed_by === "curated" && (
     <p class="callout info"><strong>Hand-listed.</strong> {provider.label} doesn't publish a list of these models, so we keep this entry by hand. The daily test shows whether it still works.</p>
@@ -202,13 +204,20 @@ const breadcrumbs = {
 
   {m.testable && <h2>Daily test</h2>}
   {m.testable && <p><TestStatus test={m.lastTest} /></p>}
+  {m.kind === "stt" && (() => {
+    const a = transcriptAccuracy(m.tests);
+    return a.mean != null && (
+      <p><strong>Transcript accuracy:</strong> {accuracyText(a.mean)} of words right on our 18-second clip (average of the last {a.scored} test{a.scored === 1 ? "" : "s"}; word error rate {(a.mean * 100).toFixed(1)}%). <a href="/voice-models/#speech-to-text">Compare all models</a>.</p>
+    );
+  })()}
   {m.testable && m.tests.length > 0 && (
-    <div class="history" aria-label="Test results, last 30 days">
-      {m.tests.map((t) => <i class={`s-${t.status}`} title={`${formatTime(t.at)}: ${t.status}`}></i>)}
-    </div>
+    <p>
+      <HistoryStrip tests={m.tests} days={30} />
+      <span class="sub"> Last {Math.min(30, new Set(m.tests.map((t) => t.at.slice(0, 10))).size)} test days: top row mornings, bottom row peak hours. Green answered, amber slow or rate-limited, red failed. Hover for details.</span>
+    </p>
   )}
   {m.testable && <p class="sub">
-    {m.kind === "image" ? "One small image per week (image generation uses much more of a free allowance than chat)." : <>One short request per day{m.kind === "tts" ? ' (speak "OK")' : m.kind === "stt" ? " (transcribe an 18-second sample clip)" : ""}.</>}
+    {m.kind === "image" ? "One small image per week (image generation uses much more of a free allowance than chat)." : <>{m.kind === "chat" ? "Two short requests a day: 06:10 UTC and 18:10 UTC, when free models are busiest" : `One short request per day${m.kind === "tts" ? ' (speak "OK")' : " (transcribe an 18-second sample clip)"}`}.</>}
     It shows the model answered at that moment, not that it is fast or available all day.
   </p>}
 
@@ -225,7 +234,7 @@ const breadcrumbs = {
 
   {m.kind === "chat" && m.testable && <h2>Coding and agents</h2>}
   {m.kind === "chat" && m.testable && <p>
-    {m.agent.level === "yes" && "Meets the agent-ready bar: tool calling, at least 64k context, and it answered on 5 of the last 7 test days."}
+    {m.agent.level === "yes" && "Meets the agent-ready bar: tool calling, at least 64k context, and it answered every test (morning and peak hours) on 5 of the last 7 days."}
     {m.agent.level === "partial" && `Has tool calling and enough context, but: ${m.agent.reasons.join("; ")}.`}
     {m.agent.level === "no" && `Not suited to coding agents: ${m.agent.reasons.join("; ")}.`}
   </p>}

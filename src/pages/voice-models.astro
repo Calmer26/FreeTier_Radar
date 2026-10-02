@@ -6,6 +6,8 @@ import { activeModels, formatDate, voices } from "../lib/data";
 import { NON_ENGLISH, voiceKey, VOICE_SENTENCES } from "../../pipeline/voices";
 import { PROVIDERS } from "../../pipeline/providers";
 import { reliability } from "../../pipeline/rankings";
+import { accuracyText, STT_REFERENCE, transcriptAccuracy } from "../../pipeline/wer";
+import HistoryStrip from "../components/HistoryStrip.astro";
 
 // Same order as the text-to-speech ranking: most reliable, then fastest.
 const models = activeModels
@@ -14,10 +16,15 @@ const models = activeModels
   .map((m) => ({ m, rel: reliability(m.tests) }))
   .sort((a, b) => (b.rel.share ?? -1) - (a.rel.share ?? -1) || (a.rel.medianLatencyMs ?? 1e9) - (b.rel.medianLatencyMs ?? 1e9));
 const done = models.filter(({ m }) => VOICE_SENTENCES.some((s) => voices.samples[voiceKey(m.id, s.id)])).length;
+// Speech-to-text: most accurate first (average word error rate), unscored last.
+const stt = activeModels
+  .filter((m) => m.kind === "stt" && m.lastTest?.status !== "no_free_quota")
+  .map((m) => ({ m, acc: transcriptAccuracy(m.tests) }))
+  .sort((a, b) => (a.acc.mean ?? 9) - (b.acc.mean ?? 9));
 const provider = (m: (typeof models)[number]["m"]) => PROVIDERS[m.provider].label.split(" (")[0];
 ---
-<Base title="Free text-to-speech voices compared" description="Listen to every free text-to-speech model read the same three sentences: natural reading, numbers and dates, and a question with emotion. Side by side.">
-  <h1>Free text-to-speech voices compared</h1>
+<Base title="Free voice models compared" description="Listen to every free text-to-speech model read the same three sentences, and see how accurately every free speech-to-text model transcribes the same clip.">
+  <h1>Free voice models compared</h1>
   <p class="lede">
     There's no public quality benchmark for voices, so listen for yourself: every free text-to-speech model reads the same
     three sentences, each aimed at a common weakness.
@@ -63,4 +70,28 @@ const provider = (m: (typeof models)[number]["m"]) => PROVIDERS[m.provider].labe
       </div>
     </>
   ))}
+
+  <h2 id="speech-to-text">Speech-to-text: how accurate?</h2>
+  <p class="sub">
+    Every day each free speech-to-text model transcribes the same 18-second clip (a British male voice). We compare its
+    transcript with the script and count the words it got wrong, dropped or added (word error rate). Only the score is
+    kept, not the transcript. One clip is a small sample: treat small differences as a tie.
+  </p>
+  <p class="sub"><strong>Script:</strong> “{STT_REFERENCE}”</p>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Model</th><th class="num">Words right</th><th class="num hide-sm">Latest test</th><th>Test history</th><th class="hide-sm">Labels</th></tr></thead>
+      <tbody>
+        {stt.map(({ m, acc }) => (
+          <tr>
+            <td><a class="model-name" href={m.href}>{m.name}</a><div class="sub">{PROVIDERS[m.provider].label.split(" (")[0]}</div></td>
+            <td class="num">{acc.mean != null ? <><strong>{accuracyText(acc.mean)}</strong> <span class="sub">({acc.scored} test{acc.scored === 1 ? "" : "s"})</span></> : <span class="sub">not scored yet</span>}</td>
+            <td class="num hide-sm">{acc.latest != null ? accuracyText(acc.latest) : "–"}</td>
+            <td><HistoryStrip tests={m.tests} /></td>
+            <td class="hide-sm"><Badges m={m} /></td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
 </Base>

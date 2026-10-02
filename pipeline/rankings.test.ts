@@ -87,6 +87,12 @@ describe("rank", () => {
     expect(out.map((x) => x.r.id)).toEqual(["c-newer", "a-older", "b-unrated-fast"]);
   });
 
+  it("lets evaluation-only models in only when asked (for experiments)", () => {
+    const inputs = [{ r: res("eval", { usage_terms: "evaluation-only" }), history: good }, { r: res("prod"), history: good }];
+    expect(rank(ranking("most-reliable"), inputs).map((x) => x.r.id)).toEqual(["prod"]);
+    expect(rank(ranking("most-reliable"), inputs, 25, { allowEval: true }).map((x) => x.r.id).sort()).toEqual(["eval", "prod"]);
+  });
+
   it("keeps speech rankings to their own kind", () => {
     const out = rank(ranking("speech-to-text"), [
       { r: res("whisper", { kind: "stt" }), history: good },

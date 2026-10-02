@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { buildRequest, checkCloudflare, classifyFailure, HttpError, limitsFromHeaders, recordResults, ttsVoice, type TestOutcome } from "./probe";
 import type { Resource, TestHistory } from "./types";
+import { STT_REFERENCE } from "./wer";
 
 describe("classifyFailure", () => {
   it("treats Mistral's zero per-minute limit as no free quota, not a passing rate limit", () => {
@@ -96,7 +97,8 @@ describe("buildRequest", () => {
   it("rejects an STT transcript that doesn't match the sample", async () => {
     const req = buildRequest(r("groq", "whisper-large-v3", "stt"), env);
     await expect(req.check(new Response(JSON.stringify({ text: "hello there" })))).rejects.toThrow(/did not match/);
-    await expect(req.check(new Response(JSON.stringify({ text: "Olympus Mons is…" })))).resolves.toBeUndefined();
+    await expect(req.check(new Response(JSON.stringify({ text: STT_REFERENCE })))).resolves.toBe(0);
+    await expect(req.check(new Response(JSON.stringify({ text: STT_REFERENCE.replace("Poland", "Holland") })))).resolves.toBe(0.018); // 1 wrong word of 55
   });
 });
 
@@ -115,6 +117,20 @@ describe("Cloudflare requests", () => {
     await expect(checkCloudflare({ kind: "image" }, new Response(new Uint8Array(2000), { headers: { "content-type": "image/png" } }))).resolves.toBeUndefined();
     await expect(checkCloudflare({ kind: "image" }, new Response(JSON.stringify({ result: { image: "A".repeat(600) } })))).resolves.toBeUndefined();
     await expect(checkCloudflare({ kind: "tts" }, new Response(JSON.stringify({ result: {} })))).rejects.toThrow(/no tts/);
-    await expect(checkCloudflare({ kind: "stt" }, new Response(JSON.stringify({ result: { text: "Olympus Mons is" } })))).resolves.toBeUndefined();
+    // Scored on the text inside Cloudflare's JSON, not on the JSON itself.
+    await expect(checkCloudflare({ kind: "stt" }, new Response(JSON.stringify({ result: { text: STT_REFERENCE } })))).resolves.toBe(0);
+  });
+});
+
+describe("recordResults with two tests a day", () => {
+  it("keeps the morning and the peak-hours result, and a rerun replaces only its own half", () => {
+    const ids = new Set(["p/m"]);
+    const add = (h: TestHistory, at: string, status: "responded" | "error") =>
+      recordResults(h, new Map([["p/m", { result: { at, status, latency_ms: 1 }, limits: null, detail: null } as TestOutcome]]), ids, at);
+    let h: TestHistory = { updated_at: null, results: {}, observed_limits: {} };
+    h = add(h, "2026-10-02T06:10:00Z", "responded");
+    h = add(h, "2026-10-02T18:10:00Z", "error");
+    h = add(h, "2026-10-02T19:00:00Z", "responded");
+    expect(h.results["p/m"].map((t) => `${t.at.slice(11, 16)} ${t.status}`)).toEqual(["06:10 responded", "19:00 responded"]);
   });
 });

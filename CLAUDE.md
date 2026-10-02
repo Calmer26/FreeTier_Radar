@@ -15,7 +15,10 @@ code there was copied and adapted, not shared.
   `sponsor.json`, `offers/ai/*.json` and `apps/*.json`. History = git log. Never store snapshots or full API
   responses or pages.
 - Models have a `kind` (chat, tts, stt, image); each kind has its own test in `probe.ts` (image: weekly,
-  120 s timeout). Hand-listed in `adapters.ts`: OpenRouter's free voices (`OPENROUTER_CURATED_SPEECH`) and
+  120 s timeout). Tests run at 06:10 UTC (everything + tool calls) and 18:10 UTC (chat only, peak hours); a run
+  after 12:00 UTC is the peak-hours run. `test-days.ts`: one result per half-day, derived from the timestamp
+  (no extra field); reliability counts tests, agent-ready counts days on which every test answered.
+- STT tests also store a word error rate (`wer.ts`) against the clip's script; never the transcript. Hand-listed in `adapters.ts`: OpenRouter's free voices (`OPENROUTER_CURATED_SPEECH`) and
   Z.ai's free Flash models (`ZAI_FREE_MODELS`; its `/models` leaves them out).
 - Cloudflare Workers AI: `base_url` has an `{account}` placeholder (`baseUrl()`). Prices come from its pricing
   page (`cloudflare-pricing.ts`, fetched each discovery; a failed fetch throws rather than wiping prices);
@@ -31,6 +34,9 @@ code there was copied and adapted, not shared.
   and the links from our model ids to Arena names. Exact matches and effort/size variants
   ("-high", "(Max)", "-30b-a3b") are automatic; other near matches only count once confirmed
   through the weekly aliases PR (`pipeline/arena.ts`). Rejected ones stay rejected.
+- `src/components/HistoryStrip.astro`: the last N test days (top row mornings, bottom peak hours).
+  `src/lib/picker.ts` + `Picker.astro`: "Help me choose" on the home page, from the rankings (`rank(…, { allowEval })`
+  for experiments); never recommends a model that hasn't answered a test.
 - `families.ts`: the same model at every free provider (sibling groups) → `/free/<model>/` pages for models free at
   2+ providers, best place first (`placeOrder`). `working.ts`: `/api/working.json`, the models an app can use
   that answered the latest test, per use; documented on `/developers/`. Keep that page in step with the feed.

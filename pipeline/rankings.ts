@@ -10,6 +10,8 @@
 import { AGENT_MIN_CONTEXT, agentReadiness, toolStats } from "./agent-ready";
 import type { ArenaBoard, ArenaScores } from "./arena";
 import { imageCost } from "./cloudflare-pricing";
+import { lastDays } from "./test-days";
+import { transcriptAccuracy } from "./wer";
 import type { ModelKind, Resource, TestResult, ToolResult } from "./types";
 
 export const RANKING_WINDOW_DAYS = 30;
@@ -24,9 +26,12 @@ export interface Reliability {
   medianLatencyMs: number | null;
 }
 
-/** Rate-limited days say nothing about the model, so they don't count as tested. */
+/**
+ * Over the last RANKING_WINDOW_DAYS test days, both daily tests (morning and peak hours).
+ * Rate-limited tests say nothing about the model, so they don't count as tested.
+ */
 export function reliability(history: TestResult[]): Reliability {
-  const recent = history.slice(-RANKING_WINDOW_DAYS).filter((t) => t.status !== "rate_limited");
+  const recent = lastDays(history, RANKING_WINDOW_DAYS).filter((t) => t.status !== "rate_limited");
   const ok = recent.filter((t) => t.status === "responded");
   const latencies = ok.map((t) => t.latency_ms ?? 0).sort((a, b) => a - b);
   return {
@@ -46,6 +51,8 @@ export interface RankInput {
 
 export interface RankedModel extends RankInput {
   rel: Reliability;
+  /** Set by rank() for experiments: evaluation-only models may take part. */
+  allowEval?: boolean;
 }
 
 export interface RankingDef {
@@ -71,7 +78,7 @@ const enoughTests = (x: RankedModel) => x.rel.tested >= MIN_TESTED_DAYS;
  * latest test (Gemini lists paid-only models; the test is what reveals them).
  */
 const usable = (x: RankedModel) =>
-  x.r.status === "active" && x.r.usage_terms !== "evaluation-only" && x.history.at(-1)?.status !== "no_free_quota";
+  x.r.status === "active" && (x.allowEval || x.r.usage_terms !== "evaluation-only") && x.history.at(-1)?.status !== "no_free_quota";
 const ofKind = (k: ModelKind) => (x: RankedModel) => x.r.kind === k;
 
 /** Most reliable first, then fastest. */
@@ -84,6 +91,8 @@ const agentLevel = (x: RankedModel) => agentReadiness(x.r, x.history, x.tools).l
 /** Arena rating for coding: WebDev when rated there, else Text; -1 when unrated. */
 const codingRating = (x: RankedModel) => x.arena?.boards.webdev?.rating ?? x.arena?.boards.text?.rating ?? -1;
 const textRating = (x: RankedModel) => x.arena?.boards.text?.rating ?? -1;
+/** Mean word error rate on our clip; unscored models sort last. */
+const sttError = (x: RankedModel) => transcriptAccuracy(x.history).mean ?? Number.MAX_SAFE_INTEGER;
 const visionRating = (x: RankedModel) => x.arena?.boards.vision?.rating ?? -1;
 const imageRating = (x: RankedModel) => x.arena?.boards.text_to_image?.rating ?? -1;
 /** Neurons per 1024×1024 image; unknown prices sort last. */
@@ -171,16 +180,17 @@ export const RANKINGS: RankingDef[] = [
   {
     slug: "speech-to-text",
     title: "Best free speech-to-text models",
-    intro: "Free STT models, tested daily by transcribing an 18-second clip.",
-    order: "Reliability over the last 30 days, then median response time.",
+    intro: "Free STT models, tested daily by transcribing an 18-second clip and scoring the transcript against its script.",
+    order: "Reliability over the last 30 days, then transcript accuracy on our 18-second clip (word error rate over the last 7 tests), then median response time.",
     filter: (x) => usable(x) && ofKind("stt")(x),
-    compare: byReliability,
+    compare: (a, b) => share(b) - share(a) || sttError(a) - sttError(b) || latency(a) - latency(b),
   },
 ];
 
-export function rank(def: RankingDef, inputs: RankInput[], limit = 25): RankedModel[] {
+/** The published rankings leave evaluation-only models out; `allowEval` lets them in (the picker's "just experimenting"). */
+export function rank(def: RankingDef, inputs: RankInput[], limit = 25, opts: { allowEval?: boolean } = {}): RankedModel[] {
   return inputs
-    .map((x) => ({ ...x, rel: reliability(x.history) }))
+    .map((x) => ({ ...x, rel: reliability(x.history), allowEval: opts.allowEval }))
     .filter(def.filter)
     .sort((a, b) => def.compare(a, b) || a.r.name.localeCompare(b.r.name))
     .slice(0, limit);

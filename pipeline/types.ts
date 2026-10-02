@@ -128,6 +128,8 @@ export interface TestResult {
   at: string;
   status: TestStatus;
   latency_ms: number | null;
+  /** Speech-to-text only: word error rate of the transcript of our clip (0 = perfect). */
+  wer?: number;
 }
 
 /** Result of the daily tool-call test (chat models only). See tool-test.ts. */

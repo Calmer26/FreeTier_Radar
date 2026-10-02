@@ -7,6 +7,7 @@ describe("due", () => {
   it("starts the showcase just after the Neuron reset and the tests at 06:10", () => {
     expect(due(at("2026-09-30T00:30:00Z"))).toEqual(["showcase.yml"]);
     expect(due(at("2026-09-30T06:10:05Z"))).toEqual(["daily-tests.yml"]);
+    expect(due(at("2026-09-30T18:10:00Z"))).toEqual(["daily-tests.yml"]); // peak-hours test
   });
 
   it("rounds a late wake-up down to its 10-minute window", () => {

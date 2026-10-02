@@ -19,6 +19,7 @@ export const SCHEDULE: Slot[] = [
   { workflow: "discovery.yml", hour: "every-6h", minute: 20 },    // 03:20, 09:20, 15:20, 21:20
   { workflow: "watch.yml", hour: 5, minute: 40, weekday: 1 },
   { workflow: "daily-tests.yml", hour: 6, minute: 10 },
+  { workflow: "daily-tests.yml", hour: 18, minute: 10 },          // peak hours: chat models only
   { workflow: "arena.yml", hour: 6, minute: 20, weekday: 1 },     // waits for the tests to finish
   { workflow: "roundup.yml", hour: 7, minute: 0, weekday: 1 },
 ];
