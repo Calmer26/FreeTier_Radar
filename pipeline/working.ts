@@ -12,7 +12,7 @@ import type { ArenaScores } from "./arena";
 import { usableNow, type FamilyMember } from "./families";
 import { PROVIDERS } from "./providers";
 import { reliability, RANKING_WINDOW_DAYS } from "./rankings";
-import type { DataLogging, LimitScope, ModelKind, RateLimits } from "./types";
+import type { DataLogging, LimitScope, ModelKind, RateLimits, UsageTerms } from "./types";
 
 export interface WorkingInput extends FamilyMember {
   context_length: number | null;
@@ -24,7 +24,7 @@ export interface WorkingInput extends FamilyMember {
   href: string;
 }
 
-export type ApiStyle = "openai" | "cloudflare-run" | "gemini-native";
+export type ApiStyle = "openai" | "cloudflare-run" | "gemini-native" | "elevenlabs";
 
 export interface WorkingModel {
   provider: string;
@@ -43,6 +43,8 @@ export interface WorkingModel {
   last_test_at: string;
   limits: RateLimits | null;
   limit_scope: LimitScope;
+  /** "non-commercial": fine for personal projects, not for a product (ElevenLabs' Free plan). */
+  usage_terms: UsageTerms;
   data_logging: DataLogging;
   arena_text: number | null;
   page: string;
@@ -53,6 +55,9 @@ export function endpointFor(m: Pick<WorkingInput, "provider" | "kind" | "model_i
   const base = PROVIDERS[m.provider].base_url;
   if (m.kind === "chat") return { api: "openai", endpoint: `${base}/chat/completions` };
   if (m.provider === "cloudflare") return { api: "cloudflare-run", endpoint: `${base.replace(/\/v1$/, "")}/run/${m.model_id}` };
+  if (m.provider === "elevenlabs") {
+    return { api: "elevenlabs", endpoint: m.kind === "tts" ? `${base}/text-to-speech/{voice_id}` : `${base}/speech-to-text` };
+  }
   if (m.provider === "google-ai-studio") {
     return { api: "gemini-native", endpoint: `https://generativelanguage.googleapis.com/v1beta/models/${m.model_id}:generateContent` };
   }
@@ -75,6 +80,7 @@ function entry(m: WorkingInput, siteUrl: string): WorkingModel {
     last_test_at: m.tests.at(-1)!.at,
     limits: m.limits,
     limit_scope: m.limit_scope,
+    usage_terms: m.usage_terms,
     data_logging: m.data_logging,
     arena_text: m.arena?.boards.text?.rating ?? null,
     page: new URL(m.href, siteUrl).href,

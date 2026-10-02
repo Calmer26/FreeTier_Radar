@@ -12,7 +12,7 @@ import HistoryStrip from "../components/HistoryStrip.astro";
 // Same order as the text-to-speech ranking: most reliable, then fastest.
 const models = activeModels
   // Models whose free tier refuses them (no free quota) would never get samples.
-  .filter((m) => m.kind === "tts" && !NON_ENGLISH.test(m.model_id) && m.lastTest?.status !== "no_free_quota")
+  .filter((m) => m.kind === "tts" && !NON_ENGLISH.test(m.model_id) && m.lastTest?.status !== "no_free_quota" && m.usage_terms !== "non-commercial")
   .map((m) => ({ m, rel: reliability(m.tests) }))
   .sort((a, b) => (b.rel.share ?? -1) - (a.rel.share ?? -1) || (a.rel.medianLatencyMs ?? 1e9) - (b.rel.medianLatencyMs ?? 1e9));
 const done = models.filter(({ m }) => VOICE_SENTENCES.some((s) => voices.samples[voiceKey(m.id, s.id)])).length;
@@ -31,7 +31,9 @@ const provider = (m: (typeof models)[number]["m"]) => PROVIDERS[m.provider].labe
   </p>
   <p class="sub">
     {done} of {models.length} models have samples so far; new models get theirs the day after they appear. Samples use
-    each model's default voice (the one named below) through its free tier, and are made once. Check a model's terms before
+    each model's default voice (the one named below) through its free tier, and are made once. ElevenLabs' free voices
+    aren't here: its Free plan doesn't allow commercial use, and this site has a sponsor slot, so listen on
+    <a href="https://elevenlabs.io/text-to-speech" rel="noopener">ElevenLabs' own demo</a> instead. Check a model's terms before
     using its audio commercially. English voices only.
   </p>
   <SponsorSlot />

@@ -138,3 +138,20 @@ describe("recordResults with two tests a day", () => {
     expect(h.results["p/m"].map((t) => `${t.at.slice(11, 16)} ${t.status}`)).toEqual(["06:10 responded", "19:00 responded"]);
   });
 });
+
+describe("ElevenLabs requests", () => {
+  const el = (kind: "tts" | "stt", model_id: string) => ({ provider: "elevenlabs", model_id, kind } as Resource);
+  const env = { ELEVENLABS_API_KEY: "k" };
+  it("speaks through its own route with the voice id in the URL and its own key header", () => {
+    const req = buildRequest(el("tts", "eleven_flash_v2_5"), env, "Hello");
+    expect(req.url).toBe("https://api.elevenlabs.io/v1/text-to-speech/JBFqnCBsd6RMkjVDRZzb?output_format=mp3_44100_64");
+    expect((req.init.headers as Record<string, string>)["xi-api-key"]).toBe("k");
+    expect(JSON.parse(req.init.body as string)).toEqual({ text: "Hello", model_id: "eleven_flash_v2_5" });
+  });
+  it("transcribes through /speech-to-text and scores the transcript", async () => {
+    const req = buildRequest(el("stt", "scribe_v2"), env);
+    expect(req.url).toBe("https://api.elevenlabs.io/v1/speech-to-text");
+    await expect(req.check(new Response(JSON.stringify({ text: STT_REFERENCE })))).resolves.toBe(0);
+  });
+});
+

@@ -5,7 +5,7 @@
  * pulling in the fetchers.
  */
 
-export type ProviderId = "openrouter" | "groq" | "google-ai-studio" | "nvidia" | "kilo" | "llm7" | "zai" | "cline" | "cloudflare" | "mistral" | "ollama" | "cohere";
+export type ProviderId = "openrouter" | "groq" | "google-ai-studio" | "nvidia" | "kilo" | "llm7" | "zai" | "cline" | "cloudflare" | "mistral" | "ollama" | "cohere" | "elevenlabs";
 
 /** What a model does. Each kind has its own directory tab and its own daily test. */
 export type ModelKind = "chat" | "tts" | "stt" | "image";

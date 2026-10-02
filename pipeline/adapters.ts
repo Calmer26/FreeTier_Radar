@@ -476,6 +476,49 @@ async function fetchCohere(env: Env): Promise<ObservedModel[]> {
   return mapCohere(json.models ?? []);
 }
 
+// ── ElevenLabs ───────────────────────────────────────────────────────────────────
+
+export interface ElevenLabsModel {
+  model_id: string;
+  name: string;
+  can_do_text_to_speech?: boolean;
+}
+
+/**
+ * Speech-to-text models aren't in /v1/models; Scribe v2 is the one its pricing page
+ * includes on the Free plan (4.5 hours a month, checked 2026-10-02). Realtime is left out.
+ */
+export const ELEVENLABS_STT_MODELS = [{ id: "scribe_v2", name: "Scribe v2" }];
+
+export function mapElevenLabs(models: ElevenLabsModel[]): ObservedModel[] {
+  const tts = models.filter((m) => m.can_do_text_to_speech).map((m) => ({
+    ...base("elevenlabs", "tts"),
+    model_id: m.model_id,
+    name: m.name,
+    url: "https://elevenlabs.io/docs/models",
+    price_type: "free" as const,
+    context_length: null,
+    input_modalities: ["text"],
+    tool_calling: null,
+  }));
+  const stt = ELEVENLABS_STT_MODELS.map((m) => ({
+    ...base("elevenlabs", "stt", "curated"),
+    model_id: m.id,
+    name: m.name,
+    url: "https://elevenlabs.io/docs/models",
+    price_type: "free" as const,
+    context_length: null,
+    input_modalities: ["audio"],
+    tool_calling: null,
+  }));
+  return [...tts, ...stt];
+}
+
+async function fetchElevenLabs(env: Env): Promise<ObservedModel[]> {
+  const json = await getJson<ElevenLabsModel[]>("https://api.elevenlabs.io/v1/models", { "xi-api-key": env.ELEVENLABS_API_KEY ?? "" });
+  return mapElevenLabs(Array.isArray(json) ? json : []);
+}
+
 // ── Cline (free promotion) ───────────────────────────────────────────────────────
 
 export interface ClineRecommended {
@@ -580,4 +623,5 @@ export const FETCHERS: Record<ProviderId, (env: Env) => Promise<ObservedModel[]>
   mistral: fetchMistral,
   ollama: fetchOllama,
   cohere: fetchCohere,
+  elevenlabs: fetchElevenLabs,
 };

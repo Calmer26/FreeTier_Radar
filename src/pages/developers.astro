@@ -70,7 +70,7 @@ const sample = JSON.stringify(feed.lists.agent[0] ?? feed.lists.chat[0] ?? {}, n
     </p>
     <p>
       Each entry has an <code>endpoint</code> and an <code>api</code> style. <code>"openai"</code> means a standard
-      OpenAI request to that URL. <code>"cloudflare-run"</code> and <code>"gemini-native"</code> use the provider's own
+      OpenAI request to that URL. <code>"cloudflare-run"</code>, <code>"gemini-native"</code> and <code>"elevenlabs"</code> use the provider's own
       format; the model's <code>page</code> links to its details. <code>key_env</code> is the environment variable
       name we use for that provider's key (null: no key needed). Cloudflare endpoints contain <code>{"{account}"}</code>:
       put your account id there.
@@ -89,6 +89,7 @@ const sample = JSON.stringify(feed.lists.agent[0] ?? feed.lists.chat[0] ?? {}, n
     <ul>
       <li>The feed updates after each daily test (06:10 UTC) and discovery run. Fetch it at startup or once an hour, not per request.</li>
       <li>"Answered the test" means it replied to one small request at test time: not a promise it's up all day. That's why the examples fall back.</li>
+      <li><code>usage_terms: "non-commercial"</code> (ElevenLabs' Free plan) means personal projects only, not a product.</li>
       <li>Check <code>data_logging</code> before sending private data: several free providers may use prompts to improve their models.</li>
       <li>Limits are per provider; <code>limit_scope: "shared"</code> means all of that provider's free models share one allowance, so falling back within the same provider may not help.</li>
     </ul>

@@ -45,7 +45,8 @@ async function main() {
   const today = new Date().toISOString().slice(0, 10);
   const existing: VoicesFile = existsSync(VOICES_FILE) ? JSON.parse(readFileSync(VOICES_FILE, "utf8")) : { samples: {} };
   const tests = readTests();
-  const models = readResources().filter((r) => r.kind === "tts" && r.status === "active");
+  // Non-commercial free plans (ElevenLabs) don't allow publishing their output on a sponsored site.
+  const models = readResources().filter((r) => r.kind === "tts" && r.status === "active" && r.usage_terms !== "non-commercial");
   const plan = planVoices(
     models.map((r) => ({ id: r.id, model_id: r.model_id, lastStatus: tests.results[r.id]?.at(-1)?.status ?? null })),
     existing,

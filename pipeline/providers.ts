@@ -268,6 +268,27 @@ export const PROVIDERS: Record<ProviderId, ProviderInfo> = {
     limits_url: "https://docs.cohere.com/docs/rate-limits",
     summary: "Cohere's Command and Aya models and its speech-to-text model, free on a trial key with 1,000 calls a month. Good for trying them, not for an app.",
   },
+  elevenlabs: {
+    id: "elevenlabs",
+    label: "ElevenLabs (Free plan)",
+    homepage: "https://elevenlabs.io",
+    base_url: "https://api.elevenlabs.io/v1",
+    key_env: "ELEVENLABS_API_KEY",
+    list_needs_key: true,
+    usage_terms: "non-commercial",
+    // help.elevenlabs.io "Can I publish the content I generate…" and elevenlabs.io/pricing(/api), checked 2026-10-02.
+    usage_terms_note: "ElevenLabs' Free plan \"does not include a commercial license and cannot be used for any commercial purpose\"; content shared non-commercially needs attribution to ElevenLabs.",
+    limit_scope: "shared",
+    rate_limits: {
+      note: "10,000 credits a month for text-to-speech (about 1 per character; Flash and Turbo models use half) and 4.5 hours of Scribe v2 speech-to-text.",
+      source: "https://elevenlabs.io/pricing/api",
+    },
+    card_required: "unknown",
+    account_required: "yes",
+    data_logging: "unknown",
+    limits_url: "https://elevenlabs.io/pricing/api",
+    summary: "Well-known text-to-speech voices and Scribe speech-to-text, with a monthly free allowance. Non-commercial use only on the Free plan.",
+  },
   cline: {
     id: "cline",
     label: "Cline (free promotion)",

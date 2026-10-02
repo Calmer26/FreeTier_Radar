@@ -54,6 +54,7 @@ import { PICKER_USES, pickerData } from "../lib/picker";
       ? list.map((c) => {
           const tags = [
             c.eval && '<span class="badge bad">⚠ Eval only</span>',
+            c.nonCommercial && '<span class="badge bad">Non-commercial only</span>',
             c.usesPrompts && '<span class="badge warn">👁 May use your prompts</span>',
             c.dataUnknown && f.get("privacy") === "private" && '<span class="badge neutral">Data use not stated</span>',
             c.noSignup && '<span class="badge neutral">No signup</span>',

@@ -94,12 +94,17 @@ export interface TestOutcome {
  * Voice to use per TTS model; undefined sends no voice. Groq's Orpheus and
  * Deepgram's Flux refuse a request without one; Fish Audio uses its default.
  */
+/** ElevenLabs premade voices by name (GET /v1/voices, checked 2026-10-02). */
+export const ELEVENLABS_VOICE_IDS: Record<string, string> = { George: "JBFqnCBsd6RMkjVDRZzb" };
+
 export function ttsVoice(r: Pick<Resource, "provider" | "model_id">): string | undefined {
   const id = r.model_id.toLowerCase();
   if (id.includes("orpheus")) return id.includes("arabic") ? "fahad" : "troy";
   if (id.includes("flux-tts")) return "flux-cole-en";
   // Mistral's speech model needs a preset voice (GET /v1/audio/voices, checked 2026-09-29).
   if (r.provider === "mistral") return "en_paul_neutral";
+  // ElevenLabs takes a voice id in the URL; "George" is one of its premade voices.
+  if (r.provider === "elevenlabs") return "George";
   return undefined;
 }
 
@@ -163,6 +168,29 @@ export function buildRequest(r: Resource, env: Record<string, string | undefined
         // Transcribe models answer in `audioTranscription`, not `text` (checked 2026-09-28).
         if (r.kind === "stt") return expectTranscript(out.map((p) => p.audioTranscription?.text ?? p.text ?? "").join(" "));
       },
+    };
+  }
+
+  // ElevenLabs: its own routes and key header (checked 2026-10-02).
+  if (r.provider === "elevenlabs") {
+    const xi = { "xi-api-key": key };
+    if (r.kind === "tts") {
+      return {
+        url: `${base}/text-to-speech/${ELEVENLABS_VOICE_IDS[ttsVoice(r) ?? "George"]}?output_format=mp3_44100_64`,
+        init: { method: "POST", headers: { "Content-Type": "application/json", ...xi }, body: JSON.stringify({ text: speech, model_id: r.model_id }) },
+        check: async (res) => {
+          const bytes = (await res.arrayBuffer()).byteLength;
+          if (bytes < 200) throw new Error(`audio response too small (${bytes} bytes)`);
+        },
+      };
+    }
+    const form = new FormData();
+    form.append("model_id", r.model_id);
+    form.append("file", new Blob([readFileSync(STT_SAMPLE_PATH)], { type: "audio/mpeg" }), "stt-sample.mp3");
+    return {
+      url: `${base}/speech-to-text`,
+      init: { method: "POST", headers: xi, body: form },
+      check: async (res) => expectTranscript(((await res.json()) as { text?: string }).text ?? ""),
     };
   }
 

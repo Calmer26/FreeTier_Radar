@@ -4,6 +4,15 @@ name: Daily tests
 on:
   # Started on time by the scheduler Worker (scheduler/schedule.ts); GitHub's cron was unreliable.
   workflow_dispatch:
+    inputs:
+      slot:
+        description: "morning (every model + tool calls) or evening (chat only); empty: by the clock"
+        required: false
+        default: ""
+      only:
+        description: "Comma-separated provider ids to test (empty: all)"
+        required: false
+        default: ""
 
 concurrency:
   group: data-writes
@@ -31,6 +40,9 @@ jobs:
           MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
           OLLAMA_API_KEY: ${{ secrets.OLLAMA_API_KEY }}
           COHERE_API_KEY: ${{ secrets.COHERE_API_KEY }}
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          TEST_SLOT: ${{ inputs.slot }}
+          TEST_ONLY: ${{ inputs.only }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           SITE_URL: ${{ vars.SITE_URL }}

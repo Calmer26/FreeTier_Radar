@@ -238,3 +238,17 @@ describe("mapCohere", () => {
     ]);
   });
 });
+
+describe("mapElevenLabs", () => {
+  it("lists its text-to-speech models plus the hand-listed Scribe model, all non-commercial", async () => {
+    const { mapElevenLabs } = await import("./adapters");
+    const out = mapElevenLabs([
+      { model_id: "eleven_flash_v2_5", name: "Eleven Flash v2.5", can_do_text_to_speech: true },
+      { model_id: "eleven_english_sts_v2", name: "Eleven English v2", can_do_text_to_speech: false },
+    ]);
+    expect(out.map((m) => [m.model_id, m.kind, m.listed_by, m.usage_terms])).toEqual([
+      ["eleven_flash_v2_5", "tts", "api", "non-commercial"],
+      ["scribe_v2", "stt", "curated", "non-commercial"],
+    ]);
+  });
+});

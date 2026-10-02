@@ -31,6 +31,7 @@ const GAP_MS: Record<ProviderId, number> = {
   mistral: 2_000,            // per-model limits (30+ requests/minute seen); stay gentle
   ollama: 3_000,             // one request at a time on the Free plan
   cohere: 3_500,             // 20 requests/minute per model on a trial key
+  elevenlabs: 1_500,         // monthly credits, not a rate; requests are tiny
 };
 const STOP_AFTER_RATE_LIMITS = 3;
 /** Image models are tested weekly: one picture uses far more of a free allowance than a chat reply. */
@@ -38,7 +39,9 @@ const IMAGE_TEST_EVERY_DAYS = 7;
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-const EVENING = new Date().getUTCHours() >= 12;
+/** TEST_SLOT=morning|evening overrides the clock (manual runs); TEST_ONLY=a,b limits the run to those providers. */
+const EVENING = process.env.TEST_SLOT === "evening" || (process.env.TEST_SLOT !== "morning" && new Date().getUTCHours() >= 12);
+const ONLY = (process.env.TEST_ONLY ?? "").split(",").map((s) => s.trim()).filter(Boolean);
 
 async function runProvider(p: ProviderId, models: Resource[], outcomes: Map<string, TestOutcome>, history: TestHistory) {
   let rateLimitedInARow = 0;
@@ -81,6 +84,7 @@ async function main() {
 
   await Promise.all(
     PROVIDER_IDS.map((p) => {
+      if (ONLY.length && !ONLY.includes(p)) return Promise.resolve();
       if (PROVIDERS[p].testable === false) {
         console.log(`- ${p}: not testable from outside; listed only`);
         return Promise.resolve();

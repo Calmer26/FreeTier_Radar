@@ -20,6 +20,7 @@ describe("endpointFor", () => {
       api: "cloudflare-run", endpoint: "https://api.cloudflare.com/client/v4/accounts/{account}/ai/run/@cf/x/y",
     });
     expect(endpointFor({ provider: "google-ai-studio", kind: "tts", model_id: "g" }).api).toBe("gemini-native");
+    expect(endpointFor({ provider: "elevenlabs", kind: "tts", model_id: "e" })).toEqual({ api: "elevenlabs", endpoint: "https://api.elevenlabs.io/v1/text-to-speech/{voice_id}" });
   });
 });
 

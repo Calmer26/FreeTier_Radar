@@ -86,7 +86,7 @@ const breadcrumbs = {
     {m.kind !== "chat" && <div><dt>Type</dt><dd>{KIND_LABELS[m.kind]}</dd></div>}
     {m.terms_url && <div><dt>Model terms</dt><dd><a href={m.terms_url} rel="noopener">{m.kind === "image" ? "Licence / commercial use" : "Licence"}</a></dd></div>}
     <div><dt>Rate limits</dt><dd>{formatLimits(m.limits)}{m.limit_scope === "shared" ? " (shared)" : ""}</dd></div>
-    <div><dt>Usage terms</dt><dd>{m.usage_terms === "production-ok" ? "Production use allowed" : m.usage_terms === "evaluation-only" ? "Evaluation only" : "Unknown"}</dd></div>
+    <div><dt>Usage terms</dt><dd>{m.usage_terms === "production-ok" ? "Production use allowed" : m.usage_terms === "evaluation-only" ? "Evaluation only" : m.usage_terms === "non-commercial" ? "Non-commercial only" : "Unknown"}</dd></div>
     <div><dt>Data use</dt><dd>{m.data_logging === "logs-prompts" ? "Logs prompts" : m.data_logging === "may-train" ? "May use your prompts" : m.data_logging === "none-stated" ? "None stated" : m.data_logging === "not-used" ? "Not logged or trained on (provider's statement)" : "Unknown"}</dd></div>
     <div><dt>Account</dt><dd>{m.account_required === "no" ? "Not needed" : m.account_required === "yes" ? "Needed" : "Unknown"}</dd></div>
     <div><dt>Card required</dt><dd>{m.card_required === "yes" ? "Yes" : m.card_required === "no" ? "No" : "Unknown"}</dd></div>

@@ -37,6 +37,7 @@ export interface PickerCandidate {
   href: string;
   why: string;
   eval: boolean;
+  nonCommercial: boolean;
   /** The provider says it logs prompts or may use them for training. */
   usesPrompts: boolean;
   /** Data use not stated by the provider. */
@@ -78,6 +79,7 @@ const candidate = (x: RankedModel, use: string): PickerCandidate => {
     href: m.href,
     why: why(x, use),
     eval: m.usage_terms === "evaluation-only",
+    nonCommercial: m.usage_terms === "non-commercial",
     usesPrompts: m.data_logging === "may-train" || m.data_logging === "logs-prompts",
     dataUnknown: m.data_logging === "unknown",
     noSignup: m.account_required === "no",
@@ -93,7 +95,8 @@ export const pickerData = Object.fromEntries(
     const def = RANKINGS.find((r) => r.slug === u.ranking)!;
     return [u.id, {
       ranking: `/rankings/${u.ranking}/`,
-      production: rank(def, inputs, 15).filter(works).map((x) => candidate(x, u.id)),
+      // "In a real product": no non-commercial models (ElevenLabs' Free plan).
+      production: rank(def, inputs, 15).filter((x) => works(x) && x.r.usage_terms !== "non-commercial").map((x) => candidate(x, u.id)),
       experiment: rank(def, inputs, 15, { allowEval: true }).filter(works).map((x) => candidate(x, u.id)),
     }];
   }),
