@@ -37,13 +37,8 @@ jobs:
       - run: npm run readme
       - name: Commit changed data
         run: |
-          git add data README.md
-          if git diff --cached --quiet; then echo "No changes"; exit 0; fi
-          git config user.name "freetier-radar-bot"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "data: discovery $(date -u +%Y-%m-%dT%H:%MZ)"
-          # Code may have been pushed while this job ran: rebase the data commit onto it.
-          for attempt in 1 2 3; do git pull --rebase --quiet && git push && exit 0; sleep $((attempt * 10)); done; exit 1
+          # Rebases onto data/code that landed meanwhile; README.md is rebuilt, never merged.
+          scripts/push-data.sh "data: discovery $(date -u +%Y-%m-%dT%H:%MZ)" data README.md
       - name: Open issue for high-impact changes
         if: hashFiles('out/high-impact.md') != ''
         env: { GH_TOKEN: "${{ github.token }}" }
