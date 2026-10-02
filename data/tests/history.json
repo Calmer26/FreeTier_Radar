@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-02T06:10:38.363Z",
+  "updated_at": "2026-10-02T18:10:37.613Z",
   "results": {
     "cloudflare/@cf/aisingapore/gemma-sea-lion-v4-27b-it": [
       {
@@ -58,6 +58,11 @@
         "at": "2026-10-02T06:10:40.819Z",
         "status": "error",
         "latency_ms": 94
+      },
+      {
+        "at": "2026-10-02T18:10:40.032Z",
+        "status": "error",
+        "latency_ms": 64
       }
     ],
     "cloudflare/@cf/cloudflare/clef-flash": [
@@ -65,6 +70,11 @@
         "at": "2026-10-02T06:10:41.915Z",
         "status": "error",
         "latency_ms": 73
+      },
+      {
+        "at": "2026-10-02T18:10:41.097Z",
+        "status": "error",
+        "latency_ms": 63
       }
     ],
     "cloudflare/@cf/deepseek-ai/deepseek-r1-distill-qwen-32b": [
@@ -372,6 +382,11 @@
         "at": "2026-10-02T06:10:38.457Z",
         "status": "responded",
         "latency_ms": 592
+      },
+      {
+        "at": "2026-10-02T18:10:37.656Z",
+        "status": "responded",
+        "latency_ms": 1401
       }
     ],
     "google-ai-studio/gemini-2.5-flash-lite": [
@@ -399,6 +414,11 @@
         "at": "2026-10-02T06:10:41.189Z",
         "status": "responded",
         "latency_ms": 455
+      },
+      {
+        "at": "2026-10-02T18:10:40.057Z",
+        "status": "responded",
+        "latency_ms": 356
       }
     ],
     "google-ai-studio/gemini-2.5-flash-preview-tts": [
@@ -453,6 +473,11 @@
         "at": "2026-10-02T06:10:46.178Z",
         "status": "no_free_quota",
         "latency_ms": 110
+      },
+      {
+        "at": "2026-10-02T18:10:41.413Z",
+        "status": "no_free_quota",
+        "latency_ms": 118
       }
     ],
     "google-ai-studio/gemini-2.5-pro-preview-tts": [
@@ -507,6 +532,11 @@
         "at": "2026-10-02T06:10:48.382Z",
         "status": "responded",
         "latency_ms": 655
+      },
+      {
+        "at": "2026-10-02T18:10:42.531Z",
+        "status": "responded",
+        "latency_ms": 2597
       }
     ],
     "google-ai-studio/gemini-3.1-flash-lite": [
@@ -534,6 +564,11 @@
         "at": "2026-10-02T06:10:51.954Z",
         "status": "responded",
         "latency_ms": 489
+      },
+      {
+        "at": "2026-10-02T18:10:46.129Z",
+        "status": "responded",
+        "latency_ms": 16703
       }
     ],
     "google-ai-studio/gemini-3.1-flash-lite-preview": [
@@ -561,6 +596,11 @@
         "at": "2026-10-02T06:10:54.850Z",
         "status": "responded",
         "latency_ms": 419
+      },
+      {
+        "at": "2026-10-02T18:11:03.833Z",
+        "status": "responded",
+        "latency_ms": 4402
       }
     ],
     "google-ai-studio/gemini-3.1-flash-tts-preview": [
@@ -615,6 +655,11 @@
         "at": "2026-10-02T06:11:02.624Z",
         "status": "no_free_quota",
         "latency_ms": 106
+      },
+      {
+        "at": "2026-10-02T18:11:09.235Z",
+        "status": "no_free_quota",
+        "latency_ms": 85
       }
     ],
     "google-ai-studio/gemini-3.5-flash": [
@@ -642,6 +687,11 @@
         "at": "2026-10-02T06:11:03.730Z",
         "status": "error",
         "latency_ms": 19345
+      },
+      {
+        "at": "2026-10-02T18:11:10.321Z",
+        "status": "responded",
+        "latency_ms": 549
       }
     ],
     "google-ai-studio/gemini-3.5-flash-lite": [
@@ -669,6 +719,11 @@
         "at": "2026-10-02T06:11:24.076Z",
         "status": "responded",
         "latency_ms": 665
+      },
+      {
+        "at": "2026-10-02T18:11:11.870Z",
+        "status": "responded",
+        "latency_ms": 350
       }
     ],
     "google-ai-studio/gemini-3.5-transcribe": [
@@ -723,6 +778,11 @@
         "at": "2026-10-02T06:11:29.670Z",
         "status": "responded",
         "latency_ms": 649
+      },
+      {
+        "at": "2026-10-02T18:11:13.220Z",
+        "status": "responded",
+        "latency_ms": 2431
       }
     ],
     "google-ai-studio/gemini-3.7-flash": [
@@ -750,6 +810,11 @@
         "at": "2026-10-02T06:11:33.436Z",
         "status": "responded",
         "latency_ms": 2077
+      },
+      {
+        "at": "2026-10-02T18:11:16.651Z",
+        "status": "error",
+        "latency_ms": 17900
       }
     ],
     "google-ai-studio/gemini-3.8-flash": [
@@ -777,6 +842,11 @@
         "at": "2026-10-02T06:11:43.060Z",
         "status": "responded",
         "latency_ms": 1596
+      },
+      {
+        "at": "2026-10-02T18:11:35.550Z",
+        "status": "error",
+        "latency_ms": 3390
       }
     ],
     "google-ai-studio/gemini-3.8-flash-lite-tts": [
@@ -858,6 +928,11 @@
         "at": "2026-10-02T06:11:54.870Z",
         "status": "no_free_quota",
         "latency_ms": 104
+      },
+      {
+        "at": "2026-10-02T18:11:39.940Z",
+        "status": "no_free_quota",
+        "latency_ms": 113
       }
     ],
     "google-ai-studio/gemini-omni-flash-preview": [
@@ -885,6 +960,11 @@
         "at": "2026-10-02T06:11:55.974Z",
         "status": "no_free_quota",
         "latency_ms": 111
+      },
+      {
+        "at": "2026-10-02T18:11:41.053Z",
+        "status": "no_free_quota",
+        "latency_ms": 91
       }
     ],
     "google-ai-studio/gemma-4-26b-a4b-it": [
@@ -912,6 +992,11 @@
         "at": "2026-10-02T06:11:57.085Z",
         "status": "error",
         "latency_ms": 159
+      },
+      {
+        "at": "2026-10-02T18:11:42.145Z",
+        "status": "responded",
+        "latency_ms": 13799
       }
     ],
     "google-ai-studio/gemma-4-31b-it": [
@@ -939,6 +1024,11 @@
         "at": "2026-10-02T06:11:58.244Z",
         "status": "error",
         "latency_ms": 179
+      },
+      {
+        "at": "2026-10-02T18:11:56.944Z",
+        "status": "slow",
+        "latency_ms": 28383
       }
     ],
     "groq/allam-2-7b": [
@@ -966,6 +1056,11 @@
         "at": "2026-10-02T06:10:38.456Z",
         "status": "responded",
         "latency_ms": 749
+      },
+      {
+        "at": "2026-10-02T18:10:37.655Z",
+        "status": "responded",
+        "latency_ms": 397
       }
     ],
     "groq/canopylabs/orpheus-arabic-saudi": [
@@ -1047,6 +1142,11 @@
         "at": "2026-10-02T06:10:41.622Z",
         "status": "responded",
         "latency_ms": 283
+      },
+      {
+        "at": "2026-10-02T18:10:38.553Z",
+        "status": "responded",
+        "latency_ms": 527
       }
     ],
     "groq/openai/gpt-oss-20b": [
@@ -1074,6 +1174,11 @@
         "at": "2026-10-02T06:10:43.040Z",
         "status": "responded",
         "latency_ms": 234
+      },
+      {
+        "at": "2026-10-02T18:10:39.580Z",
+        "status": "responded",
+        "latency_ms": 129
       }
     ],
     "groq/qwen/qwen3.8-27b": [
@@ -1101,6 +1206,11 @@
         "at": "2026-10-02T06:10:44.445Z",
         "status": "responded",
         "latency_ms": 108
+      },
+      {
+        "at": "2026-10-02T18:10:40.210Z",
+        "status": "responded",
+        "latency_ms": 114
       }
     ],
     "groq/whisper-large-v3": [
@@ -1162,6 +1272,11 @@
         "at": "2026-10-02T06:10:38.459Z",
         "status": "responded",
         "latency_ms": 1000
+      },
+      {
+        "at": "2026-10-02T18:10:37.658Z",
+        "status": "responded",
+        "latency_ms": 1269
       }
     ],
     "kilo/cohere/north-mini-code:free": [
@@ -1189,6 +1304,11 @@
         "at": "2026-10-02T06:11:20.729Z",
         "status": "responded",
         "latency_ms": 501
+      },
+      {
+        "at": "2026-10-02T18:10:58.927Z",
+        "status": "responded",
+        "latency_ms": 504
       }
     ],
     "kilo/dots-studio/dots-3-note-preview:free": [
@@ -1216,6 +1336,11 @@
         "at": "2026-10-02T06:12:02.361Z",
         "status": "responded",
         "latency_ms": 1065
+      },
+      {
+        "at": "2026-10-02T18:11:19.431Z",
+        "status": "responded",
+        "latency_ms": 1100
       }
     ],
     "kilo/inclusionai/ling-3.0-flash-sante:free": [
@@ -1243,6 +1368,11 @@
         "at": "2026-10-02T06:12:45.023Z",
         "status": "responded",
         "latency_ms": 1948
+      },
+      {
+        "at": "2026-10-02T18:11:40.531Z",
+        "status": "responded",
+        "latency_ms": 946
       }
     ],
     "kilo/liquid/lfm-2.5-2.6b:free": [
@@ -1270,6 +1400,11 @@
         "at": "2026-10-02T06:13:27.954Z",
         "status": "responded",
         "latency_ms": 1058
+      },
+      {
+        "at": "2026-10-02T18:12:01.477Z",
+        "status": "responded",
+        "latency_ms": 631
       }
     ],
     "kilo/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free": [
@@ -1297,6 +1432,11 @@
         "at": "2026-10-02T06:14:09.929Z",
         "status": "responded",
         "latency_ms": 1350
+      },
+      {
+        "at": "2026-10-02T18:12:22.108Z",
+        "status": "responded",
+        "latency_ms": 1481
       }
     ],
     "kilo/nvidia/nemotron-3-super-120b-a12b:free": [
@@ -1324,6 +1464,11 @@
         "at": "2026-10-02T06:14:54.154Z",
         "status": "responded",
         "latency_ms": 539
+      },
+      {
+        "at": "2026-10-02T18:12:43.589Z",
+        "status": "responded",
+        "latency_ms": 1146
       }
     ],
     "kilo/nvidia/nemotron-3-ultra-550b-a55b:free": [
@@ -1351,6 +1496,11 @@
         "at": "2026-10-02T06:15:35.328Z",
         "status": "responded",
         "latency_ms": 564
+      },
+      {
+        "at": "2026-10-02T18:13:04.735Z",
+        "status": "responded",
+        "latency_ms": 5898
       }
     ],
     "kilo/nvidia/nemotron-3.5-lightning:free": [
@@ -1378,6 +1528,11 @@
         "at": "2026-10-02T06:16:19.765Z",
         "status": "responded",
         "latency_ms": 560
+      },
+      {
+        "at": "2026-10-02T18:13:30.634Z",
+        "status": "responded",
+        "latency_ms": 560
       }
     ],
     "kilo/poolside/laguna-s-2.1:free": [
@@ -1400,6 +1555,11 @@
         "at": "2026-10-02T06:17:09.297Z",
         "status": "responded",
         "latency_ms": 920
+      },
+      {
+        "at": "2026-10-02T18:13:51.195Z",
+        "status": "responded",
+        "latency_ms": 1292
       }
     ],
     "kilo/poolside/laguna-xs-2.1:free": [
@@ -1441,6 +1601,11 @@
         "at": "2026-10-02T06:19:11.700Z",
         "status": "responded",
         "latency_ms": 1363
+      },
+      {
+        "at": "2026-10-02T18:15:34.062Z",
+        "status": "responded",
+        "latency_ms": 970
       }
     ],
     "kilo/stepfun/step-3.7-flash:free": [
@@ -1463,6 +1628,11 @@
         "at": "2026-10-02T06:19:54.508Z",
         "status": "responded",
         "latency_ms": 1995
+      },
+      {
+        "at": "2026-10-02T18:15:55.036Z",
+        "status": "responded",
+        "latency_ms": 1824
       }
     ],
     "llm7/DeepSeek-V4-Flash-0731": [
@@ -1475,6 +1645,11 @@
         "at": "2026-10-02T06:10:38.459Z",
         "status": "error",
         "latency_ms": 1176
+      },
+      {
+        "at": "2026-10-02T18:10:37.659Z",
+        "status": "responded",
+        "latency_ms": 2073
       }
     ],
     "llm7/GLM-5.3-Flash": [
@@ -1487,6 +1662,11 @@
         "at": "2026-10-02T06:10:46.635Z",
         "status": "error",
         "latency_ms": 144
+      },
+      {
+        "at": "2026-10-02T18:10:46.733Z",
+        "status": "responded",
+        "latency_ms": 7755
       }
     ],
     "llm7/minimax-m2.7": [
@@ -1509,6 +1689,11 @@
         "at": "2026-10-02T06:10:53.780Z",
         "status": "error",
         "latency_ms": 130
+      },
+      {
+        "at": "2026-10-02T18:11:01.489Z",
+        "status": "responded",
+        "latency_ms": 5002
       }
     ],
     "llm7/mistral-Nemo-Instruct-2407": [
@@ -1536,6 +1721,18 @@
         "at": "2026-10-02T06:11:00.911Z",
         "status": "responded",
         "latency_ms": 1207
+      },
+      {
+        "at": "2026-10-02T18:11:13.492Z",
+        "status": "responded",
+        "latency_ms": 1080
+      }
+    ],
+    "llm7/nemotron-3-nano:30b": [
+      {
+        "at": "2026-10-02T18:11:21.572Z",
+        "status": "responded",
+        "latency_ms": 794
       }
     ],
     "mistral/codestral-2508": [
@@ -1558,6 +1755,11 @@
         "at": "2026-10-02T06:10:38.461Z",
         "status": "responded",
         "latency_ms": 528
+      },
+      {
+        "at": "2026-10-02T18:10:37.661Z",
+        "status": "responded",
+        "latency_ms": 507
       }
     ],
     "mistral/ministral-14b-2512": [
@@ -1580,6 +1782,11 @@
         "at": "2026-10-02T06:10:43.317Z",
         "status": "responded",
         "latency_ms": 290
+      },
+      {
+        "at": "2026-10-02T18:10:40.169Z",
+        "status": "responded",
+        "latency_ms": 382
       }
     ],
     "mistral/ministral-3b-2512": [
@@ -1602,6 +1809,11 @@
         "at": "2026-10-02T06:10:48.026Z",
         "status": "responded",
         "latency_ms": 238
+      },
+      {
+        "at": "2026-10-02T18:10:42.551Z",
+        "status": "responded",
+        "latency_ms": 322
       }
     ],
     "mistral/ministral-8b-2512": [
@@ -1624,6 +1836,11 @@
         "at": "2026-10-02T06:10:52.606Z",
         "status": "responded",
         "latency_ms": 1001
+      },
+      {
+        "at": "2026-10-02T18:10:44.873Z",
+        "status": "responded",
+        "latency_ms": 462
       }
     ],
     "mistral/mistral-medium-latest": [
@@ -1646,6 +1863,11 @@
         "at": "2026-10-02T06:10:58.061Z",
         "status": "no_free_quota",
         "latency_ms": 152
+      },
+      {
+        "at": "2026-10-02T18:10:47.335Z",
+        "status": "no_free_quota",
+        "latency_ms": 211
       }
     ],
     "mistral/mistral-small-2603": [
@@ -1668,6 +1890,11 @@
         "at": "2026-10-02T06:11:00.214Z",
         "status": "no_free_quota",
         "latency_ms": 185
+      },
+      {
+        "at": "2026-10-02T18:10:49.547Z",
+        "status": "no_free_quota",
+        "latency_ms": 202
       }
     ],
     "mistral/voxtral-mini-2602": [
@@ -1734,6 +1961,11 @@
         "at": "2026-10-02T06:11:07.917Z",
         "status": "responded",
         "latency_ms": 384
+      },
+      {
+        "at": "2026-10-02T18:10:51.749Z",
+        "status": "responded",
+        "latency_ms": 389
       }
     ],
     "nvidia/01-ai/yi-large": [
@@ -1761,6 +1993,11 @@
         "at": "2026-10-02T06:10:38.458Z",
         "status": "gone",
         "latency_ms": 128
+      },
+      {
+        "at": "2026-10-02T18:10:37.657Z",
+        "status": "gone",
+        "latency_ms": 239
       }
     ],
     "nvidia/adept/fuyu-8b": [
@@ -1788,6 +2025,11 @@
         "at": "2026-10-02T06:10:40.188Z",
         "status": "gone",
         "latency_ms": 37
+      },
+      {
+        "at": "2026-10-02T18:10:39.497Z",
+        "status": "gone",
+        "latency_ms": 70
       }
     ],
     "nvidia/ai21labs/jamba-1.5-large-instruct": [
@@ -1815,6 +2057,11 @@
         "at": "2026-10-02T06:10:41.824Z",
         "status": "gone",
         "latency_ms": 26
+      },
+      {
+        "at": "2026-10-02T18:10:41.167Z",
+        "status": "gone",
+        "latency_ms": 60
       }
     ],
     "nvidia/aisingapore/sea-lion-7b-instruct": [
@@ -1842,6 +2089,11 @@
         "at": "2026-10-02T06:10:43.451Z",
         "status": "gone",
         "latency_ms": 26
+      },
+      {
+        "at": "2026-10-02T18:10:42.828Z",
+        "status": "gone",
+        "latency_ms": 67
       }
     ],
     "nvidia/databricks/dbrx-instruct": [
@@ -1869,6 +2121,11 @@
         "at": "2026-10-02T06:10:45.077Z",
         "status": "gone",
         "latency_ms": 36
+      },
+      {
+        "at": "2026-10-02T18:10:44.496Z",
+        "status": "gone",
+        "latency_ms": 75
       }
     ],
     "nvidia/deepseek-ai/deepseek-v4.1-flash": [
@@ -1894,6 +2151,11 @@
       },
       {
         "at": "2026-10-02T06:10:46.713Z",
+        "status": "slow",
+        "latency_ms": 30001
+      },
+      {
+        "at": "2026-10-02T18:10:46.171Z",
         "status": "slow",
         "latency_ms": 30001
       }
@@ -1923,6 +2185,11 @@
         "at": "2026-10-02T06:11:18.314Z",
         "status": "responded",
         "latency_ms": 222
+      },
+      {
+        "at": "2026-10-02T18:11:17.772Z",
+        "status": "responded",
+        "latency_ms": 196
       }
     ],
     "nvidia/google/gemma-2b": [
@@ -1950,6 +2217,11 @@
         "at": "2026-10-02T06:11:21.987Z",
         "status": "gone",
         "latency_ms": 36
+      },
+      {
+        "at": "2026-10-02T18:11:19.569Z",
+        "status": "gone",
+        "latency_ms": 64
       }
     ],
     "nvidia/google/gemma-3-12b-it": [
@@ -1977,6 +2249,11 @@
         "at": "2026-10-02T06:11:23.623Z",
         "status": "gone",
         "latency_ms": 28
+      },
+      {
+        "at": "2026-10-02T18:11:21.234Z",
+        "status": "gone",
+        "latency_ms": 64
       }
     ],
     "nvidia/google/gemma-3-4b-it": [
@@ -2004,6 +2281,11 @@
         "at": "2026-10-02T06:11:25.252Z",
         "status": "gone",
         "latency_ms": 27
+      },
+      {
+        "at": "2026-10-02T18:11:22.897Z",
+        "status": "gone",
+        "latency_ms": 68
       }
     ],
     "nvidia/google/gemma-4-31b-it": [
@@ -2031,6 +2313,11 @@
         "at": "2026-10-02T06:11:26.878Z",
         "status": "responded",
         "latency_ms": 322
+      },
+      {
+        "at": "2026-10-02T18:11:24.566Z",
+        "status": "slow",
+        "latency_ms": 30001
       }
     ],
     "nvidia/google/recurrentgemma-2b": [
@@ -2058,6 +2345,11 @@
         "at": "2026-10-02T06:11:31.014Z",
         "status": "gone",
         "latency_ms": 40
+      },
+      {
+        "at": "2026-10-02T18:11:56.168Z",
+        "status": "gone",
+        "latency_ms": 75
       }
     ],
     "nvidia/ibm/granite-3.0-3b-a800m-instruct": [
@@ -2085,6 +2377,11 @@
         "at": "2026-10-02T06:11:32.654Z",
         "status": "gone",
         "latency_ms": 28
+      },
+      {
+        "at": "2026-10-02T18:11:57.842Z",
+        "status": "gone",
+        "latency_ms": 78
       }
     ],
     "nvidia/ibm/granite-3.0-8b-instruct": [
@@ -2112,6 +2409,11 @@
         "at": "2026-10-02T06:11:34.282Z",
         "status": "gone",
         "latency_ms": 34
+      },
+      {
+        "at": "2026-10-02T18:11:59.521Z",
+        "status": "gone",
+        "latency_ms": 66
       }
     ],
     "nvidia/meta/llama-3.2-11b-vision-instruct": [
@@ -2139,6 +2441,11 @@
         "at": "2026-10-02T06:11:35.916Z",
         "status": "responded",
         "latency_ms": 172
+      },
+      {
+        "at": "2026-10-02T18:12:01.187Z",
+        "status": "responded",
+        "latency_ms": 5853
       }
     ],
     "nvidia/meta/llama-3.2-90b-vision-instruct": [
@@ -2166,6 +2473,11 @@
         "at": "2026-10-02T06:11:39.899Z",
         "status": "slow",
         "latency_ms": 30001
+      },
+      {
+        "at": "2026-10-02T18:12:08.639Z",
+        "status": "responded",
+        "latency_ms": 11854
       }
     ],
     "nvidia/meta/llama2-70b": [
@@ -2193,6 +2505,11 @@
         "at": "2026-10-02T06:12:11.501Z",
         "status": "gone",
         "latency_ms": 27
+      },
+      {
+        "at": "2026-10-02T18:12:22.092Z",
+        "status": "gone",
+        "latency_ms": 59
       }
     ],
     "nvidia/meta/muse-glimmer-30b": [
@@ -2220,6 +2537,11 @@
         "at": "2026-10-02T06:12:13.127Z",
         "status": "responded",
         "latency_ms": 261
+      },
+      {
+        "at": "2026-10-02T18:12:23.752Z",
+        "status": "responded",
+        "latency_ms": 808
       }
     ],
     "nvidia/microsoft/phi-3-vision-128k-instruct": [
@@ -2247,6 +2569,11 @@
         "at": "2026-10-02T06:12:17.017Z",
         "status": "gone",
         "latency_ms": 23
+      },
+      {
+        "at": "2026-10-02T18:12:26.160Z",
+        "status": "gone",
+        "latency_ms": 66
       }
     ],
     "nvidia/microsoft/phi-3.5-moe-instruct": [
@@ -2274,6 +2601,11 @@
         "at": "2026-10-02T06:12:18.641Z",
         "status": "gone",
         "latency_ms": 32
+      },
+      {
+        "at": "2026-10-02T18:12:27.826Z",
+        "status": "gone",
+        "latency_ms": 79
       }
     ],
     "nvidia/mistralai/mistral-7b-instruct-v0.3": [
@@ -2301,6 +2633,11 @@
         "at": "2026-10-02T06:12:20.274Z",
         "status": "gone",
         "latency_ms": 36
+      },
+      {
+        "at": "2026-10-02T18:12:29.504Z",
+        "status": "gone",
+        "latency_ms": 63
       }
     ],
     "nvidia/mistralai/mistral-large": [
@@ -2328,6 +2665,11 @@
         "at": "2026-10-02T06:12:21.909Z",
         "status": "gone",
         "latency_ms": 30
+      },
+      {
+        "at": "2026-10-02T18:12:31.168Z",
+        "status": "gone",
+        "latency_ms": 74
       }
     ],
     "nvidia/mistralai/mistral-large-2-instruct": [
@@ -2355,6 +2697,11 @@
         "at": "2026-10-02T06:12:23.539Z",
         "status": "gone",
         "latency_ms": 26
+      },
+      {
+        "at": "2026-10-02T18:12:32.843Z",
+        "status": "gone",
+        "latency_ms": 61
       }
     ],
     "nvidia/mistralai/mixtral-8x22b-v0.1": [
@@ -2382,6 +2729,11 @@
         "at": "2026-10-02T06:12:25.164Z",
         "status": "gone",
         "latency_ms": 36
+      },
+      {
+        "at": "2026-10-02T18:12:34.505Z",
+        "status": "gone",
+        "latency_ms": 64
       }
     ],
     "nvidia/moonshotai/kimi-k2.6": [
@@ -2409,6 +2761,11 @@
         "at": "2026-10-02T06:12:26.801Z",
         "status": "gone",
         "latency_ms": 26
+      },
+      {
+        "at": "2026-10-02T18:12:36.169Z",
+        "status": "gone",
+        "latency_ms": 66
       }
     ],
     "nvidia/moonshotai/kimi-k3": [
@@ -2436,6 +2793,11 @@
         "at": "2026-10-02T06:12:28.426Z",
         "status": "responded",
         "latency_ms": 1683
+      },
+      {
+        "at": "2026-10-02T18:12:37.836Z",
+        "status": "slow",
+        "latency_ms": 30001
       }
     ],
     "nvidia/nv-mistralai/mistral-nemo-12b-instruct": [
@@ -2463,6 +2825,11 @@
         "at": "2026-10-02T06:12:39.797Z",
         "status": "gone",
         "latency_ms": 33
+      },
+      {
+        "at": "2026-10-02T18:13:09.437Z",
+        "status": "gone",
+        "latency_ms": 57
       }
     ],
     "nvidia/nvidia/cosmos-reason2-8b": [
@@ -2490,6 +2857,11 @@
         "at": "2026-10-02T06:12:41.430Z",
         "status": "gone",
         "latency_ms": 100
+      },
+      {
+        "at": "2026-10-02T18:13:11.095Z",
+        "status": "gone",
+        "latency_ms": 60
       }
     ],
     "nvidia/nvidia/llama-3.1-nemotron-51b-instruct": [
@@ -2517,6 +2889,11 @@
         "at": "2026-10-02T06:12:43.130Z",
         "status": "gone",
         "latency_ms": 25
+      },
+      {
+        "at": "2026-10-02T18:13:12.755Z",
+        "status": "gone",
+        "latency_ms": 64
       }
     ],
     "nvidia/nvidia/llama-3.1-nemotron-70b-instruct": [
@@ -2544,6 +2921,11 @@
         "at": "2026-10-02T06:12:44.755Z",
         "status": "gone",
         "latency_ms": 28
+      },
+      {
+        "at": "2026-10-02T18:13:14.419Z",
+        "status": "gone",
+        "latency_ms": 62
       }
     ],
     "nvidia/nvidia/llama-3.1-nemotron-ultra-253b-v1": [
@@ -2571,6 +2953,11 @@
         "at": "2026-10-02T06:12:46.383Z",
         "status": "gone",
         "latency_ms": 24
+      },
+      {
+        "at": "2026-10-02T18:13:16.081Z",
+        "status": "gone",
+        "latency_ms": 65
       }
     ],
     "nvidia/nvidia/llama3-chatqa-1.5-70b": [
@@ -2598,6 +2985,11 @@
         "at": "2026-10-02T06:12:48.007Z",
         "status": "gone",
         "latency_ms": 37
+      },
+      {
+        "at": "2026-10-02T18:13:17.747Z",
+        "status": "gone",
+        "latency_ms": 74
       }
     ],
     "nvidia/nvidia/mistral-nemo-minitron-8b-8k-instruct": [
@@ -2625,6 +3017,11 @@
         "at": "2026-10-02T06:12:49.644Z",
         "status": "gone",
         "latency_ms": 35
+      },
+      {
+        "at": "2026-10-02T18:13:19.422Z",
+        "status": "gone",
+        "latency_ms": 76
       }
     ],
     "nvidia/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning": [
@@ -2652,6 +3049,11 @@
         "at": "2026-10-02T06:12:51.279Z",
         "status": "error",
         "latency_ms": 23
+      },
+      {
+        "at": "2026-10-02T18:13:21.099Z",
+        "status": "error",
+        "latency_ms": 120
       }
     ],
     "nvidia/nvidia/nemotron-3-super-120b-a12b": [
@@ -2679,6 +3081,11 @@
         "at": "2026-10-02T06:12:52.903Z",
         "status": "responded",
         "latency_ms": 422
+      },
+      {
+        "at": "2026-10-02T18:13:22.820Z",
+        "status": "responded",
+        "latency_ms": 817
       }
     ],
     "nvidia/nvidia/nemotron-3-ultra-550b-a55b": [
@@ -2706,6 +3113,11 @@
         "at": "2026-10-02T06:12:57.555Z",
         "status": "responded",
         "latency_ms": 732
+      },
+      {
+        "at": "2026-10-02T18:13:25.237Z",
+        "status": "responded",
+        "latency_ms": 952
       }
     ],
     "nvidia/nvidia/nemotron-3.5-lightning-30b-a3b": [
@@ -2733,6 +3145,11 @@
         "at": "2026-10-02T06:13:03.301Z",
         "status": "slow",
         "latency_ms": 30000
+      },
+      {
+        "at": "2026-10-02T18:13:27.788Z",
+        "status": "slow",
+        "latency_ms": 30001
       }
     ],
     "nvidia/nvidia/nemotron-4-340b-instruct": [
@@ -2760,6 +3177,11 @@
         "at": "2026-10-02T06:13:34.902Z",
         "status": "gone",
         "latency_ms": 39
+      },
+      {
+        "at": "2026-10-02T18:13:59.390Z",
+        "status": "gone",
+        "latency_ms": 71
       }
     ],
     "nvidia/nvidia/nemotron-nano-3-30b-a3b": [
@@ -2787,6 +3209,11 @@
         "at": "2026-10-02T06:13:36.542Z",
         "status": "gone",
         "latency_ms": 26
+      },
+      {
+        "at": "2026-10-02T18:14:01.062Z",
+        "status": "gone",
+        "latency_ms": 62
       }
     ],
     "nvidia/nvidia/neva-22b": [
@@ -2814,6 +3241,11 @@
         "at": "2026-10-02T06:13:38.169Z",
         "status": "gone",
         "latency_ms": 36
+      },
+      {
+        "at": "2026-10-02T18:14:02.726Z",
+        "status": "gone",
+        "latency_ms": 64
       }
     ],
     "nvidia/nvidia/riva-translate-4b-instruct": [
@@ -2841,6 +3273,11 @@
         "at": "2026-10-02T06:13:39.806Z",
         "status": "gone",
         "latency_ms": 36
+      },
+      {
+        "at": "2026-10-02T18:14:04.391Z",
+        "status": "gone",
+        "latency_ms": 66
       }
     ],
     "nvidia/nvidia/riva-translate-4b-instruct-v1.1": [
@@ -2868,6 +3305,11 @@
         "at": "2026-10-02T06:13:41.443Z",
         "status": "responded",
         "latency_ms": 213
+      },
+      {
+        "at": "2026-10-02T18:14:06.057Z",
+        "status": "responded",
+        "latency_ms": 395
       }
     ],
     "nvidia/nvidia/riva-translate-4b-instruct-v2": [
@@ -2895,6 +3337,11 @@
         "at": "2026-10-02T06:13:44.967Z",
         "status": "responded",
         "latency_ms": 12057
+      },
+      {
+        "at": "2026-10-02T18:14:08.053Z",
+        "status": "responded",
+        "latency_ms": 376
       }
     ],
     "nvidia/nvidia/vila": [
@@ -2922,6 +3369,11 @@
         "at": "2026-10-02T06:14:11.774Z",
         "status": "gone",
         "latency_ms": 37
+      },
+      {
+        "at": "2026-10-02T18:14:10.030Z",
+        "status": "gone",
+        "latency_ms": 65
       }
     ],
     "nvidia/openai/gpt-oss-20b": [
@@ -2949,6 +3401,11 @@
         "at": "2026-10-02T06:14:13.412Z",
         "status": "responded",
         "latency_ms": 701
+      },
+      {
+        "at": "2026-10-02T18:14:11.697Z",
+        "status": "responded",
+        "latency_ms": 345
       }
     ],
     "nvidia/poolside/laguna-xs-2.1": [
@@ -2976,6 +3433,11 @@
         "at": "2026-10-02T06:14:18.925Z",
         "status": "error",
         "latency_ms": 22
+      },
+      {
+        "at": "2026-10-02T18:14:13.642Z",
+        "status": "error",
+        "latency_ms": 110
       }
     ],
     "nvidia/writer/palmyra-creative-122b": [
@@ -3003,6 +3465,11 @@
         "at": "2026-10-02T06:14:20.547Z",
         "status": "gone",
         "latency_ms": 30
+      },
+      {
+        "at": "2026-10-02T18:14:15.353Z",
+        "status": "gone",
+        "latency_ms": 64
       }
     ],
     "nvidia/writer/palmyra-fin-70b-32k": [
@@ -3030,6 +3497,11 @@
         "at": "2026-10-02T06:14:22.177Z",
         "status": "gone",
         "latency_ms": 29
+      },
+      {
+        "at": "2026-10-02T18:14:17.018Z",
+        "status": "gone",
+        "latency_ms": 83
       }
     ],
     "nvidia/writer/palmyra-med-70b": [
@@ -3057,6 +3529,11 @@
         "at": "2026-10-02T06:14:23.808Z",
         "status": "gone",
         "latency_ms": 29
+      },
+      {
+        "at": "2026-10-02T18:14:18.702Z",
+        "status": "gone",
+        "latency_ms": 73
       }
     ],
     "nvidia/writer/palmyra-med-70b-32k": [
@@ -3084,6 +3561,11 @@
         "at": "2026-10-02T06:14:25.439Z",
         "status": "gone",
         "latency_ms": 30
+      },
+      {
+        "at": "2026-10-02T18:14:20.375Z",
+        "status": "gone",
+        "latency_ms": 59
       }
     ],
     "nvidia/z-ai/glm-5.3": [
@@ -3111,6 +3593,11 @@
         "at": "2026-10-02T06:14:27.070Z",
         "status": "responded",
         "latency_ms": 12306
+      },
+      {
+        "at": "2026-10-02T18:14:22.034Z",
+        "status": "slow",
+        "latency_ms": 30001
       }
     ],
     "nvidia/z-ai/glm-5.3-flash": [
@@ -3138,6 +3625,11 @@
         "at": "2026-10-02T06:15:13.548Z",
         "status": "slow",
         "latency_ms": 30000
+      },
+      {
+        "at": "2026-10-02T18:14:53.636Z",
+        "status": "responded",
+        "latency_ms": 1568
       }
     ],
     "nvidia/zyphra/zamba2-7b-instruct": [
@@ -3165,6 +3657,11 @@
         "at": "2026-10-02T06:15:45.150Z",
         "status": "gone",
         "latency_ms": 35
+      },
+      {
+        "at": "2026-10-02T18:14:56.804Z",
+        "status": "gone",
+        "latency_ms": 63
       }
     ],
     "openrouter/apodex/apodex-1.1-mini:free": [
@@ -3172,6 +3669,11 @@
         "at": "2026-10-02T06:10:38.366Z",
         "status": "responded",
         "latency_ms": 866
+      },
+      {
+        "at": "2026-10-02T18:10:37.618Z",
+        "status": "responded",
+        "latency_ms": 826
       }
     ],
     "openrouter/cohere/north-mini-code:free": [
@@ -3199,6 +3701,11 @@
         "at": "2026-10-02T06:10:47.152Z",
         "status": "responded",
         "latency_ms": 205
+      },
+      {
+        "at": "2026-10-02T18:10:41.944Z",
+        "status": "responded",
+        "latency_ms": 304
       }
     ],
     "openrouter/deepgram/flux-tts:free": [
@@ -3253,6 +3760,11 @@
         "at": "2026-10-02T06:10:59.468Z",
         "status": "responded",
         "latency_ms": 494
+      },
+      {
+        "at": "2026-10-02T18:10:45.748Z",
+        "status": "responded",
+        "latency_ms": 502
       }
     ],
     "openrouter/fish-audio/s2.1-pro-free:free": [
@@ -3314,6 +3826,11 @@
         "at": "2026-10-02T06:11:27.692Z",
         "status": "responded",
         "latency_ms": 784
+      },
+      {
+        "at": "2026-10-02T18:11:04.155Z",
+        "status": "responded",
+        "latency_ms": 816
       }
     ],
     "openrouter/liquid/lfm-2.5-2.6b:free": [
@@ -3341,6 +3858,11 @@
         "at": "2026-10-02T06:11:36.342Z",
         "status": "responded",
         "latency_ms": 411
+      },
+      {
+        "at": "2026-10-02T18:11:08.471Z",
+        "status": "responded",
+        "latency_ms": 692
       }
     ],
     "openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free": [
@@ -3368,6 +3890,11 @@
         "at": "2026-10-02T06:11:45.114Z",
         "status": "responded",
         "latency_ms": 105
+      },
+      {
+        "at": "2026-10-02T18:11:12.663Z",
+        "status": "responded",
+        "latency_ms": 232
       }
     ],
     "openrouter/nvidia/nemotron-3-super-120b-a12b:free": [
@@ -3395,6 +3922,11 @@
         "at": "2026-10-02T06:11:55.233Z",
         "status": "responded",
         "latency_ms": 256
+      },
+      {
+        "at": "2026-10-02T18:11:16.396Z",
+        "status": "responded",
+        "latency_ms": 261
       }
     ],
     "openrouter/nvidia/nemotron-3-ultra-550b-a55b:free": [
@@ -3422,6 +3954,11 @@
         "at": "2026-10-02T06:12:03.107Z",
         "status": "responded",
         "latency_ms": 301
+      },
+      {
+        "at": "2026-10-02T18:11:20.158Z",
+        "status": "responded",
+        "latency_ms": 362
       }
     ],
     "openrouter/nvidia/nemotron-3.5-lightning:free": [
@@ -3449,6 +3986,11 @@
         "at": "2026-10-02T06:12:13.817Z",
         "status": "responded",
         "latency_ms": 90
+      },
+      {
+        "at": "2026-10-02T18:11:24.020Z",
+        "status": "responded",
+        "latency_ms": 286
       }
     ],
     "openrouter/poolside/laguna-s-2.1:free": [
@@ -3483,6 +4025,11 @@
         "at": "2026-10-01T06:12:16.586Z",
         "status": "responded",
         "latency_ms": 153
+      },
+      {
+        "at": "2026-10-02T18:11:34.999Z",
+        "status": "responded",
+        "latency_ms": 302
       }
     ],
     "openrouter/qwen/qwen3.8-27b:free": [
@@ -3512,6 +4059,11 @@
         "at": "2026-10-01T06:12:31.419Z",
         "status": "restricted",
         "latency_ms": 164
+      },
+      {
+        "at": "2026-10-02T18:11:46.002Z",
+        "status": "restricted",
+        "latency_ms": 126
       }
     ],
     "openrouter/thinkingmachines/inkling:free": [
@@ -3534,6 +4086,11 @@
         "at": "2026-10-01T06:12:35.083Z",
         "status": "restricted",
         "latency_ms": 86
+      },
+      {
+        "at": "2026-10-02T18:11:49.628Z",
+        "status": "restricted",
+        "latency_ms": 108
       }
     ],
     "zai/glm-4.5-flash": [
@@ -3556,6 +4113,11 @@
         "at": "2026-10-02T06:10:38.460Z",
         "status": "responded",
         "latency_ms": 5350
+      },
+      {
+        "at": "2026-10-02T18:10:37.660Z",
+        "status": "responded",
+        "latency_ms": 1305
       }
     ],
     "zai/glm-4.6v-flash": [
@@ -3563,6 +4125,11 @@
         "at": "2026-09-29T20:13:48.049Z",
         "status": "responded",
         "latency_ms": 847
+      },
+      {
+        "at": "2026-10-02T18:10:40.966Z",
+        "status": "responded",
+        "latency_ms": 708
       }
     ],
     "zai/glm-4.7-flash": [
@@ -3580,6 +4147,11 @@
         "at": "2026-10-02T06:11:00.286Z",
         "status": "responded",
         "latency_ms": 1117
+      },
+      {
+        "at": "2026-10-02T18:10:43.673Z",
+        "status": "responded",
+        "latency_ms": 882
       }
     ]
   },
