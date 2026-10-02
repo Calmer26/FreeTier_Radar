@@ -26,6 +26,8 @@ export interface ProviderInfo {
    * inside its own extension): listed and tracked, never tested.
    */
   testable?: boolean;
+  /** False to skip the 18:10 UTC peak-hours test (a small monthly call budget, like Cohere's). */
+  peak_test?: boolean;
   usage_terms: UsageTerms;
   usage_terms_note: string | null;
   limit_scope: LimitScope;
@@ -242,6 +244,29 @@ export const PROVIDERS: Record<ProviderId, ProviderInfo> = {
     data_logging: "not-used",
     limits_url: "https://ollama.com/pricing",
     summary: "Ollama's hosted models, called with an API key. The Free plan covers a few starter models (Nemotron, gpt-oss, Gemma) and Ollama says it never logs or trains on prompts.",
+  },
+  cohere: {
+    id: "cohere",
+    label: "Cohere (trial key)",
+    homepage: "https://cohere.com",
+    base_url: "https://api.cohere.ai/compatibility/v1",
+    key_env: "COHERE_API_KEY",
+    list_needs_key: true,
+    peak_test: false,
+    usage_terms: "unknown",
+    // docs.cohere.com: rate-limits, cohere-faqs, going-live; cohere.com/enterprise-data-commitments. Checked 2026-10-02.
+    usage_terms_note: "Cohere gives every account a free, rate-limited trial key, which its FAQ describes for personal projects and prototyping; going live means upgrading to a paid production key. Trial keys get 1,000 API calls a month in total. Prompts and generations may be used to train Cohere's models unless you opt out in the dashboard.",
+    limit_scope: "shared",
+    rate_limits: {
+      rpm: 20,
+      note: "20 requests/minute per chat model (5 for transcription), and 1,000 API calls a month across everything on a trial key.",
+      source: "https://docs.cohere.com/docs/rate-limits",
+    },
+    card_required: "no",
+    account_required: "yes",
+    data_logging: "may-train",
+    limits_url: "https://docs.cohere.com/docs/rate-limits",
+    summary: "Cohere's Command and Aya models and its speech-to-text model, free on a trial key with 1,000 calls a month. Good for trying them, not for an app.",
   },
   cline: {
     id: "cline",

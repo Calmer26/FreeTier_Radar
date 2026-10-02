@@ -183,9 +183,11 @@ export function buildRequest(r: Resource, env: Record<string, string | undefined
     };
   }
 
+  // Fields before the file: Cohere's endpoint rejects them after it, and needs a language (checked 2026-10-02).
   const form = new FormData();
-  form.append("file", new Blob([readFileSync(STT_SAMPLE_PATH)], { type: "audio/mpeg" }), "stt-sample.mp3");
   form.append("model", r.model_id);
+  if (r.provider === "cohere") form.append("language", "en");
+  form.append("file", new Blob([readFileSync(STT_SAMPLE_PATH)], { type: "audio/mpeg" }), "stt-sample.mp3");
   return {
     url: `${base}/audio/transcriptions`,
     init: { method: "POST", headers: { ...auth, ...extra }, body: form },

@@ -218,3 +218,23 @@ describe("mapOllama", () => {
     ]);
   });
 });
+
+describe("mapCohere", () => {
+  it("keeps chat and transcription models, minus variants that would eat the trial budget", async () => {
+    const { mapCohere } = await import("./adapters");
+    const out = mapCohere([
+      { name: "command-a-03-2025", endpoints: ["chat"], context_length: 288_000, features: ["tools", "json_mode"] },
+      { name: "command-a-vision-07-2025", endpoints: ["chat"], context_length: 128_000, features: ["vision"] },
+      { name: "command-a-translate-08-2025", endpoints: ["chat"] },
+      { name: "tiny-aya-fire", endpoints: ["chat"] },
+      { name: "embed-v4.0", endpoints: ["embed"] },
+      { name: "cohere-transcribe-03-2026", endpoints: ["transcriptions"] },
+      { name: "old", endpoints: ["chat"], is_deprecated: true },
+    ]);
+    expect(out.map((m) => [m.model_id, m.kind, m.tool_calling, m.input_modalities])).toEqual([
+      ["command-a-03-2025", "chat", true, ["text"]],
+      ["command-a-vision-07-2025", "chat", false, ["text", "image"]],
+      ["cohere-transcribe-03-2026", "stt", null, ["audio"]],
+    ]);
+  });
+});

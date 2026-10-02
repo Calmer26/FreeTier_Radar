@@ -30,6 +30,7 @@ const GAP_MS: Record<ProviderId, number> = {
   cloudflare: 1_000,         // shared daily Neurons; requests are tiny
   mistral: 2_000,            // per-model limits (30+ requests/minute seen); stay gentle
   ollama: 3_000,             // one request at a time on the Free plan
+  cohere: 3_500,             // 20 requests/minute per model on a trial key
 };
 const STOP_AFTER_RATE_LIMITS = 3;
 /** Image models are tested weekly: one picture uses far more of a free allowance than a chat reply. */
@@ -87,6 +88,10 @@ async function main() {
       const keyEnv = PROVIDERS[p].key_env;
       if (keyEnv && !process.env[keyEnv]) {
         console.log(`- ${p}: skipped (${keyEnv} not set)`);
+        return Promise.resolve();
+      }
+      if (EVENING && PROVIDERS[p].peak_test === false) {
+        console.log(`- ${p}: no peak-hours test (small monthly call budget)`);
         return Promise.resolve();
       }
       const models = resources.filter((r) => r.provider === p && r.status === "active" && (!EVENING || r.kind === "chat"));

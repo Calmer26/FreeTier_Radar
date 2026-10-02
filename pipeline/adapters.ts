@@ -434,6 +434,48 @@ async function fetchOllama(env: Env): Promise<ObservedModel[]> {
   return mapOllama(json.models ?? []);
 }
 
+// ── Cohere ───────────────────────────────────────────────────────────────────────
+
+export interface CohereModel {
+  name: string;
+  endpoints?: string[];
+  context_length?: number;
+  features?: string[] | null;
+  is_deprecated?: boolean;
+}
+
+/**
+ * Chat and transcription models (no embed/rerank/parse). Translation-only, Arabic-only
+ * and the small regional tiny-aya variants are left out: a trial key has 1,000 calls a
+ * month in total, and testing every variant daily would use more than that.
+ */
+export const COHERE_SKIP = /translate|arabic|tiny-aya/;
+
+export function mapCohere(models: CohereModel[]): ObservedModel[] {
+  return models.flatMap((m) => {
+    if (m.is_deprecated || COHERE_SKIP.test(m.name)) return [];
+    const eps = m.endpoints ?? [];
+    const kind: ModelKind | null = eps.includes("chat") ? "chat" : eps.includes("transcriptions") ? "stt" : null;
+    if (!kind) return [];
+    const f = m.features ?? [];
+    return [{
+      ...base("cohere", kind),
+      model_id: m.name,
+      name: m.name,
+      url: "https://docs.cohere.com/docs/models",
+      price_type: "free" as const,
+      context_length: kind === "chat" ? m.context_length ?? null : null,
+      input_modalities: kind === "chat" ? ["text", ...(f.includes("vision") ? ["image"] : [])] : ["audio"],
+      tool_calling: kind === "chat" ? f.includes("tools") : null,
+    }];
+  });
+}
+
+async function fetchCohere(env: Env): Promise<ObservedModel[]> {
+  const json = await getJson<{ models?: CohereModel[] }>("https://api.cohere.com/v1/models?page_size=1000", { Authorization: `Bearer ${env.COHERE_API_KEY}` });
+  return mapCohere(json.models ?? []);
+}
+
 // ── Cline (free promotion) ───────────────────────────────────────────────────────
 
 export interface ClineRecommended {
@@ -537,4 +579,5 @@ export const FETCHERS: Record<ProviderId, (env: Env) => Promise<ObservedModel[]>
   cloudflare: fetchCloudflare,
   mistral: fetchMistral,
   ollama: fetchOllama,
+  cohere: fetchCohere,
 };
