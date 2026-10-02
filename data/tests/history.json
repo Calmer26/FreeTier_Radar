@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-02T18:20:46.273Z",
+  "updated_at": "2026-10-02T20:12:39.680Z",
   "results": {
     "cloudflare/@cf/aisingapore/gemma-sea-lion-v4-27b-it": [
       {
@@ -355,6 +355,155 @@
         "at": "2026-10-01T06:11:07.150Z",
         "status": "responded",
         "latency_ms": 1876
+      }
+    ],
+    "cohere/c4ai-aya-expanse-32b": [
+      {
+        "at": "2026-10-02T20:12:39.684Z",
+        "status": "responded",
+        "latency_ms": 344
+      }
+    ],
+    "cohere/c4ai-aya-vision-32b": [
+      {
+        "at": "2026-10-02T20:12:43.530Z",
+        "status": "responded",
+        "latency_ms": 180
+      }
+    ],
+    "cohere/cohere-transcribe-03-2026": [
+      {
+        "at": "2026-10-02T20:12:47.210Z",
+        "status": "responded",
+        "latency_ms": 508,
+        "wer": 0
+      }
+    ],
+    "cohere/command-a-03-2025": [
+      {
+        "at": "2026-10-02T20:12:51.220Z",
+        "status": "responded",
+        "latency_ms": 221
+      }
+    ],
+    "cohere/command-a-plus-05-2026": [
+      {
+        "at": "2026-10-02T20:12:59.251Z",
+        "status": "responded",
+        "latency_ms": 188
+      }
+    ],
+    "cohere/command-a-reasoning-08-2025": [
+      {
+        "at": "2026-10-02T20:13:06.882Z",
+        "status": "responded",
+        "latency_ms": 241
+      }
+    ],
+    "cohere/command-a-vision-07-2025": [
+      {
+        "at": "2026-10-02T20:13:15.057Z",
+        "status": "responded",
+        "latency_ms": 194
+      }
+    ],
+    "cohere/command-r-08-2024": [
+      {
+        "at": "2026-10-02T20:13:18.753Z",
+        "status": "responded",
+        "latency_ms": 235
+      }
+    ],
+    "cohere/command-r-plus-08-2024": [
+      {
+        "at": "2026-10-02T20:13:29.121Z",
+        "status": "responded",
+        "latency_ms": 291
+      }
+    ],
+    "cohere/command-r7b-12-2024": [
+      {
+        "at": "2026-10-02T20:14:02.874Z",
+        "status": "responded",
+        "latency_ms": 174
+      }
+    ],
+    "cohere/north-mini-code-1-0": [
+      {
+        "at": "2026-10-02T20:14:10.905Z",
+        "status": "responded",
+        "latency_ms": 215
+      }
+    ],
+    "elevenlabs/eleven_flash_v2": [
+      {
+        "at": "2026-10-02T20:12:39.704Z",
+        "status": "responded",
+        "latency_ms": 292
+      }
+    ],
+    "elevenlabs/eleven_flash_v2_5": [
+      {
+        "at": "2026-10-02T20:12:41.498Z",
+        "status": "responded",
+        "latency_ms": 161
+      }
+    ],
+    "elevenlabs/eleven_multilingual_v2": [
+      {
+        "at": "2026-10-02T20:12:43.161Z",
+        "status": "responded",
+        "latency_ms": 926
+      }
+    ],
+    "elevenlabs/eleven_turbo_v2": [
+      {
+        "at": "2026-10-02T20:12:45.588Z",
+        "status": "responded",
+        "latency_ms": 354
+      }
+    ],
+    "elevenlabs/eleven_turbo_v2_5": [
+      {
+        "at": "2026-10-02T20:12:47.443Z",
+        "status": "responded",
+        "latency_ms": 212
+      }
+    ],
+    "elevenlabs/eleven_v3": [
+      {
+        "at": "2026-10-02T20:12:49.157Z",
+        "status": "responded",
+        "latency_ms": 633
+      }
+    ],
+    "elevenlabs/eleven_v3_conversational": [
+      {
+        "at": "2026-10-02T20:12:51.291Z",
+        "status": "responded",
+        "latency_ms": 377
+      }
+    ],
+    "elevenlabs/eleven_v4": [
+      {
+        "at": "2026-10-02T20:12:53.169Z",
+        "status": "responded",
+        "latency_ms": 2364
+      }
+    ],
+    "elevenlabs/eleven_v4_turbo": [
+      {
+        "at": "2026-10-02T20:12:57.034Z",
+        "status": "responded",
+        "latency_ms": 356
+      }
+    ],
+    "elevenlabs/scribe_v2": [
+      {
+        "at": "2026-10-02T20:12:58.891Z",
+        "status": "responded",
+        "latency_ms": 1186,
+        "wer": 0
       }
     ],
     "google-ai-studio/gemini-2.5-flash": [
@@ -4358,6 +4507,55 @@
         "at": "2026-10-01T06:11:10.027Z",
         "status": "pass",
         "latency_ms": 863
+      }
+    ],
+    "cohere/command-a-03-2025": [
+      {
+        "at": "2026-10-02T20:12:54.943Z",
+        "status": "pass",
+        "latency_ms": 807
+      }
+    ],
+    "cohere/command-a-plus-05-2026": [
+      {
+        "at": "2026-10-02T20:13:02.941Z",
+        "status": "pass",
+        "latency_ms": 439
+      }
+    ],
+    "cohere/command-a-reasoning-08-2025": [
+      {
+        "at": "2026-10-02T20:13:10.625Z",
+        "status": "pass",
+        "latency_ms": 929
+      }
+    ],
+    "cohere/command-r-08-2024": [
+      {
+        "at": "2026-10-02T20:13:22.491Z",
+        "status": "pass",
+        "latency_ms": 3129
+      }
+    ],
+    "cohere/command-r-plus-08-2024": [
+      {
+        "at": "2026-10-02T20:13:32.914Z",
+        "status": "pass",
+        "latency_ms": 26457
+      }
+    ],
+    "cohere/command-r7b-12-2024": [
+      {
+        "at": "2026-10-02T20:14:06.551Z",
+        "status": "pass",
+        "latency_ms": 854
+      }
+    ],
+    "cohere/north-mini-code-1-0": [
+      {
+        "at": "2026-10-02T20:14:14.624Z",
+        "status": "pass",
+        "latency_ms": 508
       }
     ],
     "google-ai-studio/gemini-2.5-flash": [

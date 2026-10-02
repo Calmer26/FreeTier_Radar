@@ -171,16 +171,16 @@ _150 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 
 | Model | ID | Context | Tools | Last test | Agent |
 |---|---|---|---|---|---|
-| [c4ai-aya-expanse-32b](https://freetier-radar.marcelkanters.workers.dev/models/cohere/c4ai-aya-expanse-32b/) | `c4ai-aya-expanse-32b` | 128k | no | – |  |
-| [c4ai-aya-vision-32b](https://freetier-radar.marcelkanters.workers.dev/models/cohere/c4ai-aya-vision-32b/) | `c4ai-aya-vision-32b` | 16k | no | – |  |
-| [command-a-03-2025](https://freetier-radar.marcelkanters.workers.dev/models/cohere/command-a-03-2025/) | `command-a-03-2025` | 288k | yes | – |  |
-| [command-a-plus-05-2026](https://freetier-radar.marcelkanters.workers.dev/models/cohere/command-a-plus-05-2026/) | `command-a-plus-05-2026` | 436k | yes | – |  |
-| [command-a-reasoning-08-2025](https://freetier-radar.marcelkanters.workers.dev/models/cohere/command-a-reasoning-08-2025/) | `command-a-reasoning-08-2025` | 289k | yes | – |  |
-| [command-a-vision-07-2025](https://freetier-radar.marcelkanters.workers.dev/models/cohere/command-a-vision-07-2025/) | `command-a-vision-07-2025` | 128k | no | – |  |
-| [command-r-08-2024](https://freetier-radar.marcelkanters.workers.dev/models/cohere/command-r-08-2024/) | `command-r-08-2024` | 128k | yes | – |  |
-| [command-r-plus-08-2024](https://freetier-radar.marcelkanters.workers.dev/models/cohere/command-r-plus-08-2024/) | `command-r-plus-08-2024` | 128k | yes | – |  |
-| [command-r7b-12-2024](https://freetier-radar.marcelkanters.workers.dev/models/cohere/command-r7b-12-2024/) | `command-r7b-12-2024` | 132k | yes | – |  |
-| [north-mini-code-1-0](https://freetier-radar.marcelkanters.workers.dev/models/cohere/north-mini-code-1-0/) | `north-mini-code-1-0` | 436k | yes | – |  |
+| [c4ai-aya-expanse-32b](https://freetier-radar.marcelkanters.workers.dev/models/cohere/c4ai-aya-expanse-32b/) | `c4ai-aya-expanse-32b` | 128k | no | 🟢 |  |
+| [c4ai-aya-vision-32b](https://freetier-radar.marcelkanters.workers.dev/models/cohere/c4ai-aya-vision-32b/) | `c4ai-aya-vision-32b` | 16k | no | 🟢 |  |
+| [command-a-03-2025](https://freetier-radar.marcelkanters.workers.dev/models/cohere/command-a-03-2025/) | `command-a-03-2025` | 288k | yes | 🟢 |  |
+| [command-a-plus-05-2026](https://freetier-radar.marcelkanters.workers.dev/models/cohere/command-a-plus-05-2026/) | `command-a-plus-05-2026` | 436k | yes | 🟢 |  |
+| [command-a-reasoning-08-2025](https://freetier-radar.marcelkanters.workers.dev/models/cohere/command-a-reasoning-08-2025/) | `command-a-reasoning-08-2025` | 289k | yes | 🟢 |  |
+| [command-a-vision-07-2025](https://freetier-radar.marcelkanters.workers.dev/models/cohere/command-a-vision-07-2025/) | `command-a-vision-07-2025` | 128k | no | 🟢 |  |
+| [command-r-08-2024](https://freetier-radar.marcelkanters.workers.dev/models/cohere/command-r-08-2024/) | `command-r-08-2024` | 128k | yes | 🟢 |  |
+| [command-r-plus-08-2024](https://freetier-radar.marcelkanters.workers.dev/models/cohere/command-r-plus-08-2024/) | `command-r-plus-08-2024` | 128k | yes | 🟢 |  |
+| [command-r7b-12-2024](https://freetier-radar.marcelkanters.workers.dev/models/cohere/command-r7b-12-2024/) | `command-r7b-12-2024` | 132k | yes | 🟢 |  |
+| [north-mini-code-1-0](https://freetier-radar.marcelkanters.workers.dev/models/cohere/north-mini-code-1-0/) | `north-mini-code-1-0` | 436k | yes | 🟢 |  |
 
 #### Cline (free promotion)
 
@@ -232,15 +232,15 @@ _150 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 
 | Model | ID | Last test |
 |---|---|---|
-| [Eleven Flash v2](https://freetier-radar.marcelkanters.workers.dev/models/elevenlabs/eleven-flash-v2/) | `eleven_flash_v2` | – |
-| [Eleven Flash v2.5](https://freetier-radar.marcelkanters.workers.dev/models/elevenlabs/eleven-flash-v2-5/) | `eleven_flash_v2_5` | – |
-| [Eleven Multilingual v2](https://freetier-radar.marcelkanters.workers.dev/models/elevenlabs/eleven-multilingual-v2/) | `eleven_multilingual_v2` | – |
-| [Eleven Turbo v2](https://freetier-radar.marcelkanters.workers.dev/models/elevenlabs/eleven-turbo-v2/) | `eleven_turbo_v2` | – |
-| [Eleven Turbo v2.5](https://freetier-radar.marcelkanters.workers.dev/models/elevenlabs/eleven-turbo-v2-5/) | `eleven_turbo_v2_5` | – |
-| [Eleven v3](https://freetier-radar.marcelkanters.workers.dev/models/elevenlabs/eleven-v3/) | `eleven_v3` | – |
-| [Eleven v3 Conversational](https://freetier-radar.marcelkanters.workers.dev/models/elevenlabs/eleven-v3-conversational/) | `eleven_v3_conversational` | – |
-| [Eleven v4](https://freetier-radar.marcelkanters.workers.dev/models/elevenlabs/eleven-v4/) | `eleven_v4` | – |
-| [Eleven v4 Turbo](https://freetier-radar.marcelkanters.workers.dev/models/elevenlabs/eleven-v4-turbo/) | `eleven_v4_turbo` | – |
+| [Eleven Flash v2](https://freetier-radar.marcelkanters.workers.dev/models/elevenlabs/eleven-flash-v2/) | `eleven_flash_v2` | 🟢 |
+| [Eleven Flash v2.5](https://freetier-radar.marcelkanters.workers.dev/models/elevenlabs/eleven-flash-v2-5/) | `eleven_flash_v2_5` | 🟢 |
+| [Eleven Multilingual v2](https://freetier-radar.marcelkanters.workers.dev/models/elevenlabs/eleven-multilingual-v2/) | `eleven_multilingual_v2` | 🟢 |
+| [Eleven Turbo v2](https://freetier-radar.marcelkanters.workers.dev/models/elevenlabs/eleven-turbo-v2/) | `eleven_turbo_v2` | 🟢 |
+| [Eleven Turbo v2.5](https://freetier-radar.marcelkanters.workers.dev/models/elevenlabs/eleven-turbo-v2-5/) | `eleven_turbo_v2_5` | 🟢 |
+| [Eleven v3](https://freetier-radar.marcelkanters.workers.dev/models/elevenlabs/eleven-v3/) | `eleven_v3` | 🟢 |
+| [Eleven v3 Conversational](https://freetier-radar.marcelkanters.workers.dev/models/elevenlabs/eleven-v3-conversational/) | `eleven_v3_conversational` | 🟢 |
+| [Eleven v4](https://freetier-radar.marcelkanters.workers.dev/models/elevenlabs/eleven-v4/) | `eleven_v4` | 🟢 |
+| [Eleven v4 Turbo](https://freetier-radar.marcelkanters.workers.dev/models/elevenlabs/eleven-v4-turbo/) | `eleven_v4_turbo` | 🟢 |
 
 ### Speech-to-text (8)
 
@@ -274,13 +274,13 @@ _150 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 
 | Model | ID | Last test |
 |---|---|---|
-| [cohere-transcribe-03-2026](https://freetier-radar.marcelkanters.workers.dev/models/cohere/cohere-transcribe-03-2026/) | `cohere-transcribe-03-2026` | – |
+| [cohere-transcribe-03-2026](https://freetier-radar.marcelkanters.workers.dev/models/cohere/cohere-transcribe-03-2026/) | `cohere-transcribe-03-2026` | 🟢 |
 
 #### ElevenLabs (Free plan)
 
 | Model | ID | Last test |
 |---|---|---|
-| [Scribe v2](https://freetier-radar.marcelkanters.workers.dev/models/elevenlabs/scribe-v2/) | `scribe_v2` | – |
+| [Scribe v2](https://freetier-radar.marcelkanters.workers.dev/models/elevenlabs/scribe-v2/) | `scribe_v2` | 🟢 |
 
 ### Image (9)
 
