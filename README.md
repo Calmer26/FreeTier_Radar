@@ -11,11 +11,11 @@ change history and ready-to-paste Cline settings.
 ## The list
 
 <!-- LIST:START -->
-_129 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
+_150 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
 
 🟢 responded to the latest daily test · 🟡 rate-limited or slow · 🔴 failed · 🤖 agent-ready (tool calling, ≥64k context, answered every test on 5 of the last 7 days)
 
-### Chat (104)
+### Chat (114)
 
 #### OpenRouter
 
@@ -94,7 +94,7 @@ _129 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [Cohere: North Mini Code (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/cohere-north-mini-code-free/) | `cohere/north-mini-code:free` | 256k | yes | 🟢 | 🤖 |
 | [Dots Studio: Dots3-Note Preview (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/dots-studio-dots-3-note-preview-free/) | `dots-studio/dots-3-note-preview:free` | 512k | yes | 🟢 | 🤖 |
 | [inclusionAI: Ling 3.0 Flash Sante (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/inclusionai-ling-3-0-flash-sante-free/) | `inclusionai/ling-3.0-flash-sante:free` | 262k | yes | 🟢 | 🤖 |
-| [inclusionAI: Ling 3.1 Flash](https://freetier-radar.marcelkanters.workers.dev/models/kilo/inclusionai-ling-3-1-flash/) | `inclusionai/ling-3.1-flash` | 262k | yes | 🟢 |  |
+| [inclusionAI: Ling 3.1 Flash (new)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/inclusionai-ling-3-1-flash/) | `inclusionai/ling-3.1-flash` | 262k | yes | 🟢 |  |
 | [LiquidAI: LFM2.5-2.6B (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/liquid-lfm-2-5-2-6b-free/) | `liquid/lfm-2.5-2.6b:free` | 66k | yes | 🟢 | 🤖 |
 | [NVIDIA: Nemotron 3 Nano Omni (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/nvidia-nemotron-3-nano-omni-30b-a3b-reasoning-free/) | `nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free` | 256k | yes | 🟢 |  |
 | [NVIDIA: Nemotron 3 Super (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/nvidia-nemotron-3-super-120b-a12b-free/) | `nvidia/nemotron-3-super-120b-a12b:free` | 262k | yes | 🟢 |  |
@@ -167,6 +167,21 @@ _129 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [nemotron-3-super](https://freetier-radar.marcelkanters.workers.dev/models/ollama/nemotron-3-super/) | `nemotron-3-super` | unknown | ? | 🟡 |  |
 | [nemotron-3-ultra](https://freetier-radar.marcelkanters.workers.dev/models/ollama/nemotron-3-ultra/) | `nemotron-3-ultra` | unknown | ? | 🟡 |  |
 
+#### Cohere (trial key)
+
+| Model | ID | Context | Tools | Last test | Agent |
+|---|---|---|---|---|---|
+| [c4ai-aya-expanse-32b](https://freetier-radar.marcelkanters.workers.dev/models/cohere/c4ai-aya-expanse-32b/) | `c4ai-aya-expanse-32b` | 128k | no | – |  |
+| [c4ai-aya-vision-32b](https://freetier-radar.marcelkanters.workers.dev/models/cohere/c4ai-aya-vision-32b/) | `c4ai-aya-vision-32b` | 16k | no | – |  |
+| [command-a-03-2025](https://freetier-radar.marcelkanters.workers.dev/models/cohere/command-a-03-2025/) | `command-a-03-2025` | 288k | yes | – |  |
+| [command-a-plus-05-2026](https://freetier-radar.marcelkanters.workers.dev/models/cohere/command-a-plus-05-2026/) | `command-a-plus-05-2026` | 436k | yes | – |  |
+| [command-a-reasoning-08-2025](https://freetier-radar.marcelkanters.workers.dev/models/cohere/command-a-reasoning-08-2025/) | `command-a-reasoning-08-2025` | 289k | yes | – |  |
+| [command-a-vision-07-2025](https://freetier-radar.marcelkanters.workers.dev/models/cohere/command-a-vision-07-2025/) | `command-a-vision-07-2025` | 128k | no | – |  |
+| [command-r-08-2024](https://freetier-radar.marcelkanters.workers.dev/models/cohere/command-r-08-2024/) | `command-r-08-2024` | 128k | yes | – |  |
+| [command-r-plus-08-2024](https://freetier-radar.marcelkanters.workers.dev/models/cohere/command-r-plus-08-2024/) | `command-r-plus-08-2024` | 128k | yes | – |  |
+| [command-r7b-12-2024](https://freetier-radar.marcelkanters.workers.dev/models/cohere/command-r7b-12-2024/) | `command-r7b-12-2024` | 132k | yes | – |  |
+| [north-mini-code-1-0](https://freetier-radar.marcelkanters.workers.dev/models/cohere/north-mini-code-1-0/) | `north-mini-code-1-0` | 436k | yes | – |  |
+
 #### Cline (free promotion)
 
 | Model | ID | Context | Tools | Last test | Agent |
@@ -176,7 +191,7 @@ _129 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [Muse Spark 1.3 Contributor](https://freetier-radar.marcelkanters.workers.dev/models/cline/cline-free-muse-spark-1-3-contributor/) | `cline-free/muse-spark-1.3-contributor` | unknown | ? | – |  |
 | [space-bunny-alpha](https://freetier-radar.marcelkanters.workers.dev/models/cline/stealth-space-bunny-alpha/) | `stealth/space-bunny-alpha` | unknown | ? | – |  |
 
-### Text-to-speech (10)
+### Text-to-speech (19)
 
 #### OpenRouter
 
@@ -213,7 +228,21 @@ _129 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 |---|---|---|
 | [Voxtral Mini TTS 2603](https://freetier-radar.marcelkanters.workers.dev/models/mistral/voxtral-mini-tts-2603/) | `voxtral-mini-tts-2603` | 🟢 |
 
-### Speech-to-text (6)
+#### ElevenLabs (Free plan)
+
+| Model | ID | Last test |
+|---|---|---|
+| [Eleven Flash v2](https://freetier-radar.marcelkanters.workers.dev/models/elevenlabs/eleven-flash-v2/) | `eleven_flash_v2` | – |
+| [Eleven Flash v2.5](https://freetier-radar.marcelkanters.workers.dev/models/elevenlabs/eleven-flash-v2-5/) | `eleven_flash_v2_5` | – |
+| [Eleven Multilingual v2](https://freetier-radar.marcelkanters.workers.dev/models/elevenlabs/eleven-multilingual-v2/) | `eleven_multilingual_v2` | – |
+| [Eleven Turbo v2](https://freetier-radar.marcelkanters.workers.dev/models/elevenlabs/eleven-turbo-v2/) | `eleven_turbo_v2` | – |
+| [Eleven Turbo v2.5](https://freetier-radar.marcelkanters.workers.dev/models/elevenlabs/eleven-turbo-v2-5/) | `eleven_turbo_v2_5` | – |
+| [Eleven v3](https://freetier-radar.marcelkanters.workers.dev/models/elevenlabs/eleven-v3/) | `eleven_v3` | – |
+| [Eleven v3 Conversational](https://freetier-radar.marcelkanters.workers.dev/models/elevenlabs/eleven-v3-conversational/) | `eleven_v3_conversational` | – |
+| [Eleven v4](https://freetier-radar.marcelkanters.workers.dev/models/elevenlabs/eleven-v4/) | `eleven_v4` | – |
+| [Eleven v4 Turbo](https://freetier-radar.marcelkanters.workers.dev/models/elevenlabs/eleven-v4-turbo/) | `eleven_v4_turbo` | – |
+
+### Speech-to-text (8)
 
 #### Groq
 
@@ -240,6 +269,18 @@ _129 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | Model | ID | Last test |
 |---|---|---|
 | [Voxtral Mini 2602](https://freetier-radar.marcelkanters.workers.dev/models/mistral/voxtral-mini-2602/) | `voxtral-mini-2602` | 🟢 |
+
+#### Cohere (trial key)
+
+| Model | ID | Last test |
+|---|---|---|
+| [cohere-transcribe-03-2026](https://freetier-radar.marcelkanters.workers.dev/models/cohere/cohere-transcribe-03-2026/) | `cohere-transcribe-03-2026` | – |
+
+#### ElevenLabs (Free plan)
+
+| Model | ID | Last test |
+|---|---|---|
+| [Scribe v2](https://freetier-radar.marcelkanters.workers.dev/models/elevenlabs/scribe-v2/) | `scribe_v2` | – |
 
 ### Image (9)
 
