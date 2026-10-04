@@ -11,11 +11,11 @@ change history and ready-to-paste Cline settings.
 ## The list
 
 <!-- LIST:START -->
-_174 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
+_176 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
 
 🟢 responded to the latest daily test · 🟡 rate-limited or slow · 🔴 failed · 🤖 agent-ready (tool calling, ≥64k context, answered every test on 5 of the last 7 days)
 
-### Chat (138)
+### Chat (140)
 
 #### OpenRouter
 
@@ -181,6 +181,13 @@ _174 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [command-r-plus-08-2024](https://freetier-radar.marcelkanters.workers.dev/models/cohere/command-r-plus-08-2024/) | `command-r-plus-08-2024` | 128k | yes | 🟢 |  |
 | [command-r7b-12-2024](https://freetier-radar.marcelkanters.workers.dev/models/cohere/command-r7b-12-2024/) | `command-r7b-12-2024` | 132k | yes | 🟢 |  |
 | [north-mini-code-1-0](https://freetier-radar.marcelkanters.workers.dev/models/cohere/north-mini-code-1-0/) | `north-mini-code-1-0` | 436k | yes | 🟢 |  |
+
+#### Hetzner Inference API (experiment) ⚠ evaluation only
+
+| Model | ID | Context | Tools | Last test | Agent |
+|---|---|---|---|---|---|
+| [Qwen3.6-35B-A3B-FP8](https://freetier-radar.marcelkanters.workers.dev/models/hetzner/qwen-qwen3-6-35b-a3b-fp8/) | `Qwen/Qwen3.6-35B-A3B-FP8` | 262k | ? | – |  |
+| [Qwen3.8-27B](https://freetier-radar.marcelkanters.workers.dev/models/hetzner/qwen3-8-27b/) | `Qwen3.8-27B` | 262k | ? | – |  |
 
 #### Requesty (free models)
 
