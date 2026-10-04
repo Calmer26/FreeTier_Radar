@@ -12,7 +12,8 @@ import { scoresFor, type AliasFile, type ArenaFile, type ArenaScores } from "../
 import { borrowedContext, siblingIds } from "../../pipeline/siblings";
 import type { ShowcaseFile } from "../../pipeline/showcase";
 import type { VoicesFile } from "../../pipeline/voices";
-import { PROVIDERS } from "../../pipeline/providers";
+import { effectiveLimits } from "../../pipeline/limits";
+import { MODEL_RATE_LIMITS, PROVIDERS } from "../../pipeline/providers";
 import { isPaidOnly, isUnreachable } from "../../pipeline/reachability";
 import { withDefaults } from "../../pipeline/store-defaults";
 import type { FreeApp, JsonResult, Offer, ProviderId, RateLimits, Resource, ResourceEvent, SponsorFile, TestHistory, TestResult, ToolResult } from "../../pipeline/types";
@@ -37,7 +38,7 @@ export interface ModelView extends Resource {
   jsonTests: JsonResult[];
   lastTest: TestResult | null;
   agent: AgentReadiness;
-  /** Documented provider limits, or limits read from response headers. */
+  /** Documented provider limits, or the model's documented and header-read limits (`effectiveLimits`). */
   limits: RateLimits | null;
   href: string;
   /** A page is indexed once it has a test result; before that it is noindex. */
@@ -90,7 +91,7 @@ export const models: ModelView[] = withContext
       jsonTests: tests.json_results?.[r.id] ?? [],
       lastTest: history.at(-1) ?? null,
       agent: agentReadiness(r, history, toolTests, multiToolTests),
-      limits: r.rate_limits ?? tests.observed_limits[r.id] ?? null,
+      limits: effectiveLimits(r.rate_limits, MODEL_RATE_LIMITS[r.id], tests.observed_limits[r.id]),
       href: `/models/${r.provider}/${r.slug}/`,
       indexable: history.length > 0,
       unreachable: isUnreachable(history),

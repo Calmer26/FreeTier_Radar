@@ -46,6 +46,17 @@ describe("workingFeed", () => {
     expect(feed.schema_version).toBe(1);
   });
 
+  it("always publishes limits with tpm and tpd, null when unknown", () => {
+    const limited = workingFeed(
+      [model("known", { limits: { rpd: 1_000, tpm: 8_000, tpd: 200_000, source: "observed (response headers)" } }), model("unknown")],
+      "https://example.dev",
+      "2026-09-30T00:00:00Z",
+    );
+    const byId = Object.fromEntries(limited.lists.chat.map((m) => [m.model_id, m.limits]));
+    expect(byId.known).toEqual({ rpm: null, rph: null, rpd: 1_000, tpm: 8_000, tpd: 200_000, note: null, source: "observed (response headers)" });
+    expect(byId.unknown).toEqual({ rpm: null, rph: null, rpd: null, tpm: null, tpd: null, note: null, source: null });
+  });
+
   it("keeps only places an app can use that answered the latest test, most reliable first", () => {
     expect(feed.lists.chat.map((m) => m.model_id)).toEqual(["steady", "eyes", "flaky"]);
     expect(feed.lists.tts.map((m) => m.model_id)).toEqual(["voice"]);

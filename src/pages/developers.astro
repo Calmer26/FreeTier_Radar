@@ -77,8 +77,18 @@ const sample = JSON.stringify(feed.lists.agent[0] ?? feed.lists.chat[0] ?? {}, n
       put your account id there.
     </p>
     <p>
-      <code>schema_version</code> (now {FEED_SCHEMA_VERSION}) goes up when a field is removed, renamed or changes
-      meaning. New fields can appear without a bump, so ignore fields you don't know.
+      <code>schema_version</code> (now {FEED_SCHEMA_VERSION}) goes up only for a breaking change: a field removed,
+      renamed, or changing type or meaning. Added fields don't bump it, so ignore fields you don't know.
+    </p>
+    <p>
+      <code>limits</code> is always an object: <code>rpm</code>, <code>rph</code>, <code>rpd</code> (requests per
+      minute, hour, day), <code>tpm</code>, <code>tpd</code> (tokens per minute, day), plus <code>note</code> and
+      <code>source</code>. A number is null when it's unknown: the provider doesn't publish it and we haven't seen it
+      in response headers. Null never means unlimited. Numbers come only from the provider's own page
+      (<code>source</code> is its URL) or from the rate-limit headers on our daily test request
+      (<code>"observed (response headers)"</code>); when both apply, the headers win for the fields they carry. Some
+      allowances aren't requests or tokens (Cloudflare's Neurons, monthly credits): those are in <code>note</code>.
+      Read <code>limits</code> together with <code>limit_scope</code>.
     </p>
     <p>
       Chat entries carry three test records over the last {RANKING_WINDOW_DAYS} days, each as
@@ -105,7 +115,7 @@ const sample = JSON.stringify(feed.lists.agent[0] ?? feed.lists.chat[0] ?? {}, n
       <li>"Answered the test" means it replied to one small request at test time: not a promise it's up all day. That's why the examples fall back.</li>
       <li><code>usage_terms: "non-commercial"</code> (ElevenLabs' Free plan) means personal projects only, not a product.</li>
       <li>Check <code>data_logging</code> before sending private data: several free providers may use prompts to improve their models.</li>
-      <li>Limits are per provider; <code>limit_scope: "shared"</code> means all of that provider's free models share one allowance, so falling back within the same provider may not help.</li>
+      <li>Limits apply to your own key, per provider or per model; <code>limit_scope: "shared"</code> means all of that provider's free models share one allowance, so falling back within the same provider may not help.</li>
     </ul>
   </div>
 </Base>

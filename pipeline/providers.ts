@@ -482,6 +482,27 @@ export const PROVIDERS: Record<ProviderId, ProviderInfo> = {
   },
 };
 
+/**
+ * Limits a provider publishes per model, keyed by resource id. Same rule as above: only
+ * numbers read on the provider's own page, with its URL and date. Merged with the limits
+ * the daily test reads from response headers (`effectiveLimits`); not written to resources.
+ */
+const GROQ_LIMITS = "https://console.groq.com/docs/rate-limits";
+// console.groq.com/docs/rate-limits, checked 2026-10-04 (its RPD and TPM match our free key's headers).
+const groqChat: RateLimits = { rpm: 30, rpd: 1_000, tpm: 8_000, tpd: 200_000, source: GROQ_LIMITS };
+const groqOrpheus: RateLimits = { rpm: 10, rpd: 100, tpm: 1_200, tpd: 3_600, source: GROQ_LIMITS };
+const groqWhisper: RateLimits = { rpm: 20, rpd: 2_000, note: "7,200 audio seconds an hour, 28,800 a day.", source: GROQ_LIMITS };
+
+export const MODEL_RATE_LIMITS: Partial<Record<string, RateLimits>> = {
+  "groq/openai/gpt-oss-120b": groqChat,
+  "groq/openai/gpt-oss-20b": groqChat,
+  "groq/qwen/qwen3.8-27b": groqChat,
+  "groq/canopylabs/orpheus-v1-english": groqOrpheus,
+  "groq/canopylabs/orpheus-arabic-saudi": groqOrpheus,
+  "groq/whisper-large-v3": groqWhisper,
+  "groq/whisper-large-v3-turbo": groqWhisper,
+};
+
 /** The API version header Cartesia requires (docs.cartesia.ai, checked 2026-10-03). */
 export const CARTESIA_VERSION = "2026-08-14";
 

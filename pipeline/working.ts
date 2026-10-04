@@ -10,6 +10,7 @@
 import { toolStats, AGENT_MIN_CONTEXT } from "./agent-ready";
 import type { ArenaScores } from "./arena";
 import { usableNow, type FamilyMember } from "./families";
+import { feedLimits, type FeedLimits } from "./limits";
 import { PROVIDERS } from "./providers";
 import { reliability, RANKING_WINDOW_DAYS } from "./rankings";
 import type { DataLogging, JsonResult, LimitScope, ModelKind, RateLimits, ToolResult, UsageTerms } from "./types";
@@ -50,7 +51,8 @@ export interface WorkingModel {
    */
   json_schema: { passed: number; of: number; response_format: JsonResult["mode"] | null } | null;
   last_test_at: string;
-  limits: RateLimits | null;
+  /** Always an object; each number is null when unknown (not published, not seen in headers). */
+  limits: FeedLimits;
   limit_scope: LimitScope;
   /** "non-commercial": fine for personal projects, not for a product (ElevenLabs' Free plan). */
   usage_terms: UsageTerms;
@@ -97,7 +99,7 @@ function entry(m: WorkingInput, siteUrl: string): WorkingModel {
     multi_tool_calls: passCounts(m, m.multiToolTests),
     json_schema: json && { ...json, response_format: m.jsonTests.findLast((t) => t.status !== "error")?.mode ?? null },
     last_test_at: m.tests.at(-1)!.at,
-    limits: m.limits,
+    limits: feedLimits(m.limits),
     limit_scope: m.limit_scope,
     usage_terms: m.usage_terms,
     data_logging: m.data_logging,
@@ -126,8 +128,8 @@ const agentOk = (m: WorkingInput) =>
   toolShare(m) >= 0.5 && (multiShare(m) ?? 1) >= 0.5 && (m.context_length ?? 0) >= AGENT_MIN_CONTEXT;
 
 /**
- * Bumped when a field is removed, renamed or changes meaning; new fields don't bump it.
- * Documented on /developers/.
+ * Bumped only for a breaking change: a field removed, renamed, or changing type or
+ * meaning. Added fields don't bump it. Documented on /developers/.
  */
 export const FEED_SCHEMA_VERSION = 1;
 

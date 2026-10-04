@@ -9,7 +9,7 @@ code there was copied and adapted, not shared.
 
 - `pipeline/`: data pipeline (TypeScript, run with tsx). Pure logic (`diff.ts`, `agent-ready.ts`,
   `rankings.ts`, `roundup.ts`, `watch.ts`, `arena.ts`, `siblings.ts`, `reachability.ts`, `cloudflare-pricing.ts`,
-  `showcase.ts`, `probe.ts` helpers, adapter `map*` functions) has tests next to it. Entry points:
+  `showcase.ts`, `limits.ts`, `probe.ts` helpers, adapter `map*` functions) has tests next to it. Entry points:
   `run-discovery.ts`, `run-tests.ts`, `run-watch.ts`, `run-roundup.ts`, `run-arena.ts`, `run-showcase.ts`.
 - `data/`: the database. JSON in git, written only by the pipeline, except the hand-kept
   `sponsor.json`, `offers/ai/*.json` and `apps/*.json`. History = git log. Never store snapshots or full API
