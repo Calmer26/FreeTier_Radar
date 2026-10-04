@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-04T06:11:23.889Z",
+  "updated_at": "2026-10-04T06:24:05.427Z",
   "results": {
     "cloudflare/@cf/aisingapore/gemma-sea-lion-v4-27b-it": [
       {
@@ -6929,6 +6929,83 @@
         "latency_ms": 96
       }
     ],
+    "requesty/google/gemma-4-31b-it": [
+      {
+        "at": "2026-10-04T06:24:05.431Z",
+        "status": "responded",
+        "latency_ms": 1369
+      }
+    ],
+    "requesty/mistral/leanstral-1-5": [
+      {
+        "at": "2026-10-04T06:24:13.299Z",
+        "status": "responded",
+        "latency_ms": 409
+      }
+    ],
+    "requesty/novita/inclusionai/ling-3.0-tiny": [
+      {
+        "at": "2026-10-04T06:24:18.401Z",
+        "status": "gone",
+        "latency_ms": 477
+      }
+    ],
+    "requesty/nvidia/muse-glimmer-30b": [
+      {
+        "at": "2026-10-04T06:24:20.879Z",
+        "status": "responded",
+        "latency_ms": 794
+      }
+    ],
+    "requesty/nvidia/nemotron-3-nano-30b-a3b": [
+      {
+        "at": "2026-10-04T06:24:29.796Z",
+        "status": "gone",
+        "latency_ms": 107
+      }
+    ],
+    "requesty/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning": [
+      {
+        "at": "2026-10-04T06:24:31.904Z",
+        "status": "responded",
+        "latency_ms": 921
+      }
+    ],
+    "requesty/nvidia/nemotron-3-super-120b-a12b": [
+      {
+        "at": "2026-10-04T06:24:36.964Z",
+        "status": "responded",
+        "latency_ms": 448
+      }
+    ],
+    "requesty/nvidia/nemotron-3-ultra-550b-a55b": [
+      {
+        "at": "2026-10-04T06:24:42.041Z",
+        "status": "responded",
+        "latency_ms": 694
+      }
+    ],
+    "requesty/nvidia/nemotron-3.5-lightning-30b-a3b": [
+      {
+        "at": "2026-10-04T06:24:49.145Z",
+        "status": "responded",
+        "latency_ms": 441
+      }
+    ],
+    "requesty/poolside/laguna-m.1": [
+      {
+        "at": "2026-10-04T06:24:54.669Z",
+        "status": "gone",
+        "latency_ms": 385
+      }
+    ],
+    "requesty/poolside/laguna-xs.2": [
+      {
+        "at": "2026-10-04T06:24:57.055Z",
+        "status": "gone",
+        "latency_ms": 282
+      }
+    ],
     "zai/glm-4.5-flash": [
       {
         "at": "2026-09-29T20:13:34.780Z",
@@ -9236,6 +9313,55 @@
         "at": "2026-10-04T06:13:23.299Z",
         "status": "pass",
         "latency_ms": 630
+      }
+    ],
+    "requesty/google/gemma-4-31b-it": [
+      {
+        "at": "2026-10-04T06:24:08.802Z",
+        "status": "pass",
+        "latency_ms": 2495
+      }
+    ],
+    "requesty/mistral/leanstral-1-5": [
+      {
+        "at": "2026-10-04T06:24:15.709Z",
+        "status": "pass",
+        "latency_ms": 691
+      }
+    ],
+    "requesty/nvidia/muse-glimmer-30b": [
+      {
+        "at": "2026-10-04T06:24:23.675Z",
+        "status": "pass",
+        "latency_ms": 4119
+      }
+    ],
+    "requesty/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning": [
+      {
+        "at": "2026-10-04T06:24:34.826Z",
+        "status": "error",
+        "latency_ms": 139
+      }
+    ],
+    "requesty/nvidia/nemotron-3-super-120b-a12b": [
+      {
+        "at": "2026-10-04T06:24:39.413Z",
+        "status": "pass",
+        "latency_ms": 627
+      }
+    ],
+    "requesty/nvidia/nemotron-3-ultra-550b-a55b": [
+      {
+        "at": "2026-10-04T06:24:44.735Z",
+        "status": "pass",
+        "latency_ms": 2409
+      }
+    ],
+    "requesty/nvidia/nemotron-3.5-lightning-30b-a3b": [
+      {
+        "at": "2026-10-04T06:24:51.587Z",
+        "status": "pass",
+        "latency_ms": 1082
       }
     ],
     "zai/glm-4.5-flash": [

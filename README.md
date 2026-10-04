@@ -186,17 +186,17 @@ _174 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 
 | Model | ID | Context | Tools | Last test | Agent |
 |---|---|---|---|---|---|
-| [gemma-4-31b-it](https://freetier-radar.marcelkanters.workers.dev/models/requesty/google-gemma-4-31b-it/) | `google/gemma-4-31b-it` | 262k | yes | – |  |
-| [laguna-m.1](https://freetier-radar.marcelkanters.workers.dev/models/requesty/poolside-laguna-m-1/) | `poolside/laguna-m.1` | 33k | no | – |  |
-| [laguna-xs.2](https://freetier-radar.marcelkanters.workers.dev/models/requesty/poolside-laguna-xs-2/) | `poolside/laguna-xs.2` | 33k | no | – |  |
-| [leanstral-1-5](https://freetier-radar.marcelkanters.workers.dev/models/requesty/mistral-leanstral-1-5/) | `mistral/leanstral-1-5` | 262k | yes | – |  |
-| [ling-3.0-tiny](https://freetier-radar.marcelkanters.workers.dev/models/requesty/novita-inclusionai-ling-3-0-tiny/) | `novita/inclusionai/ling-3.0-tiny` | 262k | yes | – |  |
-| [muse-glimmer-30b](https://freetier-radar.marcelkanters.workers.dev/models/requesty/nvidia-muse-glimmer-30b/) | `nvidia/muse-glimmer-30b` | 131k | yes | – |  |
-| [nemotron-3-nano-30b-a3b](https://freetier-radar.marcelkanters.workers.dev/models/requesty/nvidia-nemotron-3-nano-30b-a3b/) | `nvidia/nemotron-3-nano-30b-a3b` | 262k | yes | – |  |
-| [nemotron-3-nano-omni-30b-a3b-reasoning](https://freetier-radar.marcelkanters.workers.dev/models/requesty/nvidia-nemotron-3-nano-omni-30b-a3b-reasoning/) | `nvidia/nemotron-3-nano-omni-30b-a3b-reasoning` | 131k | yes | – |  |
-| [nemotron-3-super-120b-a12b](https://freetier-radar.marcelkanters.workers.dev/models/requesty/nvidia-nemotron-3-super-120b-a12b/) | `nvidia/nemotron-3-super-120b-a12b` | 1M | yes | – |  |
-| [nemotron-3-ultra-550b-a55b](https://freetier-radar.marcelkanters.workers.dev/models/requesty/nvidia-nemotron-3-ultra-550b-a55b/) | `nvidia/nemotron-3-ultra-550b-a55b` | 1M | yes | – |  |
-| [nemotron-3.5-lightning-30b-a3b](https://freetier-radar.marcelkanters.workers.dev/models/requesty/nvidia-nemotron-3-5-lightning-30b-a3b/) | `nvidia/nemotron-3.5-lightning-30b-a3b` | 1M | yes | – |  |
+| [gemma-4-31b-it](https://freetier-radar.marcelkanters.workers.dev/models/requesty/google-gemma-4-31b-it/) | `google/gemma-4-31b-it` | 262k | yes | 🟢 |  |
+| [laguna-m.1](https://freetier-radar.marcelkanters.workers.dev/models/requesty/poolside-laguna-m-1/) | `poolside/laguna-m.1` | 33k | no | 🔴 |  |
+| [laguna-xs.2](https://freetier-radar.marcelkanters.workers.dev/models/requesty/poolside-laguna-xs-2/) | `poolside/laguna-xs.2` | 33k | no | 🔴 |  |
+| [leanstral-1-5](https://freetier-radar.marcelkanters.workers.dev/models/requesty/mistral-leanstral-1-5/) | `mistral/leanstral-1-5` | 262k | yes | 🟢 |  |
+| [ling-3.0-tiny](https://freetier-radar.marcelkanters.workers.dev/models/requesty/novita-inclusionai-ling-3-0-tiny/) | `novita/inclusionai/ling-3.0-tiny` | 262k | yes | 🔴 |  |
+| [muse-glimmer-30b](https://freetier-radar.marcelkanters.workers.dev/models/requesty/nvidia-muse-glimmer-30b/) | `nvidia/muse-glimmer-30b` | 131k | yes | 🟢 |  |
+| [nemotron-3-nano-30b-a3b](https://freetier-radar.marcelkanters.workers.dev/models/requesty/nvidia-nemotron-3-nano-30b-a3b/) | `nvidia/nemotron-3-nano-30b-a3b` | 262k | yes | 🔴 |  |
+| [nemotron-3-nano-omni-30b-a3b-reasoning](https://freetier-radar.marcelkanters.workers.dev/models/requesty/nvidia-nemotron-3-nano-omni-30b-a3b-reasoning/) | `nvidia/nemotron-3-nano-omni-30b-a3b-reasoning` | 131k | yes | 🟢 |  |
+| [nemotron-3-super-120b-a12b](https://freetier-radar.marcelkanters.workers.dev/models/requesty/nvidia-nemotron-3-super-120b-a12b/) | `nvidia/nemotron-3-super-120b-a12b` | 1M | yes | 🟢 |  |
+| [nemotron-3-ultra-550b-a55b](https://freetier-radar.marcelkanters.workers.dev/models/requesty/nvidia-nemotron-3-ultra-550b-a55b/) | `nvidia/nemotron-3-ultra-550b-a55b` | 1M | yes | 🟢 |  |
+| [nemotron-3.5-lightning-30b-a3b](https://freetier-radar.marcelkanters.workers.dev/models/requesty/nvidia-nemotron-3-5-lightning-30b-a3b/) | `nvidia/nemotron-3.5-lightning-30b-a3b` | 1M | yes | 🟢 |  |
 
 #### OpenCode Zen (free promotion)
 
