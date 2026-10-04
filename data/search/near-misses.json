@@ -1,0 +1,20 @@
+[
+  {
+    "name": "SerpApi",
+    "url": "https://serpapi.com",
+    "reason": "250 free searches a month (50 an hour): below our bar of about 300 a month.",
+    "source": { "url": "https://serpapi.com/pricing", "checked": "2026-10-04" }
+  },
+  {
+    "name": "Google Custom Search JSON API",
+    "url": "https://developers.google.com/custom-search/v1/overview",
+    "reason": "100 free queries a day, but Google says the API is not available for new customers.",
+    "source": { "url": "https://developers.google.com/custom-search/v1/overview", "checked": "2026-10-04" }
+  },
+  {
+    "name": "LangSearch",
+    "url": "https://langsearch.com",
+    "reason": "A free Web Search API with a daily token allowance (reset at 00:00 UTC), but its pricing page gives no number, so we can't check it against the bar.",
+    "source": { "url": "https://langsearch.com/pricing", "checked": "2026-10-04" }
+  }
+]

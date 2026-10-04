@@ -7,7 +7,8 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { agentReadiness } from "../pipeline/agent-ready";
 import { PROVIDER_IDS, PROVIDERS } from "../pipeline/providers";
-import { readResources, readTests } from "../pipeline/store";
+import { readResources, readSearchApis, readSearchTests, readTests } from "../pipeline/store";
+import { freeQueriesPerMonth, searchOrder } from "../pipeline/search";
 import { isPaidOnly, isUnreachable } from "../pipeline/reachability";
 import { formatContext, KIND_LABELS } from "../pipeline/templates";
 import { MODEL_KINDS, type Resource } from "../pipeline/types";
@@ -52,6 +53,21 @@ const sections = MODEL_KINDS.flatMap((kind) => {
   return [`### ${KIND_LABELS[kind]} (${ofKind.length})`, "", ...byProvider];
 });
 
+const searchTests = readSearchTests();
+const searchApis = readSearchApis().map((s) => ({ ...s, tests: searchTests.results[s.id] ?? [] })).sort(searchOrder);
+const searchStatus = (tests: typeof searchApis[number]["tests"]) => {
+  const last = tests.at(-1);
+  return !last ? "–" : last.status === "responded" ? "🟢" : last.status === "rate_limited" || last.status === "slow" ? "🟡" : "🔴";
+};
+const searchSection = searchApis.length === 0 ? [] : [
+  `### Free web search APIs (${searchApis.length})`,
+  "",
+  "| API | Free searches a month | Card | Last test |\n|---|---|---|---|",
+  ...searchApis.map((s) =>
+    `| [${s.name}](${SITE.url}/search-apis/${s.id}/) | ${freeQueriesPerMonth(s).toLocaleString("en-US")} | ${s.card_required === "yes" ? "required" : s.card_required === "no" ? "no" : "?"} | ${searchStatus(s.tests)} |`),
+  "",
+];
+
 const body = [
   START,
   `_${resources.length} free models. Updated automatically; see [${SITE.name}](${SITE.url}) for filters, limits and change history._`,
@@ -59,6 +75,7 @@ const body = [
   "🟢 responded to the latest daily test · 🟡 rate-limited or slow · 🔴 failed · 🤖 agent-ready (tool calling, ≥64k context, answered every test on 5 of the last 7 days)",
   "",
   ...sections,
+  ...searchSection,
   END,
 ].join("\n");
 

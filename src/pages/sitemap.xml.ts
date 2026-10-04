@@ -1,7 +1,7 @@
 import { SITE } from "../../site.config";
 import { PROVIDER_IDS } from "../../pipeline/providers";
 import { rank, RANKINGS } from "../../pipeline/rankings";
-import { activeModels } from "../lib/data";
+import { activeModels, searchApis } from "../lib/data";
 import { roundups } from "../lib/roundups";
 import { sharedFamilies } from "../lib/families";
 
@@ -13,7 +13,7 @@ import { sharedFamilies } from "../lib/families";
 export function GET() {
   const url = (path: string) => new URL(path, SITE.url).href;
   const entries: Array<{ loc: string; lastmod?: string }> = [
-    "/", "/changes/", "/rankings/", "/cline/", "/image-models/", "/voice-models/", "/free-apps/", "/free/", "/developers/", "/offers/", "/providers/", "/roundups/", "/methodology/", "/sponsor/",
+    "/", "/changes/", "/rankings/", "/cline/", "/image-models/", "/voice-models/", "/free-apps/", "/free/", "/developers/", "/offers/", "/search-apis/", "/providers/", "/roundups/", "/methodology/", "/sponsor/",
   ].map((p) => ({ loc: url(p) }));
 
   const inputs = activeModels.map((m) => ({ r: m, history: m.tests, tools: m.toolTests, multiTools: m.multiToolTests, arena: m.arena }));
@@ -27,6 +27,8 @@ export function GET() {
     entries.push({ loc: url(m.href), lastmod: (m.lastTest?.at ?? m.last_seen).slice(0, 10) });
   }
   for (const f of sharedFamilies) if (f.members.some((m) => m.indexable)) entries.push({ loc: url(`/free/${f.slug}/`) });
+  // Search API pages are noindex until their first test, like model pages.
+  for (const s of searchApis) if (s.tests.length) entries.push({ loc: url(`/search-apis/${s.id}/`), lastmod: s.tests.at(-1)!.at.slice(0, 10) });
   for (const r of roundups) entries.push({ loc: url(r.href), lastmod: r.frontmatter.end });
 
   const body = entries

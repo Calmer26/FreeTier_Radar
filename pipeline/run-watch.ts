@@ -9,7 +9,7 @@
 
 import { mkdirSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { readApps, readOffers, readWatch, writeWatch } from "./store";
+import { readApps, readOffers, readSearchApis, readWatch, writeWatch } from "./store";
 import { extractText, hashText, nextWatchState, relevantLines } from "./watch";
 
 const OUT_DIR = join(process.cwd(), "out");
@@ -20,9 +20,10 @@ async function main() {
   const changed: string[] = [];
   const failed: string[] = [];
 
-  // Offers and free apps: same check, keyed by id (app ids are prefixed to keep them apart).
+  // Offers, free apps and search APIs: same check, keyed by id (app and search ids are prefixed to keep them apart).
   const records = [
-    ...readOffers().map((o) => ({ id: o.id, name: o.name, watch_url: o.watch_url, verified_on: o.verified_on, file: `data/offers/ai/${o.id}.json` })),
+    ...readOffers().map((o) => ({ id: o.id, name: o.name, watch_url: o.watch_url, verified_on: o.verified_on, file: `data/offers/${o.category ?? "ai"}/${o.id}.json` })),
+    ...readSearchApis().map((s) => ({ id: `search:${s.id}`, name: s.name, watch_url: s.watch_url, verified_on: s.verified_on, file: `data/search/apis/${s.id}.json` })),
     ...readApps().map((a) => ({ id: `app:${a.id}`, name: a.name, watch_url: a.watch_url, verified_on: a.verified_on, file: `data/apps/${a.id}.json` })),
   ];
   for (const offer of records.filter((o) => o.watch_url)) {

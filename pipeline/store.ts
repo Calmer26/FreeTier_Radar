@@ -9,7 +9,7 @@ import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 
 import { dirname, join } from "node:path";
 import { PROVIDER_IDS } from "./providers";
 import { withDefaults } from "./store-defaults";
-import type { FreeApp, Offer, ProviderId, Resource, ResourceEvent, SourcesFile, TestHistory, WatchState } from "./types";
+import type { FreeApp, Offer, ProviderId, Resource, ResourceEvent, SearchApi, SearchNearMiss, SearchTestFile, SourcesFile, TestHistory, WatchState } from "./types";
 
 /** Resolved from the project root: scripts and the Astro build both run there. */
 export const DATA_DIR = join(process.cwd(), "data");
@@ -18,7 +18,11 @@ const resourcesFile = (p: ProviderId) => join(DATA_DIR, "resources", "ai", `${p}
 const eventsDir = join(DATA_DIR, "events");
 const testsFile = join(DATA_DIR, "tests", "history.json");
 const sourcesFile = join(DATA_DIR, "sources.json");
-const offersDir = join(DATA_DIR, "offers", "ai");
+/** AI offers, and one-time web search API credits. */
+const offersDirs = [join(DATA_DIR, "offers", "ai"), join(DATA_DIR, "offers", "search")];
+const searchApisDir = join(DATA_DIR, "search", "apis");
+const searchNearMissesFile = join(DATA_DIR, "search", "near-misses.json");
+const searchTestsFile = join(DATA_DIR, "tests", "search.json");
 const appsDir = join(DATA_DIR, "apps");
 const watchFile = join(DATA_DIR, "watch.json");
 
@@ -95,21 +99,38 @@ export function writeSources(sources: SourcesFile): void {
   writeJsonIfChanged(sourcesFile, sources);
 }
 
-/** Curated offers, one file per offer, sorted by id. */
-export function readOffers(): Offer[] {
-  if (!existsSync(offersDir)) return [];
-  return readdirSync(offersDir)
+function readDir<T>(dir: string): T[] {
+  if (!existsSync(dir)) return [];
+  return readdirSync(dir)
     .filter((f) => f.endsWith(".json"))
     .sort()
-    .map((f) => JSON.parse(readFileSync(join(offersDir, f), "utf8")) as Offer);
+    .map((f) => JSON.parse(readFileSync(join(dir, f), "utf8")) as T);
+}
+
+/** Curated offers (AI, then search), one file per offer, sorted by id within each. */
+export function readOffers(): Offer[] {
+  return offersDirs.flatMap((dir) => readDir<Offer>(dir));
+}
+
+/** Hand-kept search APIs, one file each (data/search/apis/<id>.json). */
+export function readSearchApis(): SearchApi[] {
+  return readDir<SearchApi>(searchApisDir);
+}
+
+export function readSearchNearMisses(): SearchNearMiss[] {
+  return readJson<SearchNearMiss[]>(searchNearMissesFile, []);
+}
+
+export function readSearchTests(): SearchTestFile {
+  return readJson<SearchTestFile>(searchTestsFile, { updated_at: null, results: {} });
+}
+
+export function writeSearchTests(file: SearchTestFile): void {
+  writeJsonIfChanged(searchTestsFile, file);
 }
 
 export function readApps(): FreeApp[] {
-  if (!existsSync(appsDir)) return [];
-  return readdirSync(appsDir)
-    .filter((f) => f.endsWith(".json"))
-    .sort()
-    .map((f) => JSON.parse(readFileSync(join(appsDir, f), "utf8")) as FreeApp);
+  return readDir<FreeApp>(appsDir);
 }
 
 export function readWatch(): Record<string, WatchState> {

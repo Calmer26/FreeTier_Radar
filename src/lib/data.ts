@@ -16,7 +16,8 @@ import { effectiveLimits } from "../../pipeline/limits";
 import { MODEL_RATE_LIMITS, PROVIDERS } from "../../pipeline/providers";
 import { isPaidOnly, isUnreachable } from "../../pipeline/reachability";
 import { withDefaults } from "../../pipeline/store-defaults";
-import type { FreeApp, JsonResult, Offer, ProviderId, RateLimits, Resource, ResourceEvent, SponsorFile, TestHistory, TestResult, ToolResult } from "../../pipeline/types";
+import { searchEvents, searchOrder, type SearchView } from "../../pipeline/search";
+import type { FreeApp, JsonResult, Offer, ProviderId, RateLimits, Resource, ResourceEvent, SearchApi, SearchNearMiss, SearchTestFile, SponsorFile, TestHistory, TestResult, ToolResult } from "../../pipeline/types";
 
 const resourceFiles = import.meta.glob<Resource[]>("../../data/resources/ai/*.json", { eager: true, import: "default" });
 const eventFiles = import.meta.glob<string>("../../data/events/*.jsonl", { eager: true, query: "?raw", import: "default" });
@@ -25,7 +26,10 @@ const arenaFiles = import.meta.glob<ArenaFile>("../../data/benchmarks/arena.json
 const aliasFiles = import.meta.glob<AliasFile>("../../data/aliases.json", { eager: true, import: "default" });
 const showcaseFiles = import.meta.glob<ShowcaseFile>("../../data/showcase.json", { eager: true, import: "default" });
 const voiceFiles = import.meta.glob<VoicesFile>("../../data/voices.json", { eager: true, import: "default" });
-const offerFiles = import.meta.glob<Offer>("../../data/offers/ai/*.json", { eager: true, import: "default" });
+const offerFiles = import.meta.glob<Offer>(["../../data/offers/ai/*.json", "../../data/offers/search/*.json"], { eager: true, import: "default" });
+const searchApiFiles = import.meta.glob<SearchApi>("../../data/search/apis/*.json", { eager: true, import: "default" });
+const searchNearMissFiles = import.meta.glob<SearchNearMiss[]>("../../data/search/near-misses.json", { eager: true, import: "default" });
+const searchTestFiles = import.meta.glob<SearchTestFile>("../../data/tests/search.json", { eager: true, import: "default" });
 const sponsorFiles = import.meta.glob<SponsorFile>("../../data/sponsor.json", { eager: true, import: "default" });
 
 export interface ModelView extends Resource {
@@ -144,15 +148,35 @@ const offerEvents: ResourceEvent[] = offers.flatMap((o) =>
   })),
 );
 
-/** Model events (events/YYYY-MM.jsonl) and offer changes, newest first. */
+const searchTests: SearchTestFile = Object.values(searchTestFiles)[0] ?? { updated_at: null, results: {} };
+
+/** Free web search APIs (hand-kept) with their daily test history, best first. */
+export const searchApis: SearchView[] = Object.values(searchApiFiles)
+  .map((s) => ({ ...s, tests: searchTests.results[s.id] ?? [] }))
+  .sort(searchOrder);
+
+/** Search APIs we checked and left out, with the reason. */
+export const searchNearMisses: SearchNearMiss[] = Object.values(searchNearMissFiles)[0] ?? [];
+
+export const searchTestsUpdatedAt = searchTests.updated_at;
+
+/** Model events (events/YYYY-MM.jsonl), offer and search API changes, newest first. */
 export const events: ResourceEvent[] = [
   ...Object.keys(eventFiles)
     .sort()
     .flatMap((path) => eventFiles[path].split("\n").filter((line) => line.trim()).map((line) => JSON.parse(line) as ResourceEvent)),
   ...offerEvents,
+  ...searchEvents(searchApis),
 ].sort((a, b) => b.detected_at.localeCompare(a.detected_at));
 
 export const modelById = new Map(models.map((m) => [m.id, m]));
+
+/** Where an event links to on the site: the model, the offer, or the search API; null when none. */
+export function eventHref(e: Pick<ResourceEvent, "resource_id">): string | null {
+  if (e.resource_id.startsWith("offer/")) return `/offers/#${e.resource_id.slice(6)}`;
+  if (e.resource_id.startsWith("search/")) return `/search-apis/${e.resource_id.slice(7)}/`;
+  return modelById.get(e.resource_id)?.href ?? null;
+}
 
 export const providersInData = [...new Set(models.map((m) => m.provider))].map((p) => PROVIDERS[p]);
 

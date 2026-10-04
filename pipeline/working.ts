@@ -13,6 +13,7 @@ import { usableNow, type FamilyMember } from "./families";
 import { feedLimits, type FeedLimits } from "./limits";
 import { PROVIDERS } from "./providers";
 import { reliability, RANKING_WINDOW_DAYS } from "./rankings";
+import { workingSearch, type SearchView, type WorkingSearch } from "./search";
 import type { DataLogging, JsonResult, LimitScope, ModelKind, RateLimits, ToolResult, UsageTerms } from "./types";
 
 export interface WorkingInput extends FamilyMember {
@@ -138,16 +139,21 @@ export interface WorkingFeed {
   generated_at: string;
   about: string;
   lists: Record<"chat" | "agent" | "vision" | Exclude<ModelKind, "chat">, WorkingModel[]>;
+  /**
+   * Free web search APIs that answered the latest morning test, best first. Not inside
+   * `lists`: these aren't models and have their own entry shape (search.ts).
+   */
+  search: WorkingSearch[];
 }
 
-export function workingFeed(models: WorkingInput[], siteUrl: string, now: string): WorkingFeed {
+export function workingFeed(models: WorkingInput[], siteUrl: string, now: string, search: SearchView[] = []): WorkingFeed {
   const ok = models.filter(usableNow);
   const chat = ok.filter((m) => m.kind === "chat");
   const list = (xs: WorkingInput[], order = general) => [...xs].sort(order).map((m) => entry(m, siteUrl));
   return {
     schema_version: FEED_SCHEMA_VERSION,
     generated_at: now,
-    about: `Free models that answered the latest daily test, best first. Evaluation-only and Cline-only models are left out. Docs: ${new URL("/developers/", siteUrl).href}`,
+    about: `Free models (lists) and free web search APIs (search) that answered the latest daily test, best first. Evaluation-only and Cline-only models are left out. Docs: ${new URL("/developers/", siteUrl).href}`,
     lists: {
       chat: list(chat),
       agent: list(chat.filter(agentOk), agentOrder),
@@ -156,5 +162,6 @@ export function workingFeed(models: WorkingInput[], siteUrl: string, now: string
       stt: list(ok.filter((m) => m.kind === "stt")),
       image: list(ok.filter((m) => m.kind === "image")),
     },
+    search: workingSearch(search, siteUrl),
   };
 }

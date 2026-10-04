@@ -38,7 +38,7 @@ const SECTIONS: Array<{ title: string; types: ResourceEvent["event_type"][] }> =
   { title: "New free models", types: ["NEW", "RETURNED"] },
   { title: "Gone", types: ["REMOVED"] },
   { title: "Changed", types: ["CHANGED"] },
-  { title: "Free credits and quotas", types: ["OFFER"] },
+  { title: "Free credits, quotas and search APIs", types: ["OFFER"] },
 ];
 
 /** The fact list given to the intro writer, and used by the template intro. */
@@ -52,7 +52,7 @@ export function templateIntro(events: ResourceEvent[]): string {
     count(["NEW", "RETURNED"]) && `${count(["NEW", "RETURNED"])} model(s) became free`,
     count(["REMOVED"]) && `${count(["REMOVED"])} left the free tier`,
     count(["CHANGED"]) && `${count(["CHANGED"])} change(s) to limits, terms or specs`,
-    count(["OFFER"]) && `${count(["OFFER"])} update(s) to free credits and quotas`,
+    count(["OFFER"]) && `${count(["OFFER"])} update(s) to free credits, quotas and search APIs`,
   ].filter(Boolean);
   return parts.length ? `This week: ${parts.join(", ")}.` : "A quiet week: nothing changed in the free tiers we track.";
 }

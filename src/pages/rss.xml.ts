@@ -1,6 +1,6 @@
 import rss from "@astrojs/rss";
 import type { APIContext } from "astro";
-import { events, modelById } from "../lib/data";
+import { eventHref, events } from "../lib/data";
 import { SITE } from "../../site.config";
 
 export function GET(context: APIContext) {
@@ -13,7 +13,7 @@ export function GET(context: APIContext) {
       title: `${e.event_type}: ${e.name}`,
       description: e.text,
       pubDate: new Date(e.detected_at),
-      link: modelById.get(e.resource_id)?.href ?? (e.resource_id.startsWith("offer/") ? `/offers/#${e.resource_id.slice(6)}` : "/changes/"),
+      link: eventHref(e) ?? "/changes/",
       categories: [e.provider, e.event_type],
     })),
   });

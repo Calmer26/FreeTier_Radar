@@ -1,5 +1,5 @@
 ---
-import { formatDate, modelById } from "../lib/data";
+import { eventHref, formatDate } from "../lib/data";
 import type { ResourceEvent } from "../../pipeline/types";
 
 interface Props {
@@ -14,8 +14,7 @@ const { events, empty = "No changes recorded yet." } = Astro.props;
 ) : (
   <ul class="feed">
     {events.map((e) => {
-      const m = modelById.get(e.resource_id);
-      const href = m?.href ?? (e.resource_id.startsWith("offer/") ? `/offers/#${e.resource_id.slice(6)}` : null);
+      const href = eventHref(e);
       return (
         <li>
           <div>

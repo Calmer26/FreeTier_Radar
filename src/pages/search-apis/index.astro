@@ -1,0 +1,111 @@
+---
+import Base from "../../layouts/Base.astro";
+import HistoryStrip from "../../components/HistoryStrip.astro";
+import SponsorSlot from "../../components/SponsorSlot.astro";
+import TestStatus from "../../components/TestStatus.astro";
+import { formatDate, offers, searchApis, searchNearMisses } from "../../lib/data";
+import { allowanceText, cardBadge, DATA_LABEL, limitsText, queriesLine, TERMS_LABEL } from "../../lib/search";
+import { reliability } from "../../../pipeline/rankings";
+import { SEARCH_MIN_QUERIES_PER_MONTH, SEARCH_TESTS_PER_MONTH, testUsage } from "../../../pipeline/search";
+
+const searchOffers = offers.filter((o) => o.category === "search");
+const yn = (v: "yes" | "no" | "unknown") => (v === "yes" ? "yes" : v === "no" ? "no" : "?");
+const pct = (x: number) => `${Math.round(x * 100)}%`;
+const itemList = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "Free web search APIs",
+  itemListElement: searchApis.map((s, i) => ({ "@type": "ListItem", position: i + 1, name: s.name, url: new URL(`/search-apis/${s.id}/`, Astro.site).href })),
+};
+---
+<Base title="Free web search APIs" description={`Web search APIs with a free monthly allowance (Brave, Tavily, Exa, Firecrawl and more): searches per month, card, limits, terms, data use and a daily test.`} jsonLd={itemList}>
+  <h1>Free web search APIs</h1>
+  <p class="lede">
+    Search APIs your app or agent can call for free every month. Each one gets one small test search every morning.
+    The numbers come from each provider's own pages; each detail page links its source and the date we read it.
+  </p>
+  <SponsorSlot />
+
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th>API</th><th>Free</th><th>Card</th><th class="hide-sm">Limits</th><th class="hide-sm">Terms</th>
+          <th class="hide-sm">Queries</th><th class="hide-sm" title="Can a search target a country (e.g. NL) and a language (e.g. nl)?">NL / nl</th><th>Last test</th>
+        </tr>
+      </thead>
+      <tbody>
+        {searchApis.map((s) => {
+          const rel = reliability(s.tests);
+          return (
+            <tr>
+              <td>
+                <a class="model-name" href={`/search-apis/${s.id}/`}>{s.name}</a>
+                <div class="sub">{s.maker}</div>
+              </td>
+              <td class="nowrap"><strong>{queriesLine(s)}</strong><div class="sub">{allowanceText(s)}</div></td>
+              <td>{s.card_required === "yes" ? <span class="badge warn" title={s.card_note ?? undefined}>Required</span> : s.card_required === "no" ? <span class="badge">No card</span> : <span class="sub">Not stated</span>}</td>
+              <td class="hide-sm sub">{limitsText(s)}</td>
+              <td class="hide-sm sub">{TERMS_LABEL[s.usage_terms]}</td>
+              <td class="hide-sm">{s.data_logging === "logs-prompts" || s.data_logging === "may-train" ? <span class="badge warn">👁 {DATA_LABEL[s.data_logging]}</span> : <span class="sub">{DATA_LABEL[s.data_logging]}</span>}</td>
+              <td class="hide-sm nowrap">{yn(s.locale.country)} / {yn(s.locale.language)}</td>
+              <td class="nowrap">
+                <TestStatus test={s.tests.at(-1) ?? null} />
+                <div><HistoryStrip tests={s.tests} halves={["am"]} /> {rel.tested > 0 && <span class="sub">{rel.responded}/{rel.tested}</span>}</div>
+              </td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  </div>
+  <p class="sub">
+    Best first: answered our test most often over 30 days, then the larger free allowance, then faster. "Free" counts the
+    cheapest plain search. 👁: the provider keeps queries or may use them to improve its service.
+  </p>
+  {searchApis.filter((s) => s.card_required === "yes").map((s) => (
+    <p class="callout"><strong>{s.name}:</strong> {cardBadge(s)}. {s.card_note?.split(/(?<=\.)\s/).slice(1).join(" ")}</p>
+  ))}
+
+  <h2>Our test uses part of each allowance</h2>
+  <p class="sub">
+    One search each morning, about {SEARCH_TESTS_PER_MONTH} a month, with the cheapest settings: one result, no page content, no answer.
+  </p>
+  <ul>
+    {searchApis.map((s) => {
+      const u = testUsage(s);
+      return <li>{s.name}: about {u.queries} of {u.of.toLocaleString("en-US")} free searches a month ({pct(u.share)})</li>;
+    })}
+  </ul>
+
+  {searchOffers.length > 0 && (
+    <>
+      <h2>One-time credits</h2>
+      <p class="sub">Free credit that doesn't renew: fine for trying an API, not for building on. Not tested.</p>
+      <ul>
+        {searchOffers.map((o) => (
+          <li><a href={`/offers/#${o.id}`}>{o.provider}</a>: {o.amount}.{o.card_required === "no" && " No card."} <span class="sub">Checked {formatDate(o.verified_on)}.</span></li>
+        ))}
+      </ul>
+    </>
+  )}
+
+  {searchNearMisses.length > 0 && (
+    <>
+      <h2>Near misses</h2>
+      <p class="sub">Checked and left out: not tested, not ranked. The bar is a recurring allowance of about {SEARCH_MIN_QUERIES_PER_MONTH} searches a month.</p>
+      <ul>
+        {searchNearMisses.map((m) => (
+          <li><a href={m.url} rel="noopener">{m.name}</a>: {m.reason} <a class="sub" href={m.source.url} rel="noopener">Source, {formatDate(m.source.checked)}</a></li>
+        ))}
+      </ul>
+    </>
+  )}
+
+  <h2>For developers</h2>
+  <p>
+    The search APIs that answered this morning are the <code>search</code> list in the
+    <a href="/developers/">working feed</a> (<code>/api/working.json</code>). <a href="/api/search.json"><code>/api/search.json</code></a>
+    has all of them, with sources and test history.
+  </p>
+</Base>

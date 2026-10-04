@@ -1,0 +1,57 @@
+{
+  "id": "tavily",
+  "name": "Tavily Search",
+  "maker": "Tavily",
+  "url": "https://www.tavily.com",
+  "docs_url": "https://docs.tavily.com/documentation/api-reference/endpoint/search",
+  "summary": "Search built for AI agents: results come back as short content snippets ready for a prompt. 1,000 free credits every month without a card; a basic search costs 1 credit.",
+  "index": "mixed",
+  "api": {
+    "style": "tavily",
+    "endpoint": "https://api.tavily.com/search",
+    "method": "POST",
+    "auth": "Authorization: Bearer <key>"
+  },
+  "key_env": "TAVILY_API_KEY",
+  "allowance": {
+    "period": "month",
+    "amount": 1000,
+    "unit": "credits",
+    "text": "1,000 free API credits every month, no credit card required",
+    "resets": "1st of each month",
+    "source": { "url": "https://docs.tavily.com/documentation/api-credits", "checked": "2026-10-04" }
+  },
+  "cost_per_query": {
+    "basic": 1,
+    "basic_label": "Basic, fast or ultra-fast search",
+    "advanced": 2,
+    "advanced_label": "Advanced search",
+    "source": { "url": "https://docs.tavily.com/documentation/api-credits", "checked": "2026-10-04" }
+  },
+  "rate_limits": {
+    "rpm": 100,
+    "note": "Development keys: 100 requests a minute. Production keys (1,000 a minute) need a paid plan or pay-as-you-go.",
+    "source": { "url": "https://docs.tavily.com/documentation/rate-limits", "checked": "2026-10-04" }
+  },
+  "card_required": "no",
+  "card_note": null,
+  "account_required": "yes",
+  "account_note": null,
+  "usage_terms": "unknown",
+  "usage_terms_note": "The free plan gives Development keys; Production keys need a paid plan or pay-as-you-go. Tavily's terms of service haven't been checked yet.",
+  "terms_source": { "url": "https://docs.tavily.com/documentation/rate-limits", "checked": "2026-10-04" },
+  "result_storage": "unknown",
+  "data_logging": "may-train",
+  "data_logging_note": "Tavily may use parts of your query data to improve its responses to future queries, and may send queries to third-party search indexes (such as Google) when its own index can't answer.",
+  "data_logging_source": { "url": "https://www.tavily.com/privacy", "checked": "2026-10-04" },
+  "locale": {
+    "country": "yes",
+    "language": "yes",
+    "example": "\"country\": \"netherlands\", \"language\": \"nl\"",
+    "note": "Both boost matching results rather than filter; add \"filter_by_language\": true to filter by language. country works with topic \"general\" only.",
+    "source": { "url": "https://docs.tavily.com/documentation/api-reference/endpoint/search", "checked": "2026-10-04" }
+  },
+  "watch_url": "https://docs.tavily.com/documentation/api-credits",
+  "verified_on": "2026-10-04",
+  "changes": []
+}

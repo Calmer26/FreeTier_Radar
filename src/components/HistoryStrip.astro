@@ -3,6 +3,7 @@
  * The last N test days at a glance: one column per day, the morning test on top and
  * the peak-hours test below. Green answered, amber slow or rate-limited, red failed,
  * grey not callable here; an empty outline means no test in that half of the day.
+ * `halves={["am"]}` shows the morning row only (search APIs have no peak-hours test).
  */
 import { half, testDays } from "../../pipeline/test-days";
 import type { TestResult } from "../../pipeline/types";
@@ -10,8 +11,9 @@ import type { TestResult } from "../../pipeline/types";
 interface Props {
   tests: TestResult[];
   days?: number;
+  halves?: Array<"am" | "pm">;
 }
-const { tests, days = 14 } = Astro.props;
+const { tests, days = 14, halves = ["am", "pm"] } = Astro.props;
 const recent = testDays(tests).slice(-days);
 
 const LABEL: Record<TestResult["status"], string> = {
@@ -37,7 +39,7 @@ const cell = (d: (typeof recent)[number], h: "am" | "pm") => {
   <span class="strip" role="img" aria-label={`Test results for the last ${recent.length} test days: ${recent.filter((d) => d.answered).length} days with every test answered`}>
     {recent.map((d) => (
       <span class="d">
-        {(["am", "pm"] as const).map((h) => {
+        {halves.map((h) => {
           const c = cell(d, h);
           return <i class={c.cls} title={c.title}></i>;
         })}

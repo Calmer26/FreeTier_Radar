@@ -1,0 +1,53 @@
+{
+  "id": "linkup",
+  "name": "Linkup Search",
+  "maker": "Linkup",
+  "url": "https://www.linkup.so",
+  "docs_url": "https://docs.linkup.so/pages/documentation/endpoints/search/reference",
+  "summary": "Web search API for AI apps, with plain results or sourced answers. Accounts with a work email get $20 topped up every month: 4,000 standard searches.",
+  "index": "unknown",
+  "api": {
+    "style": "linkup",
+    "endpoint": "https://api.linkup.so/v1/search",
+    "method": "POST",
+    "auth": "Authorization: Bearer <key>"
+  },
+  "key_env": "LINKUP_API_KEY",
+  "allowance": {
+    "period": "month",
+    "amount": 20,
+    "unit": "usd",
+    "text": "Accounts signed up with a professional email address get $20, topped back up to $20 each month",
+    "resets": "each month",
+    "source": { "url": "https://docs.linkup.so/pages/documentation/platform/pricing", "checked": "2026-10-04" }
+  },
+  "cost_per_query": {
+    "basic": 0.005,
+    "basic_label": "Flash, fast or standard search returning search results",
+    "advanced": 0.05,
+    "advanced_label": "Deep search returning search results",
+    "source": { "url": "https://docs.linkup.so/pages/documentation/platform/pricing", "checked": "2026-10-04" }
+  },
+  "rate_limits": null,
+  "card_required": "unknown",
+  "card_note": null,
+  "account_required": "yes",
+  "account_note": "The monthly $20 is for accounts signed up with a professional (work) email address.",
+  "usage_terms": "unknown",
+  "usage_terms_note": null,
+  "terms_source": null,
+  "result_storage": "unknown",
+  "data_logging": "unknown",
+  "data_logging_note": null,
+  "data_logging_source": null,
+  "locale": {
+    "country": "unknown",
+    "language": "unknown",
+    "example": null,
+    "note": "The search reference doesn't mention country or language options.",
+    "source": { "url": "https://docs.linkup.so/pages/documentation/endpoints/search/reference", "checked": "2026-10-04" }
+  },
+  "watch_url": "https://docs.linkup.so/pages/documentation/platform/pricing",
+  "verified_on": "2026-10-04",
+  "changes": []
+}

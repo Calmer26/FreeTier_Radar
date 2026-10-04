@@ -339,6 +339,17 @@ _176 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [lykon/dreamshaper-8-lcm](https://freetier-radar.marcelkanters.workers.dev/models/cloudflare/cf-lykon-dreamshaper-8-lcm/) | `@cf/lykon/dreamshaper-8-lcm` | 🟢 |
 | [stabilityai/stable-diffusion-xl-base-1.0](https://freetier-radar.marcelkanters.workers.dev/models/cloudflare/cf-stabilityai-stable-diffusion-xl-base-1-0/) | `@cf/stabilityai/stable-diffusion-xl-base-1.0` | 🟢 |
 
+### Free web search APIs (6)
+
+| API | Free searches a month | Card | Last test |
+|---|---|---|---|
+| [Parallel Search API](https://freetier-radar.marcelkanters.workers.dev/search-apis/parallel/) | 5,000 | ? | – |
+| [Linkup Search](https://freetier-radar.marcelkanters.workers.dev/search-apis/linkup/) | 4,000 | ? | – |
+| [Exa Search](https://freetier-radar.marcelkanters.workers.dev/search-apis/exa/) | 2,500 | no | – |
+| [Brave Search API](https://freetier-radar.marcelkanters.workers.dev/search-apis/brave/) | 1,000 | required | – |
+| [Tavily Search](https://freetier-radar.marcelkanters.workers.dev/search-apis/tavily/) | 1,000 | no | – |
+| [Firecrawl Search](https://freetier-radar.marcelkanters.workers.dev/search-apis/firecrawl/) | 500 | no | – |
+
 <!-- LIST:END -->
 
 ## How it works

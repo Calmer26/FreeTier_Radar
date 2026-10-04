@@ -1,0 +1,57 @@
+{
+  "id": "exa",
+  "name": "Exa Search",
+  "maker": "Exa",
+  "url": "https://exa.ai",
+  "docs_url": "https://exa.ai/docs/reference/search",
+  "summary": "Search from Exa's own index, built for AI. $10 of free credit every month (plus a $10 bonus at signup) without a payment method: 2,500 Instant searches a month.",
+  "index": "own",
+  "api": {
+    "style": "exa",
+    "endpoint": "https://api.exa.ai/search",
+    "method": "POST",
+    "auth": "x-api-key: <key>"
+  },
+  "key_env": "EXA_API_KEY",
+  "allowance": {
+    "period": "month",
+    "amount": 10,
+    "unit": "usd",
+    "text": "$10 credits every month plus a $10 onboarding bonus, no payment method required",
+    "resets": "every month",
+    "source": { "url": "https://exa.ai/pricing", "checked": "2026-10-04" }
+  },
+  "cost_per_query": {
+    "basic": 0.004,
+    "basic_label": "Instant search, up to 10 results ($4 per 1,000; Fast or Auto search: $7 per 1,000)",
+    "advanced": 0.012,
+    "advanced_label": "Deep search ($12 per 1,000)",
+    "source": { "url": "https://exa.ai/pricing", "checked": "2026-10-04" }
+  },
+  "rate_limits": {
+    "rps": 10,
+    "note": "Free plan: 10 search queries per second.",
+    "source": { "url": "https://exa.ai/pricing", "checked": "2026-10-04" }
+  },
+  "card_required": "no",
+  "card_note": null,
+  "account_required": "yes",
+  "account_note": null,
+  "usage_terms": "unknown",
+  "usage_terms_note": null,
+  "terms_source": null,
+  "result_storage": "unknown",
+  "data_logging": "may-train",
+  "data_logging_note": "Exa uses query data to improve its products, including training and fine-tuning the models behind its services.",
+  "data_logging_source": { "url": "https://exa.ai/privacy-policy", "checked": "2026-10-04" },
+  "locale": {
+    "country": "yes",
+    "language": "unknown",
+    "example": "\"userLocation\": \"NL\"",
+    "note": "userLocation takes the user's two-letter country code. The search reference has no language parameter.",
+    "source": { "url": "https://exa.ai/docs/reference/search", "checked": "2026-10-04" }
+  },
+  "watch_url": "https://exa.ai/pricing",
+  "verified_on": "2026-10-04",
+  "changes": []
+}

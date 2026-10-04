@@ -1,12 +1,13 @@
 ---
 import Base from "../layouts/Base.astro";
-import { activeModels } from "../lib/data";
+import { activeModels, searchApis } from "../lib/data";
 import { RANKING_WINDOW_DAYS } from "../../pipeline/rankings";
 import { FEED_SCHEMA_VERSION, workingFeed } from "../../pipeline/working";
+import { searchEntry } from "../../pipeline/search";
 import { SITE } from "../../site.config";
 
-const feed = workingFeed(activeModels, SITE.url, new Date().toISOString());
-const counts = Object.entries(feed.lists).map(([k, v]) => `${k} ${v.length}`).join(" · ");
+const feed = workingFeed(activeModels, SITE.url, new Date().toISOString(), searchApis);
+const counts = [...Object.entries(feed.lists), ["search", feed.search] as const].map(([k, v]) => `${k} ${v.length}`).join(" · ");
 const feedUrl = new URL("/api/working.json", SITE.url).href;
 
 const js = `// Pick a free model that answered today's test, and fall back to the next on failure.
@@ -47,8 +48,33 @@ def ask(prompt, models=feed["lists"]["chat"]):
     raise RuntimeError("no free model answered")`;
 
 const sample = JSON.stringify(feed.lists.agent[0] ?? feed.lists.chat[0] ?? {}, null, 2);
+
+const searchJs = `// Search the web through whichever free search API answered this morning's test.
+const post = (body, headers) => ({ method: "POST", headers: { "Content-Type": "application/json", ...headers }, body: JSON.stringify(body) });
+const SEARCH = {
+  brave:     (q, key) => ["?" + new URLSearchParams({ q, count: "5" }), { headers: { "X-Subscription-Token": key } }, (j) => j.web?.results],
+  tavily:    (q, key) => ["", post({ query: q, max_results: 5 }, { Authorization: "Bearer " + key }), (j) => j.results],
+  exa:       (q, key) => ["", post({ query: q, type: "instant", numResults: 5 }, { "x-api-key": key }), (j) => j.results],
+  firecrawl: (q, key) => ["", post({ query: q, limit: 5 }, { Authorization: "Bearer " + key }), (j) => j.data?.web],
+  parallel:  (q, key) => ["", post({ search_queries: [q], max_results: 5 }, { "x-api-key": key }), (j) => j.results],
+  linkup:    (q, key) => ["", post({ q, depth: "standard", outputType: "searchResults", maxResults: 5 }, { Authorization: "Bearer " + key }), (j) => j.results],
+};
+
+async function search(q) {
+  for (const s of feed.search) {
+    const key = process.env[s.key_env];
+    if (!key || !SEARCH[s.api]) continue; // no key, or a style this code doesn't know yet
+    const [suffix, init, results] = SEARCH[s.api](q, key);
+    const res = await fetch(s.endpoint + suffix, init);
+    if (res.ok) return (results(await res.json()) ?? []).map((r) => ({ title: r.title, url: r.url }));
+    // 429, 402 (allowance used up) or 5xx: try the next one
+  }
+  throw new Error("no free search API answered");
+}`;
+
+const searchSample = JSON.stringify(feed.search[0] ?? (searchApis[0] ? searchEntry(searchApis[0], SITE.url) : {}), null, 2);
 ---
-<Base title="Working free models feed for developers" description="A JSON feed of free AI models that answered today's test, per use (chat, agent, vision, speech, images), with endpoints, limits and fallbacks. Updated daily.">
+<Base title="Working free models feed for developers" description="A JSON feed of free AI models and free web search APIs that answered today's test, per use (chat, agent, vision, speech, images, search), with endpoints, limits and fallbacks. Updated daily.">
   <div class="prose">
     <h1>Working-models feed</h1>
     <p class="lede">
@@ -63,6 +89,7 @@ const sample = JSON.stringify(feed.lists.agent[0] ?? feed.lists.chat[0] ?? {}, n
       <li><code>lists.agent</code>: chat models that pass our tool-call test at least half the time (and the multi-turn tool test too, once they have results), with at least 64k context; best multi-turn tool-caller first. Use these for agents.</li>
       <li><code>lists.vision</code>: chat models that accept images.</li>
       <li><code>lists.tts</code>, <code>lists.stt</code>, <code>lists.image</code>: speech and image models.</li>
+      <li><code>search</code> (top level, not in <code>lists</code>): free <a href="/search-apis/">web search APIs</a> that answered this morning's test. Its entries have their own shape; see <a href="#search">Search APIs</a> below.</li>
     </ul>
     <p>
       Only models that answered the latest daily test and that an app may use. Evaluation-only providers (NVIDIA's
@@ -109,9 +136,31 @@ const sample = JSON.stringify(feed.lists.agent[0] ?? feed.lists.chat[0] ?? {}, n
     <h2>One entry</h2>
     <pre><code>{sample}</code></pre>
 
+    <h2 id="search">Search APIs</h2>
+    <p>
+      <code>search</code> lists web search APIs with a recurring free allowance of at least about 300 searches a month that
+      answered this morning's test (one search, mornings only), best first: answered most often over 30 days, then the larger
+      free allowance, then faster. <a href="/api/search.json"><code>/api/search.json</code></a> has every one we track,
+      whether it answered or not, plus the sources and test history, one-time credits and near misses.
+    </p>
+    <ul>
+      <li><code>api</code> is the request style (<code>"brave"</code>, <code>"tavily"</code>, <code>"exa"</code>, <code>"firecrawl"</code>, <code>"parallel"</code>, <code>"linkup"</code>). Each has its own request and response shape; <code>docs</code> links the provider's reference. <code>method</code>, <code>endpoint</code> and <code>auth</code> say where and how to send the key in <code>key_env</code>.</li>
+      <li><code>free_allowance</code>: <code>amount</code> in <code>unit</code> (<code>"queries"</code>, <code>"credits"</code> or <code>"usd"</code>) per <code>period</code>, the provider's own words in <code>text</code>, and <code>queries_per_month</code>: how many basic searches that covers. <code>source</code> and <code>checked</code> are the page and the day we read it.</li>
+      <li><code>cost_per_query</code>: what one <code>basic</code> search (the cheapest plain search) and one <code>advanced</code> search cost, in the same <code>unit</code>; <code>advanced</code> is null when there's no separately priced mode.</li>
+      <li><code>limits</code> is always an object (<code>rps</code>, <code>rpm</code>, <code>rph</code>, <code>rpd</code>, <code>concurrency</code>, <code>note</code>, <code>source</code>); null means not published, never unlimited.</li>
+      <li><code>card_required</code> with <code>card_note</code>, <code>usage_terms</code>, <code>result_storage</code> (may you store results: Brave's free credit doesn't allow it) and <code>data_logging</code>, labelled only from the provider's own statements; <code>"unknown"</code> when we haven't found one.</li>
+      <li><code>locale</code>: whether a search can target a <code>country</code> and a <code>language</code> (<code>"yes"</code>, <code>"no"</code>, <code>"unknown"</code>), with an <code>example</code> of the request fields for Dutch results from the Netherlands.</li>
+      <li><code>answered</code> (<code>days</code>, <code>of</code>, <code>share</code>) and <code>median_latency_ms</code> over the last 30 days; <code>last_test_at</code>.</li>
+    </ul>
+    <p class="sub">JavaScript, falling back through the free search APIs:</p>
+    <pre><code>{searchJs}</code></pre>
+    <p class="sub">One search entry:</p>
+    <pre><code>{searchSample}</code></pre>
+
     <h2>Good to know</h2>
     <ul>
       <li>The feed updates after each daily test (06:10 UTC) and discovery run. Fetch it at startup or once an hour, not per request.</li>
+      <li>Free search allowances are small and monthly (hundreds to a few thousand searches): cache results where the terms allow it, and spread searches over several APIs.</li>
       <li>"Answered the test" means it replied to one small request at test time: not a promise it's up all day. That's why the examples fall back.</li>
       <li><code>usage_terms: "non-commercial"</code> (ElevenLabs' Free plan) means personal projects only, not a product.</li>
       <li>Check <code>data_logging</code> before sending private data: several free providers may use prompts to improve their models.</li>

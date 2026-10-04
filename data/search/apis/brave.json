@@ -1,0 +1,57 @@
+{
+  "id": "brave",
+  "name": "Brave Search API",
+  "maker": "Brave",
+  "url": "https://brave.com/search/api/",
+  "docs_url": "https://api-dashboard.search.brave.com/documentation/services/web-search",
+  "summary": "Web search from Brave's own independent index. Every plan includes $5 of free credit each month: 1,000 searches on the Search plan. Signing up needs a card.",
+  "index": "own",
+  "api": {
+    "style": "brave",
+    "endpoint": "https://api.search.brave.com/res/v1/web/search",
+    "method": "GET",
+    "auth": "X-Subscription-Token: <key>"
+  },
+  "key_env": "BRAVE_SEARCH_API_KEY",
+  "allowance": {
+    "period": "month",
+    "amount": 5,
+    "unit": "usd",
+    "text": "$5 in free credits every month, applied automatically (each plan gets its own $5)",
+    "resets": "every month",
+    "source": { "url": "https://api-dashboard.search.brave.com/app/plans", "checked": "2026-10-04" }
+  },
+  "cost_per_query": {
+    "basic": 0.005,
+    "basic_label": "Web search on the Search plan ($5 per 1,000 requests)",
+    "advanced": null,
+    "advanced_label": null,
+    "source": { "url": "https://api-dashboard.search.brave.com/app/plans", "checked": "2026-10-04" }
+  },
+  "rate_limits": {
+    "rps": 50,
+    "note": "Search plan capacity: 50 requests per second.",
+    "source": { "url": "https://api-dashboard.search.brave.com/app/plans", "checked": "2026-10-04" }
+  },
+  "card_required": "yes",
+  "card_note": "Card required: usage above the $5 monthly credit is billed. Brave lets you set usage limits in its dashboard and a monthly cap on auto-reload; signing up places a $0 or $1 card check that is refunded.",
+  "account_required": "yes",
+  "account_note": null,
+  "usage_terms": "production-ok",
+  "usage_terms_note": "Brave describes the free credit as enough to run proofs of concept and power small-scale projects. Storing results (for example to train or tune a model) needs a plan that grants storage rights.",
+  "terms_source": { "url": "https://api-dashboard.search.brave.com/documentation/resources/help-feedback", "checked": "2026-10-04" },
+  "result_storage": "not-allowed",
+  "data_logging": "logs-prompts",
+  "data_logging_note": "Queries are kept for at most 90 days, for billing and troubleshooting. Brave says it collects no identifiers that link a query to a person or device.",
+  "data_logging_source": { "url": "https://api-dashboard.search.brave.com/privacy-policy", "checked": "2026-10-04" },
+  "locale": {
+    "country": "yes",
+    "language": "yes",
+    "example": "country=NL&search_lang=nl",
+    "note": null,
+    "source": { "url": "https://api-dashboard.search.brave.com/api-reference/web/search/get", "checked": "2026-10-04" }
+  },
+  "watch_url": "https://brave.com/search/api/",
+  "verified_on": "2026-10-04",
+  "changes": []
+}

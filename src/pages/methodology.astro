@@ -4,6 +4,7 @@ import { AGENT_MIN_CONTEXT, AGENT_MIN_RESPONDED_DAYS, AGENT_WINDOW_DAYS } from "
 import { MIN_TESTED_DAYS, RANKINGS, RANKING_WINDOW_DAYS } from "../../pipeline/rankings";
 import { UNREACHABLE_AFTER } from "../../pipeline/reachability";
 import { HIGH_IMPACT_THRESHOLD } from "../../pipeline/scoring";
+import { SEARCH_MIN_QUERIES_PER_MONTH, SEARCH_TESTS_PER_MONTH } from "../../pipeline/search";
 import { SITE } from "../../site.config";
 ---
 <Base title="Methodology" description="How FreeTier Radar finds free models, tests them, labels them, and handles sponsors.">
@@ -82,6 +83,20 @@ import { SITE } from "../../site.config";
       left out of the directory and marked <em>Listed but not callable</em> on its page and provider page. It
       returns as soon as it answers again.
     </p>
+
+    <h2 id="search">Web search APIs</h2>
+    <p>
+      <a href="/search-apis/">Free web search APIs</a> have no model list to read, so they're kept by hand, like
+      offers. Every number (free allowance, price per search, rate limits) and every label (card, terms, data use,
+      country and language support) comes from the provider's own pages, with the page and the date we read it. Where a
+      page says nothing, the label is “not stated” or “not yet checked”. Each pricing page is checked weekly for changes.
+    </p>
+    <ul>
+      <li><strong>The bar:</strong> a recurring free allowance (monthly or daily) of at least about {SEARCH_MIN_QUERIES_PER_MONTH} basic searches a month, counted at the price of the cheapest plain search. One-time credits are listed as <a href="/offers/">offers</a>; APIs we checked and left out are listed as near misses, untested and unranked.</li>
+      <li><strong>A card</strong> doesn't rule an API out, but it's labelled, with what happens above the free credit.</li>
+      <li><strong>The test:</strong> one search for “wikipedia” each morning (no peak-hours test: about {SEARCH_TESTS_PER_MONTH} searches a month), with the cheapest settings: one result, no page content, no generated answer. It counts as answered when at least one result with a link comes back. We keep the status and the time it took, never the results. A rate-limit answer isn't recorded; an answer that the free allowance is used up shows as “No free quota”.</li>
+      <li><strong>Order:</strong> answered most often over {RANKING_WINDOW_DAYS} days, then the larger free allowance, then faster. There's no quality score for search results yet.</li>
+    </ul>
 
     <h2>Rankings</h2>
     <p>

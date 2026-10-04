@@ -46,6 +46,11 @@ describe("workingFeed", () => {
     expect(feed.schema_version).toBe(1);
   });
 
+  it("adds search APIs as a top-level list, outside the model lists", () => {
+    expect(feed.search).toEqual([]);
+    expect(Object.keys(feed.lists)).not.toContain("search");
+  });
+
   it("always publishes limits with tpm and tpd, null when unknown", () => {
     const limited = workingFeed(
       [model("known", { limits: { rpd: 1_000, tpm: 8_000, tpd: 200_000, source: "observed (response headers)" } }), model("unknown")],

@@ -1,0 +1,89 @@
+---
+import Base from "../../layouts/Base.astro";
+import EventList from "../../components/EventList.astro";
+import HistoryStrip from "../../components/HistoryStrip.astro";
+import SponsorSlot from "../../components/SponsorSlot.astro";
+import TestStatus from "../../components/TestStatus.astro";
+import { events, formatDate, searchApis } from "../../lib/data";
+import { allowanceText, cardBadge, costText, curlFor, DATA_LABEL, INDEX_LABEL, limitsText, queriesLine, STORAGE_LABEL, TERMS_LABEL } from "../../lib/search";
+import { reliability } from "../../../pipeline/rankings";
+import { searchUsableNow, testUsage, type SearchView } from "../../../pipeline/search";
+import type { Sourced } from "../../../pipeline/types";
+
+export function getStaticPaths() {
+  return searchApis.map((s) => ({ params: { id: s.id }, props: { s } }));
+}
+
+const { s } = Astro.props as { s: SearchView };
+const rel = reliability(s.tests);
+const usage = testUsage(s);
+const changes = events.filter((e) => e.resource_id === `search/${s.id}`);
+const yn = (v: "yes" | "no" | "unknown") => (v === "yes" ? "Yes" : v === "no" ? "No" : "Not stated");
+const sources: Array<[string, Sourced | null]> = [
+  ["Free allowance", s.allowance.source],
+  ["Price per search", s.cost_per_query.source],
+  ["Rate limits", s.rate_limits?.source ?? null],
+  ["Terms", s.terms_source],
+  ["Data use", s.data_logging_source],
+  ["Country and language", s.locale.source],
+];
+const breadcrumbs = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Free web search APIs", item: new URL("/search-apis/", Astro.site).href },
+    { "@type": "ListItem", position: 2, name: s.name, item: new URL(`/search-apis/${s.id}/`, Astro.site).href },
+  ],
+};
+---
+<Base title={`${s.name} free tier`} description={`${s.name} free tier: ${queriesLine(s)} (${allowanceText(s)}), ${s.card_required === "yes" ? "card required" : s.card_required === "no" ? "no card" : "card not stated"}. Limits, terms, data use and a daily test.`} noindex={s.tests.length === 0} jsonLd={breadcrumbs}>
+  <p class="sub"><a href="/search-apis/">Free web search APIs</a> · {s.maker}</p>
+  <h1>{s.name} free tier</h1>
+  <p class="lede">{s.summary}</p>
+  {s.card_required === "yes" && <p class="callout"><strong>{cardBadge(s)}.</strong> {s.card_note?.split(/(?<=\.)\s/).slice(1).join(" ")}</p>}
+  {s.usage_terms_note && <p class="callout info">{s.usage_terms_note}</p>}
+
+  <dl class="facts">
+    <div><dt>Free a {s.allowance.period}</dt><dd>{queriesLine(s)}</dd></div>
+    <div><dt>Allowance</dt><dd>{s.allowance.text}{s.allowance.resets && <span class="sub"> (renews {s.allowance.resets})</span>}</dd></div>
+    <div><dt>Basic search</dt><dd>{costText(s, s.cost_per_query.basic)} <span class="sub">{s.cost_per_query.basic_label}</span></dd></div>
+    <div><dt>Advanced search</dt><dd>{s.cost_per_query.advanced != null ? <>{costText(s, s.cost_per_query.advanced)} <span class="sub">{s.cost_per_query.advanced_label}</span></> : "No separate price"}</dd></div>
+    <div><dt>Rate limits</dt><dd>{limitsText(s)}{s.rate_limits?.note && <div class="sub">{s.rate_limits.note}</div>}</dd></div>
+    <div><dt>Card</dt><dd>{s.card_required === "yes" ? "Required" : s.card_required === "no" ? "Not required" : "Not stated"}</dd></div>
+    <div><dt>Account</dt><dd>{yn(s.account_required)}{s.account_note && <div class="sub">{s.account_note}</div>}</dd></div>
+    <div><dt>Terms</dt><dd>{TERMS_LABEL[s.usage_terms]}</dd></div>
+    <div><dt>Storing results</dt><dd>{STORAGE_LABEL[s.result_storage]}</dd></div>
+    <div><dt>Data use</dt><dd>{DATA_LABEL[s.data_logging]}{s.data_logging_note && <div class="sub">{s.data_logging_note}</div>}</dd></div>
+    <div><dt>Country / language (e.g. NL / nl)</dt><dd>{yn(s.locale.country)} / {yn(s.locale.language)}{s.locale.example && <div class="sub mono">{s.locale.example}</div>}{s.locale.note && <div class="sub">{s.locale.note}</div>}</dd></div>
+    <div><dt>Results from</dt><dd>{INDEX_LABEL[s.index]}</dd></div>
+  </dl>
+
+  <SponsorSlot />
+
+  <h2>Daily test</h2>
+  <p>
+    <TestStatus test={s.tests.at(-1) ?? null} />
+    {rel.tested > 0 && <> · answered {rel.responded} of {rel.tested} tests{rel.medianLatencyMs != null && <>, median {(rel.medianLatencyMs / 1000).toFixed(1)} s</>}</>}
+  </p>
+  <p><HistoryStrip tests={s.tests} days={30} halves={["am"]} /></p>
+  <p class="sub">
+    One search for "wikipedia" each morning (06:10 UTC); it counts as answered when at least one result with a link comes
+    back. That uses about {usage.queries} of the {usage.of.toLocaleString("en-US")} free searches a month ({Math.round(usage.share * 100)}%).
+    {!searchUsableNow(s) && s.tests.length > 0 && " It didn't answer the latest test, so it's not in the working feed right now."}
+  </p>
+
+  <h2>Call it</h2>
+  <p class="sub">The request our test sends ({s.api.method} {s.api.endpoint}, key in <code>{s.api.auth}</code>). Set <code>{s.key_env}</code> to your key. <a href={s.docs_url} rel="noopener">API docs</a>.</p>
+  <pre><code>{curlFor(s)}</code></pre>
+
+  <h2>Sources</h2>
+  <ul>
+    {sources.map(([what, src]) => src
+      ? <li>{what}: <a href={src.url} rel="noopener">{new URL(src.url).hostname}{new URL(src.url).pathname}</a>, read {formatDate(src.checked)}</li>
+      : <li>{what}: <span class="sub">not stated on a page we've read</span></li>)}
+  </ul>
+  <p class="sub">Record checked {formatDate(s.verified_on)}.{s.watch_url && " We check the pricing page weekly for changes."}</p>
+
+  <h2>Changes</h2>
+  <EventList events={changes} empty="No changes recorded since we started tracking it." />
+</Base>

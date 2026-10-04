@@ -1,0 +1,57 @@
+{
+  "id": "parallel",
+  "name": "Parallel Search API",
+  "maker": "Parallel Web Systems",
+  "url": "https://parallel.ai",
+  "docs_url": "https://docs.parallel.ai/api-reference/search/search",
+  "summary": "Search for AI agents that returns compressed excerpts of each page. $5 of free credit a month, which Parallel says covers up to 5,000 search requests.",
+  "index": "unknown",
+  "api": {
+    "style": "parallel",
+    "endpoint": "https://api.parallel.ai/v1/search",
+    "method": "POST",
+    "auth": "x-api-key: <key>"
+  },
+  "key_env": "PARALLEL_API_KEY",
+  "allowance": {
+    "period": "month",
+    "amount": 5,
+    "unit": "usd",
+    "text": "$5 in free credits per month (\"Run up to 5,000 requests per month for free\")",
+    "resets": "every month",
+    "source": { "url": "https://parallel.ai/pricing", "checked": "2026-10-04" }
+  },
+  "cost_per_query": {
+    "basic": 0.001,
+    "basic_label": "Search, 10 results: low end of the published $0.001–$0.005 range",
+    "advanced": 0.005,
+    "advanced_label": "Search, 10 results: high end of the range",
+    "source": { "url": "https://parallel.ai/pricing", "checked": "2026-10-04" }
+  },
+  "rate_limits": {
+    "rpm": 600,
+    "note": "Search API: 600 requests a minute.",
+    "source": { "url": "https://parallel.ai/pricing", "checked": "2026-10-04" }
+  },
+  "card_required": "unknown",
+  "card_note": null,
+  "account_required": "yes",
+  "account_note": null,
+  "usage_terms": "unknown",
+  "usage_terms_note": null,
+  "terms_source": null,
+  "result_storage": "unknown",
+  "data_logging": "unknown",
+  "data_logging_note": null,
+  "data_logging_source": null,
+  "locale": {
+    "country": "unknown",
+    "language": "unknown",
+    "example": null,
+    "note": "The search reference doesn't mention country or language options.",
+    "source": { "url": "https://docs.parallel.ai/api-reference/search/search", "checked": "2026-10-04" }
+  },
+  "watch_url": "https://parallel.ai/pricing",
+  "verified_on": "2026-10-04",
+  "changes": []
+}

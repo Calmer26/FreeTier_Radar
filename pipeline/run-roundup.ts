@@ -10,7 +10,8 @@ import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { SITE } from "../site.config";
 import { eventsInRange, factLines, introPrompt, isoWeek, renderRoundup, templateIntro } from "./roundup";
-import { readEvents, readOffers, readResources } from "./store";
+import { readEvents, readOffers, readResources, readSearchApis } from "./store";
+import { searchEvents } from "./search";
 import type { ModelKind, ResourceEvent } from "./types";
 
 const INTRO_MODEL = "openai/gpt-oss-120b";
@@ -59,11 +60,13 @@ async function main() {
       old_value: null, new_value: null, impact_score: 60, source_url: o.url, text: c.text,
     })),
   );
-  const events = eventsInRange([...readEvents(), ...offerEvents], week.start, week.end);
+  const searchApis = readSearchApis();
+  const events = eventsInRange([...readEvents(), ...offerEvents, ...searchEvents(searchApis)], week.start, week.end);
 
   const links = new Map<string, string>([
     ...resources.map((r) => [r.id, `${SITE.url}/models/${r.provider}/${r.slug}/`] as [string, string]),
     ...readOffers().map((o) => [`offer/${o.id}`, `${SITE.url}/offers/#${o.id}`] as [string, string]),
+    ...searchApis.map((s) => [`search/${s.id}`, `${SITE.url}/search-apis/${s.id}/`] as [string, string]),
   ]);
   const kinds = new Map<string, ModelKind>(resources.map((r) => [r.id, r.kind ?? "chat"]));
 

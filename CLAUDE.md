@@ -9,10 +9,10 @@ code there was copied and adapted, not shared.
 
 - `pipeline/`: data pipeline (TypeScript, run with tsx). Pure logic (`diff.ts`, `agent-ready.ts`,
   `rankings.ts`, `roundup.ts`, `watch.ts`, `arena.ts`, `siblings.ts`, `reachability.ts`, `cloudflare-pricing.ts`,
-  `showcase.ts`, `limits.ts`, `probe.ts` helpers, adapter `map*` functions) has tests next to it. Entry points:
-  `run-discovery.ts`, `run-tests.ts`, `run-watch.ts`, `run-roundup.ts`, `run-arena.ts`, `run-showcase.ts`.
+  `showcase.ts`, `limits.ts`, `search.ts`, `search-test.ts`, `probe.ts` helpers, adapter `map*` functions) has tests next to it. Entry points:
+  `run-discovery.ts`, `run-tests.ts`, `run-search-tests.ts`, `run-watch.ts`, `run-roundup.ts`, `run-arena.ts`, `run-showcase.ts`.
 - `data/`: the database. JSON in git, written only by the pipeline, except the hand-kept
-  `sponsor.json`, `offers/ai/*.json` and `apps/*.json`. History = git log. Never store snapshots or full API
+  `sponsor.json`, `offers/*/*.json`, `apps/*.json` and `search/`. History = git log. Never store snapshots or full API
   responses or pages.
 - Models have a `kind` (chat, tts, stt, image); each kind has its own test in `probe.ts` (image: weekly,
   120 s timeout). Tests run at 06:10 UTC (everything + tool calls) and 18:10 UTC (chat only, peak hours); a run
@@ -43,6 +43,13 @@ code there was copied and adapted, not shared.
 - `data/apps/`: consumer apps with free image/video generation but no free API (`/free-apps/`). Same rules as
   offers: numbers only from the app's own page, an Arena name only when the app says which model free users
   get, `watch_url: null` when the page blocks bots (the page flags records older than 60 days).
+- `data/search/apis/`: free web search APIs (`/search-apis/`), hand-kept like offers (`SearchApi` in `types.ts`):
+  every number and label has its own `{ url, checked }` source from the provider's own pages; "unknown" otherwise.
+  `search.ts` (site-safe: bar, request builders, feed entries) + `search-test.ts`/`run-search-tests.ts`: one basic
+  search per API in the morning run only, results in `data/tests/search.json` (30 days, one a day). One-time search
+  credits are offers in `data/offers/search/` (`category: "search"`); checked-and-left-out ones in
+  `data/search/near-misses.json` (not tested or ranked). Feeds: top-level `search` in `/api/working.json` (not in
+  `lists`) and `/api/search.json`; documented on `/developers/`.
 - `content/roundups/`: published weekly roundups (Markdown), merged from the Monday PR.
 - `fixtures/`: the STT test clip (see its README).
 - `src/`: Astro static site; reads `data/` and `content/` at build time through `src/lib/`, bundled with
@@ -84,6 +91,10 @@ code there was copied and adapted, not shared.
   OpenCode Zen is list-only the same way (its API refuses free models outside OpenCode).
 - Gateways with a public model list (Requesty, BazaarLink, OrcaRouter) still have `list_needs_key: true`,
   so their models only appear once a key exists and they can be tested.
+- Inclusion bar for a search API: a recurring allowance of at least ~300 basic searches a month
+  (`SEARCH_MIN_QUERIES_PER_MONTH`, at the cheapest plain search's price); a card is allowed but labelled with what
+  happens above the free credit (Brave). One-time credits are offers. Left out: SerpApi (250/month), Google Custom
+  Search (closed to new customers), LangSearch (no published number).
 - Inclusion bar for a provider: at least 10 free requests a day, or a monthly amount worth about 300
   (TTS ≈10k characters, STT ≈1 hour), surviving our own daily tests; one-time credits are offers.
   Left out on purpose: Nous Portal (its terms forbid monitoring availability), UnoRouter and
@@ -96,5 +107,5 @@ code there was copied and adapted, not shared.
 
 ## Commands
 
-`npm test` · `npm run check` · `npm run build` · `npm run discover` · `npm run test-models` ·
+`npm test` · `npm run check` · `npm run build` · `npm run discover` · `npm run test-models` · `npm run test-search` ·
 `npm run readme` · `npm run dev` (port 4321, also in `.claude/launch.json`).

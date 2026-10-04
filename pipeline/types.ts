@@ -195,6 +195,8 @@ export interface Offer {
   id: string;
   provider: string;
   name: string;
+  /** "search": one-time web search API credits (data/offers/search/); absent: AI. */
+  category?: "ai" | "search";
   offer_type: "recurring-quota" | "recurring-credit" | "trial-credit" | "retired";
   /** One line, e.g. "10,000 Neurons per day, shared across all models". */
   amount: string;
@@ -255,4 +257,110 @@ export interface WatchState {
   hash: string;
   checked_on: string;
   changed_on: string | null;
+}
+
+/** Where a number or statement comes from: the provider's own page, and the day we read it. */
+export interface Sourced {
+  url: string;
+  /** YYYY-MM-DD */
+  checked: string;
+}
+
+/** Request style of a search API; each has its own request and response shape (search.ts). */
+export type SearchStyle = "brave" | "tavily" | "exa" | "firecrawl" | "parallel" | "linkup";
+
+/**
+ * A web search API with a recurring free allowance. Hand-kept in data/search/apis/,
+ * like offers: numbers only from the provider's own pages, each with its source and
+ * date. One-time credits are offers (data/offers/search/), not these.
+ */
+export interface SearchApi {
+  id: string;
+  name: string;
+  maker: string;
+  url: string;
+  docs_url: string;
+  summary: string;
+  /** Whose results: its own index, scraped Google/Bing results, or both. */
+  index: "own" | "google-serp" | "mixed" | "unknown";
+  api: {
+    style: SearchStyle;
+    endpoint: string;
+    method: "GET" | "POST";
+    /** How the key is sent, e.g. "Authorization: Bearer <key>" or "X-Subscription-Token: <key>". */
+    auth: string;
+  };
+  /** Env var name we use for the key. */
+  key_env: string;
+  allowance: {
+    period: "month" | "day";
+    amount: number;
+    unit: "queries" | "credits" | "usd";
+    /** The provider's own words, e.g. "$5 in free credits every month". */
+    text: string;
+    /** When it renews, e.g. "1st of each month"; null when not stated. */
+    resets: string | null;
+    source: Sourced;
+  };
+  /** What one search costs, in the allowance's unit. */
+  cost_per_query: {
+    /** The cheapest plain web search (what our daily test sends). */
+    basic: number;
+    basic_label: string;
+    /** The deeper search mode, when there is one with a published price. */
+    advanced: number | null;
+    advanced_label: string | null;
+    source: Sourced;
+  };
+  rate_limits: {
+    rps?: number;
+    rpm?: number;
+    rph?: number;
+    rpd?: number;
+    concurrency?: number;
+    note?: string;
+    source: Sourced;
+  } | null;
+  card_required: YesNoUnknown;
+  /** Shown as the card badge's text when a card is required. */
+  card_note: string | null;
+  account_required: YesNoUnknown;
+  account_note: string | null;
+  usage_terms: UsageTerms;
+  usage_terms_note: string | null;
+  terms_source: Sourced | null;
+  /** May you store or cache results? Brave: only on a plan that grants storage rights. */
+  result_storage: "allowed" | "not-allowed" | "unknown";
+  /** What the provider says it does with queries. */
+  data_logging: DataLogging;
+  data_logging_note: string | null;
+  data_logging_source: Sourced | null;
+  /** Can a search target a country and a language (e.g. NL / nl)? */
+  locale: {
+    country: YesNoUnknown;
+    language: YesNoUnknown;
+    /** Request fields for Dutch results from the Netherlands, when supported. */
+    example: string | null;
+    note: string | null;
+    source: Sourced;
+  };
+  /** Page the weekly watcher fetches; null to skip. */
+  watch_url: string | null;
+  verified_on: string;
+  /** Newest last; shown in the change feed. */
+  changes: Array<{ date: string; text: string }>;
+}
+
+/** A search API we checked and left out, with the reason (not tested, not ranked). */
+export interface SearchNearMiss {
+  name: string;
+  url: string;
+  reason: string;
+  source: Sourced;
+}
+
+/** data/tests/search.json: the daily search test, 30 days, one result per day per API. */
+export interface SearchTestFile {
+  updated_at: string | null;
+  results: Record<string, TestResult[]>;
 }

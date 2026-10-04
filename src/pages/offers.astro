@@ -24,11 +24,12 @@ const ACCOUNT: Record<Offer["account_required"], string> = {
   unknown: "Account requirements unknown",
 };
 ---
-<Base title="Free AI credits and quotas" description="Free AI credits, trials and daily quotas from inference providers, with what they're worth and the conditions attached.">
+<Base title="Free AI credits and quotas" description="Free AI credits, trials and daily quotas from inference providers and web search APIs, with what they're worth and the conditions attached.">
   <h1>Free credits and quotas</h1>
   <p class="lede">
     Some providers don't offer free models: they offer a free budget. These records are kept by hand, and each
     provider's page is checked weekly for changes. Changes also appear in the <a href="/changes/">change feed</a>.
+    Web search APIs with a monthly free allowance have their own page: <a href="/search-apis/">free web search APIs</a>.
   </p>
   <SponsorSlot />
 
@@ -55,6 +56,7 @@ const ACCOUNT: Record<Offer["account_required"], string> = {
               <p>{o.summary}</p>
               <p>
                 {o.offer_type === "retired" ? <span class="badge bad">Retired</span> : null}
+                {o.category === "search" && <span class="badge">Web search API</span>}
                 {o.usage_terms === "evaluation-only" && <span class="badge bad">⚠ Eval only</span>}
                 {o.card_required === "no" && <span class="badge neutral">No card</span>}
                 <span class="badge neutral">{ACCOUNT[o.account_required]}</span>

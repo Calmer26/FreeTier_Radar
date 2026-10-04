@@ -1,0 +1,58 @@
+{
+  "id": "firecrawl",
+  "name": "Firecrawl Search",
+  "maker": "Firecrawl",
+  "url": "https://www.firecrawl.dev",
+  "docs_url": "https://docs.firecrawl.dev/api-reference/endpoint/search",
+  "summary": "Web search from the Firecrawl scraping platform, optionally with the full page of each result. 1,000 free credits every month without a card; a search of up to 10 results costs 2 credits, so about 500 searches.",
+  "index": "unknown",
+  "api": {
+    "style": "firecrawl",
+    "endpoint": "https://api.firecrawl.dev/v2/search",
+    "method": "POST",
+    "auth": "Authorization: Bearer <key>"
+  },
+  "key_env": "FIRECRAWL_API_KEY",
+  "allowance": {
+    "period": "month",
+    "amount": 1000,
+    "unit": "credits",
+    "text": "1,000 credits every month, refreshed monthly, no credit card required",
+    "resets": "every month",
+    "source": { "url": "https://www.firecrawl.dev/pricing", "checked": "2026-10-04" }
+  },
+  "cost_per_query": {
+    "basic": 2,
+    "basic_label": "Search, up to 10 results",
+    "advanced": null,
+    "advanced_label": null,
+    "source": { "url": "https://www.firecrawl.dev/pricing", "checked": "2026-10-04" }
+  },
+  "rate_limits": {
+    "rpm": 10,
+    "concurrency": 2,
+    "note": "Free plan: /search 10 requests a minute; 2 concurrent browsers.",
+    "source": { "url": "https://www.firecrawl.dev/pricing", "checked": "2026-10-04" }
+  },
+  "card_required": "no",
+  "card_note": null,
+  "account_required": "yes",
+  "account_note": "Search also works without a key, capped per IP address per day (the caps aren't published); we test with a key.",
+  "usage_terms": "unknown",
+  "usage_terms_note": null,
+  "terms_source": null,
+  "result_storage": "unknown",
+  "data_logging": "unknown",
+  "data_logging_note": null,
+  "data_logging_source": null,
+  "locale": {
+    "country": "yes",
+    "language": "unknown",
+    "example": "\"country\": \"NL\"",
+    "note": "country takes an ISO country code; location (e.g. \"Netherlands\") also geo-targets, from Firecrawl's list of supported locations.",
+    "source": { "url": "https://docs.firecrawl.dev/api-reference/endpoint/search", "checked": "2026-10-04" }
+  },
+  "watch_url": "https://www.firecrawl.dev/pricing",
+  "verified_on": "2026-10-04",
+  "changes": []
+}
