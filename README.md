@@ -186,8 +186,8 @@ _176 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 
 | Model | ID | Context | Tools | Last test | Agent |
 |---|---|---|---|---|---|
-| [Qwen3.6-35B-A3B-FP8](https://freetier-radar.marcelkanters.workers.dev/models/hetzner/qwen-qwen3-6-35b-a3b-fp8/) | `Qwen/Qwen3.6-35B-A3B-FP8` | 262k | ? | – |  |
-| [Qwen3.8-27B](https://freetier-radar.marcelkanters.workers.dev/models/hetzner/qwen3-8-27b/) | `Qwen3.8-27B` | 262k | ? | – |  |
+| [Qwen3.6-35B-A3B-FP8](https://freetier-radar.marcelkanters.workers.dev/models/hetzner/qwen-qwen3-6-35b-a3b-fp8/) | `Qwen/Qwen3.6-35B-A3B-FP8` | 262k | ? | 🟢 |  |
+| [Qwen3.8-27B](https://freetier-radar.marcelkanters.workers.dev/models/hetzner/qwen3-8-27b/) | `Qwen3.8-27B` | 262k | ? | 🟢 |  |
 
 #### Requesty (free models)
 

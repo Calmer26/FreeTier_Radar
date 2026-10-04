@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-04T06:24:05.427Z",
+  "updated_at": "2026-10-04T06:34:09.637Z",
   "results": {
     "cloudflare/@cf/aisingapore/gemma-sea-lion-v4-27b-it": [
       {
@@ -2308,6 +2308,20 @@
         "status": "responded",
         "latency_ms": 886,
         "wer": 0
+      }
+    ],
+    "hetzner/Qwen/Qwen3.6-35B-A3B-FP8": [
+      {
+        "at": "2026-10-04T06:34:09.643Z",
+        "status": "responded",
+        "latency_ms": 1448
+      }
+    ],
+    "hetzner/Qwen3.8-27B": [
+      {
+        "at": "2026-10-04T06:34:31.769Z",
+        "status": "responded",
+        "latency_ms": 1883
       }
     ],
     "kilo/apodex/apodex-1.1-mini:free": [
@@ -7819,6 +7833,20 @@
         "at": "2026-10-04T06:11:30.208Z",
         "status": "pass",
         "latency_ms": 704
+      }
+    ],
+    "hetzner/Qwen/Qwen3.6-35B-A3B-FP8": [
+      {
+        "at": "2026-10-04T06:34:17.592Z",
+        "status": "pass",
+        "latency_ms": 7674
+      }
+    ],
+    "hetzner/Qwen3.8-27B": [
+      {
+        "at": "2026-10-04T06:34:40.152Z",
+        "status": "pass",
+        "latency_ms": 1848
       }
     ],
     "kilo/apodex/apodex-1.1-mini:free": [
