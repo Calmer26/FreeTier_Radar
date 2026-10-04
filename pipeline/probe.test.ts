@@ -98,6 +98,24 @@ describe("buildRequest", () => {
     expect(JSON.parse(req.init.body as string).generationConfig.responseModalities).toEqual(["AUDIO"]);
   });
 
+  it("uses SpeechifyAI's own request shape and reads the base64 audio", async () => {
+    const req = buildRequest(r("speechify", "simba-3.2", "tts"), { SPEECHIFY_API_KEY: "k" });
+    expect(req.url).toBe("https://api.speechify.ai/v1/audio/speech");
+    expect(JSON.parse(req.init.body as string)).toEqual({ input: "OK", voice_id: "geffen_32", model: "simba-3.2", audio_format: "mp3" });
+    await expect(req.check(new Response(JSON.stringify({ audio_data: "" })))).rejects.toThrow(/no audio/);
+    await expect(req.check(new Response(JSON.stringify({ audio_data: "A".repeat(400) })))).resolves.toBeUndefined();
+  });
+
+  it("calls Cartesia's TTS and STT routes with its version header", () => {
+    const tts = buildRequest(r("cartesia", "sonic-3.6", "tts"), { CARTESIA_API_KEY: "k" });
+    expect(tts.url).toBe("https://api.cartesia.ai/tts/bytes");
+    expect((tts.init.headers as Record<string, string>)["Cartesia-Version"]).toBe("2026-08-14");
+    expect(JSON.parse(tts.init.body as string)).toMatchObject({ model_id: "sonic-3.6", transcript: "OK", output_format: { container: "mp3" } });
+    const stt = buildRequest(r("cartesia", "ink-whisper", "stt"), { CARTESIA_API_KEY: "k" });
+    expect(stt.url).toBe("https://api.cartesia.ai/stt");
+    expect((stt.init.body as FormData).get("model")).toBe("ink-whisper");
+  });
+
   it("rejects an STT transcript that doesn't match the sample", async () => {
     const req = buildRequest(r("groq", "whisper-large-v3", "stt"), env);
     await expect(req.check(new Response(JSON.stringify({ text: "hello there" })))).rejects.toThrow(/did not match/);

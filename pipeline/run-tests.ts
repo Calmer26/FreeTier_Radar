@@ -32,6 +32,14 @@ const GAP_MS: Record<ProviderId, number> = {
   ollama: 3_000,             // one request at a time on the Free plan
   cohere: 3_500,             // 20 requests/minute per model on a trial key
   elevenlabs: 1_500,         // monthly credits, not a rate; requests are tiny
+  hetzner: 6_500,            // 10 requests/minute per key
+  requesty: 2_000,           // 200 requests/day shared; limits per minute not published
+  amd: 3_500,                // 20 requests/minute per account
+  bazaarlink: 6_500,         // 10 requests/minute
+  orcarouter: 6_500,         // 10 requests/minute
+  opencode: 0,               // never tested: free models work only inside OpenCode
+  speechify: 1_500,          // monthly characters, not a rate; requests are tiny
+  cartesia: 1_500,           // monthly credits; 2 TTS requests at a time
 };
 const STOP_AFTER_RATE_LIMITS = 3;
 /** Image models are tested weekly: one picture uses far more of a free allowance than a chat reply. */

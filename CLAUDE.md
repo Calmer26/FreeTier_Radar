@@ -81,6 +81,13 @@ code there was copied and adapted, not shared.
   A paid model that's also free and in the list isn't repeated.
 - Cline (free promotion) is list-only (`testable: false`): its free list comes from the public
   endpoint the Cline extension uses; models are linked to the same model elsewhere by normalised name.
+  OpenCode Zen is list-only the same way (its API refuses free models outside OpenCode).
+- Gateways with a public model list (Requesty, BazaarLink, OrcaRouter) still have `list_needs_key: true`,
+  so their models only appear once a key exists and they can be tested.
+- Inclusion bar for a provider: at least 10 free requests a day, or a monthly amount worth about 300
+  (TTS ≈10k characters, STT ≈1 hour), surviving our own daily tests; one-time credits are offers.
+  Left out on purpose: Nous Portal (its terms forbid monitoring availability), UnoRouter and
+  Api.Airforce (unidentified resellers), Aion Labs (20k tokens a day).
 - Data workflows rebase before pushing (code pushes can land mid-run); keep that loop when editing them.
 - The methodology page describes scoring and labels; keep it in step with `scoring.ts`
   and `agent-ready.ts`.

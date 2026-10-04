@@ -41,6 +41,13 @@ jobs:
           OLLAMA_API_KEY: ${{ secrets.OLLAMA_API_KEY }}
           COHERE_API_KEY: ${{ secrets.COHERE_API_KEY }}
           ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          SPEECHIFY_API_KEY: ${{ secrets.SPEECHIFY_API_KEY }}
+          CARTESIA_API_KEY: ${{ secrets.CARTESIA_API_KEY }}
+          HETZNER_API_KEY: ${{ secrets.HETZNER_API_KEY }}
+          REQUESTY_API_KEY: ${{ secrets.REQUESTY_API_KEY }}
+          AMD_RADEON_API_KEY: ${{ secrets.AMD_RADEON_API_KEY }}
+          BAZAARLINK_API_KEY: ${{ secrets.BAZAARLINK_API_KEY }}
+          ORCAROUTER_API_KEY: ${{ secrets.ORCAROUTER_API_KEY }}
           TEST_SLOT: ${{ inputs.slot }}
           TEST_ONLY: ${{ inputs.only }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}

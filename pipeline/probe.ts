@@ -20,7 +20,7 @@ import { wordErrorRate } from "./wer";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { SITE } from "../site.config";
-import { baseUrl, PROVIDERS } from "./providers";
+import { baseUrl, CARTESIA_VERSION, PROVIDERS } from "./providers";
 import type { RateLimits, Resource, TestHistory, TestResult, TestStatus, ToolResult } from "./types";
 
 export const TEST_TIMEOUT_MS = 30_000;
@@ -105,6 +105,10 @@ export function ttsVoice(r: Pick<Resource, "provider" | "model_id">): string | u
   if (r.provider === "mistral") return "en_paul_neutral";
   // ElevenLabs takes a voice id in the URL; "George" is one of its premade voices.
   if (r.provider === "elevenlabs") return "George";
+  // SpeechifyAI's example voice in its docs (docs.speechify.ai/llms.txt, checked 2026-10-03).
+  if (r.provider === "speechify") return "geffen_32";
+  // Cartesia's example voice in its TTS reference (checked 2026-10-03).
+  if (r.provider === "cartesia") return "db6b0ed5-d5d3-463d-ae85-518a07d3c2b4";
   return undefined;
 }
 
@@ -190,6 +194,56 @@ export function buildRequest(r: Resource, env: Record<string, string | undefined
     return {
       url: `${base}/speech-to-text`,
       init: { method: "POST", headers: xi, body: form },
+      check: async (res) => expectTranscript(((await res.json()) as { text?: string }).text ?? ""),
+    };
+  }
+
+  // SpeechifyAI: not the OpenAI shape; the audio comes back base64 in `audio_data`
+  // (docs.speechify.ai/llms.txt, checked 2026-10-03).
+  if (r.provider === "speechify") {
+    return {
+      url: `${base}/audio/speech`,
+      init: {
+        method: "POST",
+        headers: { "Content-Type": "application/json", ...auth },
+        body: JSON.stringify({ input: speech, voice_id: ttsVoice(r), model: r.model_id, audio_format: "mp3" }),
+      },
+      check: async (res) => {
+        const audio = ((await res.json()) as { audio_data?: string }).audio_data ?? "";
+        if (audio.length < 200) throw new Error(`no audio in response (${audio.length} base64 chars)`);
+      },
+    };
+  }
+
+  // Cartesia: its own routes and a required version header (docs.cartesia.ai, checked 2026-10-03).
+  if (r.provider === "cartesia") {
+    const headers = { ...auth, "Cartesia-Version": CARTESIA_VERSION };
+    if (r.kind === "tts") {
+      return {
+        url: `${base}/tts/bytes`,
+        init: {
+          method: "POST",
+          headers: { "Content-Type": "application/json", ...headers },
+          body: JSON.stringify({
+            model_id: r.model_id,
+            transcript: speech,
+            voice: { mode: "id", id: ttsVoice(r) },
+            output_format: { container: "mp3", sample_rate: 44100, bit_rate: 128000 },
+          }),
+        },
+        check: async (res) => {
+          const bytes = (await res.arrayBuffer()).byteLength;
+          if (bytes < 200) throw new Error(`audio response too small (${bytes} bytes)`);
+        },
+      };
+    }
+    const form = new FormData();
+    form.append("model", r.model_id);
+    form.append("language", "en");
+    form.append("file", new Blob([readFileSync(STT_SAMPLE_PATH)], { type: "audio/mpeg" }), "stt-sample.mp3");
+    return {
+      url: `${base}/stt`,
+      init: { method: "POST", headers, body: form },
       check: async (res) => expectTranscript(((await res.json()) as { text?: string }).text ?? ""),
     };
   }

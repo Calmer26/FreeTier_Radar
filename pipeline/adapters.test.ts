@@ -252,3 +252,79 @@ describe("mapElevenLabs", () => {
     ]);
   });
 });
+
+describe("mapHetzner", () => {
+  it("lists every model as free chat, with the context length and Hetzner's no-storage statement", async () => {
+    const { mapHetzner } = await import("./adapters");
+    const out = mapHetzner([{ id: "Qwen/Qwen3.6-35B-A3B-FP8", max_model_len: 262144 }, { id: "Qwen3.8-27B" }]);
+    expect(out.map((m) => [m.model_id, m.name, m.kind, m.context_length, m.usage_terms, m.data_logging])).toEqual([
+      ["Qwen/Qwen3.6-35B-A3B-FP8", "Qwen3.6-35B-A3B-FP8", "chat", 262144, "evaluation-only", "not-used"],
+      ["Qwen3.8-27B", "Qwen3.8-27B", "chat", null, "evaluation-only", "not-used"],
+    ]);
+  });
+});
+
+describe("mapRequesty", () => {
+  it("keeps the $0 chat models, with data use and NVIDIA's trial terms per model", async () => {
+    const { mapRequesty } = await import("./adapters");
+    const out = mapRequesty([
+      { id: "google/gemma-4-31b-it", api: "chat", input_price: 0, output_price: 0, context_window: 262144, supports_vision: true, supports_tool_calling: true, data_retention_days: 30, data_used_for_training: false },
+      { id: "nvidia/nemotron-3-super-120b-a12b", api: "chat", input_price: 0, output_price: 0, data_retention_days: 30, data_used_for_training: true },
+      { id: "mistral/leanstral-1-5", api: "chat", input_price: 0, output_price: 0, data_retention_days: 0, data_used_for_training: false },
+      { id: "openai/gpt-6-luna", api: "chat", input_price: 1e-7, output_price: 5e-7 },
+    ]);
+    expect(out.map((m) => [m.model_id, m.input_modalities, m.usage_terms, m.data_logging])).toEqual([
+      ["google/gemma-4-31b-it", ["text", "image"], "unknown", "logs-prompts"],
+      ["nvidia/nemotron-3-super-120b-a12b", ["text"], "evaluation-only", "may-train"],
+      ["mistral/leanstral-1-5", ["text"], "unknown", "not-used"],
+    ]);
+  });
+});
+
+describe("gateway free-model filters", () => {
+  it("BazaarLink: ':free' ids, without the auto router", async () => {
+    const { mapBazaarLink } = await import("./adapters");
+    const out = mapBazaarLink([{ id: "qwen/qwen3.7-flash:free" }, { id: "auto:free" }, { id: "deepseek-v4-flash" }]);
+    expect(out.map((m) => m.model_id)).toEqual(["qwen/qwen3.7-flash:free"]);
+  });
+
+  it("OrcaRouter: '-free' ids, without its own router", async () => {
+    const { mapOrcaRouter } = await import("./adapters");
+    const out = mapOrcaRouter([{ id: "orcarouter/free" }, { id: "tencent/hy3-free" }, { id: "tencent/hy3" }]);
+    expect(out.map((m) => m.model_id)).toEqual(["tencent/hy3-free"]);
+  });
+
+  it("AMD: every shared model, free, evaluation-only", async () => {
+    const { mapAmd } = await import("./adapters");
+    const out = mapAmd([{ id: "DeepSeek-V4-Flash", context_length: 1048576, architecture: { input_modalities: ["text"] }, providers: [{ tools: true }] }]);
+    expect(out.map((m) => [m.model_id, m.context_length, m.tool_calling, m.usage_terms, m.data_logging])).toEqual([
+      ["DeepSeek-V4-Flash", 1048576, true, "evaluation-only", "logs-prompts"],
+    ]);
+  });
+
+  it("OpenCode: free models only, never Jev, with data use per model", async () => {
+    const { mapOpenCode } = await import("./adapters");
+    const out = mapOpenCode([{ id: "big-pickle" }, { id: "jev-1.13-free" }, { id: "nemotron-3-ultra-free" }, { id: "longcat-2.5-preview-free" }, { id: "gpt-5.5" }]);
+    expect(out.map((m) => [m.model_id, m.usage_terms, m.data_logging])).toEqual([
+      ["big-pickle", "unknown", "may-train"],
+      ["nemotron-3-ultra-free", "evaluation-only", "logs-prompts"],
+      ["longcat-2.5-preview-free", "unknown", "not-used"],
+    ]);
+  });
+});
+
+describe("speech providers", () => {
+  it("Speechify: accepts a bare or wrapped model list", async () => {
+    const { mapSpeechify } = await import("./adapters");
+    expect(mapSpeechify([{ id: "simba-3.2" }]).map((m) => [m.model_id, m.kind])).toEqual([["simba-3.2", "tts"]]);
+    expect(mapSpeechify({ models: [{ model: "simba-3.0" }] }).map((m) => m.model_id)).toEqual(["simba-3.0"]);
+  });
+
+  it("Cartesia: hand-listed TTS and STT models, non-commercial", async () => {
+    const { mapCartesia } = await import("./adapters");
+    expect(mapCartesia().map((m) => [m.model_id, m.kind, m.usage_terms, m.listed_by])).toEqual([
+      ["sonic-3.6", "tts", "non-commercial", "curated"],
+      ["ink-whisper", "stt", "non-commercial", "curated"],
+    ]);
+  });
+});

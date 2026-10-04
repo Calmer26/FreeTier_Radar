@@ -24,7 +24,7 @@ export interface WorkingInput extends FamilyMember {
   href: string;
 }
 
-export type ApiStyle = "openai" | "cloudflare-run" | "gemini-native" | "elevenlabs";
+export type ApiStyle = "openai" | "cloudflare-run" | "gemini-native" | "elevenlabs" | "speechify" | "cartesia";
 
 export interface WorkingModel {
   provider: string;
@@ -58,6 +58,8 @@ export function endpointFor(m: Pick<WorkingInput, "provider" | "kind" | "model_i
   if (m.provider === "elevenlabs") {
     return { api: "elevenlabs", endpoint: m.kind === "tts" ? `${base}/text-to-speech/{voice_id}` : `${base}/speech-to-text` };
   }
+  if (m.provider === "speechify") return { api: "speechify", endpoint: `${base}/audio/speech` };
+  if (m.provider === "cartesia") return { api: "cartesia", endpoint: `${base}/${m.kind === "tts" ? "tts/bytes" : "stt"}` };
   if (m.provider === "google-ai-studio") {
     return { api: "gemini-native", endpoint: `https://generativelanguage.googleapis.com/v1beta/models/${m.model_id}:generateContent` };
   }

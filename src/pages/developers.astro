@@ -65,12 +65,12 @@ const sample = JSON.stringify(feed.lists.agent[0] ?? feed.lists.chat[0] ?? {}, n
     </ul>
     <p>
       Only models that answered the latest daily test and that an app may use. Evaluation-only providers (NVIDIA's
-      API, LLM7) and Cline's in-extension models are left out; everything is in the
+      API, LLM7, Hetzner, AMD) and the in-app models of Cline and OpenCode are left out; everything is in the
       <a href="/api/resources.json">full feed</a>.
     </p>
     <p>
       Each entry has an <code>endpoint</code> and an <code>api</code> style. <code>"openai"</code> means a standard
-      OpenAI request to that URL. <code>"cloudflare-run"</code>, <code>"gemini-native"</code> and <code>"elevenlabs"</code> use the provider's own
+      OpenAI request to that URL. <code>"cloudflare-run"</code>, <code>"gemini-native"</code>, <code>"elevenlabs"</code>, <code>"speechify"</code> and <code>"cartesia"</code> use the provider's own
       format; the model's <code>page</code> links to its details. <code>key_env</code> is the environment variable
       name we use for that provider's key (null: no key needed). Cloudflare endpoints contain <code>{"{account}"}</code>:
       put your account id there.

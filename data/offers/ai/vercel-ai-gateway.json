@@ -1,0 +1,18 @@
+{
+  "id": "vercel-ai-gateway",
+  "provider": "Vercel",
+  "name": "Vercel AI Gateway monthly free credit",
+  "offer_type": "recurring-credit",
+  "amount": "A monthly included credit (the amount isn't stated in Vercel's docs), for a subset of models",
+  "summary": "Every Vercel team gets a monthly free credit on AI Gateway, usable on its free-tier models (some $0 chat models such as Ling 3.1 Flash and Laguna S 2.1, plus image and video models) with lower per-model rate limits. Vercel asks for a valid payment method before the free credit can be used, and the free credit stops for good once you buy credits. Vercel says it doesn't train on prompts or keep their content.",
+  "expires": null,
+  "usage_terms": "unknown",
+  "card_required": "yes",
+  "account_required": "yes",
+  "data_logging": "not-used",
+  "url": "https://vercel.com/ai-gateway/models?freeTier=true",
+  "watch_url": "https://vercel.com/docs/ai-gateway/pricing",
+  "verified_on": "2026-10-03",
+  "source_note": "vercel.com/docs/ai-gateway: pricing, rate-limits and FAQ (customer_verification_required: a payment method before free credits), checked 2026-10-03.",
+  "changes": []
+}

@@ -12,7 +12,7 @@
 
 import { classifyModel } from "./candidates";
 import { catalogueLines, fetchCloudflarePricing } from "./cloudflare-pricing";
-import { PROVIDERS } from "./providers";
+import { CARTESIA_VERSION, PROVIDERS } from "./providers";
 import type { ModelKind, ObservedModel, PriceLine, ProviderId } from "./types";
 
 const TIMEOUT_MS = 30_000;
@@ -434,6 +434,269 @@ async function fetchOllama(env: Env): Promise<ObservedModel[]> {
   return mapOllama(json.models ?? []);
 }
 
+// ── Hetzner Inference API (experiment) ───────────────────────────────────────────
+
+export interface HetznerModel {
+  id: string;
+  max_model_len?: number;
+}
+
+/**
+ * Hetzner's docs say the /models list is definitive and everything on it is free while
+ * the API is an experiment (checked 2026-10-03: two Qwen models, both with vision).
+ */
+export function mapHetzner(models: HetznerModel[]): ObservedModel[] {
+  return models.map((m) => ({
+    ...base("hetzner", "chat"),
+    model_id: m.id,
+    name: m.id.split("/").at(-1) ?? m.id,
+    url: "https://docs.hetzner.com/general/company-and-policy/experiments/inference/",
+    price_type: "free" as const,
+    context_length: m.max_model_len ?? null,
+    // The list carries no modalities; the docs table is the only place they appear.
+    input_modalities: null,
+    tool_calling: null,
+  }));
+}
+
+async function fetchHetzner(env: Env): Promise<ObservedModel[]> {
+  const json = await getJson<{ data?: HetznerModel[] }>("https://inference.hetzner.com/api/v1/models", {
+    Authorization: `Bearer ${env.HETZNER_API_KEY}`,
+  });
+  return mapHetzner(json.data ?? []);
+}
+
+// ── Requesty ─────────────────────────────────────────────────────────────────────
+
+export interface RequestyModel {
+  id: string;
+  api?: string;
+  input_price?: number;
+  output_price?: number;
+  context_window?: number;
+  supports_vision?: boolean;
+  supports_tool_calling?: boolean;
+  data_retention_days?: number;
+  data_used_for_training?: boolean;
+}
+
+/**
+ * The chat models Requesty prices at $0 (checked 2026-10-03: 12 of 749). Each entry says
+ * whether prompts are retained and used for training; NVIDIA-hosted ones are trial terms.
+ */
+export function mapRequesty(models: RequestyModel[]): ObservedModel[] {
+  const free = models.filter((m) => (m.api ?? "chat") === "chat" && m.input_price === 0 && m.output_price === 0);
+  return withKind(free, (m) => m.id).map(({ item: m, kind }) => ({
+    ...base("requesty", kind),
+    model_id: m.id,
+    name: m.id.split("/").at(-1) ?? m.id,
+    url: "https://www.requesty.ai/free-models",
+    price_type: "free" as const,
+    context_length: m.context_window ?? null,
+    input_modalities: m.supports_vision ? ["text", "image"] : ["text"],
+    tool_calling: m.supports_tool_calling ?? null,
+    ...(m.id.startsWith("nvidia/") ? { usage_terms: "evaluation-only" as const } : {}),
+    data_logging: m.data_used_for_training ? ("may-train" as const)
+      : (m.data_retention_days ?? 0) > 0 ? ("logs-prompts" as const)
+      : m.data_used_for_training === false ? ("not-used" as const)
+      : ("unknown" as const),
+  }));
+}
+
+async function fetchRequesty(): Promise<ObservedModel[]> {
+  const json = await getJson<{ data?: RequestyModel[] }>("https://router.requesty.ai/v1/models");
+  return mapRequesty(json.data ?? []);
+}
+
+// ── AMD Radeon Cloud (Public Free Model APIs) ────────────────────────────────────
+
+export interface AmdModel {
+  id: string;
+  name?: string;
+  context_length?: number;
+  architecture?: { input_modalities?: string[] };
+  providers?: Array<{ tools?: boolean }>;
+}
+
+/**
+ * Every model on the shared list is free (amd-aim.github.io/radeon-cloud-docs, checked
+ * 2026-10-03); the prices it carries are what a dedicated endpoint would cost.
+ */
+export function mapAmd(models: AmdModel[]): ObservedModel[] {
+  return withKind(models, (m) => m.id).map(({ item: m, kind }) => ({
+    ...base("amd", kind),
+    model_id: m.id,
+    name: m.name ?? m.id,
+    url: "https://amd-aim.github.io/radeon-cloud-docs/models/overview/",
+    price_type: "free" as const,
+    context_length: m.context_length ?? null,
+    input_modalities: m.architecture?.input_modalities ?? null,
+    tool_calling: m.providers?.[0]?.tools ?? null,
+  }));
+}
+
+async function fetchAmd(env: Env): Promise<ObservedModel[]> {
+  const json = await getJson<{ data?: AmdModel[] }>("https://developer.amd.com.cn/radeon/api/v1/models", {
+    Authorization: `Bearer ${env.AMD_RADEON_API_KEY}`,
+  });
+  return mapAmd(json.data ?? []);
+}
+
+// ── BazaarLink ───────────────────────────────────────────────────────────────────
+
+export interface BazaarLinkModel {
+  id: string;
+  name?: string;
+  context_length?: number;
+  architecture?: { input_modalities?: string[] };
+}
+
+/** Free models carry a ":free" id; "auto:free" is a router, not a model (checked 2026-10-03). */
+export function mapBazaarLink(models: BazaarLinkModel[]): ObservedModel[] {
+  const free = models.filter((m) => m.id.endsWith(":free") && !m.id.startsWith("auto:"));
+  return withKind(free, (m) => m.id).map(({ item: m, kind }) => ({
+    ...base("bazaarlink", kind),
+    model_id: m.id,
+    name: m.name ?? m.id,
+    url: "https://bazaarlink.ai/free",
+    price_type: "free" as const,
+    context_length: m.context_length ?? null,
+    input_modalities: m.architecture?.input_modalities ?? null,
+    tool_calling: null,
+  }));
+}
+
+async function fetchBazaarLink(): Promise<ObservedModel[]> {
+  const json = await getJson<{ data?: BazaarLinkModel[] }>("https://api.bazaarlink.ai/v1/models");
+  return mapBazaarLink(json.data ?? []);
+}
+
+// ── OrcaRouter ───────────────────────────────────────────────────────────────────
+
+export interface OrcaRouterModel {
+  id: string;
+  name?: string;
+  context_length?: number;
+  architecture?: { input_modalities?: string[] };
+}
+
+/** Free models end in "-free"; "orcarouter/free" routes between them (checked 2026-10-03). */
+export function mapOrcaRouter(models: OrcaRouterModel[]): ObservedModel[] {
+  const free = models.filter((m) => m.id.endsWith("-free") && !m.id.startsWith("orcarouter/"));
+  return withKind(free, (m) => m.id).map(({ item: m, kind }) => ({
+    ...base("orcarouter", kind),
+    model_id: m.id,
+    name: m.name ?? m.id,
+    url: "https://docs.orcarouter.ai/routing/free-models",
+    price_type: "free" as const,
+    context_length: m.context_length ?? null,
+    input_modalities: m.architecture?.input_modalities ?? null,
+    tool_calling: null,
+  }));
+}
+
+async function fetchOrcaRouter(): Promise<ObservedModel[]> {
+  const json = await getJson<{ data?: OrcaRouterModel[] }>("https://api.orcarouter.ai/v1/models");
+  return mapOrcaRouter(json.data ?? []);
+}
+
+// ── OpenCode Zen (free promotion) ────────────────────────────────────────────────
+
+/**
+ * Zen's free models end in "-free", plus the stealth "big-pickle". They only work inside
+ * OpenCode, so they're listed, never tested. Jev is a decision model on its own endpoint,
+ * not chat. Data use per model from opencode.ai/docs/zen#privacy (checked 2026-10-03).
+ */
+export function mapOpenCode(models: Array<{ id: string }>): ObservedModel[] {
+  const free = models.filter((m) => (m.id.endsWith("-free") || m.id === "big-pickle") && !m.id.startsWith("jev-"));
+  return withKind(free, (m) => m.id).map(({ item: m, kind }) => {
+    const nvidia = m.id.startsWith("nemotron-");
+    const zeroRetention = /^(space-bunny|longcat)-/.test(m.id);
+    return {
+      ...base("opencode", kind),
+      model_id: m.id,
+      name: m.id,
+      url: "https://opencode.ai/docs/zen/",
+      price_type: "trial-credit" as const,
+      context_length: null,
+      input_modalities: null,
+      tool_calling: null,
+      ...(nvidia ? { usage_terms: "evaluation-only" as const } : {}),
+      data_logging: nvidia ? ("logs-prompts" as const) : zeroRetention ? ("not-used" as const) : ("may-train" as const),
+    };
+  });
+}
+
+async function fetchOpenCode(): Promise<ObservedModel[]> {
+  const json = await getJson<{ data?: Array<{ id: string }> }>("https://opencode.ai/zen/v1/models");
+  return mapOpenCode(json.data ?? []);
+}
+
+// ── SpeechifyAI ──────────────────────────────────────────────────────────────────
+
+export interface SpeechifyModel {
+  id?: string;
+  model?: string;
+  name?: string;
+}
+
+/**
+ * GET /v1/audio/models: the TTS models this workspace can use (docs.speechify.ai/llms.txt,
+ * checked 2026-10-03: simba-3.2 English, simba-3.0 six languages). The response shape
+ * isn't documented there, so both a bare array and a wrapped one are accepted.
+ */
+export function mapSpeechify(json: SpeechifyModel[] | { data?: SpeechifyModel[]; models?: SpeechifyModel[] }): ObservedModel[] {
+  const list = Array.isArray(json) ? json : json.data ?? json.models ?? [];
+  return list.flatMap((m) => {
+    const id = m.id ?? m.model;
+    if (!id) return [];
+    return [{
+      ...base("speechify", "tts"),
+      model_id: id,
+      name: m.name ?? id,
+      url: "https://speechify.ai/models",
+      price_type: "freemium-quota" as const,
+      context_length: null,
+      input_modalities: ["text"],
+      tool_calling: null,
+    }];
+  });
+}
+
+async function fetchSpeechify(env: Env): Promise<ObservedModel[]> {
+  return mapSpeechify(await getJson("https://api.speechify.ai/v1/audio/models", { Authorization: `Bearer ${env.SPEECHIFY_API_KEY}` }));
+}
+
+// ── Cartesia ─────────────────────────────────────────────────────────────────────
+
+/**
+ * Cartesia publishes no model list; these are the current models in its API reference
+ * (docs.cartesia.ai, checked 2026-10-03). The Free plan covers both TTS and STT.
+ */
+export const CARTESIA_MODELS: Array<{ id: string; name: string; kind: ModelKind }> = [
+  { id: "sonic-3.6", name: "Sonic 3.6", kind: "tts" },
+  { id: "ink-whisper", name: "Ink Whisper", kind: "stt" },
+];
+
+export function mapCartesia(): ObservedModel[] {
+  return CARTESIA_MODELS.map((m) => ({
+    ...base("cartesia", m.kind, "curated"),
+    model_id: m.id,
+    name: m.name,
+    url: m.kind === "tts" ? "https://docs.cartesia.ai/build-with-cartesia/tts-models/latest" : "https://docs.cartesia.ai/build-with-cartesia/stt/latest",
+    price_type: "freemium-quota" as const,
+    context_length: null,
+    input_modalities: m.kind === "stt" ? ["audio"] : ["text"],
+    tool_calling: null,
+  }));
+}
+
+async function fetchCartesia(env: Env): Promise<ObservedModel[]> {
+  // Checks the key works, so a bad key shows up as a failing source, not as broken models.
+  await getJson("https://api.cartesia.ai/voices?limit=1", { Authorization: `Bearer ${env.CARTESIA_API_KEY}`, "Cartesia-Version": CARTESIA_VERSION });
+  return mapCartesia();
+}
+
 // ── Cohere ───────────────────────────────────────────────────────────────────────
 
 export interface CohereModel {
@@ -624,4 +887,12 @@ export const FETCHERS: Record<ProviderId, (env: Env) => Promise<ObservedModel[]>
   ollama: fetchOllama,
   cohere: fetchCohere,
   elevenlabs: fetchElevenLabs,
+  hetzner: fetchHetzner,
+  requesty: () => fetchRequesty(),
+  amd: fetchAmd,
+  bazaarlink: () => fetchBazaarLink(),
+  orcarouter: () => fetchOrcaRouter(),
+  opencode: () => fetchOpenCode(),
+  speechify: fetchSpeechify,
+  cartesia: fetchCartesia,
 };

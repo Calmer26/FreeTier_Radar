@@ -2,17 +2,22 @@
   "id": "mistral",
   "provider": "Mistral",
   "name": "Mistral API Free mode",
-  "offer_type": "recurring-quota",
-  "amount": "Included monthly usage within per-model limits shown in your Mistral account (not published)",
-  "summary": "Mistral's Free mode: API keys with no credit card, covering its smaller models (Ministral, Codestral, Voxtral) within per-minute limits. The bigger models (Mistral Small, Mistral Medium) have a free limit of 0. Mistral may use Free-mode inputs and outputs to train its models. The free models are in the directory and tested daily.",
+  "offer_type": "recurring-credit",
+  "amount": "$10 of API credit a month on the Free plan, shared across Studio, the API and Vibe Code",
+  "summary": "Mistral's Free plan: API keys with no credit card and $10 of API credit a month, shared with Studio and Vibe Code; usage stops when it runs out unless pay-as-you-go is on. Per-model limits still apply (Mistral Small and Medium have a free limit of 0 in our tests). Mistral may use Free-plan inputs and outputs to train its models. The free models are in the directory and tested daily.",
   "expires": null,
   "usage_terms": "unknown",
   "card_required": "no",
   "account_required": "yes",
   "data_logging": "may-train",
   "url": "https://console.mistral.ai",
-  "watch_url": "https://docs.mistral.ai/admin/billing-usage/usage-limits",
-  "verified_on": "2026-09-29",
-  "source_note": "docs.mistral.ai (Activate Studio; Usage and limits) and help.mistral.ai (data use in Free mode), plus our own requests with a Free-mode key, 2026-09-29.",
-  "changes": []
+  "watch_url": "https://mistral.ai/pricing",
+  "verified_on": "2026-10-03",
+  "source_note": "mistral.ai/pricing (Free: \"$10 /mo in API credits\") and docs.mistral.ai (Usage and limits), checked 2026-10-03; help.mistral.ai (data use in Free mode); our own requests with a Free-mode key, 2026-09-29.",
+  "changes": [
+    {
+      "date": "2026-10-03",
+      "text": "Mistral's pricing page now describes the Free plan's API use as $10 of API credit a month (shared with Studio and Vibe Code), instead of an unpublished monthly allowance."
+    }
+  ]
 }
