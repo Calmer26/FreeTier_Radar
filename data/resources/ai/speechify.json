@@ -1,0 +1,68 @@
+[
+  {
+    "provider": "speechify",
+    "kind": "tts",
+    "listed_by": "api",
+    "limit_scope": "shared",
+    "usage_terms": "production-ok",
+    "rate_limits": {
+      "note": "500,000 characters a month; pauses until next month when used up.",
+      "source": "https://speechify.ai/pricing"
+    },
+    "card_required": "no",
+    "account_required": "yes",
+    "licence": null,
+    "data_logging": "unknown",
+    "model_id": "simba-3.0",
+    "name": "Simba 3.0",
+    "url": "https://speechify.ai/models",
+    "price_type": "freemium-quota",
+    "context_length": null,
+    "input_modalities": [
+      "text"
+    ],
+    "tool_calling": null,
+    "id": "speechify/simba-3.0",
+    "slug": "simba-3-0",
+    "category": "ai-model",
+    "status": "active",
+    "first_seen": "2026-10-04T15:21:14.769Z",
+    "last_seen": "2026-10-04T15:21:14.769Z",
+    "missing_since": null,
+    "removed_at": null,
+    "fingerprint": "f1db5f99cc05d97d"
+  },
+  {
+    "provider": "speechify",
+    "kind": "tts",
+    "listed_by": "api",
+    "limit_scope": "shared",
+    "usage_terms": "production-ok",
+    "rate_limits": {
+      "note": "500,000 characters a month; pauses until next month when used up.",
+      "source": "https://speechify.ai/pricing"
+    },
+    "card_required": "no",
+    "account_required": "yes",
+    "licence": null,
+    "data_logging": "unknown",
+    "model_id": "simba-3.2",
+    "name": "Simba 3.2",
+    "url": "https://speechify.ai/models",
+    "price_type": "freemium-quota",
+    "context_length": null,
+    "input_modalities": [
+      "text"
+    ],
+    "tool_calling": null,
+    "id": "speechify/simba-3.2",
+    "slug": "simba-3-2",
+    "category": "ai-model",
+    "status": "active",
+    "first_seen": "2026-10-04T15:21:14.769Z",
+    "last_seen": "2026-10-04T15:21:14.769Z",
+    "missing_since": null,
+    "removed_at": null,
+    "fingerprint": "12983078d1e82961"
+  }
+]

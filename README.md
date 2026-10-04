@@ -11,7 +11,7 @@ change history and ready-to-paste Cline settings.
 ## The list
 
 <!-- LIST:START -->
-_176 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
+_178 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
 
 🟢 responded to the latest daily test · 🟡 rate-limited or slow · 🔴 failed · 🤖 agent-ready (tool calling, ≥64k context, answered every test on 5 of the last 7 days)
 
@@ -232,7 +232,7 @@ _176 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [Muse Spark 1.3 Contributor](https://freetier-radar.marcelkanters.workers.dev/models/cline/cline-free-muse-spark-1-3-contributor/) | `cline-free/muse-spark-1.3-contributor` | unknown | ? | – |  |
 | [space-bunny-alpha](https://freetier-radar.marcelkanters.workers.dev/models/cline/stealth-space-bunny-alpha/) | `stealth/space-bunny-alpha` | unknown | ? | – |  |
 
-### Text-to-speech (19)
+### Text-to-speech (21)
 
 #### OpenRouter
 
@@ -282,6 +282,13 @@ _176 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [Eleven v3 Conversational](https://freetier-radar.marcelkanters.workers.dev/models/elevenlabs/eleven-v3-conversational/) | `eleven_v3_conversational` | 🟢 |
 | [Eleven v4](https://freetier-radar.marcelkanters.workers.dev/models/elevenlabs/eleven-v4/) | `eleven_v4` | 🟢 |
 | [Eleven v4 Turbo](https://freetier-radar.marcelkanters.workers.dev/models/elevenlabs/eleven-v4-turbo/) | `eleven_v4_turbo` | 🟢 |
+
+#### SpeechifyAI (Free plan)
+
+| Model | ID | Last test |
+|---|---|---|
+| [Simba 3.0](https://freetier-radar.marcelkanters.workers.dev/models/speechify/simba-3-0/) | `simba-3.0` | – |
+| [Simba 3.2](https://freetier-radar.marcelkanters.workers.dev/models/speechify/simba-3-2/) | `simba-3.2` | – |
 
 ### Speech-to-text (8)
 
