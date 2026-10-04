@@ -93,7 +93,7 @@ describe("buildFollowUpRequest", () => {
     };
     const body = JSON.parse(buildFollowUpRequest(r, { GROQ_API_KEY: "k" }, first).init.body as string);
     expect(body.messages.map((m: { role: string }) => m.role)).toEqual(["user", "assistant", "tool", "tool"]);
-    expect(body.messages[1]).toMatchObject({ content: null, reasoning_content: "need weather", tool_calls: [{ id: "abc", extra_content: { sig: "s" } }, { id: "call_1", type: "function" }] });
+    expect(body.messages[1]).toMatchObject({ content: "", reasoning_content: "need weather", tool_calls: [{ id: "abc", extra_content: { sig: "s" } }, { id: "call_1", type: "function" }] });
     expect(body.messages[2]).toEqual({ role: "tool", tool_call_id: "abc", content: '{"city":"Paris","temp_c":18,"condition":"cloudy"}' });
     expect(body.messages[3].tool_call_id).toBe("call_1");
     expect(body.tools[0].function.name).toBe("get_weather");

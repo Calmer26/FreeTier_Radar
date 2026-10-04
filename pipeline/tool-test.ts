@@ -108,7 +108,8 @@ export function buildFollowUpRequest(r: Resource, env: Env, first: ChatMessage):
   const calls = (first.tool_calls ?? []).map((c, i) => ({ ...c, type: c.type ?? "function", id: c.id || `call_${i}` }));
   const assistant = {
     role: "assistant",
-    content: first.content ?? null,
+    // Cloudflare refuses a null content (seen 2026-10-04); "" is valid everywhere.
+    content: first.content ?? "",
     tool_calls: calls,
     ...(first.reasoning_content ? { reasoning_content: first.reasoning_content } : {}),
   };
