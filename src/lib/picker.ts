@@ -68,7 +68,7 @@ function why(x: RankedModel, use: string): string {
   return parts.join(" · ");
 }
 
-const inputs = activeModels.map((m) => ({ r: m, history: m.tests, tools: m.toolTests, arena: m.arena }));
+const inputs = activeModels.map((m) => ({ r: m, history: m.tests, tools: m.toolTests, multiTools: m.multiToolTests, arena: m.arena }));
 
 const candidate = (x: RankedModel, use: string): PickerCandidate => {
   const m = x.r as ModelView;

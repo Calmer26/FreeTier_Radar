@@ -12,9 +12,11 @@ import type { ArenaScores } from "./arena";
 import { usableNow, type FamilyMember } from "./families";
 import { PROVIDERS } from "./providers";
 import { reliability, RANKING_WINDOW_DAYS } from "./rankings";
-import type { DataLogging, LimitScope, ModelKind, RateLimits, UsageTerms } from "./types";
+import type { DataLogging, JsonResult, LimitScope, ModelKind, RateLimits, ToolResult, UsageTerms } from "./types";
 
 export interface WorkingInput extends FamilyMember {
+  multiToolTests: ToolResult[];
+  jsonTests: JsonResult[];
   context_length: number | null;
   input_modalities: string[] | null;
   limits: RateLimits | null;
@@ -40,6 +42,13 @@ export interface WorkingModel {
   answered: { days: number; of: number; share: number | null };
   median_latency_ms: number | null;
   tool_calls: { passed: number; of: number } | null;
+  /** Multi-turn tool test: sends the tool result back, expects a final answer that uses it. */
+  multi_tool_calls: { passed: number; of: number } | null;
+  /**
+   * JSON-schema output test. `response_format`: what the provider accepted at the latest
+   * test ("json_schema", or "json_object" after refusing json_schema; null: neither).
+   */
+  json_schema: { passed: number; of: number; response_format: JsonResult["mode"] | null } | null;
   last_test_at: string;
   limits: RateLimits | null;
   limit_scope: LimitScope;
@@ -66,9 +75,15 @@ export function endpointFor(m: Pick<WorkingInput, "provider" | "kind" | "model_i
   return { api: "openai", endpoint: `${base}/${m.kind === "tts" ? "audio/speech" : m.kind === "stt" ? "audio/transcriptions" : "images/generations"}` };
 }
 
+/** passed/of over the ranking window, or null when never tested (or not a chat model). */
+function passCounts(m: WorkingInput, results: ToolResult[]): { passed: number; of: number } | null {
+  const s = toolStats(results, RANKING_WINDOW_DAYS);
+  return m.kind === "chat" && s.tested ? { passed: s.passed, of: s.tested } : null;
+}
+
 function entry(m: WorkingInput, siteUrl: string): WorkingModel {
   const rel = reliability(m.tests);
-  const tools = toolStats(m.toolTests, RANKING_WINDOW_DAYS);
+  const json = passCounts(m, m.jsonTests);
   return {
     provider: m.provider,
     model_id: m.model_id,
@@ -78,7 +93,9 @@ function entry(m: WorkingInput, siteUrl: string): WorkingModel {
     context_length: m.context_length,
     answered: { days: rel.responded, of: rel.tested, share: rel.share == null ? null : Math.round(rel.share * 100) / 100 },
     median_latency_ms: rel.medianLatencyMs,
-    tool_calls: m.kind === "chat" && tools.tested ? { passed: tools.passed, of: tools.tested } : null,
+    tool_calls: passCounts(m, m.toolTests),
+    multi_tool_calls: passCounts(m, m.multiToolTests),
+    json_schema: json && { ...json, response_format: m.jsonTests.findLast((t) => t.status !== "error")?.mode ?? null },
     last_test_at: m.tests.at(-1)!.at,
     limits: m.limits,
     limit_scope: m.limit_scope,
@@ -92,14 +109,30 @@ function entry(m: WorkingInput, siteUrl: string): WorkingModel {
 const share = (m: WorkingInput) => reliability(m.tests).share ?? -1;
 const latency = (m: WorkingInput) => reliability(m.tests).medianLatencyMs ?? Number.MAX_SAFE_INTEGER;
 const toolShare = (m: WorkingInput) => toolStats(m.toolTests, RANKING_WINDOW_DAYS).share ?? -1;
+/** Null when never tested: the multi-turn test is newer than the tool-call test. */
+const multiShare = (m: WorkingInput) => toolStats(m.multiToolTests, RANKING_WINDOW_DAYS).share;
 const arena = (m: WorkingInput) => m.arena?.boards.text?.rating ?? -1;
 
 /** General order: answers most often, then rated higher, then faster. */
 const general = (a: WorkingInput, b: WorkingInput) => share(b) - share(a) || arena(b) - arena(a) || latency(a) - latency(b);
-/** Agent order: passes tool calls most often, then answers most often, then faster. */
-const agentOrder = (a: WorkingInput, b: WorkingInput) => toolShare(b) - toolShare(a) || general(a, b);
+/**
+ * Agent order: passes the multi-turn tool test most often (the single-turn test until it
+ * has one), then single-turn tool calls, then answers most often, then faster.
+ */
+const agentShare = (m: WorkingInput) => multiShare(m) ?? toolShare(m);
+const agentOrder = (a: WorkingInput, b: WorkingInput) => agentShare(b) - agentShare(a) || toolShare(b) - toolShare(a) || general(a, b);
+/** Tool calls pass at least half the time, multi-turn too once tested, and the context fits an agent. */
+const agentOk = (m: WorkingInput) =>
+  toolShare(m) >= 0.5 && (multiShare(m) ?? 1) >= 0.5 && (m.context_length ?? 0) >= AGENT_MIN_CONTEXT;
+
+/**
+ * Bumped when a field is removed, renamed or changes meaning; new fields don't bump it.
+ * Documented on /developers/.
+ */
+export const FEED_SCHEMA_VERSION = 1;
 
 export interface WorkingFeed {
+  schema_version: number;
   generated_at: string;
   about: string;
   lists: Record<"chat" | "agent" | "vision" | Exclude<ModelKind, "chat">, WorkingModel[]>;
@@ -110,11 +143,12 @@ export function workingFeed(models: WorkingInput[], siteUrl: string, now: string
   const chat = ok.filter((m) => m.kind === "chat");
   const list = (xs: WorkingInput[], order = general) => [...xs].sort(order).map((m) => entry(m, siteUrl));
   return {
+    schema_version: FEED_SCHEMA_VERSION,
     generated_at: now,
     about: `Free models that answered the latest daily test, best first. Evaluation-only and Cline-only models are left out. Docs: ${new URL("/developers/", siteUrl).href}`,
     lists: {
       chat: list(chat),
-      agent: list(chat.filter((m) => toolShare(m) >= 0.5 && (m.context_length ?? 0) >= AGENT_MIN_CONTEXT), agentOrder),
+      agent: list(chat.filter(agentOk), agentOrder),
       vision: list(chat.filter((m) => m.input_modalities?.includes("image"))),
       tts: list(ok.filter((m) => m.kind === "tts")),
       stt: list(ok.filter((m) => m.kind === "stt")),

@@ -16,7 +16,7 @@ export function GET() {
     "/", "/changes/", "/rankings/", "/cline/", "/image-models/", "/voice-models/", "/free-apps/", "/free/", "/developers/", "/offers/", "/providers/", "/roundups/", "/methodology/", "/sponsor/",
   ].map((p) => ({ loc: url(p) }));
 
-  const inputs = activeModels.map((m) => ({ r: m, history: m.tests, tools: m.toolTests, arena: m.arena }));
+  const inputs = activeModels.map((m) => ({ r: m, history: m.tests, tools: m.toolTests, multiTools: m.multiToolTests, arena: m.arena }));
   // Empty rankings are noindex, so leave them out too.
   for (const r of RANKINGS) if (rank(r, inputs).length) entries.push({ loc: url(`/rankings/${r.slug}/`) });
   for (const p of PROVIDER_IDS) {

@@ -1,7 +1,8 @@
 ---
 import Base from "../layouts/Base.astro";
 import { activeModels } from "../lib/data";
-import { workingFeed } from "../../pipeline/working";
+import { RANKING_WINDOW_DAYS } from "../../pipeline/rankings";
+import { FEED_SCHEMA_VERSION, workingFeed } from "../../pipeline/working";
 import { SITE } from "../../site.config";
 
 const feed = workingFeed(activeModels, SITE.url, new Date().toISOString());
@@ -59,7 +60,7 @@ const sample = JSON.stringify(feed.lists.agent[0] ?? feed.lists.chat[0] ?? {}, n
     <h2>What's in it</h2>
     <ul>
       <li><code>lists.chat</code>: chat models, most reliable first (then higher LMArena rating, then faster).</li>
-      <li><code>lists.agent</code>: chat models that pass our tool-call test at least half the time, with at least 64k context; best tool-caller first. Use these for agents.</li>
+      <li><code>lists.agent</code>: chat models that pass our tool-call test at least half the time (and the multi-turn tool test too, once they have results), with at least 64k context; best multi-turn tool-caller first. Use these for agents.</li>
       <li><code>lists.vision</code>: chat models that accept images.</li>
       <li><code>lists.tts</code>, <code>lists.stt</code>, <code>lists.image</code>: speech and image models.</li>
     </ul>
@@ -75,6 +76,19 @@ const sample = JSON.stringify(feed.lists.agent[0] ?? feed.lists.chat[0] ?? {}, n
       name we use for that provider's key (null: no key needed). Cloudflare endpoints contain <code>{"{account}"}</code>:
       put your account id there.
     </p>
+    <p>
+      <code>schema_version</code> (now {FEED_SCHEMA_VERSION}) goes up when a field is removed, renamed or changes
+      meaning. New fields can appear without a bump, so ignore fields you don't know.
+    </p>
+    <p>
+      Chat entries carry three test records over the last {RANKING_WINDOW_DAYS} days, each as
+      <code>{"{ passed, of }"}</code>, or null before the first test (see the <a href="/methodology/">methodology</a>):
+    </p>
+    <ul>
+      <li><code>tool_calls</code>: the model calls a <code>get_weather</code> tool with the right argument.</li>
+      <li><code>multi_tool_calls</code>: it also reads the tool's result back and answers with it, without calling again.</li>
+      <li><code>json_schema</code>: it extracts a small object from a Dutch text as valid JSON with the right values. Its <code>response_format</code> says what the provider accepted at the latest test: <code>"json_schema"</code> (send your schema), <code>"json_object"</code> (it refused a schema; JSON mode worked, so describe the fields in the prompt) or null (it refused both).</li>
+    </ul>
 
     <h2>Example: fall back through free models</h2>
     <p class="sub">JavaScript (Node 18+ or any runtime with fetch):</p>

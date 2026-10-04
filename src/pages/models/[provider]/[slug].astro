@@ -39,6 +39,9 @@ const siblings = m.siblings.map((id) => modelById.get(id)!).filter(Boolean);
 const fit = codingFit(m.id);
 const family = familyFor(m.id);
 const tt = toolStats(m.toolTests, RANKING_WINDOW_DAYS);
+const mt = toolStats(m.multiToolTests, RANKING_WINDOW_DAYS);
+const jt = toolStats(m.jsonTests, RANKING_WINDOW_DAYS);
+const testedText = (t: { passed: number; tested: number }) => (t.tested ? `passed on ${t.passed} of ${t.tested} days` : "not run yet");
 // Search-friendly title and description: "Qwen3.8 27B free on OpenRouter" plus the key facts.
 const cleanName = m.name.replace(/\s*\(free\)\s*/i, " ").replace(/^[^:]+:\s*/, "").trim() || m.name;
 const providerShort = provider.label.split(" (")[0];
@@ -240,7 +243,9 @@ const breadcrumbs = {
   </p>}
   {m.kind === "chat" && m.testable && (
     <p>
-      <strong>Tool-call test:</strong> {tt.tested ? `passed on ${tt.passed} of ${tt.tested} days` : "not run yet"}.
+      <strong>Tool-call test:</strong> {testedText(tt)}.
+      {" "}<strong>Multi-turn tool test:</strong> {testedText(mt)}.
+      {" "}<strong>JSON output test:</strong> {testedText(jt)}.
       {" "}<strong>Coding rankings:</strong>{" "}
       {fit.coding || fit.plan || fit.act ? (
         <>

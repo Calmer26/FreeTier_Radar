@@ -141,12 +141,22 @@ export interface ToolResult {
   latency_ms: number | null;
 }
 
+/** Result of the JSON-schema output test (chat models only). See json-test.ts. */
+export interface JsonResult extends ToolResult {
+  /** The response_format the provider accepted; absent when it refused both. */
+  mode?: "json_schema" | "json_object";
+}
+
 export interface TestHistory {
   updated_at: string | null;
   /** Rolling window, newest last, at most one entry per UTC day per resource. */
   results: Record<string, TestResult[]>;
   /** Tool-call test results, same window; absent in files written before it existed. */
   tool_results?: Record<string, ToolResult[]>;
+  /** Multi-turn tool test (tool result → final answer); absent in older files. */
+  multi_tool_results?: Record<string, ToolResult[]>;
+  /** JSON-schema output test; absent in older files. */
+  json_results?: Record<string, JsonResult[]>;
   /** Limits read from response headers (Groq publishes them), by resource id. */
   observed_limits: Record<string, RateLimits>;
 }

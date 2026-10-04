@@ -63,4 +63,15 @@ describe("agentReadiness with the tool-call test", () => {
     const a = agentReadiness(resource({ provider: "llm7", limit_scope: "shared", rate_limits: { rpm: 10, rph: 60 } }), days(7), [tool("pass", 7)]);
     expect(a.caveat).toMatch(/60 requests\/hour/);
   });
+
+  it("marks a model partial when it keeps failing the multi-turn tool test", () => {
+    const a = agentReadiness(resource(), days(7), [tool("pass", 6), tool("pass", 7)], [tool("fail", 6), tool("fail", 7)]);
+    expect(a.level).toBe("partial");
+    expect(a.reasons).toContain("passed the multi-turn tool test on 0 of 2 days");
+  });
+
+  it("stays yes when the multi-turn test passes, or hasn't run yet", () => {
+    expect(agentReadiness(resource(), days(7), [tool("pass", 7)], [tool("fail", 6), tool("pass", 7)]).level).toBe("yes");
+    expect(agentReadiness(resource(), days(7), [tool("pass", 7)], []).level).toBe("yes");
+  });
 });

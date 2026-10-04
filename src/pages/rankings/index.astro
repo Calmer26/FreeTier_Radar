@@ -4,7 +4,7 @@ import { activeModels } from "../../lib/data";
 import { rank, RANKINGS } from "../../../pipeline/rankings";
 import { PROVIDERS } from "../../../pipeline/providers";
 
-const inputs = activeModels.map((m) => ({ r: m, history: m.tests, tools: m.toolTests, arena: m.arena }));
+const inputs = activeModels.map((m) => ({ r: m, history: m.tests, tools: m.toolTests, multiTools: m.multiToolTests, arena: m.arena }));
 const lists = RANKINGS.map((def) => ({ def, top: rank(def, inputs, 3) }));
 ---
 <Base title="Rankings" description="The best free AI models for coding (plan and act), vision, long context, text-to-speech and speech-to-text, ranked by daily tests.">

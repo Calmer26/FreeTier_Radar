@@ -46,6 +46,7 @@ export interface RankInput {
   r: Resource;
   history: TestResult[];
   tools?: ToolResult[];
+  multiTools?: ToolResult[];
   arena?: ArenaScores | null;
 }
 
@@ -86,7 +87,7 @@ const byReliability = (a: RankedModel, b: RankedModel) => share(b) - share(a) ||
 
 /** Tool-call pass share over the whole window; -1 when never tested. */
 const toolShare = (x: RankedModel) => toolStats(x.tools, RANKING_WINDOW_DAYS).share ?? -1;
-const agentLevel = (x: RankedModel) => agentReadiness(x.r, x.history, x.tools).level;
+const agentLevel = (x: RankedModel) => agentReadiness(x.r, x.history, x.tools, x.multiTools).level;
 
 /** Arena rating for coding: WebDev when rated there, else Text; -1 when unrated. */
 const codingRating = (x: RankedModel) => x.arena?.boards.webdev?.rating ?? x.arena?.boards.text?.rating ?? -1;

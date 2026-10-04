@@ -15,7 +15,7 @@ export function clineSnippet(m: ModelView): string {
   return `API Provider: OpenAI Compatible\nBase URL:     ${p.base_url}\nAPI Key:      ${key}\nModel ID:     ${m.model_id}`;
 }
 
-const inputs = activeModels.map((m) => ({ r: m, history: m.tests, tools: m.toolTests, arena: m.arena }));
+const inputs = activeModels.map((m) => ({ r: m, history: m.tests, tools: m.toolTests, multiTools: m.multiToolTests, arena: m.arena }));
 const def = (slug: string) => RANKINGS.find((r) => r.slug === slug)!;
 
 export const planRanking = rank(def("coding-plan"), inputs);

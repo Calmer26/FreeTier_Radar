@@ -21,7 +21,7 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { SITE } from "../site.config";
 import { baseUrl, CARTESIA_VERSION, PROVIDERS } from "./providers";
-import type { RateLimits, Resource, TestHistory, TestResult, TestStatus, ToolResult } from "./types";
+import type { JsonResult, RateLimits, Resource, TestHistory, TestResult, TestStatus, ToolResult } from "./types";
 
 export const TEST_TIMEOUT_MS = 30_000;
 /** Large image models (FLUX.2 dev) need well over 30 s for one picture. */
@@ -88,6 +88,10 @@ export interface TestOutcome {
   detail: string | null;
   /** Tool-call test result, when one ran and wasn't rate-limited. */
   tool?: ToolResult | null;
+  /** Multi-turn tool test result, likewise. */
+  multiTool?: ToolResult | null;
+  /** JSON-schema output test result, likewise. */
+  json?: JsonResult | null;
 }
 
 /**
@@ -381,7 +385,7 @@ export function recordResults(
   const day = (t: { at: string }) => t.at.slice(0, 10);
   /**
    * Keep the window, and replace an earlier entry from the same slot: test results keep
-   * one per half-day (morning and peak hours), tool results one per day.
+   * one per half-day (morning and peak hours), tool, multi-turn and JSON results one per day.
    */
   const merge = <T extends { at: string }>(old: T[] | undefined, next: T | null | undefined, key: (t: { at: string }) => string = slotKey): T[] => {
     const kept = (old ?? []).filter((t) => day(t) >= cutoff && (!next || key(t) !== key(next)));
@@ -389,10 +393,16 @@ export function recordResults(
   };
   const results: TestHistory["results"] = {};
   const tool_results: NonNullable<TestHistory["tool_results"]> = {};
+  const multi_tool_results: NonNullable<TestHistory["multi_tool_results"]> = {};
+  const json_results: NonNullable<TestHistory["json_results"]> = {};
   const observed_limits: TestHistory["observed_limits"] = {};
   const oldTools = history.tool_results ?? {};
+  const oldMulti = history.multi_tool_results ?? {};
+  const oldJson = history.json_results ?? {};
 
-  const ids = new Set([...Object.keys(history.results), ...Object.keys(oldTools), ...outcomes.keys()]);
+  const ids = new Set([
+    ...Object.keys(history.results), ...Object.keys(oldTools), ...Object.keys(oldMulti), ...Object.keys(oldJson), ...outcomes.keys(),
+  ]);
   for (const id of [...ids].sort()) {
     if (!knownIds.has(id)) continue;
     const outcome = outcomes.get(id);
@@ -400,8 +410,12 @@ export function recordResults(
     if (list.length) results[id] = list;
     const tools = merge(oldTools[id], outcome?.tool, day);
     if (tools.length) tool_results[id] = tools;
+    const multi = merge(oldMulti[id], outcome?.multiTool, day);
+    if (multi.length) multi_tool_results[id] = multi;
+    const json = merge(oldJson[id], outcome?.json, day);
+    if (json.length) json_results[id] = json;
     const limits = outcome?.limits ?? history.observed_limits[id];
     if (limits) observed_limits[id] = limits;
   }
-  return { updated_at: now, results, tool_results, observed_limits };
+  return { updated_at: now, results, tool_results, multi_tool_results, json_results, observed_limits };
 }

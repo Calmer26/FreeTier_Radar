@@ -5,12 +5,14 @@
  *
  *   yes      tool calling, ≥ 64k context, answered every test (morning and peak hours) on
  *            ≥ 5 of the last 7 test days,
- *            passed at least half its recent tool-call tests, and not evaluation-only
+ *            passed at least half its recent tool-call tests and (once tested) half its
+ *            multi-turn tool tests, and not evaluation-only
  *   partial  tool calling and ≥ 64k context, but the test history or terms fall short
  *   no       otherwise (including "tool support unknown")
  *
  * Tool calling counts as present when the provider says so OR the model passed our
- * daily tool-call test (Groq publishes nothing, the test shows it).
+ * daily tool-call test (Groq publishes nothing, the test shows it). The multi-turn test
+ * checks the rest of an agent's loop: reading a tool result back and answering with it.
  *
  * `caveat` carries the rate-limit warning: an agent sends one request per tool step,
  * so a low daily cap shared across all free models runs out within a task or two.
@@ -46,10 +48,16 @@ export interface AgentReadiness {
   caveat: string | null;
 }
 
-export function agentReadiness(r: Resource, history: TestResult[] = [], tools: ToolResult[] = []): AgentReadiness {
+export function agentReadiness(
+  r: Resource,
+  history: TestResult[] = [],
+  tools: ToolResult[] = [],
+  multiTools: ToolResult[] = [],
+): AgentReadiness {
   if (r.kind !== "chat") return { level: "no", reasons: ["not a chat model"], caveat: null };
   const reasons: string[] = [];
   const ts = toolStats(tools);
+  const ms = toolStats(multiTools);
   if (r.tool_calling !== true && ts.passed === 0) {
     reasons.push(r.tool_calling === false || ts.tested > 0 ? "no working tool calling" : "tool calling not published or tested yet");
   }
@@ -61,6 +69,7 @@ export function agentReadiness(r: Resource, history: TestResult[] = [], tools: T
   if (recent.length === 0) reasons.push("not tested yet");
   else if (answered < AGENT_MIN_RESPONDED_DAYS) reasons.push(`answered every test on ${answered} of the last ${recent.length} test days`);
   if (ts.share !== null && ts.share < 0.5) reasons.push(`passed the tool-call test on ${ts.passed} of ${ts.tested} days`);
+  if (ms.share !== null && ms.share < 0.5) reasons.push(`passed the multi-turn tool test on ${ms.passed} of ${ms.tested} days`);
   if (r.usage_terms === "evaluation-only") reasons.push("evaluation-only terms");
 
   let caveat: string | null = null;

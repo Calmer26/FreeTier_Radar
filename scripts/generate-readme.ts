@@ -36,7 +36,7 @@ const sections = MODEL_KINDS.flatMap((kind) => {
     const info = PROVIDERS[p];
     const rows = kind === "chat"
       ? list.map((r) => {
-          const agent = agentReadiness(r, history(r.id), tests.tool_results?.[r.id]).level === "yes" ? "🤖" : "";
+          const agent = agentReadiness(r, history(r.id), tests.tool_results?.[r.id], tests.multi_tool_results?.[r.id]).level === "yes" ? "🤖" : "";
           const tools = r.tool_calling === true ? "yes" : r.tool_calling === false ? "no" : "?";
           return `| ${link(r)} | \`${r.model_id}\` | ${formatContext(r.context_length)} | ${tools} | ${status(r.id)} | ${agent} |`;
         })

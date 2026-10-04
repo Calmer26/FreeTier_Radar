@@ -4,11 +4,14 @@ import { endpointFor, workingFeed, type WorkingInput } from "./working";
 
 const day = (d: number, status: TestResult["status"], latency = 500): TestResult =>
   ({ at: `2026-09-${String(d).padStart(2, "0")}T06:00:00Z`, status, latency_ms: latency });
-const pass = (d: number) => ({ at: `2026-09-${String(d).padStart(2, "0")}T06:01:00Z`, status: "pass" as const, latency_ms: 500 });
+const result = <S extends "pass" | "fail" | "error">(status: S) => (d: number) =>
+  ({ at: `2026-09-${String(d).padStart(2, "0")}T06:01:00Z`, status, latency_ms: 500 });
+const pass = result("pass");
+const fail = result("fail");
 
 const model = (id: string, over: Partial<WorkingInput> = {}): WorkingInput => ({
   id, provider: "groq", kind: "chat", model_id: id, name: id, usage_terms: "production-ok", testable: true,
-  tests: [day(1, "responded"), day(2, "responded")], toolTests: [], context_length: 131_072, input_modalities: ["text"],
+  tests: [day(1, "responded"), day(2, "responded")], toolTests: [], multiToolTests: [], jsonTests: [], context_length: 131_072, input_modalities: ["text"],
   limits: null, limit_scope: "per-model", data_logging: "unknown", arena: null, href: `/models/groq/${id}/`, ...over,
 });
 
@@ -39,6 +42,10 @@ describe("workingFeed", () => {
     "2026-09-30T00:00:00Z",
   );
 
+  it("carries its schema version", () => {
+    expect(feed.schema_version).toBe(1);
+  });
+
   it("keeps only places an app can use that answered the latest test, most reliable first", () => {
     expect(feed.lists.chat.map((m) => m.model_id)).toEqual(["steady", "eyes", "flaky"]);
     expect(feed.lists.tts.map((m) => m.model_id)).toEqual(["voice"]);
@@ -48,5 +55,29 @@ describe("workingFeed", () => {
     expect(feed.lists.agent.map((m) => m.model_id)).toEqual(["steady"]);
     expect(feed.lists.vision.map((m) => m.model_id)).toEqual(["eyes"]);
     expect(feed.lists.agent[0]).toMatchObject({ tool_calls: { passed: 2, of: 2 }, key_env: "GROQ_API_KEY", page: "https://example.dev/models/groq/steady/" });
+  });
+});
+
+describe("workingFeed: multi-turn and JSON tests", () => {
+  const feed = workingFeed(
+    [
+      model("loops", { toolTests: [pass(1), pass(2)], multiToolTests: [pass(1), pass(2)], jsonTests: [{ ...pass(2), mode: "json_object" }] }),
+      model("single", { toolTests: [pass(1), pass(2)] }),
+      model("stuck", { toolTests: [pass(1), pass(2)], multiToolTests: [fail(1), fail(2)] }),
+      model("half", { toolTests: [pass(1), pass(2)], multiToolTests: [fail(1), pass(2)], jsonTests: [{ ...pass(1), mode: "json_schema" }, result("error")(2)] }),
+    ],
+    "https://example.dev",
+    "2026-09-30T00:00:00Z",
+  );
+  const byId = Object.fromEntries(feed.lists.chat.map((m) => [m.model_id, m]));
+
+  it("reports passes per test, and the response_format the provider took last", () => {
+    expect(byId.loops).toMatchObject({ multi_tool_calls: { passed: 2, of: 2 }, json_schema: { passed: 1, of: 1, response_format: "json_object" } });
+    expect(byId.half.json_schema).toEqual({ passed: 1, of: 1, response_format: "json_schema" });
+    expect(byId.single).toMatchObject({ multi_tool_calls: null, json_schema: null });
+  });
+
+  it("leaves models that fail the multi-turn test out of the agent list, multi-turn passers first", () => {
+    expect(feed.lists.agent.map((m) => m.model_id)).toEqual(["loops", "single", "half"]);
   });
 });

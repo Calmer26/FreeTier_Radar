@@ -31,6 +31,11 @@ export interface ProviderInfo {
   testable?: boolean;
   /** False to skip the 18:10 UTC peak-hours test (a small monthly call budget, like Cohere's). */
   peak_test?: boolean;
+  /**
+   * Run the multi-turn tool and JSON-schema tests for each model only every this many
+   * days, spread over the days (a small daily or monthly call budget). Default: daily.
+   */
+  extra_tests_every_days?: number;
   usage_terms: UsageTerms;
   usage_terms_note: string | null;
   limit_scope: LimitScope;
@@ -257,6 +262,7 @@ export const PROVIDERS: Record<ProviderId, ProviderInfo> = {
     key_env: "COHERE_API_KEY",
     list_needs_key: true,
     peak_test: false,
+    extra_tests_every_days: 7,
     usage_terms: "unknown",
     // docs.cohere.com: rate-limits, cohere-faqs, going-live; cohere.com/enterprise-data-commitments. Checked 2026-10-02.
     usage_terms_note: "Cohere gives every account a free, rate-limited trial key, which its FAQ describes for personal projects and prototyping; going live means upgrading to a paid production key. Trial keys get 1,000 API calls a month in total. Prompts and generations may be used to train Cohere's models unless you opt out in the dashboard.",
@@ -363,6 +369,7 @@ export const PROVIDERS: Record<ProviderId, ProviderInfo> = {
     base_url: "https://api.bazaarlink.ai/v1",
     key_env: "BAZAARLINK_API_KEY",
     list_needs_key: true,
+    extra_tests_every_days: 7,
     usage_terms: "unknown",
     // bazaarlink.ai/free and bazaarlink.ai/en/docs, checked 2026-10-03.
     usage_terms_note: "BazaarLink (a Taiwanese company) gives a free key without a card for its \":free\" models. Free use is counted in units that grow with the prompt length; an account with credit gets twice the allowance and falls back to paid use once it runs out. Its docs say message content isn't stored by default.",
@@ -381,6 +388,7 @@ export const PROVIDERS: Record<ProviderId, ProviderInfo> = {
     base_url: "https://api.orcarouter.ai/v1",
     key_env: "ORCAROUTER_API_KEY",
     list_needs_key: true,
+    extra_tests_every_days: 7,
     usage_terms: "unknown",
     // docs.orcarouter.ai/routing/free-models and www.orcarouter.ai/api/free-package/public, checked 2026-10-03.
     usage_terms_note: "OrcaRouter prices a few models at $0 (the \"-free\" ids). Its limits are tuned live and published at its free-package endpoint; a small, unpublished prompt-length cap applies to free requests. Data use isn't stated for the free models.",

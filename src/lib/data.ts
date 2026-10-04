@@ -15,7 +15,7 @@ import type { VoicesFile } from "../../pipeline/voices";
 import { PROVIDERS } from "../../pipeline/providers";
 import { isPaidOnly, isUnreachable } from "../../pipeline/reachability";
 import { withDefaults } from "../../pipeline/store-defaults";
-import type { FreeApp, Offer, ProviderId, RateLimits, Resource, ResourceEvent, SponsorFile, TestHistory, TestResult, ToolResult } from "../../pipeline/types";
+import type { FreeApp, JsonResult, Offer, ProviderId, RateLimits, Resource, ResourceEvent, SponsorFile, TestHistory, TestResult, ToolResult } from "../../pipeline/types";
 
 const resourceFiles = import.meta.glob<Resource[]>("../../data/resources/ai/*.json", { eager: true, import: "default" });
 const eventFiles = import.meta.glob<string>("../../data/events/*.jsonl", { eager: true, query: "?raw", import: "default" });
@@ -31,6 +31,10 @@ export interface ModelView extends Resource {
   tests: TestResult[];
   /** Daily tool-call test results (chat models). */
   toolTests: ToolResult[];
+  /** Multi-turn tool test results (chat models). */
+  multiToolTests: ToolResult[];
+  /** JSON-schema output test results (chat models). */
+  jsonTests: JsonResult[];
   lastTest: TestResult | null;
   agent: AgentReadiness;
   /** Documented provider limits, or limits read from response headers. */
@@ -77,12 +81,15 @@ export const models: ModelView[] = withContext
   .map((r) => {
     const history = tests.results[r.id] ?? [];
     const toolTests = tests.tool_results?.[r.id] ?? [];
+    const multiToolTests = tests.multi_tool_results?.[r.id] ?? [];
     return {
       ...r,
       tests: history,
       toolTests,
+      multiToolTests,
+      jsonTests: tests.json_results?.[r.id] ?? [],
       lastTest: history.at(-1) ?? null,
-      agent: agentReadiness(r, history, toolTests),
+      agent: agentReadiness(r, history, toolTests, multiToolTests),
       limits: r.rate_limits ?? tests.observed_limits[r.id] ?? null,
       href: `/models/${r.provider}/${r.slug}/`,
       indexable: history.length > 0,

@@ -1,9 +1,11 @@
 /**
  * Daily test run (GitHub Actions, twice a day): one request per active free model.
  *
- * Morning (06:10 UTC): every kind, plus the tool-call test. Peak hours (18:10 UTC, any run
- * after 12:00): chat models only and no tool test, to see which free models still answer
- * when they're busiest. Each half-day keeps its own result (test-days.ts).
+ * Morning (06:10 UTC): every kind, plus the tool-call, multi-turn tool and JSON-schema
+ * tests for chat models (the last two weekly per model on small budgets, see
+ * `extraTestsDue`). Peak hours (18:10 UTC, any run after 12:00): chat models only and
+ * none of those extra tests, to see which free models still answer when they're
+ * busiest. Each half-day keeps its own result (test-days.ts).
  *
  * Providers run in parallel; models within a provider run one at a time with a gap
  * that keeps us well inside the free limits. After three rate-limit answers in a row
@@ -12,7 +14,8 @@
  */
 
 import { testModel, recordResults, type TestOutcome } from "./probe";
-import { testToolCall } from "./tool-test";
+import { testJsonOutput } from "./json-test";
+import { extraTestsDue, testToolCall } from "./tool-test";
 import { PROVIDER_IDS, PROVIDERS } from "./providers";
 import { readResources, readTests, writeTests } from "./store";
 import type { ProviderId, Resource, TestHistory } from "./types";
@@ -73,19 +76,35 @@ async function runProvider(p: ProviderId, models: Resource[], outcomes: Map<stri
     if (!outcome.detail) console.log(`  ${p} ${r.model_id}: ${outcome.result.status} (${outcome.result.latency_ms} ms)`);
     await sleep(GAP_MS[p]);
 
-    // Act-mode signal: only for chat models that just answered, and not ones known to lack tools.
-    if (!EVENING && r.kind === "chat" && outcome.result.status === "responded" && r.tool_calling !== false) {
-      const tool = await testToolCall(r, process.env);
-      outcome.tool = tool.result;
-      console.log(`  ${p} ${r.model_id}: tool call ${tool.result?.status ?? "rate-limited"}${tool.detail ? `: ${tool.detail}` : ""}`);
-      await sleep(GAP_MS[p]);
+    // Agent and extraction signals: only for chat models that just answered.
+    if (!EVENING && r.kind === "chat" && outcome.result.status === "responded") {
+      const extras = extraTestsDue(r, new Date().toISOString());
+      const log = (what: string, run: { result: { status: string } | null; detail: string | null }) =>
+        console.log(`  ${p} ${r.model_id}: ${what} ${run.result?.status ?? "rate-limited"}${run.detail ? `: ${run.detail}` : ""}`);
+      // Not for models known to lack tools.
+      if (r.tool_calling !== false) {
+        const tool = await testToolCall(r, process.env, { multiTurn: extras, pauseMs: GAP_MS[p] });
+        outcome.tool = tool.single.result;
+        log("tool call", tool.single);
+        if (tool.multi) {
+          outcome.multiTool = tool.multi.result;
+          log("multi-turn tool", tool.multi);
+        }
+        await sleep(GAP_MS[p]);
+      }
+      if (extras) {
+        const json = await testJsonOutput(r, process.env, { pauseMs: GAP_MS[p] });
+        outcome.json = json.result;
+        log(`json (${json.result?.mode ?? "refused"})`, json);
+        await sleep(GAP_MS[p]);
+      }
     }
   }
 }
 
 async function main() {
   const now = new Date().toISOString();
-  console.log(EVENING ? "Peak-hours test: chat models only, no tool test." : "Morning test: every model, plus tool calls.");
+  console.log(EVENING ? "Peak-hours test: chat models only, no tool or JSON tests." : "Morning test: every model, plus tool-call and JSON tests.");
   const resources = readResources();
   const history = readTests();
   const outcomes = new Map<string, TestOutcome>();
