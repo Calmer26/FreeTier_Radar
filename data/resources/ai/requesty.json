@@ -107,6 +107,40 @@
     "kind": "chat",
     "listed_by": "api",
     "limit_scope": "shared",
+    "usage_terms": "unknown",
+    "rate_limits": {
+      "rpd": 200,
+      "note": "200 requests a day across all free models.",
+      "source": "https://www.requesty.ai/pricing"
+    },
+    "card_required": "no",
+    "account_required": "yes",
+    "licence": null,
+    "data_logging": "not-used",
+    "model_id": "novita/ling-3.1-flash",
+    "name": "ling-3.1-flash",
+    "url": "https://www.requesty.ai/free-models",
+    "price_type": "free",
+    "context_length": 262144,
+    "input_modalities": [
+      "text"
+    ],
+    "tool_calling": true,
+    "id": "requesty/novita/ling-3.1-flash",
+    "slug": "novita-ling-3-1-flash",
+    "category": "ai-model",
+    "status": "active",
+    "first_seen": "2026-10-05T15:21:12.183Z",
+    "last_seen": "2026-10-05T15:21:12.183Z",
+    "missing_since": null,
+    "removed_at": null,
+    "fingerprint": "ce5f687ff2a90fef"
+  },
+  {
+    "provider": "requesty",
+    "kind": "chat",
+    "listed_by": "api",
+    "limit_scope": "shared",
     "usage_terms": "evaluation-only",
     "rate_limits": {
       "rpd": 200,

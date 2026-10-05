@@ -206,6 +206,7 @@ _184 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 |---|---|---|---|---|---|
 | [gemma-4-31b-it](https://freetier-radar.marcelkanters.workers.dev/models/requesty/google-gemma-4-31b-it/) | `google/gemma-4-31b-it` | 262k | yes | 🟢 |  |
 | [leanstral-1-5](https://freetier-radar.marcelkanters.workers.dev/models/requesty/mistral-leanstral-1-5/) | `mistral/leanstral-1-5` | 262k | yes | 🟢 |  |
+| [ling-3.1-flash](https://freetier-radar.marcelkanters.workers.dev/models/requesty/novita-ling-3-1-flash/) | `novita/ling-3.1-flash` | 262k | yes | – |  |
 | [muse-glimmer-30b](https://freetier-radar.marcelkanters.workers.dev/models/requesty/nvidia-muse-glimmer-30b/) | `nvidia/muse-glimmer-30b` | 131k | yes | 🟢 |  |
 | [nemotron-3-nano-omni-30b-a3b-reasoning](https://freetier-radar.marcelkanters.workers.dev/models/requesty/nvidia-nemotron-3-nano-omni-30b-a3b-reasoning/) | `nvidia/nemotron-3-nano-omni-30b-a3b-reasoning` | 131k | yes | 🔴 |  |
 | [nemotron-3-super-120b-a12b](https://freetier-radar.marcelkanters.workers.dev/models/requesty/nvidia-nemotron-3-super-120b-a12b/) | `nvidia/nemotron-3-super-120b-a12b` | 1M | yes | 🟢 |  |
@@ -234,7 +235,6 @@ _184 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 
 | Model | ID | Context | Tools | Last test | Agent |
 |---|---|---|---|---|---|
-| [Deepseek-v4.1-Flash](https://freetier-radar.marcelkanters.workers.dev/models/cline/cline-free-deepseek-v4-1-flash/) | `cline-free/deepseek-v4.1-flash` | unknown | ? | – |  |
 | [Mimo V2.6 Flash](https://freetier-radar.marcelkanters.workers.dev/models/cline/cline-free-mimo-v2-6-flash/) | `cline-free/mimo-v2.6-flash` | unknown | ? | – |  |
 | [Muse Spark 1.3 Contributor](https://freetier-radar.marcelkanters.workers.dev/models/cline/cline-free-muse-spark-1-3-contributor/) | `cline-free/muse-spark-1.3-contributor` | unknown | ? | – |  |
 | [space-bunny-alpha](https://freetier-radar.marcelkanters.workers.dev/models/cline/stealth-space-bunny-alpha/) | `stealth/space-bunny-alpha` | unknown | ? | – |  |
