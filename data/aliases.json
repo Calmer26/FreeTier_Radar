@@ -69,6 +69,31 @@
     "status": "exact",
     "on": "2026-09-28"
   },
+  "cohere/c4ai-aya-expanse-32b": {
+    "arena": "c4ai-aya-expanse-32b",
+    "status": "exact",
+    "on": "2026-10-05"
+  },
+  "cohere/c4ai-aya-vision-32b": {
+    "arena": "c4ai-aya-vision-32b",
+    "status": "exact",
+    "on": "2026-10-05"
+  },
+  "cohere/command-a-03-2025": {
+    "arena": "command-a-03-2025",
+    "status": "exact",
+    "on": "2026-10-05"
+  },
+  "cohere/command-r-08-2024": {
+    "arena": "command-r-08-2024",
+    "status": "exact",
+    "on": "2026-10-05"
+  },
+  "cohere/command-r-plus-08-2024": {
+    "arena": "command-r-plus-08-2024",
+    "status": "exact",
+    "on": "2026-10-05"
+  },
   "google-ai-studio/gemini-2.5-flash": {
     "arena": "gemini-2.5-flash",
     "status": "exact",
@@ -153,6 +178,11 @@
     "arena": "qwen3.8-27b",
     "status": "exact",
     "on": "2026-09-28"
+  },
+  "hetzner/Qwen3.8-27B": {
+    "arena": "qwen3.8-27b",
+    "status": "exact",
+    "on": "2026-10-05"
   },
   "kilo/nvidia/nemotron-3-super-120b-a12b:free": {
     "arena": "nvidia-nemotron-3-super-120b-a12b",
@@ -304,6 +334,61 @@
     "status": "exact",
     "on": "2026-09-28"
   },
+  "ollama/deepseek-v4.1-flash": {
+    "arena": "Deepseek V4.1 Flash (Max)",
+    "status": "variant",
+    "on": "2026-10-05"
+  },
+  "ollama/glm-5.2": {
+    "arena": "GLM 5.2 (Max)",
+    "status": "variant",
+    "on": "2026-10-05"
+  },
+  "ollama/glm-5.3": {
+    "arena": "GLM 5.3 (Max)",
+    "status": "variant",
+    "on": "2026-10-05"
+  },
+  "ollama/glm-5.3-flash": {
+    "arena": "GLM 5.3 Flash",
+    "status": "exact",
+    "on": "2026-10-05"
+  },
+  "ollama/kimi-k2.6": {
+    "arena": "kimi-k2.6",
+    "status": "exact",
+    "on": "2026-10-05"
+  },
+  "ollama/kimi-k2.7-code": {
+    "arena": "kimi-k2.7-code",
+    "status": "exact",
+    "on": "2026-10-05"
+  },
+  "ollama/kimi-k3": {
+    "arena": "Kimi K3 (Max)",
+    "status": "variant",
+    "on": "2026-10-05"
+  },
+  "ollama/minimax-m2.7": {
+    "arena": "minimax-m2.7",
+    "status": "exact",
+    "on": "2026-10-05"
+  },
+  "ollama/minimax-m3": {
+    "arena": "minimax-m3",
+    "status": "exact",
+    "on": "2026-10-05"
+  },
+  "ollama/nemotron-3-super": {
+    "arena": "nvidia-nemotron-3-super-120b-a12b",
+    "status": "variant",
+    "on": "2026-10-05"
+  },
+  "ollama/nemotron-3-ultra": {
+    "arena": "nvidia-nemotron-3-ultra-550b-a55b-nvfp4",
+    "status": "variant",
+    "on": "2026-10-05"
+  },
   "openrouter/google/gemma-4-26b-a4b-it:free": {
     "arena": "gemma-4-26b-a4b",
     "status": "exact",
@@ -343,6 +428,41 @@
     "arena": "inkling",
     "status": "exact",
     "on": "2026-09-28"
+  },
+  "requesty/google/gemma-4-31b-it": {
+    "arena": "gemma-4-31b",
+    "status": "exact",
+    "on": "2026-10-05"
+  },
+  "requesty/nvidia/nemotron-3-nano-30b-a3b": {
+    "arena": "nvidia-nemotron-3-nano-30b-a3b-bf16",
+    "status": "exact",
+    "on": "2026-10-05"
+  },
+  "requesty/nvidia/nemotron-3-super-120b-a12b": {
+    "arena": "nvidia-nemotron-3-super-120b-a12b",
+    "status": "exact",
+    "on": "2026-10-05"
+  },
+  "requesty/nvidia/nemotron-3-ultra-550b-a55b": {
+    "arena": "nvidia-nemotron-3-ultra-550b-a55b-nvfp4",
+    "status": "exact",
+    "on": "2026-10-05"
+  },
+  "requesty/nvidia/nemotron-3.5-lightning-30b-a3b": {
+    "arena": "nvidia-nemotron-3.5-lightning-30b-a3b-nvfp4",
+    "status": "exact",
+    "on": "2026-10-05"
+  },
+  "requesty/poolside/laguna-m.1": {
+    "arena": "laguna-m.1",
+    "status": "exact",
+    "on": "2026-10-05"
+  },
+  "requesty/poolside/laguna-xs.2": {
+    "arena": "laguna-xs.2",
+    "status": "exact",
+    "on": "2026-10-05"
   },
   "zai/glm-4.7-flash": {
     "arena": "glm-4.7-flash",
