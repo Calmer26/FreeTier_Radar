@@ -216,12 +216,12 @@
     "data_logging": "unknown",
     "paid_version_pricing": [
       {
-        "usd": 0.09,
+        "usd": 0.0765,
         "unit": "M input tokens",
         "neurons": null
       },
       {
-        "usd": 0.3,
+        "usd": 0.255,
         "unit": "M output tokens",
         "neurons": null
       }
@@ -684,10 +684,10 @@
     "id": "openrouter/qwen/qwen3.8-27b:free",
     "slug": "qwen-qwen3-8-27b-free",
     "category": "ai-model",
-    "status": "active",
+    "status": "pending_removal",
     "first_seen": "2026-09-28T06:07:16.518Z",
     "last_seen": "2026-10-05T03:21:08.762Z",
-    "missing_since": null,
+    "missing_since": "2026-10-05T21:29:44.911Z",
     "removed_at": null,
     "fingerprint": "a5a4cb98a536f3cd",
     "kind": "chat",

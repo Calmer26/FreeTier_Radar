@@ -11,11 +11,11 @@ change history and ready-to-paste Cline settings.
 ## The list
 
 <!-- LIST:START -->
-_184 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
+_183 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
 
 🟢 responded to the latest daily test · 🟡 rate-limited or slow · 🔴 failed · 🤖 agent-ready (tool calling, ≥64k context, answered every test on 5 of the last 7 days)
 
-### Chat (147)
+### Chat (146)
 
 #### OpenRouter
 
@@ -79,7 +79,6 @@ _184 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [nvidia/nemotron-3-super-120b-a12b (nvidia)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/nvidia-nemotron-3-super-120b-a12b/) | `nvidia/nemotron-3-super-120b-a12b` | unknown | ? | 🟢 |  |
 | [nvidia/nemotron-3-ultra-550b-a55b (nvidia)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/nvidia-nemotron-3-ultra-550b-a55b/) | `nvidia/nemotron-3-ultra-550b-a55b` | unknown | ? | 🔴 |  |
 | [nvidia/nemotron-3.5-lightning-30b-a3b (nvidia)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/nvidia-nemotron-3-5-lightning-30b-a3b/) | `nvidia/nemotron-3.5-lightning-30b-a3b` | unknown | ? | 🟢 |  |
-| [nvidia/riva-translate-4b-instruct-v1.1 (nvidia)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/nvidia-riva-translate-4b-instruct-v1-1/) | `nvidia/riva-translate-4b-instruct-v1.1` | unknown | ? | 🟢 |  |
 | [nvidia/riva-translate-4b-instruct-v2 (nvidia)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/nvidia-riva-translate-4b-instruct-v2/) | `nvidia/riva-translate-4b-instruct-v2` | unknown | ? | 🟢 |  |
 | [openai/gpt-oss-20b (openai)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/openai-gpt-oss-20b/) | `openai/gpt-oss-20b` | unknown | ? | 🟢 |  |
 | [poolside/laguna-xs-2.1 (poolside)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/poolside-laguna-xs-2-1/) | `poolside/laguna-xs-2.1` | unknown | ? | 🟡 |  |
