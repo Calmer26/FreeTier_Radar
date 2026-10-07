@@ -11,11 +11,11 @@ change history and ready-to-paste Cline settings.
 ## The list
 
 <!-- LIST:START -->
-_186 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
+_188 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
 
 🟢 responded to the latest daily test · 🟡 rate-limited or slow · 🔴 failed · 🤖 agent-ready (tool calling, ≥64k context, answered every test on 5 of the last 7 days)
 
-### Chat (149)
+### Chat (151)
 
 #### OpenRouter
 
@@ -176,6 +176,7 @@ _186 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [minimax-m2.7](https://freetier-radar.marcelkanters.workers.dev/models/ollama/minimax-m2-7/) | `minimax-m2.7` | unknown | ? | 🔴 |  |
 | [minimax-m3](https://freetier-radar.marcelkanters.workers.dev/models/ollama/minimax-m3/) | `minimax-m3` | unknown | ? | 🔴 |  |
 | [mistral-large-3:675b](https://freetier-radar.marcelkanters.workers.dev/models/ollama/mistral-large-3-675b/) | `mistral-large-3:675b` | unknown | ? | 🔴 |  |
+| [mistral-large-4](https://freetier-radar.marcelkanters.workers.dev/models/ollama/mistral-large-4/) | `mistral-large-4` | unknown | ? | – |  |
 | [nemotron-3-nano:30b](https://freetier-radar.marcelkanters.workers.dev/models/ollama/nemotron-3-nano-30b/) | `nemotron-3-nano:30b` | unknown | ? | 🟡 |  |
 | [nemotron-3-super](https://freetier-radar.marcelkanters.workers.dev/models/ollama/nemotron-3-super/) | `nemotron-3-super` | unknown | ? | 🟡 |  |
 | [nemotron-3-ultra](https://freetier-radar.marcelkanters.workers.dev/models/ollama/nemotron-3-ultra/) | `nemotron-3-ultra` | unknown | ? | 🟡 |  |
@@ -221,6 +222,7 @@ _186 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 |---|---|---|---|---|---|
 | [big-pickle](https://freetier-radar.marcelkanters.workers.dev/models/opencode/big-pickle/) | `big-pickle` | unknown | ? | – |  |
 | [deepseek-v4-flash-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/deepseek-v4-flash-free/) | `deepseek-v4-flash-free` | unknown | ? | – |  |
+| [exo-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/exo-free/) | `exo-free` | unknown | ? | – |  |
 | [fledge-alpha-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/fledge-alpha-free/) | `fledge-alpha-free` | unknown | ? | – |  |
 | [ling-3.0-flash-fin-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/ling-3-0-flash-fin-free/) | `ling-3.0-flash-fin-free` | unknown | ? | – |  |
 | [ling-3.1-flash-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/ling-3-1-flash-free/) | `ling-3.1-flash-free` | unknown | ? | – |  |
