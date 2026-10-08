@@ -783,7 +783,8 @@
     "price_type": "freemium-quota",
     "context_length": 128000,
     "input_modalities": [
-      "text"
+      "text",
+      "image"
     ],
     "tool_calling": true,
     "terms_url": null,
@@ -795,7 +796,7 @@
     "last_seen": "2026-10-08T03:21:00.064Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "fb80e20d14dbbf46",
+    "fingerprint": "cb6504940d7bfaa0",
     "pricing": [
       {
         "usd": 0.351,
