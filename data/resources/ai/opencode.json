@@ -432,5 +432,36 @@
     "missing_since": null,
     "removed_at": null,
     "fingerprint": "be8e9314c2ebc568"
+  },
+  {
+    "provider": "opencode",
+    "kind": "chat",
+    "listed_by": "api",
+    "limit_scope": "unknown",
+    "usage_terms": "unknown",
+    "rate_limits": {
+      "note": "Free-tier limits aren't published; the free models rotate.",
+      "source": "https://opencode.ai/docs/zen/"
+    },
+    "card_required": "no",
+    "account_required": "unknown",
+    "licence": null,
+    "data_logging": "may-train",
+    "model_id": "step-5-preview-free",
+    "name": "step-5-preview-free",
+    "url": "https://opencode.ai/docs/zen/",
+    "price_type": "trial-credit",
+    "context_length": null,
+    "input_modalities": null,
+    "tool_calling": null,
+    "id": "opencode/step-5-preview-free",
+    "slug": "step-5-preview-free",
+    "category": "ai-model",
+    "status": "active",
+    "first_seen": "2026-10-08T15:20:51.786Z",
+    "last_seen": "2026-10-08T15:20:51.786Z",
+    "missing_since": null,
+    "removed_at": null,
+    "fingerprint": "fb9be915447d90d1"
   }
 ]
