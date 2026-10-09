@@ -11,11 +11,11 @@ change history and ready-to-paste Cline settings.
 ## The list
 
 <!-- LIST:START -->
-_185 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
+_186 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
 
 🟢 responded to the latest daily test · 🟡 rate-limited or slow · 🔴 failed · 🤖 agent-ready (tool calling, ≥64k context, answered every test on 5 of the last 7 days)
 
-### Chat (148)
+### Chat (149)
 
 #### OpenRouter
 
@@ -130,6 +130,7 @@ _185 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [aisingapore/gemma-sea-lion-v4-27b-it](https://freetier-radar.marcelkanters.workers.dev/models/cloudflare/cf-aisingapore-gemma-sea-lion-v4-27b-it/) | `@cf/aisingapore/gemma-sea-lion-v4-27b-it` | 128k | no | 🟢 |  |
 | [cloudflare/clef](https://freetier-radar.marcelkanters.workers.dev/models/cloudflare/cf-cloudflare-clef/) | `@cf/cloudflare/clef` | 66k | no | 🔴 |  |
 | [cloudflare/clef-flash](https://freetier-radar.marcelkanters.workers.dev/models/cloudflare/cf-cloudflare-clef-flash/) | `@cf/cloudflare/clef-flash` | 66k | no | 🔴 |  |
+| [cloudflare/clef-omni](https://freetier-radar.marcelkanters.workers.dev/models/cloudflare/cf-cloudflare-clef-omni/) | `@cf/cloudflare/clef-omni` | 66k | no | – |  |
 | [deepseek-ai/deepseek-r1-distill-qwen-32b](https://freetier-radar.marcelkanters.workers.dev/models/cloudflare/cf-deepseek-ai-deepseek-r1-distill-qwen-32b/) | `@cf/deepseek-ai/deepseek-r1-distill-qwen-32b` | 80k | no | 🟢 |  |
 | [ibm-granite/granite-4.0-h-micro](https://freetier-radar.marcelkanters.workers.dev/models/cloudflare/cf-ibm-granite-granite-4-0-h-micro/) | `@cf/ibm-granite/granite-4.0-h-micro` | 131k | yes | 🟢 | 🤖 |
 | [meta/llama-3.1-8b-instruct-fp8](https://freetier-radar.marcelkanters.workers.dev/models/cloudflare/cf-meta-llama-3-1-8b-instruct-fp8/) | `@cf/meta/llama-3.1-8b-instruct-fp8` | 32k | no | 🟢 |  |
