@@ -11,11 +11,11 @@ change history and ready-to-paste Cline settings.
 ## The list
 
 <!-- LIST:START -->
-_186 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
+_185 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
 
 🟢 responded to the latest daily test · 🟡 rate-limited or slow · 🔴 failed · 🤖 agent-ready (tool calling, ≥64k context, answered every test on 5 of the last 7 days)
 
-### Chat (149)
+### Chat (148)
 
 #### OpenRouter
 
@@ -110,7 +110,6 @@ _186 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [glm-5.2](https://freetier-radar.marcelkanters.workers.dev/models/llm7/glm-5-2/) | `glm-5.2` | 976k | yes | 🔴 |  |
 | [GLM-5.3-Flash](https://freetier-radar.marcelkanters.workers.dev/models/llm7/glm-5-3-flash/) | `GLM-5.3-Flash` | 400k | yes | 🟢 |  |
 | [gpt-oss:20b](https://freetier-radar.marcelkanters.workers.dev/models/llm7/gpt-oss-20b/) | `gpt-oss:20b` | 128k | yes | 🟢 |  |
-| [minimax-m2.7](https://freetier-radar.marcelkanters.workers.dev/models/llm7/minimax-m2-7/) | `minimax-m2.7` | 180k | yes | 🟢 |  |
 | [minimax-m3](https://freetier-radar.marcelkanters.workers.dev/models/llm7/minimax-m3/) | `minimax-m3` | 512k | yes | 🔴 |  |
 | [mistral-Nemo-Instruct-2407](https://freetier-radar.marcelkanters.workers.dev/models/llm7/mistral-nemo-instruct-2407/) | `mistral-Nemo-Instruct-2407` | 128k | no | 🟢 |  |
 | [nemotron-3-nano:30b](https://freetier-radar.marcelkanters.workers.dev/models/llm7/nemotron-3-nano-30b/) | `nemotron-3-nano:30b` | 1M | yes | 🟢 |  |
