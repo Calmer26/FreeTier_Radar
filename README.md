@@ -72,14 +72,14 @@ _182 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [meta/llama-3.2-11b-vision-instruct (meta)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/meta-llama-3-2-11b-vision-instruct/) | `meta/llama-3.2-11b-vision-instruct` | unknown | ? | 🟢 |  |
 | [meta/llama-3.2-90b-vision-instruct (meta)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/meta-llama-3-2-90b-vision-instruct/) | `meta/llama-3.2-90b-vision-instruct` | unknown | ? | 🟡 |  |
 | [meta/muse-glimmer-30b (meta)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/meta-muse-glimmer-30b/) | `meta/muse-glimmer-30b` | unknown | ? | 🟢 |  |
-| [moonshotai/kimi-k3 (moonshotai)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/moonshotai-kimi-k3/) | `moonshotai/kimi-k3` | unknown | ? | 🟢 |  |
+| [moonshotai/kimi-k3 (moonshotai)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/moonshotai-kimi-k3/) | `moonshotai/kimi-k3` | unknown | ? | 🟡 |  |
 | [nvidia/nemotron-3-nano-omni-30b-a3b-reasoning (nvidia)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/nvidia-nemotron-3-nano-omni-30b-a3b-reasoning/) | `nvidia/nemotron-3-nano-omni-30b-a3b-reasoning` | unknown | ? | 🔴 |  |
 | [nvidia/nemotron-3-super-120b-a12b (nvidia)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/nvidia-nemotron-3-super-120b-a12b/) | `nvidia/nemotron-3-super-120b-a12b` | unknown | ? | 🟢 |  |
 | [nvidia/nemotron-3-ultra-550b-a55b (nvidia)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/nvidia-nemotron-3-ultra-550b-a55b/) | `nvidia/nemotron-3-ultra-550b-a55b` | unknown | ? | 🟢 |  |
 | [nvidia/nemotron-3.5-lightning-30b-a3b (nvidia)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/nvidia-nemotron-3-5-lightning-30b-a3b/) | `nvidia/nemotron-3.5-lightning-30b-a3b` | unknown | ? | 🟢 |  |
 | [nvidia/riva-translate-4b-instruct-v2 (nvidia)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/nvidia-riva-translate-4b-instruct-v2/) | `nvidia/riva-translate-4b-instruct-v2` | unknown | ? | 🟢 |  |
 | [openai/gpt-oss-20b (openai)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/openai-gpt-oss-20b/) | `openai/gpt-oss-20b` | unknown | ? | 🟢 |  |
-| [poolside/laguna-xs-2.1 (poolside)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/poolside-laguna-xs-2-1/) | `poolside/laguna-xs-2.1` | unknown | ? | 🟢 |  |
+| [poolside/laguna-xs-2.1 (poolside)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/poolside-laguna-xs-2-1/) | `poolside/laguna-xs-2.1` | unknown | ? | 🔴 |  |
 | [z-ai/glm-5.3 (z-ai)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/z-ai-glm-5-3/) | `z-ai/glm-5.3` | unknown | ? | 🟢 |  |
 | [z-ai/glm-5.3-flash (z-ai)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/z-ai-glm-5-3-flash/) | `z-ai/glm-5.3-flash` | unknown | ? | 🟢 |  |
 
@@ -105,7 +105,7 @@ _182 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 
 | Model | ID | Context | Tools | Last test | Agent |
 |---|---|---|---|---|---|
-| [DeepSeek-V4-Flash-0731](https://freetier-radar.marcelkanters.workers.dev/models/llm7/deepseek-v4-flash-0731/) | `DeepSeek-V4-Flash-0731` | 400k | yes | 🟢 |  |
+| [DeepSeek-V4-Flash-0731](https://freetier-radar.marcelkanters.workers.dev/models/llm7/deepseek-v4-flash-0731/) | `DeepSeek-V4-Flash-0731` | 400k | yes | 🟡 |  |
 | [GLM-5.3-Flash](https://freetier-radar.marcelkanters.workers.dev/models/llm7/glm-5-3-flash/) | `GLM-5.3-Flash` | 400k | yes | 🟢 |  |
 | [gpt-oss:20b](https://freetier-radar.marcelkanters.workers.dev/models/llm7/gpt-oss-20b/) | `gpt-oss:20b` | 128k | yes | 🟢 |  |
 | [mistral-Nemo-Instruct-2407](https://freetier-radar.marcelkanters.workers.dev/models/llm7/mistral-nemo-instruct-2407/) | `mistral-Nemo-Instruct-2407` | 128k | no | 🟢 |  |
@@ -196,7 +196,7 @@ _182 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [Qwen3.6-35B-A3B](https://freetier-radar.marcelkanters.workers.dev/models/hetzner/qwen-qwen3-6-35b-a3b/) | `Qwen/Qwen3.6-35B-A3B` | 262k | ? | 🟢 |  |
 | [Qwen3.6-35B-A3B-FP8](https://freetier-radar.marcelkanters.workers.dev/models/hetzner/qwen-qwen3-6-35b-a3b-fp8/) | `Qwen/Qwen3.6-35B-A3B-FP8` | 262k | ? | 🟢 |  |
 | [Qwen3.8-27B](https://freetier-radar.marcelkanters.workers.dev/models/hetzner/qwen-qwen3-8-27b/) | `Qwen/Qwen3.8-27B` | 262k | ? | 🟢 |  |
-| [Qwen3.8-27B](https://freetier-radar.marcelkanters.workers.dev/models/hetzner/qwen3-8-27b/) | `Qwen3.8-27B` | 262k | ? | 🟢 |  |
+| [Qwen3.8-27B](https://freetier-radar.marcelkanters.workers.dev/models/hetzner/qwen3-8-27b/) | `Qwen3.8-27B` | 262k | ? | 🟡 |  |
 
 #### Requesty (free models)
 
@@ -206,7 +206,7 @@ _182 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [leanstral-1-5](https://freetier-radar.marcelkanters.workers.dev/models/requesty/mistral-leanstral-1-5/) | `mistral/leanstral-1-5` | 262k | yes | 🟢 |  |
 | [ling-3.1-flash](https://freetier-radar.marcelkanters.workers.dev/models/requesty/novita-ling-3-1-flash/) | `novita/ling-3.1-flash` | 262k | yes | 🟢 | 🤖 |
 | [muse-glimmer-30b](https://freetier-radar.marcelkanters.workers.dev/models/requesty/nvidia-muse-glimmer-30b/) | `nvidia/muse-glimmer-30b` | 131k | yes | 🟢 |  |
-| [nemotron-3-nano-omni-30b-a3b-reasoning](https://freetier-radar.marcelkanters.workers.dev/models/requesty/nvidia-nemotron-3-nano-omni-30b-a3b-reasoning/) | `nvidia/nemotron-3-nano-omni-30b-a3b-reasoning` | 131k | yes | 🟢 |  |
+| [nemotron-3-nano-omni-30b-a3b-reasoning](https://freetier-radar.marcelkanters.workers.dev/models/requesty/nvidia-nemotron-3-nano-omni-30b-a3b-reasoning/) | `nvidia/nemotron-3-nano-omni-30b-a3b-reasoning` | 131k | yes | 🔴 |  |
 | [nemotron-3-super-120b-a12b](https://freetier-radar.marcelkanters.workers.dev/models/requesty/nvidia-nemotron-3-super-120b-a12b/) | `nvidia/nemotron-3-super-120b-a12b` | 1M | yes | 🟢 |  |
 | [nemotron-3-ultra-550b-a55b](https://freetier-radar.marcelkanters.workers.dev/models/requesty/nvidia-nemotron-3-ultra-550b-a55b/) | `nvidia/nemotron-3-ultra-550b-a55b` | 1M | yes | 🟢 |  |
 | [nemotron-3.5-lightning-30b-a3b](https://freetier-radar.marcelkanters.workers.dev/models/requesty/nvidia-nemotron-3-5-lightning-30b-a3b/) | `nvidia/nemotron-3.5-lightning-30b-a3b` | 1M | yes | 🟢 |  |
