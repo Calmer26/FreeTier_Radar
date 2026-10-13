@@ -28,10 +28,10 @@
     "id": "openrouter/apodex/apodex-1.1-mini:free",
     "slug": "apodex-apodex-1-1-mini-free",
     "category": "ai-model",
-    "status": "active",
+    "status": "pending_removal",
     "first_seen": "2026-10-01T21:20:33.669Z",
     "last_seen": "2026-10-13T03:20:50.323Z",
-    "missing_since": null,
+    "missing_since": "2026-10-13T21:20:54.311Z",
     "removed_at": null,
     "fingerprint": "fb1d414b3d2ada97"
   },
@@ -216,12 +216,12 @@
     "data_logging": "unknown",
     "paid_version_pricing": [
       {
-        "usd": 0.09,
+        "usd": 0.0765,
         "unit": "M input tokens",
         "neurons": null
       },
       {
-        "usd": 0.3,
+        "usd": 0.255,
         "unit": "M output tokens",
         "neurons": null
       }
