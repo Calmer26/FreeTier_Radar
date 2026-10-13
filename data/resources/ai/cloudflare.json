@@ -335,7 +335,7 @@
     "name": "cloudflare/clef-flash",
     "url": "https://developers.cloudflare.com/workers-ai/models/clef-flash/",
     "price_type": "freemium-quota",
-    "context_length": 65536,
+    "context_length": 24576,
     "input_modalities": [
       "text",
       "image"
@@ -357,7 +357,7 @@
     "last_seen": "2026-10-13T03:20:50.323Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "5487797e1b66913b"
+    "fingerprint": "9deba37c9d919841"
   },
   {
     "provider": "cloudflare",
