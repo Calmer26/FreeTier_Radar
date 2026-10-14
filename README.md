@@ -11,17 +11,16 @@ change history and ready-to-paste Cline settings.
 ## The list
 
 <!-- LIST:START -->
-_181 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
+_179 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
 
 🟢 responded to the latest daily test · 🟡 rate-limited or slow · 🔴 failed · 🤖 agent-ready (tool calling, ≥64k context, answered every test on 5 of the last 7 days)
 
-### Chat (144)
+### Chat (142)
 
 #### OpenRouter
 
 | Model | ID | Context | Tools | Last test | Agent |
 |---|---|---|---|---|---|
-| [Apodex: Apodex 1.1 Mini (free)](https://freetier-radar.marcelkanters.workers.dev/models/openrouter/apodex-apodex-1-1-mini-free/) | `apodex/apodex-1.1-mini:free` | 262k | yes | 🟢 | 🤖 |
 | [Cohere: North Mini Code (free)](https://freetier-radar.marcelkanters.workers.dev/models/openrouter/cohere-north-mini-code-free/) | `cohere/north-mini-code:free` | 256k | yes | 🟢 | 🤖 |
 | [Dots Studio: Dots3-Note Preview (free)](https://freetier-radar.marcelkanters.workers.dev/models/openrouter/dots-studio-dots-3-note-preview-free/) | `dots-studio/dots-3-note-preview:free` | 512k | yes | 🟢 | 🤖 |
 | [Google: Gemma 4 26B A4B  (free)](https://freetier-radar.marcelkanters.workers.dev/models/openrouter/google-gemma-4-26b-a4b-it-free/) | `google/gemma-4-26b-a4b-it:free` | 262k | yes | – |  |
@@ -89,7 +88,6 @@ _181 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 |---|---|---|---|---|---|
 | [Cohere: North Mini Code (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/cohere-north-mini-code-free/) | `cohere/north-mini-code:free` | 256k | yes | 🟢 | 🤖 |
 | [Dots Studio: Dots3-Note Preview (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/dots-studio-dots-3-note-preview-free/) | `dots-studio/dots-3-note-preview:free` | 512k | yes | 🟢 | 🤖 |
-| [inclusionAI: Ling 3.1 Flash](https://freetier-radar.marcelkanters.workers.dev/models/kilo/inclusionai-ling-3-1-flash/) | `inclusionai/ling-3.1-flash` | 262k | yes | 🟢 | 🤖 |
 | [LiquidAI: LFM2.5-2.6B (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/liquid-lfm-2-5-2-6b-free/) | `liquid/lfm-2.5-2.6b:free` | 66k | yes | 🟢 | 🤖 |
 | [NVIDIA: Nemotron 3 Nano Omni (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/nvidia-nemotron-3-nano-omni-30b-a3b-reasoning-free/) | `nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free` | 256k | yes | 🟢 |  |
 | [NVIDIA: Nemotron 3 Super (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/nvidia-nemotron-3-super-120b-a12b-free/) | `nvidia/nemotron-3-super-120b-a12b:free` | 262k | yes | 🟢 |  |
