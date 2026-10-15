@@ -216,12 +216,12 @@
     "data_logging": "unknown",
     "paid_version_pricing": [
       {
-        "usd": 0.09,
+        "usd": 0.0765,
         "unit": "M input tokens",
         "neurons": null
       },
       {
-        "usd": 0.3,
+        "usd": 0.255,
         "unit": "M output tokens",
         "neurons": null
       }
@@ -590,7 +590,18 @@
       "video"
     ],
     "tool_calling": true,
-    "paid_version_pricing": null,
+    "paid_version_pricing": [
+      {
+        "usd": 0.15,
+        "unit": "M input tokens",
+        "neurons": null
+      },
+      {
+        "usd": 0.5,
+        "unit": "M output tokens",
+        "neurons": null
+      }
+    ],
     "id": "openrouter/nvidia/nemotron-3.5-super-vl:free",
     "slug": "nvidia-nemotron-3-5-super-vl-free",
     "category": "ai-model",

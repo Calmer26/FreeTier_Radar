@@ -13,6 +13,39 @@
     "account_required": "yes",
     "licence": null,
     "data_logging": "not-used",
+    "model_id": "clef:27b",
+    "name": "clef:27b",
+    "url": "https://ollama.com/library/clef",
+    "price_type": "free",
+    "context_length": null,
+    "input_modalities": [
+      "text"
+    ],
+    "tool_calling": null,
+    "id": "ollama/clef:27b",
+    "slug": "clef-27b",
+    "category": "ai-model",
+    "status": "active",
+    "first_seen": "2026-10-15T21:20:36.217Z",
+    "last_seen": "2026-10-15T21:20:36.217Z",
+    "missing_since": null,
+    "removed_at": null,
+    "fingerprint": "4a3bc8c22df617fc"
+  },
+  {
+    "provider": "ollama",
+    "kind": "chat",
+    "listed_by": "api",
+    "limit_scope": "shared",
+    "usage_terms": "unknown",
+    "rate_limits": {
+      "note": "A starter amount of usage per month (not published as a number), reset monthly from signup; 1 concurrent request.",
+      "source": "https://ollama.com/pricing"
+    },
+    "card_required": "unknown",
+    "account_required": "yes",
+    "licence": null,
+    "data_logging": "not-used",
     "model_id": "deepseek-v4-pro:0813",
     "name": "deepseek-v4-pro:0813",
     "url": "https://ollama.com/library/deepseek-v4-pro",
@@ -493,6 +526,39 @@
     "missing_since": null,
     "removed_at": null,
     "fingerprint": "c3c6c4ac95877032"
+  },
+  {
+    "provider": "ollama",
+    "kind": "chat",
+    "listed_by": "api",
+    "limit_scope": "shared",
+    "usage_terms": "unknown",
+    "rate_limits": {
+      "note": "A starter amount of usage per month (not published as a number), reset monthly from signup; 1 concurrent request.",
+      "source": "https://ollama.com/pricing"
+    },
+    "card_required": "unknown",
+    "account_required": "yes",
+    "licence": null,
+    "data_logging": "not-used",
+    "model_id": "muse-spark-open",
+    "name": "muse-spark-open",
+    "url": "https://ollama.com/library/muse-spark-open",
+    "price_type": "free",
+    "context_length": null,
+    "input_modalities": [
+      "text"
+    ],
+    "tool_calling": null,
+    "id": "ollama/muse-spark-open",
+    "slug": "muse-spark-open",
+    "category": "ai-model",
+    "status": "active",
+    "first_seen": "2026-10-15T21:20:36.217Z",
+    "last_seen": "2026-10-15T21:20:36.217Z",
+    "missing_since": null,
+    "removed_at": null,
+    "fingerprint": "4d88c6d760e68d88"
   },
   {
     "provider": "ollama",
