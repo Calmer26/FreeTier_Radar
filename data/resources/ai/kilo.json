@@ -382,6 +382,42 @@
     "kind": "chat",
     "listed_by": "api",
     "limit_scope": "shared",
+    "usage_terms": "evaluation-only",
+    "rate_limits": {
+      "rph": 200,
+      "note": "Anonymous access: 200 requests per hour per IP address, across all free models.",
+      "source": "https://kilo.ai/docs/gateway/authentication"
+    },
+    "card_required": "no",
+    "account_required": "no",
+    "licence": null,
+    "data_logging": "logs-prompts",
+    "model_id": "nvidia/nemotron-3.5-super-vl:free",
+    "name": "NVIDIA: Nemotron 3.5 Super VL (free)",
+    "url": "https://kilo.ai/models",
+    "price_type": "free",
+    "context_length": 1000000,
+    "input_modalities": [
+      "text",
+      "image",
+      "video"
+    ],
+    "tool_calling": true,
+    "id": "kilo/nvidia/nemotron-3.5-super-vl:free",
+    "slug": "nvidia-nemotron-3-5-super-vl-free",
+    "category": "ai-model",
+    "status": "active",
+    "first_seen": "2026-10-15T15:20:40.166Z",
+    "last_seen": "2026-10-15T15:20:40.166Z",
+    "missing_since": null,
+    "removed_at": null,
+    "fingerprint": "29508db2c1115387"
+  },
+  {
+    "provider": "kilo",
+    "kind": "chat",
+    "listed_by": "api",
+    "limit_scope": "shared",
     "usage_terms": "unknown",
     "rate_limits": {
       "rph": 200,

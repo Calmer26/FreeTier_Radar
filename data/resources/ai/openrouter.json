@@ -565,6 +565,44 @@
   },
   {
     "provider": "openrouter",
+    "kind": "chat",
+    "listed_by": "api",
+    "limit_scope": "shared",
+    "usage_terms": "production-ok",
+    "rate_limits": {
+      "rpm": 20,
+      "rpd": 50,
+      "note": "Shared across all free models. 1,000 requests/day after a one-time purchase of 10 credits.",
+      "source": "https://openrouter.ai/docs/faq"
+    },
+    "card_required": "no",
+    "account_required": "yes",
+    "licence": null,
+    "data_logging": "unknown",
+    "model_id": "nvidia/nemotron-3.5-super-vl:free",
+    "name": "NVIDIA: Nemotron 3.5 Super VL (free)",
+    "url": "https://openrouter.ai/nvidia/nemotron-3.5-super-vl:free",
+    "price_type": "free",
+    "context_length": 1000000,
+    "input_modalities": [
+      "text",
+      "image",
+      "video"
+    ],
+    "tool_calling": true,
+    "paid_version_pricing": null,
+    "id": "openrouter/nvidia/nemotron-3.5-super-vl:free",
+    "slug": "nvidia-nemotron-3-5-super-vl-free",
+    "category": "ai-model",
+    "status": "active",
+    "first_seen": "2026-10-15T15:20:40.166Z",
+    "last_seen": "2026-10-15T15:20:40.166Z",
+    "missing_since": null,
+    "removed_at": null,
+    "fingerprint": "5e8a98e320ce9490"
+  },
+  {
+    "provider": "openrouter",
     "limit_scope": "shared",
     "usage_terms": "production-ok",
     "rate_limits": {
