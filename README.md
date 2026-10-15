@@ -11,7 +11,7 @@ change history and ready-to-paste Cline settings.
 ## The list
 
 <!-- LIST:START -->
-_179 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
+_178 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
 
 🟢 responded to the latest daily test · 🟡 rate-limited or slow · 🔴 failed · 🤖 agent-ready (tool calling, ≥64k context, answered every test on 5 of the last 7 days)
 
@@ -79,6 +79,7 @@ _179 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [nvidia/riva-translate-4b-instruct-v2 (nvidia)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/nvidia-riva-translate-4b-instruct-v2/) | `nvidia/riva-translate-4b-instruct-v2` | unknown | ? | 🟡 |  |
 | [openai/gpt-oss-20b (openai)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/openai-gpt-oss-20b/) | `openai/gpt-oss-20b` | unknown | ? | 🟢 |  |
 | [poolside/laguna-xs-2.1 (poolside)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/poolside-laguna-xs-2-1/) | `poolside/laguna-xs-2.1` | unknown | ? | 🟢 |  |
+| [stepfun-ai/step-5-preview (stepfun-ai)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/stepfun-ai-step-5-preview/) | `stepfun-ai/step-5-preview` | unknown | ? | – |  |
 | [z-ai/glm-5.3 (z-ai)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/z-ai-glm-5-3/) | `z-ai/glm-5.3` | unknown | ? | 🟢 |  |
 | [z-ai/glm-5.3-flash (z-ai)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/z-ai-glm-5-3-flash/) | `z-ai/glm-5.3-flash` | unknown | ? | 🟡 |  |
 
@@ -148,7 +149,6 @@ _179 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [Ministral 14B 2512](https://freetier-radar.marcelkanters.workers.dev/models/mistral/ministral-14b-2512/) | `ministral-14b-2512` | 262k | yes | 🟢 | 🤖 |
 | [Ministral 3B 2512](https://freetier-radar.marcelkanters.workers.dev/models/mistral/ministral-3b-2512/) | `ministral-3b-2512` | 131k | yes | 🟢 | 🤖 |
 | [Ministral 8B 2512](https://freetier-radar.marcelkanters.workers.dev/models/mistral/ministral-8b-2512/) | `ministral-8b-2512` | 262k | yes | 🟢 | 🤖 |
-| [Voxtral Small 2507](https://freetier-radar.marcelkanters.workers.dev/models/mistral/voxtral-small-2507/) | `voxtral-small-2507` | 33k | yes | 🟢 |  |
 
 #### Ollama Cloud (Free plan)
 
@@ -216,7 +216,7 @@ _179 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 |---|---|---|---|---|---|
 | [big-pickle](https://freetier-radar.marcelkanters.workers.dev/models/opencode/big-pickle/) | `big-pickle` | unknown | ? | – |  |
 | [cat-jam-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/cat-jam-free/) | `cat-jam-free` | unknown | ? | – |  |
-| [ling-3.1-flash-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/ling-3-1-flash-free/) | `ling-3.1-flash-free` | unknown | ? | – |  |
+| [deepseek-v4.1-flash-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/deepseek-v4-1-flash-free/) | `deepseek-v4.1-flash-free` | unknown | ? | – |  |
 | [longcat-2.5-preview-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/longcat-2-5-preview-free/) | `longcat-2.5-preview-free` | unknown | ? | – |  |
 | [mimo-v2.6-flash-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/mimo-v2-6-flash-free/) | `mimo-v2.6-flash-free` | unknown | ? | – |  |
 | [muse-spark-1.2-contributor-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/muse-spark-1-2-contributor-free/) | `muse-spark-1.2-contributor-free` | unknown | ? | – |  |
@@ -291,7 +291,7 @@ _179 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [Simba 3.0](https://freetier-radar.marcelkanters.workers.dev/models/speechify/simba-3-0/) | `simba-3.0` | 🟢 |
 | [Simba 3.2](https://freetier-radar.marcelkanters.workers.dev/models/speechify/simba-3-2/) | `simba-3.2` | 🟢 |
 
-### Speech-to-text (8)
+### Speech-to-text (7)
 
 #### Groq
 
@@ -312,12 +312,6 @@ _179 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 |---|---|---|
 | [openai/whisper](https://freetier-radar.marcelkanters.workers.dev/models/cloudflare/cf-openai-whisper/) | `@cf/openai/whisper` | 🟢 |
 | [openai/whisper-tiny-en](https://freetier-radar.marcelkanters.workers.dev/models/cloudflare/cf-openai-whisper-tiny-en/) | `@cf/openai/whisper-tiny-en` | 🟢 |
-
-#### Mistral AI (Free mode)
-
-| Model | ID | Last test |
-|---|---|---|
-| [Voxtral Mini 2602](https://freetier-radar.marcelkanters.workers.dev/models/mistral/voxtral-mini-2602/) | `voxtral-mini-2602` | 🟢 |
 
 #### Cohere (trial key)
 
