@@ -11,11 +11,11 @@ change history and ready-to-paste Cline settings.
 ## The list
 
 <!-- LIST:START -->
-_185 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
+_187 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
 
 🟢 responded to the latest daily test · 🟡 rate-limited or slow · 🔴 failed · 🤖 agent-ready (tool calling, ≥64k context, answered every test on 5 of the last 7 days)
 
-### Chat (149)
+### Chat (151)
 
 #### OpenRouter
 
@@ -222,6 +222,8 @@ _185 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [big-pickle](https://freetier-radar.marcelkanters.workers.dev/models/opencode/big-pickle/) | `big-pickle` | unknown | ? | – |  |
 | [cat-jam-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/cat-jam-free/) | `cat-jam-free` | unknown | ? | – |  |
 | [deepseek-v4.1-flash-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/deepseek-v4-1-flash-free/) | `deepseek-v4.1-flash-free` | unknown | ? | – |  |
+| [glm-5.3-flash-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/glm-5-3-flash-free/) | `glm-5.3-flash-free` | unknown | ? | – |  |
+| [ll-alpha-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/ll-alpha-free/) | `ll-alpha-free` | unknown | ? | – |  |
 | [longcat-2.5-preview-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/longcat-2-5-preview-free/) | `longcat-2.5-preview-free` | unknown | ? | – |  |
 | [mimo-v2.6-flash-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/mimo-v2-6-flash-free/) | `mimo-v2.6-flash-free` | unknown | ? | – |  |
 | [muse-spark-1.2-contributor-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/muse-spark-1-2-contributor-free/) | `muse-spark-1.2-contributor-free` | unknown | ? | – |  |
