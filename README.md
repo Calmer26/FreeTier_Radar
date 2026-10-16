@@ -11,11 +11,11 @@ change history and ready-to-paste Cline settings.
 ## The list
 
 <!-- LIST:START -->
-_187 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
+_190 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
 
 🟢 responded to the latest daily test · 🟡 rate-limited or slow · 🔴 failed · 🤖 agent-ready (tool calling, ≥64k context, answered every test on 5 of the last 7 days)
 
-### Chat (151)
+### Chat (154)
 
 #### OpenRouter
 
@@ -98,6 +98,7 @@ _187 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [NVIDIA: Nemotron 3.5 Super VL (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/nvidia-nemotron-3-5-super-vl-free/) | `nvidia/nemotron-3.5-super-vl:free` | 1M | yes | 🟢 |  |
 | [Poolside: Laguna S 2.1 (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/poolside-laguna-s-2-1-free/) | `poolside/laguna-s-2.1:free` | 262k | yes | 🟢 | 🤖 |
 | [Poolside: Laguna XS 2.1 (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/poolside-laguna-xs-2-1-free/) | `poolside/laguna-xs-2.1:free` | 262k | yes | 🟢 | 🤖 |
+| [Stealth: Cat Jam (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/stealth-cat-jam/) | `stealth/cat-jam` | 1M | yes | – |  |
 | [Stealth: Glyph Cluster (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/stealth-glyph-cluster/) | `stealth/glyph-cluster` | 256k | yes | 🟢 | 🤖 |
 | [StepFun: Step 5 Preview (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/stepfun-step-5-preview-free/) | `stepfun/step-5-preview-free` | 1M | yes | 🟢 | 🤖 |
 | [Thinking Machines: Inkling Small (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/thinkingmachines-inkling-small-free/) | `thinkingmachines/inkling-small:free` | 1M | yes | – |  |
@@ -157,6 +158,7 @@ _187 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 
 | Model | ID | Context | Tools | Last test | Agent |
 |---|---|---|---|---|---|
+| [beam](https://freetier-radar.marcelkanters.workers.dev/models/ollama/beam/) | `beam` | unknown | ? | – |  |
 | [clef:27b](https://freetier-radar.marcelkanters.workers.dev/models/ollama/clef-27b/) | `clef:27b` | unknown | ? | 🔴 |  |
 | [deepseek-v4-pro:0813](https://freetier-radar.marcelkanters.workers.dev/models/ollama/deepseek-v4-pro-0813/) | `deepseek-v4-pro:0813` | unknown | ? | 🔴 |  |
 | [deepseek-v4.1-flash](https://freetier-radar.marcelkanters.workers.dev/models/ollama/deepseek-v4-1-flash/) | `deepseek-v4.1-flash` | unknown | ? | 🔴 |  |
@@ -219,6 +221,7 @@ _187 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 
 | Model | ID | Context | Tools | Last test | Agent |
 |---|---|---|---|---|---|
+| [beam-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/beam-free/) | `beam-free` | unknown | ? | – |  |
 | [big-pickle](https://freetier-radar.marcelkanters.workers.dev/models/opencode/big-pickle/) | `big-pickle` | unknown | ? | – |  |
 | [cat-jam-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/cat-jam-free/) | `cat-jam-free` | unknown | ? | – |  |
 | [deepseek-v4.1-flash-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/deepseek-v4-1-flash-free/) | `deepseek-v4.1-flash-free` | unknown | ? | – |  |
