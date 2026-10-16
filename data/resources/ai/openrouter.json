@@ -216,12 +216,12 @@
     "data_logging": "unknown",
     "paid_version_pricing": [
       {
-        "usd": 0.09,
+        "usd": 0.0675,
         "unit": "M input tokens",
         "neurons": null
       },
       {
-        "usd": 0.3,
+        "usd": 0.225,
         "unit": "M output tokens",
         "neurons": null
       }
@@ -852,5 +852,41 @@
         "neurons": null
       }
     ]
+  },
+  {
+    "provider": "openrouter",
+    "kind": "chat",
+    "listed_by": "api",
+    "limit_scope": "shared",
+    "usage_terms": "production-ok",
+    "rate_limits": {
+      "rpm": 20,
+      "rpd": 50,
+      "note": "Shared across all free models. 1,000 requests/day after a one-time purchase of 10 credits.",
+      "source": "https://openrouter.ai/docs/faq"
+    },
+    "card_required": "no",
+    "account_required": "yes",
+    "licence": null,
+    "data_logging": "unknown",
+    "model_id": "xingchen-agi/xing4.0-29b-a4b:free",
+    "name": "XingChen: Xing4.0 29B A4B (free)",
+    "url": "https://openrouter.ai/xingchen-agi/xing4.0-29b-a4b:free",
+    "price_type": "free",
+    "context_length": 262144,
+    "input_modalities": [
+      "text"
+    ],
+    "tool_calling": true,
+    "paid_version_pricing": null,
+    "id": "openrouter/xingchen-agi/xing4.0-29b-a4b:free",
+    "slug": "xingchen-agi-xing4-0-29b-a4b-free",
+    "category": "ai-model",
+    "status": "active",
+    "first_seen": "2026-10-16T21:21:22.286Z",
+    "last_seen": "2026-10-16T21:21:22.286Z",
+    "missing_since": null,
+    "removed_at": null,
+    "fingerprint": "9f828d1d2a489c05"
   }
 ]

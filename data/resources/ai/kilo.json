@@ -532,6 +532,40 @@
     "account_required": "no",
     "licence": null,
     "data_logging": "may-train",
+    "model_id": "reflection/beam-free",
+    "name": "Reflection: Beam 1.0 (free)",
+    "url": "https://kilo.ai/models",
+    "price_type": "free",
+    "context_length": 1048576,
+    "input_modalities": [
+      "text"
+    ],
+    "tool_calling": true,
+    "id": "kilo/reflection/beam-free",
+    "slug": "reflection-beam-free",
+    "category": "ai-model",
+    "status": "active",
+    "first_seen": "2026-10-16T21:21:22.286Z",
+    "last_seen": "2026-10-16T21:21:22.286Z",
+    "missing_since": null,
+    "removed_at": null,
+    "fingerprint": "0f2617e79abd4a94"
+  },
+  {
+    "provider": "kilo",
+    "kind": "chat",
+    "listed_by": "api",
+    "limit_scope": "shared",
+    "usage_terms": "unknown",
+    "rate_limits": {
+      "rph": 200,
+      "note": "Anonymous access: 200 requests per hour per IP address, across all free models.",
+      "source": "https://kilo.ai/docs/gateway/authentication"
+    },
+    "card_required": "no",
+    "account_required": "no",
+    "licence": null,
+    "data_logging": "may-train",
     "model_id": "stealth/cat-jam",
     "name": "Stealth: Cat Jam (free)",
     "url": "https://kilo.ai/models",
@@ -544,10 +578,10 @@
     "id": "kilo/stealth/cat-jam",
     "slug": "stealth-cat-jam",
     "category": "ai-model",
-    "status": "active",
+    "status": "pending_removal",
     "first_seen": "2026-10-16T15:21:17.188Z",
     "last_seen": "2026-10-16T15:21:17.188Z",
-    "missing_since": null,
+    "missing_since": "2026-10-16T21:21:22.286Z",
     "removed_at": null,
     "fingerprint": "5eaea71dcf02ca6e"
   },
@@ -684,11 +718,11 @@
     "id": "kilo/stepfun/step-5-preview-free",
     "slug": "stepfun-step-5-preview-free",
     "category": "ai-model",
-    "status": "pending_removal",
+    "status": "removed",
     "first_seen": "2026-10-08T15:20:51.786Z",
     "last_seen": "2026-10-15T03:20:37.539Z",
-    "missing_since": "2026-10-16T03:21:20.146Z",
-    "removed_at": null,
+    "missing_since": null,
+    "removed_at": "2026-10-16T21:21:22.286Z",
     "fingerprint": "cf158bcf5f08ce4e"
   },
   {
@@ -726,5 +760,39 @@
     "missing_since": null,
     "removed_at": null,
     "fingerprint": "e171b1d232d737ed"
+  },
+  {
+    "provider": "kilo",
+    "kind": "chat",
+    "listed_by": "api",
+    "limit_scope": "shared",
+    "usage_terms": "unknown",
+    "rate_limits": {
+      "rph": 200,
+      "note": "Anonymous access: 200 requests per hour per IP address, across all free models.",
+      "source": "https://kilo.ai/docs/gateway/authentication"
+    },
+    "card_required": "no",
+    "account_required": "no",
+    "licence": null,
+    "data_logging": "may-train",
+    "model_id": "xingchen-agi/xing4.0-29b-a4b:free",
+    "name": "XingChen: Xing4.0 29B A4B (free)",
+    "url": "https://kilo.ai/models",
+    "price_type": "free",
+    "context_length": 262144,
+    "input_modalities": [
+      "text"
+    ],
+    "tool_calling": true,
+    "id": "kilo/xingchen-agi/xing4.0-29b-a4b:free",
+    "slug": "xingchen-agi-xing4-0-29b-a4b-free",
+    "category": "ai-model",
+    "status": "active",
+    "first_seen": "2026-10-16T21:21:22.286Z",
+    "last_seen": "2026-10-16T21:21:22.286Z",
+    "missing_since": null,
+    "removed_at": null,
+    "fingerprint": "df83e8252ae1943f"
   }
 ]

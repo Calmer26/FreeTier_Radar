@@ -35,6 +35,7 @@ _190 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [Poolside: Laguna XS 2.1 (free)](https://freetier-radar.marcelkanters.workers.dev/models/openrouter/poolside-laguna-xs-2-1-free/) | `poolside/laguna-xs-2.1:free` | 262k | yes | 🟢 | 🤖 |
 | [Thinking Machines: Inkling (free)](https://freetier-radar.marcelkanters.workers.dev/models/openrouter/thinkingmachines-inkling-free/) | `thinkingmachines/inkling:free` | 1M | yes | 🟡 |  |
 | [Thinking Machines: Inkling Small (free)](https://freetier-radar.marcelkanters.workers.dev/models/openrouter/thinkingmachines-inkling-small-free/) | `thinkingmachines/inkling-small:free` | 1M | yes | 🟡 |  |
+| [XingChen: Xing4.0 29B A4B (free)](https://freetier-radar.marcelkanters.workers.dev/models/openrouter/xingchen-agi-xing4-0-29b-a4b-free/) | `xingchen-agi/xing4.0-29b-a4b:free` | 262k | yes | – |  |
 
 #### Groq
 
@@ -98,10 +99,11 @@ _190 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [NVIDIA: Nemotron 3.5 Super VL (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/nvidia-nemotron-3-5-super-vl-free/) | `nvidia/nemotron-3.5-super-vl:free` | 1M | yes | 🟢 |  |
 | [Poolside: Laguna S 2.1 (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/poolside-laguna-s-2-1-free/) | `poolside/laguna-s-2.1:free` | 262k | yes | 🟢 | 🤖 |
 | [Poolside: Laguna XS 2.1 (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/poolside-laguna-xs-2-1-free/) | `poolside/laguna-xs-2.1:free` | 262k | yes | 🟢 | 🤖 |
+| [Reflection: Beam 1.0 (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/reflection-beam-free/) | `reflection/beam-free` | 1M | yes | – |  |
 | [Stealth: Cat Jam (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/stealth-cat-jam/) | `stealth/cat-jam` | 1M | yes | 🟢 |  |
 | [Stealth: Glyph Cluster (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/stealth-glyph-cluster/) | `stealth/glyph-cluster` | 256k | yes | 🟢 | 🤖 |
-| [StepFun: Step 5 Preview (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/stepfun-step-5-preview-free/) | `stepfun/step-5-preview-free` | 1M | yes | 🟢 | 🤖 |
 | [Thinking Machines: Inkling Small (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/thinkingmachines-inkling-small-free/) | `thinkingmachines/inkling-small:free` | 1M | yes | – |  |
+| [XingChen: Xing4.0 29B A4B (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/xingchen-agi-xing4-0-29b-a4b-free/) | `xingchen-agi/xing4.0-29b-a4b:free` | 262k | yes | – |  |
 
 #### LLM7.io ⚠ evaluation only
 
@@ -234,7 +236,6 @@ _190 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [nemotron-3.5-lightning-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/nemotron-3-5-lightning-free/) | `nemotron-3.5-lightning-free` | unknown | ? | – |  |
 | [nemotron-3.5-super-vl-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/nemotron-3-5-super-vl-free/) | `nemotron-3.5-super-vl-free` | unknown | ? | – |  |
 | [space-bunny-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/space-bunny-free/) | `space-bunny-free` | unknown | ? | – |  |
-| [step-5-preview-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/step-5-preview-free/) | `step-5-preview-free` | unknown | ? | – |  |
 
 #### Cline (free promotion)
 
@@ -244,7 +245,6 @@ _190 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [Muse Spark 1.3 Contributor](https://freetier-radar.marcelkanters.workers.dev/models/cline/cline-free-muse-spark-1-3-contributor/) | `cline-free/muse-spark-1.3-contributor` | unknown | ? | – |  |
 | [nemotron-3.5-super-vl](https://freetier-radar.marcelkanters.workers.dev/models/cline/cline-free-nemotron-3-5-super-vl/) | `cline-free/nemotron-3.5-super-vl` | unknown | ? | – |  |
 | [Solar Mini 4](https://freetier-radar.marcelkanters.workers.dev/models/cline/cline-free-solar-mini4/) | `cline-free/solar-mini4` | unknown | ? | – |  |
-| [Step 5 Preview](https://freetier-radar.marcelkanters.workers.dev/models/cline/cline-free-step-5-preview/) | `cline-free/step-5-preview` | unknown | ? | – |  |
 
 ### Text-to-speech (20)
 
