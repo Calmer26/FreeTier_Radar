@@ -11,11 +11,11 @@ change history and ready-to-paste Cline settings.
 ## The list
 
 <!-- LIST:START -->
-_187 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
+_186 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
 
 🟢 responded to the latest daily test · 🟡 rate-limited or slow · 🔴 failed · 🤖 agent-ready (tool calling, ≥64k context, answered every test on 5 of the last 7 days)
 
-### Chat (151)
+### Chat (150)
 
 #### OpenRouter
 
@@ -163,6 +163,7 @@ _187 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [clef:27b](https://freetier-radar.marcelkanters.workers.dev/models/ollama/clef-27b/) | `clef:27b` | unknown | ? | 🔴 |  |
 | [deepseek-v4-pro:0813](https://freetier-radar.marcelkanters.workers.dev/models/ollama/deepseek-v4-pro-0813/) | `deepseek-v4-pro:0813` | unknown | ? | 🔴 |  |
 | [deepseek-v4.1-flash](https://freetier-radar.marcelkanters.workers.dev/models/ollama/deepseek-v4-1-flash/) | `deepseek-v4.1-flash` | unknown | ? | 🔴 |  |
+| [deepseek-v4.1-flash:1017](https://freetier-radar.marcelkanters.workers.dev/models/ollama/deepseek-v4-1-flash-1017/) | `deepseek-v4.1-flash:1017` | unknown | ? | – |  |
 | [gemma4:31b](https://freetier-radar.marcelkanters.workers.dev/models/ollama/gemma4-31b/) | `gemma4:31b` | unknown | ? | 🟢 |  |
 | [glm-5.2](https://freetier-radar.marcelkanters.workers.dev/models/ollama/glm-5-2/) | `glm-5.2` | unknown | ? | 🔴 |  |
 | [glm-5.3](https://freetier-radar.marcelkanters.workers.dev/models/ollama/glm-5-3/) | `glm-5.3` | unknown | ? | 🔴 |  |
@@ -228,8 +229,6 @@ _187 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [glm-5.3-flash-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/glm-5-3-flash-free/) | `glm-5.3-flash-free` | unknown | ? | – |  |
 | [longcat-2.5-preview-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/longcat-2-5-preview-free/) | `longcat-2.5-preview-free` | unknown | ? | – |  |
 | [mimo-v2.6-flash-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/mimo-v2-6-flash-free/) | `mimo-v2.6-flash-free` | unknown | ? | – |  |
-| [muse-spark-1.2-contributor-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/muse-spark-1-2-contributor-free/) | `muse-spark-1.2-contributor-free` | unknown | ? | – |  |
-| [muse-spark-1.3-contributor-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/muse-spark-1-3-contributor-free/) | `muse-spark-1.3-contributor-free` | unknown | ? | – |  |
 | [nemotron-3.5-lightning-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/nemotron-3-5-lightning-free/) | `nemotron-3.5-lightning-free` | unknown | ? | – |  |
 | [nemotron-3.5-super-vl-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/nemotron-3-5-super-vl-free/) | `nemotron-3.5-super-vl-free` | unknown | ? | – |  |
 | [space-bunny-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/space-bunny-free/) | `space-bunny-free` | unknown | ? | – |  |
