@@ -11,11 +11,11 @@ change history and ready-to-paste Cline settings.
 ## The list
 
 <!-- LIST:START -->
-_190 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
+_189 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
 
 🟢 responded to the latest daily test · 🟡 rate-limited or slow · 🔴 failed · 🤖 agent-ready (tool calling, ≥64k context, answered every test on 5 of the last 7 days)
 
-### Chat (154)
+### Chat (153)
 
 #### OpenRouter
 
@@ -225,7 +225,6 @@ _190 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 |---|---|---|---|---|---|
 | [beam-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/beam-free/) | `beam-free` | unknown | ? | – |  |
 | [big-pickle](https://freetier-radar.marcelkanters.workers.dev/models/opencode/big-pickle/) | `big-pickle` | unknown | ? | – |  |
-| [cat-jam-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/cat-jam-free/) | `cat-jam-free` | unknown | ? | – |  |
 | [deepseek-v4.1-flash-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/deepseek-v4-1-flash-free/) | `deepseek-v4.1-flash-free` | unknown | ? | – |  |
 | [glm-5.3-flash-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/glm-5-3-flash-free/) | `glm-5.3-flash-free` | unknown | ? | – |  |
 | [ll-alpha-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/ll-alpha-free/) | `ll-alpha-free` | unknown | ? | – |  |
