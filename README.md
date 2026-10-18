@@ -11,7 +11,7 @@ change history and ready-to-paste Cline settings.
 ## The list
 
 <!-- LIST:START -->
-_186 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
+_187 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
 
 🟢 responded to the latest daily test · 🟡 rate-limited or slow · 🔴 failed · 🤖 agent-ready (tool calling, ≥64k context, answered every test on 5 of the last 7 days)
 
@@ -242,7 +242,7 @@ _186 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [nemotron-3.5-super-vl](https://freetier-radar.marcelkanters.workers.dev/models/cline/cline-free-nemotron-3-5-super-vl/) | `cline-free/nemotron-3.5-super-vl` | unknown | ? | – |  |
 | [Solar Mini 4](https://freetier-radar.marcelkanters.workers.dev/models/cline/cline-free-solar-mini4/) | `cline-free/solar-mini4` | unknown | ? | – |  |
 
-### Text-to-speech (20)
+### Text-to-speech (21)
 
 #### OpenRouter
 
@@ -298,6 +298,7 @@ _186 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 |---|---|---|
 | [Simba 3.0](https://freetier-radar.marcelkanters.workers.dev/models/speechify/simba-3-0/) | `simba-3.0` | 🟢 |
 | [Simba 3.2](https://freetier-radar.marcelkanters.workers.dev/models/speechify/simba-3-2/) | `simba-3.2` | 🟢 |
+| [Simba 3.5](https://freetier-radar.marcelkanters.workers.dev/models/speechify/simba-3-5/) | `simba-3.5` | – |
 
 ### Speech-to-text (7)
 
