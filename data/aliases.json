@@ -14,6 +14,11 @@
     "status": "exact",
     "on": "2026-09-28"
   },
+  "cline/cline-free/nemotron-3.5-super-vl": {
+    "arena": "nvidia-nemotron-3.5-super-vl-120b-a12b-nvfp4",
+    "status": "variant",
+    "on": "2026-10-19"
+  },
   "cline/cline-free/step-5-preview": {
     "arena": "Step 5 Preview",
     "status": "exact",
@@ -154,6 +159,11 @@
     "status": "variant",
     "on": "2026-09-28"
   },
+  "google-ai-studio/gemini-4-argon": {
+    "arena": "Gemini 4 Argon (High)",
+    "status": "variant",
+    "on": "2026-10-19"
+  },
   "google-ai-studio/gemini-omni-1.1-flash": {
     "arena": "gemini-omni-1.1-flash",
     "status": "exact",
@@ -208,6 +218,11 @@
     "arena": "nvidia-nemotron-3.5-lightning-30b-a3b-nvfp4",
     "status": "variant",
     "on": "2026-09-28"
+  },
+  "kilo/nvidia/nemotron-3.5-super-vl:free": {
+    "arena": "nvidia-nemotron-3.5-super-vl-120b-a12b-nvfp4",
+    "status": "variant",
+    "on": "2026-10-19"
   },
   "kilo/qwen/qwen3.8-27b:free": {
     "arena": "qwen3.8-27b",
@@ -324,6 +339,11 @@
     "status": "exact",
     "on": "2026-09-28"
   },
+  "nvidia/nvidia/nemotron-3.5-super-vl-120b-a12b": {
+    "arena": "nvidia-nemotron-3.5-super-vl-120b-a12b-nvfp4",
+    "status": "exact",
+    "on": "2026-10-19"
+  },
   "nvidia/nvidia/nemotron-4-340b-instruct": {
     "arena": "nemotron-4-340b-instruct",
     "status": "exact",
@@ -333,6 +353,11 @@
     "arena": "gpt-oss-20b",
     "status": "exact",
     "on": "2026-09-28"
+  },
+  "nvidia/stepfun-ai/step-5-preview": {
+    "arena": "Step 5 Preview",
+    "status": "exact",
+    "on": "2026-10-19"
   },
   "nvidia/z-ai/glm-5.3": {
     "arena": "GLM 5.3 (Max)",
@@ -394,6 +419,11 @@
     "status": "exact",
     "on": "2026-10-12"
   },
+  "ollama/muse-spark-open": {
+    "arena": "Muse Spark Open (Max)",
+    "status": "variant",
+    "on": "2026-10-19"
+  },
   "ollama/nemotron-3-super": {
     "arena": "nvidia-nemotron-3-super-120b-a12b",
     "status": "variant",
@@ -428,6 +458,11 @@
     "arena": "nvidia-nemotron-3.5-lightning-30b-a3b-nvfp4",
     "status": "variant",
     "on": "2026-09-28"
+  },
+  "openrouter/nvidia/nemotron-3.5-super-vl:free": {
+    "arena": "nvidia-nemotron-3.5-super-vl-120b-a12b-nvfp4",
+    "status": "variant",
+    "on": "2026-10-19"
   },
   "openrouter/qwen/qwen3.8-27b:free": {
     "arena": "qwen3.8-27b",
