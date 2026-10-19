@@ -243,6 +243,42 @@
     "kind": "chat",
     "listed_by": "api",
     "limit_scope": "shared",
+    "usage_terms": "unknown",
+    "rate_limits": {
+      "rph": 200,
+      "note": "Anonymous access: 200 requests per hour per IP address, across all free models.",
+      "source": "https://kilo.ai/docs/gateway/authentication"
+    },
+    "card_required": "no",
+    "account_required": "no",
+    "licence": null,
+    "data_logging": "may-train",
+    "model_id": "minimax/minimax-m3.1-flash:free",
+    "name": "MiniMax: MiniMax M3.1 Flash (free)",
+    "url": "https://kilo.ai/models",
+    "price_type": "free",
+    "context_length": 1000000,
+    "input_modalities": [
+      "text",
+      "image",
+      "video"
+    ],
+    "tool_calling": true,
+    "id": "kilo/minimax/minimax-m3.1-flash:free",
+    "slug": "minimax-minimax-m3-1-flash-free",
+    "category": "ai-model",
+    "status": "active",
+    "first_seen": "2026-10-19T15:20:47.709Z",
+    "last_seen": "2026-10-19T15:20:47.709Z",
+    "missing_since": null,
+    "removed_at": null,
+    "fingerprint": "17f27872053b389c"
+  },
+  {
+    "provider": "kilo",
+    "kind": "chat",
+    "listed_by": "api",
+    "limit_scope": "shared",
     "usage_terms": "evaluation-only",
     "rate_limits": {
       "rph": 200,

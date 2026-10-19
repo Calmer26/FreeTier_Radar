@@ -385,6 +385,44 @@
   },
   {
     "provider": "openrouter",
+    "kind": "chat",
+    "listed_by": "api",
+    "limit_scope": "shared",
+    "usage_terms": "production-ok",
+    "rate_limits": {
+      "rpm": 20,
+      "rpd": 50,
+      "note": "Shared across all free models. 1,000 requests/day after a one-time purchase of 10 credits.",
+      "source": "https://openrouter.ai/docs/faq"
+    },
+    "card_required": "no",
+    "account_required": "yes",
+    "licence": null,
+    "data_logging": "unknown",
+    "model_id": "minimax/minimax-m3.1-flash:free",
+    "name": "MiniMax: MiniMax M3.1 Flash (free)",
+    "url": "https://openrouter.ai/minimax/minimax-m3.1-flash:free",
+    "price_type": "free",
+    "context_length": 1000000,
+    "input_modalities": [
+      "text",
+      "image",
+      "video"
+    ],
+    "tool_calling": true,
+    "paid_version_pricing": null,
+    "id": "openrouter/minimax/minimax-m3.1-flash:free",
+    "slug": "minimax-minimax-m3-1-flash-free",
+    "category": "ai-model",
+    "status": "active",
+    "first_seen": "2026-10-19T15:20:47.709Z",
+    "last_seen": "2026-10-19T15:20:47.709Z",
+    "missing_since": null,
+    "removed_at": null,
+    "fingerprint": "097fea8a169d7bbc"
+  },
+  {
+    "provider": "openrouter",
     "limit_scope": "shared",
     "usage_terms": "production-ok",
     "rate_limits": {
