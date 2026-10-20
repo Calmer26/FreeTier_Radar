@@ -11,11 +11,11 @@ change history and ready-to-paste Cline settings.
 ## The list
 
 <!-- LIST:START -->
-_191 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
+_194 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
 
 🟢 responded to the latest daily test · 🟡 rate-limited or slow · 🔴 failed · 🤖 agent-ready (tool calling, ≥64k context, answered every test on 5 of the last 7 days)
 
-### Chat (155)
+### Chat (158)
 
 #### OpenRouter
 
@@ -241,9 +241,12 @@ _191 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 
 | Model | ID | Context | Tools | Last test | Agent |
 |---|---|---|---|---|---|
+| [Beam](https://freetier-radar.marcelkanters.workers.dev/models/cline/reflection-beam-free/) | `reflection/beam-free` | unknown | ? | – |  |
+| [Laguna S 2.1](https://freetier-radar.marcelkanters.workers.dev/models/cline/poolside-laguna-s-2-1-free/) | `poolside/laguna-s-2.1-free` | unknown | ? | – |  |
 | [Mimo V2.6 Flash](https://freetier-radar.marcelkanters.workers.dev/models/cline/cline-free-mimo-v2-6-flash/) | `cline-free/mimo-v2.6-flash` | unknown | ? | – |  |
 | [Minimax M3.1 Flash](https://freetier-radar.marcelkanters.workers.dev/models/cline/cline-free-minimax-m3-1-flash/) | `cline-free/minimax-m3.1-flash` | unknown | ? | – |  |
 | [Muse Spark 1.3 Contributor](https://freetier-radar.marcelkanters.workers.dev/models/cline/cline-free-muse-spark-1-3-contributor/) | `cline-free/muse-spark-1.3-contributor` | unknown | ? | – |  |
+| [Nemotron 3.5 Lightning](https://freetier-radar.marcelkanters.workers.dev/models/cline/nvidia-nemotron-3-5-lightning-free/) | `nvidia/nemotron-3.5-lightning-free` | unknown | ? | – |  |
 | [nemotron-3.5-super-vl](https://freetier-radar.marcelkanters.workers.dev/models/cline/cline-free-nemotron-3-5-super-vl/) | `cline-free/nemotron-3.5-super-vl` | unknown | ? | – |  |
 | [Solar Mini 4](https://freetier-radar.marcelkanters.workers.dev/models/cline/cline-free-solar-mini4/) | `cline-free/solar-mini4` | unknown | ? | – |  |
 
