@@ -11,11 +11,11 @@ change history and ready-to-paste Cline settings.
 ## The list
 
 <!-- LIST:START -->
-_193 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
+_191 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
 
 🟢 responded to the latest daily test · 🟡 rate-limited or slow · 🔴 failed · 🤖 agent-ready (tool calling, ≥64k context, answered every test on 5 of the last 7 days)
 
-### Chat (156)
+### Chat (155)
 
 #### OpenRouter
 
@@ -236,7 +236,6 @@ _193 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [minimax-m3.1-flash-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/minimax-m3-1-flash-free/) | `minimax-m3.1-flash-free` | unknown | ? | – |  |
 | [nemotron-3.5-lightning-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/nemotron-3-5-lightning-free/) | `nemotron-3.5-lightning-free` | unknown | ? | – |  |
 | [nemotron-3.5-super-vl-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/nemotron-3-5-super-vl-free/) | `nemotron-3.5-super-vl-free` | unknown | ? | – |  |
-| [space-bunny-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/space-bunny-free/) | `space-bunny-free` | unknown | ? | – |  |
 
 #### Cline (free promotion)
 
@@ -248,7 +247,7 @@ _193 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [nemotron-3.5-super-vl](https://freetier-radar.marcelkanters.workers.dev/models/cline/cline-free-nemotron-3-5-super-vl/) | `cline-free/nemotron-3.5-super-vl` | unknown | ? | – |  |
 | [Solar Mini 4](https://freetier-radar.marcelkanters.workers.dev/models/cline/cline-free-solar-mini4/) | `cline-free/solar-mini4` | unknown | ? | – |  |
 
-### Text-to-speech (21)
+### Text-to-speech (20)
 
 #### OpenRouter
 
@@ -277,12 +276,6 @@ _193 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | Model | ID | Last test |
 |---|---|---|
 | [myshell-ai/melotts](https://freetier-radar.marcelkanters.workers.dev/models/cloudflare/cf-myshell-ai-melotts/) | `@cf/myshell-ai/melotts` | 🟢 |
-
-#### Mistral AI (Free mode)
-
-| Model | ID | Last test |
-|---|---|---|
-| [Voxtral Mini TTS 2603](https://freetier-radar.marcelkanters.workers.dev/models/mistral/voxtral-mini-tts-2603/) | `voxtral-mini-tts-2603` | 🟢 |
 
 #### ElevenLabs (Free plan)
 
