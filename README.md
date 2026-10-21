@@ -11,11 +11,11 @@ change history and ready-to-paste Cline settings.
 ## The list
 
 <!-- LIST:START -->
-_187 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
+_190 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
 
 🟢 responded to the latest daily test · 🟡 rate-limited or slow · 🔴 failed · 🤖 agent-ready (tool calling, ≥64k context, answered every test on 5 of the last 7 days)
 
-### Chat (151)
+### Chat (154)
 
 #### OpenRouter
 
@@ -33,6 +33,7 @@ _187 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [NVIDIA: Nemotron 3.5 Super VL (free)](https://freetier-radar.marcelkanters.workers.dev/models/openrouter/nvidia-nemotron-3-5-super-vl-free/) | `nvidia/nemotron-3.5-super-vl:free` | 1M | yes | 🔴 |  |
 | [Poolside: Laguna S 2.1 (free)](https://freetier-radar.marcelkanters.workers.dev/models/openrouter/poolside-laguna-s-2-1-free/) | `poolside/laguna-s-2.1:free` | 262k | yes | 🟢 | 🤖 |
 | [Poolside: Laguna XS 2.1 (free)](https://freetier-radar.marcelkanters.workers.dev/models/openrouter/poolside-laguna-xs-2-1-free/) | `poolside/laguna-xs-2.1:free` | 262k | yes | 🟢 | 🤖 |
+| [Recursive: Flint (free)](https://freetier-radar.marcelkanters.workers.dev/models/openrouter/recursive-flint-v1-0-free/) | `recursive/flint-v1.0:free` | 262k | yes | – |  |
 | [Thinking Machines: Inkling (free)](https://freetier-radar.marcelkanters.workers.dev/models/openrouter/thinkingmachines-inkling-free/) | `thinkingmachines/inkling:free` | 1M | yes | 🟡 |  |
 | [Thinking Machines: Inkling Small (free)](https://freetier-radar.marcelkanters.workers.dev/models/openrouter/thinkingmachines-inkling-small-free/) | `thinkingmachines/inkling-small:free` | 1M | yes | 🟡 |  |
 | [XingChen: Xing4.0 29B A4B (free)](https://freetier-radar.marcelkanters.workers.dev/models/openrouter/xingchen-agi-xing4-0-29b-a4b-free/) | `xingchen-agi/xing4.0-29b-a4b:free` | 262k | yes | 🟢 |  |
@@ -98,6 +99,7 @@ _187 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [NVIDIA: Nemotron 3.5 Super VL (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/nvidia-nemotron-3-5-super-vl-free/) | `nvidia/nemotron-3.5-super-vl:free` | 1M | yes | 🟢 |  |
 | [Poolside: Laguna S 2.1 (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/poolside-laguna-s-2-1-free/) | `poolside/laguna-s-2.1:free` | 262k | yes | 🟢 | 🤖 |
 | [Poolside: Laguna XS 2.1 (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/poolside-laguna-xs-2-1-free/) | `poolside/laguna-xs-2.1:free` | 262k | yes | 🟢 | 🤖 |
+| [Recursive: Flint (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/recursive-flint-v1-0-free/) | `recursive/flint-v1.0:free` | 262k | yes | – |  |
 | [Reflection: Beam 1.0 (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/reflection-beam-free/) | `reflection/beam-free` | 1M | yes | 🟡 |  |
 | [Stealth: Glyph Cluster (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/stealth-glyph-cluster/) | `stealth/glyph-cluster` | 256k | yes | 🟢 |  |
 | [XingChen: Xing4.0 29B A4B (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/xingchen-agi-xing4-0-29b-a4b-free/) | `xingchen-agi/xing4.0-29b-a4b:free` | 262k | yes | 🟢 |  |
@@ -225,6 +227,7 @@ _187 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [beam-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/beam-free/) | `beam-free` | unknown | ? | – |  |
 | [big-pickle](https://freetier-radar.marcelkanters.workers.dev/models/opencode/big-pickle/) | `big-pickle` | unknown | ? | – |  |
 | [deepseek-v4.1-flash-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/deepseek-v4-1-flash-free/) | `deepseek-v4.1-flash-free` | unknown | ? | – |  |
+| [flint-40b-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/flint-40b-free/) | `flint-40b-free` | unknown | ? | – |  |
 | [glm-5.3-flash-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/glm-5-3-flash-free/) | `glm-5.3-flash-free` | unknown | ? | – |  |
 | [longcat-2.5-preview-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/longcat-2-5-preview-free/) | `longcat-2.5-preview-free` | unknown | ? | – |  |
 | [mimo-v2.6-flash-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/mimo-v2-6-flash-free/) | `mimo-v2.6-flash-free` | unknown | ? | – |  |
