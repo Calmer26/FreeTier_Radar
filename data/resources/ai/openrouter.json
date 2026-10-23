@@ -216,12 +216,12 @@
     "data_logging": "unknown",
     "paid_version_pricing": [
       {
-        "usd": 0.0765,
+        "usd": 0.09,
         "unit": "M input tokens",
         "neurons": null
       },
       {
-        "usd": 0.255,
+        "usd": 0.3,
         "unit": "M output tokens",
         "neurons": null
       }
@@ -414,11 +414,11 @@
     "id": "openrouter/minimax/minimax-m3.1-flash:free",
     "slug": "minimax-minimax-m3-1-flash-free",
     "category": "ai-model",
-    "status": "pending_removal",
+    "status": "removed",
     "first_seen": "2026-10-19T15:20:47.709Z",
     "last_seen": "2026-10-22T03:21:42.773Z",
-    "missing_since": "2026-10-22T15:21:22.593Z",
-    "removed_at": null,
+    "missing_since": null,
+    "removed_at": "2026-10-23T09:21:14.444Z",
     "fingerprint": "097fea8a169d7bbc"
   },
   {
