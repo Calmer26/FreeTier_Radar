@@ -77,6 +77,7 @@ _186 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [minimaxai/minimax-m3.1-flash (minimaxai)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/minimaxai-minimax-m3-1-flash/) | `minimaxai/minimax-m3.1-flash` | unknown | ? | 🟢 |  |
 | [nvidia/nemotron-3-nano-omni-30b-a3b-reasoning (nvidia)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/nvidia-nemotron-3-nano-omni-30b-a3b-reasoning/) | `nvidia/nemotron-3-nano-omni-30b-a3b-reasoning` | unknown | ? | 🟢 |  |
 | [nvidia/nemotron-3-ultra-550b-a55b (nvidia)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/nvidia-nemotron-3-ultra-550b-a55b/) | `nvidia/nemotron-3-ultra-550b-a55b` | unknown | ? | 🟢 |  |
+| [nvidia/nemotron-3.5-bolt-e4b (nvidia)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/nvidia-nemotron-3-5-bolt-e4b/) | `nvidia/nemotron-3.5-bolt-e4b` | unknown | ? | – |  |
 | [nvidia/nemotron-3.5-lightning-30b-a3b (nvidia)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/nvidia-nemotron-3-5-lightning-30b-a3b/) | `nvidia/nemotron-3.5-lightning-30b-a3b` | unknown | ? | 🟢 |  |
 | [nvidia/nemotron-3.5-super-vl-120b-a12b (nvidia)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/nvidia-nemotron-3-5-super-vl-120b-a12b/) | `nvidia/nemotron-3.5-super-vl-120b-a12b` | unknown | ? | 🟢 |  |
 | [nvidia/riva-translate-4b-instruct-v2 (nvidia)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/nvidia-riva-translate-4b-instruct-v2/) | `nvidia/riva-translate-4b-instruct-v2` | unknown | ? | 🟡 |  |
@@ -237,7 +238,6 @@ _186 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 |---|---|---|---|---|---|
 | [Beam](https://freetier-radar.marcelkanters.workers.dev/models/cline/reflection-beam-free/) | `reflection/beam-free` | unknown | ? | – |  |
 | [Laguna S 2.1](https://freetier-radar.marcelkanters.workers.dev/models/cline/poolside-laguna-s-2-1-free/) | `poolside/laguna-s-2.1-free` | unknown | ? | – |  |
-| [Minimax M3.1 Flash](https://freetier-radar.marcelkanters.workers.dev/models/cline/cline-free-minimax-m3-1-flash/) | `cline-free/minimax-m3.1-flash` | unknown | ? | – |  |
 | [Nemotron 3.5 Lightning](https://freetier-radar.marcelkanters.workers.dev/models/cline/nvidia-nemotron-3-5-lightning-free/) | `nvidia/nemotron-3.5-lightning-free` | unknown | ? | – |  |
 | [nemotron-3.5-super-vl](https://freetier-radar.marcelkanters.workers.dev/models/cline/cline-free-nemotron-3-5-super-vl/) | `cline-free/nemotron-3.5-super-vl` | unknown | ? | – |  |
 | [Solar Mini 4](https://freetier-radar.marcelkanters.workers.dev/models/cline/cline-free-solar-mini4/) | `cline-free/solar-mini4` | unknown | ? | – |  |
