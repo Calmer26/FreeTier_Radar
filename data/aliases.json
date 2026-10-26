@@ -49,6 +49,11 @@
     "status": "exact",
     "on": "2026-09-28"
   },
+  "cloudflare/@cf/meta/llama-3.2-11b-vision-instruct": {
+    "arena": "Llama 3.2 11B Vision Instruct",
+    "status": "exact",
+    "on": "2026-10-26"
+  },
   "cloudflare/@cf/meta/llama-3.2-1b-instruct": {
     "arena": "llama-3.2-1b-instruct",
     "status": "exact",
@@ -284,6 +289,16 @@
     "status": "exact",
     "on": "2026-09-28"
   },
+  "nvidia/meta/llama-3.2-11b-vision-instruct": {
+    "arena": "Llama 3.2 11B Vision Instruct",
+    "status": "exact",
+    "on": "2026-10-26"
+  },
+  "nvidia/meta/llama-3.2-90b-vision-instruct": {
+    "arena": "Llama 3.2 90B Vision Instruct",
+    "status": "exact",
+    "on": "2026-10-26"
+  },
   "nvidia/meta/llama2-70b": {
     "arena": "llama2-70b-steerlm-chat",
     "status": "rejected",
@@ -293,6 +308,11 @@
     "arena": "phi-3-vision-128k-instruct",
     "status": "exact",
     "on": "2026-09-28"
+  },
+  "nvidia/minimaxai/minimax-m3.1-flash": {
+    "arena": "MiniMax-M3.1-Flash",
+    "status": "exact",
+    "on": "2026-10-26"
   },
   "nvidia/mistralai/mistral-large": {
     "arena": "mistral-large-3",
@@ -413,6 +433,11 @@
     "arena": "minimax-m3",
     "status": "exact",
     "on": "2026-10-05"
+  },
+  "ollama/minimax-m3.1-flash": {
+    "arena": "MiniMax-M3.1-Flash",
+    "status": "exact",
+    "on": "2026-10-26"
   },
   "ollama/mistral-large-4": {
     "arena": "mistral-large-4",
