@@ -11,11 +11,11 @@ change history and ready-to-paste Cline settings.
 ## The list
 
 <!-- LIST:START -->
-_171 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
+_170 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
 
 🟢 responded to the latest daily test · 🟡 rate-limited or slow · 🔴 failed · 🤖 agent-ready (tool calling, ≥64k context, answered every test on 5 of the last 7 days)
 
-### Chat (135)
+### Chat (134)
 
 #### OpenRouter
 
@@ -83,7 +83,6 @@ _171 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [openai/gpt-oss-20b (openai)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/openai-gpt-oss-20b/) | `openai/gpt-oss-20b` | unknown | ? | 🟢 |  |
 | [poolside/laguna-xs-2.1 (poolside)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/poolside-laguna-xs-2-1/) | `poolside/laguna-xs-2.1` | unknown | ? | 🟡 |  |
 | [stepfun-ai/step-5-preview (stepfun-ai)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/stepfun-ai-step-5-preview/) | `stepfun-ai/step-5-preview` | unknown | ? | 🟡 |  |
-| [z-ai/glm-5.3 (z-ai)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/z-ai-glm-5-3/) | `z-ai/glm-5.3` | unknown | ? | 🟡 |  |
 | [z-ai/glm-5.3-flash (z-ai)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/z-ai-glm-5-3-flash/) | `z-ai/glm-5.3-flash` | unknown | ? | 🟡 |  |
 
 #### Kilo Code gateway
