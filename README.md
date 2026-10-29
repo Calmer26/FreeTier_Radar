@@ -24,12 +24,12 @@ _170 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [Cohere: North Mini Code (free)](https://freetier-radar.marcelkanters.workers.dev/models/openrouter/cohere-north-mini-code-free/) | `cohere/north-mini-code:free` | 256k | yes | 🟢 | 🤖 |
 | [Dots Studio: Dots3-Note Preview (free)](https://freetier-radar.marcelkanters.workers.dev/models/openrouter/dots-studio-dots-3-note-preview-free/) | `dots-studio/dots-3-note-preview:free` | 512k | yes | 🟢 | 🤖 |
 | [Google: Gemma 4 26B A4B  (free)](https://freetier-radar.marcelkanters.workers.dev/models/openrouter/google-gemma-4-26b-a4b-it-free/) | `google/gemma-4-26b-a4b-it:free` | 262k | yes | – |  |
-| [Google: Gemma 4 31B (free)](https://freetier-radar.marcelkanters.workers.dev/models/openrouter/google-gemma-4-31b-it-free/) | `google/gemma-4-31b-it:free` | 262k | yes | 🟢 |  |
+| [Google: Gemma 4 31B (free)](https://freetier-radar.marcelkanters.workers.dev/models/openrouter/google-gemma-4-31b-it-free/) | `google/gemma-4-31b-it:free` | 262k | yes | – |  |
 | [LiquidAI: LFM2.5-2.6B (free)](https://freetier-radar.marcelkanters.workers.dev/models/openrouter/liquid-lfm-2-5-2-6b-free/) | `liquid/lfm-2.5-2.6b:free` | 66k | yes | 🟢 | 🤖 |
 | [NVIDIA: Nemotron 3 Nano Omni (free)](https://freetier-radar.marcelkanters.workers.dev/models/openrouter/nvidia-nemotron-3-nano-omni-30b-a3b-reasoning-free/) | `nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free` | 256k | yes | 🟢 |  |
 | [NVIDIA: Nemotron 3 Ultra (free)](https://freetier-radar.marcelkanters.workers.dev/models/openrouter/nvidia-nemotron-3-ultra-550b-a55b-free/) | `nvidia/nemotron-3-ultra-550b-a55b:free` | 1M | yes | 🟢 | 🤖 |
 | [NVIDIA: Nemotron 3.5 Lightning (free)](https://freetier-radar.marcelkanters.workers.dev/models/openrouter/nvidia-nemotron-3-5-lightning-free/) | `nvidia/nemotron-3.5-lightning:free` | 1M | yes | 🟢 | 🤖 |
-| [NVIDIA: Nemotron 3.5 Super VL (free)](https://freetier-radar.marcelkanters.workers.dev/models/openrouter/nvidia-nemotron-3-5-super-vl-free/) | `nvidia/nemotron-3.5-super-vl:free` | 1M | yes | 🟢 |  |
+| [NVIDIA: Nemotron 3.5 Super VL (free)](https://freetier-radar.marcelkanters.workers.dev/models/openrouter/nvidia-nemotron-3-5-super-vl-free/) | `nvidia/nemotron-3.5-super-vl:free` | 1M | yes | 🟢 | 🤖 |
 | [Poolside: Laguna S 2.1 (free)](https://freetier-radar.marcelkanters.workers.dev/models/openrouter/poolside-laguna-s-2-1-free/) | `poolside/laguna-s-2.1:free` | 262k | yes | 🟢 | 🤖 |
 | [Poolside: Laguna XS 2.1 (free)](https://freetier-radar.marcelkanters.workers.dev/models/openrouter/poolside-laguna-xs-2-1-free/) | `poolside/laguna-xs-2.1:free` | 262k | yes | 🟢 | 🤖 |
 | [Recursive: Flint (free)](https://freetier-radar.marcelkanters.workers.dev/models/openrouter/recursive-flint-v1-0-free/) | `recursive/flint-v1.0:free` | 262k | yes | 🟢 | 🤖 |
@@ -71,7 +71,7 @@ _170 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [google/diffusiongemma-26b-a4b-it (google)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/google-diffusiongemma-26b-a4b-it/) | `google/diffusiongemma-26b-a4b-it` | unknown | ? | 🟢 |  |
 | [google/gemma-4-31b-it (google)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/google-gemma-4-31b-it/) | `google/gemma-4-31b-it` | unknown | ? | 🟡 |  |
 | [meta/llama-3.2-11b-vision-instruct (meta)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/meta-llama-3-2-11b-vision-instruct/) | `meta/llama-3.2-11b-vision-instruct` | unknown | ? | 🟢 |  |
-| [meta/llama-3.2-90b-vision-instruct (meta)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/meta-llama-3-2-90b-vision-instruct/) | `meta/llama-3.2-90b-vision-instruct` | unknown | ? | 🟡 |  |
+| [meta/llama-3.2-90b-vision-instruct (meta)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/meta-llama-3-2-90b-vision-instruct/) | `meta/llama-3.2-90b-vision-instruct` | unknown | ? | 🟢 |  |
 | [meta/muse-glimmer-30b (meta)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/meta-muse-glimmer-30b/) | `meta/muse-glimmer-30b` | unknown | ? | 🟢 |  |
 | [minimaxai/minimax-m3.1-flash (minimaxai)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/minimaxai-minimax-m3-1-flash/) | `minimaxai/minimax-m3.1-flash` | unknown | ? | 🟢 |  |
 | [nvidia/nemotron-3-nano-omni-30b-a3b-reasoning (nvidia)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/nvidia-nemotron-3-nano-omni-30b-a3b-reasoning/) | `nvidia/nemotron-3-nano-omni-30b-a3b-reasoning` | unknown | ? | 🟢 |  |
@@ -99,7 +99,7 @@ _170 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [Poolside: Laguna S 2.1 (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/poolside-laguna-s-2-1-free/) | `poolside/laguna-s-2.1:free` | 262k | yes | 🟢 | 🤖 |
 | [Poolside: Laguna XS 2.1 (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/poolside-laguna-xs-2-1-free/) | `poolside/laguna-xs-2.1:free` | 262k | yes | 🟢 | 🤖 |
 | [Recursive: Flint (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/recursive-flint-v1-0-free/) | `recursive/flint-v1.0:free` | 262k | yes | 🟢 | 🤖 |
-| [Reflection: Beam 1.0 (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/reflection-beam-free/) | `reflection/beam-free` | 1M | yes | 🔴 | 🤖 |
+| [Reflection: Beam 1.0 (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/reflection-beam-free/) | `reflection/beam-free` | 1M | yes | 🟢 | 🤖 |
 | [Stealth: Glyph Cluster (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/stealth-glyph-cluster/) | `stealth/glyph-cluster` | 256k | yes | 🟢 | 🤖 |
 | [XingChen: Xing4.0 29B A4B (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/xingchen-agi-xing4-0-29b-a4b-free/) | `xingchen-agi/xing4.0-29b-a4b:free` | 262k | yes | 🟢 | 🤖 |
 
@@ -116,7 +116,7 @@ _170 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 
 | Model | ID | Context | Tools | Last test | Agent |
 |---|---|---|---|---|---|
-| [GLM-4.5-Flash](https://freetier-radar.marcelkanters.workers.dev/models/zai/glm-4-5-flash/) | `glm-4.5-flash` | unknown | ? | 🟢 |  |
+| [GLM-4.5-Flash](https://freetier-radar.marcelkanters.workers.dev/models/zai/glm-4-5-flash/) | `glm-4.5-flash` | unknown | ? | 🟡 |  |
 | [GLM-4.6V-Flash](https://freetier-radar.marcelkanters.workers.dev/models/zai/glm-4-6v-flash/) | `glm-4.6v-flash` | unknown | ? | 🟢 |  |
 | [GLM-4.7-Flash](https://freetier-radar.marcelkanters.workers.dev/models/zai/glm-4-7-flash/) | `glm-4.7-flash` | unknown | ? | 🟡 |  |
 
@@ -129,7 +129,7 @@ _170 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [cloudflare/clef](https://freetier-radar.marcelkanters.workers.dev/models/cloudflare/cf-cloudflare-clef/) | `@cf/cloudflare/clef` | 66k | no | 🔴 |  |
 | [cloudflare/clef-flash](https://freetier-radar.marcelkanters.workers.dev/models/cloudflare/cf-cloudflare-clef-flash/) | `@cf/cloudflare/clef-flash` | 25k | no | 🔴 |  |
 | [cloudflare/clef-omni](https://freetier-radar.marcelkanters.workers.dev/models/cloudflare/cf-cloudflare-clef-omni/) | `@cf/cloudflare/clef-omni` | 66k | no | 🔴 |  |
-| [daily-co/phonellm-mini-alpha-2](https://freetier-radar.marcelkanters.workers.dev/models/cloudflare/cf-daily-co-phonellm-mini-alpha-2/) | `@cf/daily-co/phonellm-mini-alpha-2` | 262k | yes | 🟢 | 🤖 |
+| [daily-co/phonellm-mini-alpha-2](https://freetier-radar.marcelkanters.workers.dev/models/cloudflare/cf-daily-co-phonellm-mini-alpha-2/) | `@cf/daily-co/phonellm-mini-alpha-2` | 262k | yes | 🟡 | 🤖 |
 | [deepseek-ai/deepseek-r1-distill-qwen-32b](https://freetier-radar.marcelkanters.workers.dev/models/cloudflare/cf-deepseek-ai-deepseek-r1-distill-qwen-32b/) | `@cf/deepseek-ai/deepseek-r1-distill-qwen-32b` | 80k | no | 🟢 |  |
 | [ibm-granite/granite-4.0-h-micro](https://freetier-radar.marcelkanters.workers.dev/models/cloudflare/cf-ibm-granite-granite-4-0-h-micro/) | `@cf/ibm-granite/granite-4.0-h-micro` | 131k | yes | 🟢 | 🤖 |
 | [meta/llama-3.1-8b-instruct-fp8](https://freetier-radar.marcelkanters.workers.dev/models/cloudflare/cf-meta-llama-3-1-8b-instruct-fp8/) | `@cf/meta/llama-3.1-8b-instruct-fp8` | 32k | no | 🟢 |  |
@@ -177,7 +177,7 @@ _170 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [command-a-plus-05-2026](https://freetier-radar.marcelkanters.workers.dev/models/cohere/command-a-plus-05-2026/) | `command-a-plus-05-2026` | 436k | yes | 🟢 | 🤖 |
 | [command-a-reasoning-08-2025](https://freetier-radar.marcelkanters.workers.dev/models/cohere/command-a-reasoning-08-2025/) | `command-a-reasoning-08-2025` | 289k | yes | 🟢 | 🤖 |
 | [command-a-vision-07-2025](https://freetier-radar.marcelkanters.workers.dev/models/cohere/command-a-vision-07-2025/) | `command-a-vision-07-2025` | 128k | no | 🟢 |  |
-| [command-r-08-2024](https://freetier-radar.marcelkanters.workers.dev/models/cohere/command-r-08-2024/) | `command-r-08-2024` | 128k | yes | 🟡 | 🤖 |
+| [command-r-08-2024](https://freetier-radar.marcelkanters.workers.dev/models/cohere/command-r-08-2024/) | `command-r-08-2024` | 128k | yes | 🟢 | 🤖 |
 | [command-r-plus-08-2024](https://freetier-radar.marcelkanters.workers.dev/models/cohere/command-r-plus-08-2024/) | `command-r-plus-08-2024` | 128k | yes | 🟢 | 🤖 |
 | [command-r7b-12-2024](https://freetier-radar.marcelkanters.workers.dev/models/cohere/command-r7b-12-2024/) | `command-r7b-12-2024` | 132k | yes | 🟢 | 🤖 |
 | [north-mini-code-1.0](https://freetier-radar.marcelkanters.workers.dev/models/cohere/north-mini-code-1-0-2/) | `north-mini-code-1.0` | 436k | yes | 🟢 |  |
@@ -198,7 +198,7 @@ _170 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [gemma-4-31b-it](https://freetier-radar.marcelkanters.workers.dev/models/requesty/google-gemma-4-31b-it/) | `google/gemma-4-31b-it` | 262k | yes | 🟢 | 🤖 |
 | [leanstral-1-5](https://freetier-radar.marcelkanters.workers.dev/models/requesty/mistral-leanstral-1-5/) | `mistral/leanstral-1-5` | 262k | yes | 🟢 | 🤖 |
 | [ling-3.1-flash](https://freetier-radar.marcelkanters.workers.dev/models/requesty/novita-ling-3-1-flash/) | `novita/ling-3.1-flash` | 262k | yes | 🟢 | 🤖 |
-| [muse-glimmer-30b](https://freetier-radar.marcelkanters.workers.dev/models/requesty/nvidia-muse-glimmer-30b/) | `nvidia/muse-glimmer-30b` | 131k | yes | 🟢 |  |
+| [muse-glimmer-30b](https://freetier-radar.marcelkanters.workers.dev/models/requesty/nvidia-muse-glimmer-30b/) | `nvidia/muse-glimmer-30b` | 131k | yes | 🟡 |  |
 | [nemotron-3-nano-omni-30b-a3b-reasoning](https://freetier-radar.marcelkanters.workers.dev/models/requesty/nvidia-nemotron-3-nano-omni-30b-a3b-reasoning/) | `nvidia/nemotron-3-nano-omni-30b-a3b-reasoning` | 131k | yes | 🟢 |  |
 | [nemotron-3-ultra-550b-a55b](https://freetier-radar.marcelkanters.workers.dev/models/requesty/nvidia-nemotron-3-ultra-550b-a55b/) | `nvidia/nemotron-3-ultra-550b-a55b` | 1M | yes | 🟢 |  |
 | [nemotron-3.5-lightning-30b-a3b](https://freetier-radar.marcelkanters.workers.dev/models/requesty/nvidia-nemotron-3-5-lightning-30b-a3b/) | `nvidia/nemotron-3.5-lightning-30b-a3b` | 1M | yes | 🟢 |  |
@@ -297,7 +297,7 @@ _170 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 
 | Model | ID | Last test |
 |---|---|---|
-| [openai/whisper](https://freetier-radar.marcelkanters.workers.dev/models/cloudflare/cf-openai-whisper/) | `@cf/openai/whisper` | 🟡 |
+| [openai/whisper](https://freetier-radar.marcelkanters.workers.dev/models/cloudflare/cf-openai-whisper/) | `@cf/openai/whisper` | 🟢 |
 | [openai/whisper-tiny-en](https://freetier-radar.marcelkanters.workers.dev/models/cloudflare/cf-openai-whisper-tiny-en/) | `@cf/openai/whisper-tiny-en` | 🟢 |
 
 #### Cohere (trial key)
