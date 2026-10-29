@@ -137,7 +137,7 @@
     "name": "Mistral Large 4",
     "url": "https://docs.mistral.ai/getting-started/models/",
     "price_type": "free",
-    "context_length": 524288,
+    "context_length": 1048576,
     "input_modalities": [
       "text",
       "image"
@@ -146,12 +146,12 @@
     "id": "mistral/mistral-large-4",
     "slug": "mistral-large-4",
     "category": "ai-model",
-    "status": "removed",
+    "status": "active",
     "first_seen": "2026-10-06T15:21:03.403Z",
-    "last_seen": "2026-10-06T15:21:03.403Z",
+    "last_seen": "2026-10-29T21:21:17.984Z",
     "missing_since": null,
-    "removed_at": "2026-10-07T15:21:07.189Z",
-    "fingerprint": "74d3ae08b6b8a1a9"
+    "removed_at": null,
+    "fingerprint": "7eb1a5ec5018e5d5"
   },
   {
     "provider": "mistral",
@@ -177,10 +177,10 @@
     "id": "mistral/mistral-large-4-0-8",
     "slug": "mistral-large-4-0-8",
     "category": "ai-model",
-    "status": "active",
+    "status": "pending_removal",
     "first_seen": "2026-10-29T15:21:19.374Z",
     "last_seen": "2026-10-29T15:21:19.374Z",
-    "missing_since": null,
+    "missing_since": "2026-10-29T21:21:17.984Z",
     "removed_at": null,
     "fingerprint": "0d6af733a2370879"
   },
