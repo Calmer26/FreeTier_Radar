@@ -11,11 +11,11 @@ change history and ready-to-paste Cline settings.
 ## The list
 
 <!-- LIST:START -->
-_170 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
+_172 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
 
 🟢 responded to the latest daily test · 🟡 rate-limited or slow · 🔴 failed · 🤖 agent-ready (tool calling, ≥64k context, answered every test on 5 of the last 7 days)
 
-### Chat (134)
+### Chat (136)
 
 #### OpenRouter
 
@@ -74,6 +74,7 @@ _170 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [meta/llama-3.2-90b-vision-instruct (meta)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/meta-llama-3-2-90b-vision-instruct/) | `meta/llama-3.2-90b-vision-instruct` | unknown | ? | 🟢 |  |
 | [meta/muse-glimmer-30b (meta)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/meta-muse-glimmer-30b/) | `meta/muse-glimmer-30b` | unknown | ? | 🟢 |  |
 | [minimaxai/minimax-m3.1-flash (minimaxai)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/minimaxai-minimax-m3-1-flash/) | `minimaxai/minimax-m3.1-flash` | unknown | ? | 🟢 |  |
+| [mistralai/mistral-large-4-1t-a52b (mistralai)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/mistralai-mistral-large-4-1t-a52b/) | `mistralai/mistral-large-4-1t-a52b` | unknown | ? | – |  |
 | [nvidia/nemotron-3-nano-omni-30b-a3b-reasoning (nvidia)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/nvidia-nemotron-3-nano-omni-30b-a3b-reasoning/) | `nvidia/nemotron-3-nano-omni-30b-a3b-reasoning` | unknown | ? | 🟢 |  |
 | [nvidia/nemotron-3-ultra-550b-a55b (nvidia)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/nvidia-nemotron-3-ultra-550b-a55b/) | `nvidia/nemotron-3-ultra-550b-a55b` | unknown | ? | 🟢 |  |
 | [nvidia/nemotron-3.5-bolt-e4b (nvidia)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/nvidia-nemotron-3-5-bolt-e4b/) | `nvidia/nemotron-3.5-bolt-e4b` | unknown | ? | 🟢 |  |
@@ -152,6 +153,7 @@ _170 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [Ministral 14B 2512](https://freetier-radar.marcelkanters.workers.dev/models/mistral/ministral-14b-2512/) | `ministral-14b-2512` | 262k | yes | 🟢 | 🤖 |
 | [Ministral 3B 2512](https://freetier-radar.marcelkanters.workers.dev/models/mistral/ministral-3b-2512/) | `ministral-3b-2512` | 131k | yes | 🟢 | 🤖 |
 | [Ministral 8B 2512](https://freetier-radar.marcelkanters.workers.dev/models/mistral/ministral-8b-2512/) | `ministral-8b-2512` | 262k | yes | 🟢 | 🤖 |
+| [Mistral Large 4 0 8](https://freetier-radar.marcelkanters.workers.dev/models/mistral/mistral-large-4-0-8/) | `mistral-large-4-0-8` | 1M | yes | – |  |
 
 #### Ollama Cloud (Free plan)
 
