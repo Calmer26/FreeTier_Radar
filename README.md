@@ -92,6 +92,7 @@ _173 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 |---|---|---|---|---|---|
 | [Cohere: North Mini Code (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/cohere-north-mini-code-free/) | `cohere/north-mini-code:free` | 256k | yes | 🟢 | 🤖 |
 | [Dots Studio: Dots3-Note Preview (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/dots-studio-dots-3-note-preview-free/) | `dots-studio/dots-3-note-preview:free` | 512k | yes | 🟢 | 🤖 |
+| [inclusionAI: Ling 3.1 Flash 1019 (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/inclusionai-ling-3-1-flash-1019-free/) | `inclusionai/ling-3.1-flash-1019-free` | 1M | yes | – |  |
 | [LiquidAI: LFM2.5-2.6B (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/liquid-lfm-2-5-2-6b-free/) | `liquid/lfm-2.5-2.6b:free` | 66k | yes | 🟢 | 🤖 |
 | [NVIDIA: Nemotron 3 Nano Omni (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/nvidia-nemotron-3-nano-omni-30b-a3b-reasoning-free/) | `nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free` | 256k | yes | 🟢 |  |
 | [NVIDIA: Nemotron 3 Ultra (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/nvidia-nemotron-3-ultra-550b-a55b-free/) | `nvidia/nemotron-3-ultra-550b-a55b:free` | 1M | yes | 🟢 |  |
@@ -154,7 +155,6 @@ _173 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [Ministral 3B 2512](https://freetier-radar.marcelkanters.workers.dev/models/mistral/ministral-3b-2512/) | `ministral-3b-2512` | 131k | yes | 🟢 | 🤖 |
 | [Ministral 8B 2512](https://freetier-radar.marcelkanters.workers.dev/models/mistral/ministral-8b-2512/) | `ministral-8b-2512` | 262k | yes | 🟢 | 🤖 |
 | [Mistral Large 4](https://freetier-radar.marcelkanters.workers.dev/models/mistral/mistral-large-4/) | `mistral-large-4` | 1M | yes | 🟢 |  |
-| [Mistral Large 4 0 8](https://freetier-radar.marcelkanters.workers.dev/models/mistral/mistral-large-4-0-8/) | `mistral-large-4-0-8` | 1M | yes | 🟢 |  |
 
 #### Ollama Cloud (Free plan)
 
