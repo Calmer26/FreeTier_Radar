@@ -249,6 +249,11 @@
     "status": "exact",
     "on": "2026-09-28"
   },
+  "mistral/mistral-large-4": {
+    "arena": "Mistral Large 4",
+    "status": "exact",
+    "on": "2026-11-02"
+  },
   "nvidia/ai21labs/jamba-1.5-large-instruct": {
     "arena": "jamba-1.5-large",
     "status": "exact",
@@ -423,6 +428,16 @@
     "arena": "Kimi K3 (Max)",
     "status": "variant",
     "on": "2026-10-05"
+  },
+  "ollama/mimo-v2.6-flash": {
+    "arena": "MiMo-V2.6-Flash",
+    "status": "exact",
+    "on": "2026-11-02"
+  },
+  "ollama/mimo-v2.6-pro": {
+    "arena": "MiMo-V2.6-Pro",
+    "status": "exact",
+    "on": "2026-11-02"
   },
   "ollama/minimax-m2.7": {
     "arena": "minimax-m2.7",
