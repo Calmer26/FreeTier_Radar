@@ -62,7 +62,7 @@
     "category": "ai-model",
     "status": "active",
     "first_seen": "2026-09-28T11:37:34.966Z",
-    "last_seen": "2026-11-02T03:21:14.205Z",
+    "last_seen": "2026-11-03T03:21:17.970Z",
     "missing_since": null,
     "removed_at": null,
     "fingerprint": "e519fb179fdac159"
@@ -97,10 +97,46 @@
     "category": "ai-model",
     "status": "active",
     "first_seen": "2026-09-28T11:37:34.966Z",
-    "last_seen": "2026-11-02T03:21:14.205Z",
+    "last_seen": "2026-11-03T03:21:17.970Z",
     "missing_since": null,
     "removed_at": null,
     "fingerprint": "ec78086924d051a5"
+  },
+  {
+    "provider": "kilo",
+    "kind": "chat",
+    "listed_by": "api",
+    "limit_scope": "shared",
+    "usage_terms": "unknown",
+    "rate_limits": {
+      "rph": 200,
+      "note": "Anonymous access: 200 requests per hour per IP address, across all free models.",
+      "source": "https://kilo.ai/docs/gateway/authentication"
+    },
+    "card_required": "no",
+    "account_required": "no",
+    "licence": null,
+    "data_logging": "may-train",
+    "model_id": "google/gemma-4-31b-it:free",
+    "name": "Google: Gemma 4 31B (free)",
+    "url": "https://kilo.ai/models",
+    "price_type": "free",
+    "context_length": 262144,
+    "input_modalities": [
+      "image",
+      "text",
+      "video"
+    ],
+    "tool_calling": true,
+    "id": "kilo/google/gemma-4-31b-it:free",
+    "slug": "google-gemma-4-31b-it-free",
+    "category": "ai-model",
+    "status": "active",
+    "first_seen": "2026-11-03T03:21:17.970Z",
+    "last_seen": "2026-11-03T03:21:17.970Z",
+    "missing_since": null,
+    "removed_at": null,
+    "fingerprint": "eaea1bff0f4e1124"
   },
   {
     "provider": "kilo",
@@ -233,7 +269,7 @@
     "category": "ai-model",
     "status": "active",
     "first_seen": "2026-10-30T15:21:15.245Z",
-    "last_seen": "2026-11-02T03:21:14.205Z",
+    "last_seen": "2026-11-03T03:21:17.970Z",
     "missing_since": null,
     "removed_at": null,
     "fingerprint": "f3f68f5c74a682f8"
@@ -267,7 +303,7 @@
     "category": "ai-model",
     "status": "active",
     "first_seen": "2026-09-28T11:37:34.966Z",
-    "last_seen": "2026-11-02T03:21:14.205Z",
+    "last_seen": "2026-11-03T03:21:17.970Z",
     "missing_since": null,
     "removed_at": null,
     "fingerprint": "5cfec29d937b06d9"
@@ -340,7 +376,7 @@
     "category": "ai-model",
     "status": "active",
     "first_seen": "2026-09-28T11:37:34.966Z",
-    "last_seen": "2026-11-02T03:21:14.205Z",
+    "last_seen": "2026-11-03T03:21:17.970Z",
     "missing_since": null,
     "removed_at": null,
     "fingerprint": "4cd19a96bb6f412e"
@@ -408,7 +444,7 @@
     "category": "ai-model",
     "status": "active",
     "first_seen": "2026-09-28T11:37:34.966Z",
-    "last_seen": "2026-11-02T03:21:14.205Z",
+    "last_seen": "2026-11-03T03:21:17.970Z",
     "missing_since": null,
     "removed_at": null,
     "fingerprint": "f46f401ffa43c25e"
@@ -442,7 +478,7 @@
     "category": "ai-model",
     "status": "active",
     "first_seen": "2026-09-28T11:37:34.966Z",
-    "last_seen": "2026-11-02T03:21:14.205Z",
+    "last_seen": "2026-11-03T03:21:17.970Z",
     "missing_since": null,
     "removed_at": null,
     "fingerprint": "856b000de2e99292"
@@ -478,7 +514,7 @@
     "category": "ai-model",
     "status": "active",
     "first_seen": "2026-10-15T15:20:40.166Z",
-    "last_seen": "2026-11-02T03:21:14.205Z",
+    "last_seen": "2026-11-03T03:21:17.970Z",
     "missing_since": null,
     "removed_at": null,
     "fingerprint": "29508db2c1115387"
@@ -616,7 +652,7 @@
     "category": "ai-model",
     "status": "active",
     "first_seen": "2026-10-21T21:20:56.710Z",
-    "last_seen": "2026-11-02T03:21:14.205Z",
+    "last_seen": "2026-11-03T03:21:17.970Z",
     "missing_since": null,
     "removed_at": null,
     "fingerprint": "8f30204d8d45807c"
@@ -650,7 +686,7 @@
     "category": "ai-model",
     "status": "active",
     "first_seen": "2026-10-16T21:21:22.286Z",
-    "last_seen": "2026-11-02T03:21:14.205Z",
+    "last_seen": "2026-11-03T03:21:17.970Z",
     "missing_since": null,
     "removed_at": null,
     "fingerprint": "0f2617e79abd4a94"
@@ -718,7 +754,7 @@
     "category": "ai-model",
     "status": "active",
     "first_seen": "2026-10-08T15:20:51.786Z",
-    "last_seen": "2026-11-02T03:21:14.205Z",
+    "last_seen": "2026-11-03T03:21:17.970Z",
     "missing_since": null,
     "removed_at": null,
     "fingerprint": "4db51efbfda00004"
@@ -858,12 +894,48 @@
     "id": "kilo/thinkingmachines/inkling-small:free",
     "slug": "thinkingmachines-inkling-small-free",
     "category": "ai-model",
-    "status": "removed",
+    "status": "active",
     "first_seen": "2026-09-28T11:37:34.966Z",
-    "last_seen": "2026-10-20T03:20:54.491Z",
+    "last_seen": "2026-11-03T03:21:17.970Z",
     "missing_since": null,
-    "removed_at": "2026-10-21T09:20:58.777Z",
+    "removed_at": null,
     "fingerprint": "e171b1d232d737ed"
+  },
+  {
+    "provider": "kilo",
+    "kind": "chat",
+    "listed_by": "api",
+    "limit_scope": "shared",
+    "usage_terms": "unknown",
+    "rate_limits": {
+      "rph": 200,
+      "note": "Anonymous access: 200 requests per hour per IP address, across all free models.",
+      "source": "https://kilo.ai/docs/gateway/authentication"
+    },
+    "card_required": "no",
+    "account_required": "no",
+    "licence": null,
+    "data_logging": "may-train",
+    "model_id": "thinkingmachines/inkling:free",
+    "name": "Thinking Machines: Inkling (free)",
+    "url": "https://kilo.ai/models",
+    "price_type": "free",
+    "context_length": 1048576,
+    "input_modalities": [
+      "text",
+      "image",
+      "audio"
+    ],
+    "tool_calling": true,
+    "id": "kilo/thinkingmachines/inkling:free",
+    "slug": "thinkingmachines-inkling-free",
+    "category": "ai-model",
+    "status": "active",
+    "first_seen": "2026-11-03T03:21:17.970Z",
+    "last_seen": "2026-11-03T03:21:17.970Z",
+    "missing_since": null,
+    "removed_at": null,
+    "fingerprint": "88f5c8ba39d248d5"
   },
   {
     "provider": "kilo",
@@ -894,7 +966,7 @@
     "category": "ai-model",
     "status": "active",
     "first_seen": "2026-10-16T21:21:22.286Z",
-    "last_seen": "2026-11-02T03:21:14.205Z",
+    "last_seen": "2026-11-03T03:21:17.970Z",
     "missing_since": null,
     "removed_at": null,
     "fingerprint": "df83e8252ae1943f"
