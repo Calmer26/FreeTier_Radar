@@ -216,12 +216,12 @@
     "data_logging": "unknown",
     "paid_version_pricing": [
       {
-        "usd": 0.029,
+        "usd": 0.053,
         "unit": "M input tokens",
         "neurons": null
       },
       {
-        "usd": 0.088,
+        "usd": 0.16,
         "unit": "M output tokens",
         "neurons": null
       }
@@ -867,11 +867,11 @@
     "id": "openrouter/thinkingmachines/inkling-small:free",
     "slug": "thinkingmachines-inkling-small-free",
     "category": "ai-model",
-    "status": "pending_removal",
+    "status": "removed",
     "first_seen": "2026-09-28T06:07:16.518Z",
     "last_seen": "2026-11-04T03:20:15.157Z",
-    "missing_since": "2026-11-04T15:20:39.242Z",
-    "removed_at": null,
+    "missing_since": null,
+    "removed_at": "2026-11-05T09:20:32.189Z",
     "fingerprint": "8280172f50176eb0",
     "kind": "chat",
     "listed_by": "api",
@@ -916,11 +916,11 @@
     "id": "openrouter/thinkingmachines/inkling:free",
     "slug": "thinkingmachines-inkling-free",
     "category": "ai-model",
-    "status": "pending_removal",
+    "status": "removed",
     "first_seen": "2026-09-28T06:07:16.518Z",
     "last_seen": "2026-11-04T03:20:15.157Z",
-    "missing_since": "2026-11-04T15:20:39.242Z",
-    "removed_at": null,
+    "missing_since": null,
+    "removed_at": "2026-11-05T09:20:32.189Z",
     "fingerprint": "b109001cb0c99575",
     "kind": "chat",
     "listed_by": "api",
