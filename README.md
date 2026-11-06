@@ -11,11 +11,11 @@ change history and ready-to-paste Cline settings.
 ## The list
 
 <!-- LIST:START -->
-_166 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
+_165 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
 
 🟢 responded to the latest daily test · 🟡 rate-limited or slow · 🔴 failed · 🤖 agent-ready (tool calling, ≥64k context, answered every test on 5 of the last 7 days)
 
-### Chat (130)
+### Chat (129)
 
 #### OpenRouter
 
@@ -54,10 +54,9 @@ _166 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [Gemini 3.5 Flash](https://freetier-radar.marcelkanters.workers.dev/models/google-ai-studio/gemini-3-5-flash/) | `gemini-3.5-flash` | 1M | ? | 🟢 | 🤖 |
 | [Gemini 3.5 Flash Lite](https://freetier-radar.marcelkanters.workers.dev/models/google-ai-studio/gemini-3-5-flash-lite/) | `gemini-3.5-flash-lite` | 1M | ? | 🟢 | 🤖 |
 | [Gemini 3.6 Flash](https://freetier-radar.marcelkanters.workers.dev/models/google-ai-studio/gemini-3-6-flash/) | `gemini-3.6-flash` | 1M | ? | 🟢 | 🤖 |
-| [Gemini 3.7 Flash](https://freetier-radar.marcelkanters.workers.dev/models/google-ai-studio/gemini-3-7-flash/) | `gemini-3.7-flash` | 1M | ? | 🔴 |  |
+| [Gemini 3.7 Flash](https://freetier-radar.marcelkanters.workers.dev/models/google-ai-studio/gemini-3-7-flash/) | `gemini-3.7-flash` | 1M | ? | 🟢 |  |
 | [Gemini 3.8 Flash](https://freetier-radar.marcelkanters.workers.dev/models/google-ai-studio/gemini-3-8-flash/) | `gemini-3.8-flash` | 1M | ? | 🟡 |  |
-| [Gemini Omni 1.2 Flash](https://freetier-radar.marcelkanters.workers.dev/models/google-ai-studio/gemini-omni-1-2-flash/) | `gemini-omni-1.2-flash` | 131k | ? | – |  |
-| [Gemma 4 26B A4B IT](https://freetier-radar.marcelkanters.workers.dev/models/google-ai-studio/gemma-4-26b-a4b-it/) | `gemma-4-26b-a4b-it` | 262k | ? | 🟢 | 🤖 |
+| [Gemma 4 26B A4B IT](https://freetier-radar.marcelkanters.workers.dev/models/google-ai-studio/gemma-4-26b-a4b-it/) | `gemma-4-26b-a4b-it` | 262k | ? | 🔴 | 🤖 |
 | [Gemma 4 31B IT](https://freetier-radar.marcelkanters.workers.dev/models/google-ai-studio/gemma-4-31b-it/) | `gemma-4-31b-it` | 262k | ? | 🔴 |  |
 
 #### NVIDIA API catalog (build.nvidia.com) ⚠ evaluation only
@@ -66,8 +65,8 @@ _166 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 |---|---|---|---|---|---|
 | [deepseek-ai/deepseek-v4.1-flash (deepseek-ai)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/deepseek-ai-deepseek-v4-1-flash/) | `deepseek-ai/deepseek-v4.1-flash` | unknown | ? | 🟡 |  |
 | [google/diffusiongemma-26b-a4b-it (google)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/google-diffusiongemma-26b-a4b-it/) | `google/diffusiongemma-26b-a4b-it` | unknown | ? | 🟢 |  |
-| [google/gemma-4-31b-it (google)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/google-gemma-4-31b-it/) | `google/gemma-4-31b-it` | unknown | ? | 🟢 |  |
-| [meta/llama-3.2-90b-vision-instruct (meta)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/meta-llama-3-2-90b-vision-instruct/) | `meta/llama-3.2-90b-vision-instruct` | unknown | ? | 🟢 |  |
+| [google/gemma-4-31b-it (google)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/google-gemma-4-31b-it/) | `google/gemma-4-31b-it` | unknown | ? | 🟡 |  |
+| [meta/llama-3.2-90b-vision-instruct (meta)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/meta-llama-3-2-90b-vision-instruct/) | `meta/llama-3.2-90b-vision-instruct` | unknown | ? | 🟡 |  |
 | [meta/muse-glimmer-30b (meta)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/meta-muse-glimmer-30b/) | `meta/muse-glimmer-30b` | unknown | ? | 🟢 |  |
 | [minimaxai/minimax-m3.1-flash (minimaxai)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/minimaxai-minimax-m3-1-flash/) | `minimaxai/minimax-m3.1-flash` | unknown | ? | 🟢 |  |
 | [mistralai/mistral-large-4-1t-a52b (mistralai)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/mistralai-mistral-large-4-1t-a52b/) | `mistralai/mistral-large-4-1t-a52b` | unknown | ? | 🟢 |  |
@@ -159,7 +158,7 @@ _166 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [gpt-oss:120b](https://freetier-radar.marcelkanters.workers.dev/models/ollama/gpt-oss-120b/) | `gpt-oss:120b` | unknown | ? | 🟢 |  |
 | [gpt-oss:20b](https://freetier-radar.marcelkanters.workers.dev/models/ollama/gpt-oss-20b/) | `gpt-oss:20b` | unknown | ? | 🟢 |  |
 | [nemotron-3-nano:30b](https://freetier-radar.marcelkanters.workers.dev/models/ollama/nemotron-3-nano-30b/) | `nemotron-3-nano:30b` | unknown | ? | 🟢 |  |
-| [nemotron-3-super](https://freetier-radar.marcelkanters.workers.dev/models/ollama/nemotron-3-super/) | `nemotron-3-super` | unknown | ? | 🟡 |  |
+| [nemotron-3-super](https://freetier-radar.marcelkanters.workers.dev/models/ollama/nemotron-3-super/) | `nemotron-3-super` | unknown | ? | 🟢 |  |
 | [nemotron-3-ultra](https://freetier-radar.marcelkanters.workers.dev/models/ollama/nemotron-3-ultra/) | `nemotron-3-ultra` | unknown | ? | 🟢 |  |
 
 #### Cohere (trial key)
@@ -293,7 +292,7 @@ _166 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 
 | Model | ID | Last test |
 |---|---|---|
-| [openai/whisper](https://freetier-radar.marcelkanters.workers.dev/models/cloudflare/cf-openai-whisper/) | `@cf/openai/whisper` | 🟢 |
+| [openai/whisper](https://freetier-radar.marcelkanters.workers.dev/models/cloudflare/cf-openai-whisper/) | `@cf/openai/whisper` | 🟡 |
 | [openai/whisper-tiny-en](https://freetier-radar.marcelkanters.workers.dev/models/cloudflare/cf-openai-whisper-tiny-en/) | `@cf/openai/whisper-tiny-en` | 🟢 |
 
 #### Cohere (trial key)
