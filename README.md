@@ -11,11 +11,11 @@ change history and ready-to-paste Cline settings.
 ## The list
 
 <!-- LIST:START -->
-_165 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
+_169 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
 
 🟢 responded to the latest daily test · 🟡 rate-limited or slow · 🔴 failed · 🤖 agent-ready (tool calling, ≥64k context, answered every test on 5 of the last 7 days)
 
-### Chat (129)
+### Chat (133)
 
 #### OpenRouter
 
@@ -26,6 +26,7 @@ _165 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [Google: Gemma 4 26B A4B  (free)](https://freetier-radar.marcelkanters.workers.dev/models/openrouter/google-gemma-4-26b-a4b-it-free/) | `google/gemma-4-26b-a4b-it:free` | 262k | yes | – |  |
 | [Google: Gemma 4 31B (free)](https://freetier-radar.marcelkanters.workers.dev/models/openrouter/google-gemma-4-31b-it-free/) | `google/gemma-4-31b-it:free` | 262k | yes | – |  |
 | [LiquidAI: LFM2.5-2.6B (free)](https://freetier-radar.marcelkanters.workers.dev/models/openrouter/liquid-lfm-2-5-2-6b-free/) | `liquid/lfm-2.5-2.6b:free` | 66k | yes | 🟢 | 🤖 |
+| [LiquidAI: LFM3-1.7B (free)](https://freetier-radar.marcelkanters.workers.dev/models/openrouter/liquid-lfm-3-1-7b-free/) | `liquid/lfm-3-1.7b:free` | 262k | yes | – |  |
 | [NVIDIA: Nemotron 3 Nano Omni (free)](https://freetier-radar.marcelkanters.workers.dev/models/openrouter/nvidia-nemotron-3-nano-omni-30b-a3b-reasoning-free/) | `nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free` | 256k | yes | 🟢 | 🤖 |
 | [NVIDIA: Nemotron 3 Ultra (free)](https://freetier-radar.marcelkanters.workers.dev/models/openrouter/nvidia-nemotron-3-ultra-550b-a55b-free/) | `nvidia/nemotron-3-ultra-550b-a55b:free` | 1M | yes | 🟢 | 🤖 |
 | [NVIDIA: Nemotron 3.5 Lightning (free)](https://freetier-radar.marcelkanters.workers.dev/models/openrouter/nvidia-nemotron-3-5-lightning-free/) | `nvidia/nemotron-3.5-lightning:free` | 1M | yes | 🟢 | 🤖 |
@@ -88,6 +89,7 @@ _165 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [Cohere: North Mini Code (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/cohere-north-mini-code-free/) | `cohere/north-mini-code:free` | 256k | yes | 🟢 | 🤖 |
 | [Crouton Alpha](https://freetier-radar.marcelkanters.workers.dev/models/kilo/stealth-crouton-alpha/) | `stealth/crouton-alpha` | 1M | yes | 🟢 |  |
 | [Dots Studio: Dots3-Note Preview (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/dots-studio-dots-3-note-preview-free/) | `dots-studio/dots-3-note-preview:free` | 512k | yes | 🟢 | 🤖 |
+| [LiquidAI: LFM3-1.7B (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/liquid-lfm-3-1-7b-free/) | `liquid/lfm-3-1.7b:free` | 262k | yes | – |  |
 | [NVIDIA: Nemotron 3 Nano Omni (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/nvidia-nemotron-3-nano-omni-30b-a3b-reasoning-free/) | `nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free` | 256k | yes | 🟢 |  |
 | [NVIDIA: Nemotron 3 Ultra (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/nvidia-nemotron-3-ultra-550b-a55b-free/) | `nvidia/nemotron-3-ultra-550b-a55b:free` | 1M | yes | 🟢 |  |
 | [NVIDIA: Nemotron 3.5 Lightning (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/nvidia-nemotron-3-5-lightning-free/) | `nvidia/nemotron-3.5-lightning:free` | 1M | yes | 🟢 |  |
@@ -207,6 +209,8 @@ _165 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [deepseek-v4.1-flash-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/deepseek-v4-1-flash-free/) | `deepseek-v4.1-flash-free` | unknown | ? | – |  |
 | [flint-40b-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/flint-40b-free/) | `flint-40b-free` | unknown | ? | – |  |
 | [glm-5.3-flash-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/glm-5-3-flash-free/) | `glm-5.3-flash-free` | unknown | ? | – |  |
+| [iceman-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/iceman-free/) | `iceman-free` | unknown | ? | – |  |
+| [inkling-2-small-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/inkling-2-small-free/) | `inkling-2-small-free` | unknown | ? | – |  |
 | [mimo-v2.6-flash-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/mimo-v2-6-flash-free/) | `mimo-v2.6-flash-free` | unknown | ? | – |  |
 | [nemotron-3.5-lightning-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/nemotron-3-5-lightning-free/) | `nemotron-3.5-lightning-free` | unknown | ? | – |  |
 | [nemotron-3.5-super-vl-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/nemotron-3-5-super-vl-free/) | `nemotron-3.5-super-vl-free` | unknown | ? | – |  |
