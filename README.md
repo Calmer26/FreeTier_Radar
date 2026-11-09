@@ -11,11 +11,11 @@ change history and ready-to-paste Cline settings.
 ## The list
 
 <!-- LIST:START -->
-_164 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
+_163 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
 
 🟢 responded to the latest daily test · 🟡 rate-limited or slow · 🔴 failed · 🤖 agent-ready (tool calling, ≥64k context, answered every test on 5 of the last 7 days)
 
-### Chat (128)
+### Chat (127)
 
 #### OpenRouter
 
@@ -94,7 +94,6 @@ _164 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [NVIDIA: Nemotron 3 Ultra (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/nvidia-nemotron-3-ultra-550b-a55b-free/) | `nvidia/nemotron-3-ultra-550b-a55b:free` | 1M | yes | 🟢 |  |
 | [NVIDIA: Nemotron 3.5 Lightning (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/nvidia-nemotron-3-5-lightning-free/) | `nvidia/nemotron-3.5-lightning:free` | 1M | yes | 🟢 |  |
 | [NVIDIA: Nemotron 3.5 Super VL (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/nvidia-nemotron-3-5-super-vl-free/) | `nvidia/nemotron-3.5-super-vl:free` | 1M | yes | 🟢 |  |
-| [Reflection: Beam 1.0 (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/reflection-beam-free/) | `reflection/beam-free` | 1M | yes | 🟢 | 🤖 |
 | [Stealth: Glyph Cluster (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/stealth-glyph-cluster/) | `stealth/glyph-cluster` | 256k | yes | 🟢 | 🤖 |
 
 #### LLM7.io ⚠ evaluation only
