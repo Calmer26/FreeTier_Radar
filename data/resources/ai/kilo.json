@@ -62,7 +62,7 @@
     "category": "ai-model",
     "status": "active",
     "first_seen": "2026-09-28T11:37:34.966Z",
-    "last_seen": "2026-11-09T03:21:11.184Z",
+    "last_seen": "2026-11-10T03:21:14.090Z",
     "missing_since": null,
     "removed_at": null,
     "fingerprint": "e519fb179fdac159"
@@ -97,7 +97,7 @@
     "category": "ai-model",
     "status": "active",
     "first_seen": "2026-09-28T11:37:34.966Z",
-    "last_seen": "2026-11-09T03:21:11.184Z",
+    "last_seen": "2026-11-10T03:21:14.090Z",
     "missing_since": null,
     "removed_at": null,
     "fingerprint": "ec78086924d051a5"
@@ -337,7 +337,7 @@
     "category": "ai-model",
     "status": "active",
     "first_seen": "2026-11-07T03:20:30.574Z",
-    "last_seen": "2026-11-09T03:21:11.184Z",
+    "last_seen": "2026-11-10T03:21:14.090Z",
     "missing_since": null,
     "removed_at": null,
     "fingerprint": "e82dc0984c1741c6"
@@ -410,7 +410,7 @@
     "category": "ai-model",
     "status": "active",
     "first_seen": "2026-09-28T11:37:34.966Z",
-    "last_seen": "2026-11-09T03:21:11.184Z",
+    "last_seen": "2026-11-10T03:21:14.090Z",
     "missing_since": null,
     "removed_at": null,
     "fingerprint": "4cd19a96bb6f412e"
@@ -478,7 +478,7 @@
     "category": "ai-model",
     "status": "active",
     "first_seen": "2026-09-28T11:37:34.966Z",
-    "last_seen": "2026-11-09T03:21:11.184Z",
+    "last_seen": "2026-11-10T03:21:14.090Z",
     "missing_since": null,
     "removed_at": null,
     "fingerprint": "f46f401ffa43c25e"
@@ -512,7 +512,7 @@
     "category": "ai-model",
     "status": "active",
     "first_seen": "2026-09-28T11:37:34.966Z",
-    "last_seen": "2026-11-09T03:21:11.184Z",
+    "last_seen": "2026-11-10T03:21:14.090Z",
     "missing_since": null,
     "removed_at": null,
     "fingerprint": "856b000de2e99292"
@@ -548,7 +548,7 @@
     "category": "ai-model",
     "status": "active",
     "first_seen": "2026-10-15T15:20:40.166Z",
-    "last_seen": "2026-11-09T03:21:11.184Z",
+    "last_seen": "2026-11-10T03:21:14.090Z",
     "missing_since": null,
     "removed_at": null,
     "fingerprint": "29508db2c1115387"
@@ -790,10 +790,10 @@
     "id": "kilo/stealth/crouton-alpha",
     "slug": "stealth-crouton-alpha",
     "category": "ai-model",
-    "status": "active",
+    "status": "pending_removal",
     "first_seen": "2026-11-03T21:20:33.061Z",
     "last_seen": "2026-11-09T03:21:11.184Z",
-    "missing_since": null,
+    "missing_since": "2026-11-10T03:21:14.090Z",
     "removed_at": null,
     "fingerprint": "b13b73cc8b2c1f27"
   },
@@ -826,7 +826,7 @@
     "category": "ai-model",
     "status": "active",
     "first_seen": "2026-10-08T15:20:51.786Z",
-    "last_seen": "2026-11-09T03:21:11.184Z",
+    "last_seen": "2026-11-10T03:21:14.090Z",
     "missing_since": null,
     "removed_at": null,
     "fingerprint": "4db51efbfda00004"
@@ -936,6 +936,41 @@
     "missing_since": null,
     "removed_at": "2026-10-16T21:21:22.286Z",
     "fingerprint": "cf158bcf5f08ce4e"
+  },
+  {
+    "provider": "kilo",
+    "kind": "chat",
+    "listed_by": "api",
+    "limit_scope": "shared",
+    "usage_terms": "unknown",
+    "rate_limits": {
+      "rph": 200,
+      "note": "Anonymous access: 200 requests per hour per IP address, across all free models.",
+      "source": "https://kilo.ai/docs/gateway/authentication"
+    },
+    "card_required": "no",
+    "account_required": "no",
+    "licence": null,
+    "data_logging": "may-train",
+    "model_id": "thinkingmachines/inkling-2-small:free",
+    "name": "Thinking Machines: Inkling 2 Small (free)",
+    "url": "https://kilo.ai/models",
+    "price_type": "free",
+    "context_length": 1048576,
+    "input_modalities": [
+      "text",
+      "image"
+    ],
+    "tool_calling": true,
+    "id": "kilo/thinkingmachines/inkling-2-small:free",
+    "slug": "thinkingmachines-inkling-2-small-free",
+    "category": "ai-model",
+    "status": "active",
+    "first_seen": "2026-11-10T03:21:14.090Z",
+    "last_seen": "2026-11-10T03:21:14.090Z",
+    "missing_since": null,
+    "removed_at": null,
+    "fingerprint": "27ec062bfa289779"
   },
   {
     "provider": "kilo",
