@@ -37,6 +37,42 @@
   },
   {
     "provider": "openrouter",
+    "kind": "chat",
+    "listed_by": "api",
+    "limit_scope": "shared",
+    "usage_terms": "production-ok",
+    "rate_limits": {
+      "rpm": 20,
+      "rpd": 50,
+      "note": "Shared across all free models. 1,000 requests/day after a one-time purchase of 10 credits.",
+      "source": "https://openrouter.ai/docs/faq"
+    },
+    "card_required": "no",
+    "account_required": "yes",
+    "licence": null,
+    "data_logging": "unknown",
+    "model_id": "baidu/ernie-5.5-flash-preview:free",
+    "name": "Baidu: ERNIE-5.5-Flash-Preview (free)",
+    "url": "https://openrouter.ai/baidu/ernie-5.5-flash-preview:free",
+    "price_type": "free",
+    "context_length": 1024000,
+    "input_modalities": [
+      "text"
+    ],
+    "tool_calling": true,
+    "paid_version_pricing": null,
+    "id": "openrouter/baidu/ernie-5.5-flash-preview:free",
+    "slug": "baidu-ernie-5-5-flash-preview-free",
+    "category": "ai-model",
+    "status": "active",
+    "first_seen": "2026-11-11T09:20:36.410Z",
+    "last_seen": "2026-11-11T09:20:36.410Z",
+    "missing_since": null,
+    "removed_at": null,
+    "fingerprint": "dae3f9696a902068"
+  },
+  {
+    "provider": "openrouter",
     "limit_scope": "shared",
     "usage_terms": "production-ok",
     "rate_limits": {
