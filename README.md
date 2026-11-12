@@ -11,16 +11,17 @@ change history and ready-to-paste Cline settings.
 ## The list
 
 <!-- LIST:START -->
-_177 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
+_179 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
 
 🟢 responded to the latest daily test · 🟡 rate-limited or slow · 🔴 failed · 🤖 agent-ready (tool calling, ≥64k context, answered every test on 5 of the last 7 days)
 
-### Chat (141)
+### Chat (143)
 
 #### OpenRouter
 
 | Model | ID | Context | Tools | Last test | Agent |
 |---|---|---|---|---|---|
+| [Apodex: Apodex 1.1 Mini (free)](https://freetier-radar.marcelkanters.workers.dev/models/openrouter/apodex-apodex-1-1-mini-free/) | `apodex/apodex-1.1-mini:free` | 262k | yes | – |  |
 | [Baidu: ERNIE-5.5-Flash-Preview (free)](https://freetier-radar.marcelkanters.workers.dev/models/openrouter/baidu-ernie-5-5-flash-preview-free/) | `baidu/ernie-5.5-flash-preview:free` | 1M | yes | 🟢 |  |
 | [Cohere: North Mini Code (free)](https://freetier-radar.marcelkanters.workers.dev/models/openrouter/cohere-north-mini-code-free/) | `cohere/north-mini-code:free` | 256k | yes | 🟢 | 🤖 |
 | [Dots Studio: Dots3-Note Preview (free)](https://freetier-radar.marcelkanters.workers.dev/models/openrouter/dots-studio-dots-3-note-preview-free/) | `dots-studio/dots-3-note-preview:free` | 512k | yes | 🟢 | 🤖 |
@@ -58,6 +59,7 @@ _177 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [Gemini 3.6 Flash](https://freetier-radar.marcelkanters.workers.dev/models/google-ai-studio/gemini-3-6-flash/) | `gemini-3.6-flash` | 1M | ? | 🟡 | 🤖 |
 | [Gemini 3.7 Flash](https://freetier-radar.marcelkanters.workers.dev/models/google-ai-studio/gemini-3-7-flash/) | `gemini-3.7-flash` | 1M | ? | 🔴 |  |
 | [Gemini 3.8 Flash](https://freetier-radar.marcelkanters.workers.dev/models/google-ai-studio/gemini-3-8-flash/) | `gemini-3.8-flash` | 1M | ? | 🔴 |  |
+| [Gemini 4 Hydrogen](https://freetier-radar.marcelkanters.workers.dev/models/google-ai-studio/gemini-4-hydrogen/) | `gemini-4-hydrogen` | 1M | ? | – |  |
 | [Gemma 4 26B A4B IT](https://freetier-radar.marcelkanters.workers.dev/models/google-ai-studio/gemma-4-26b-a4b-it/) | `gemma-4-26b-a4b-it` | 262k | ? | 🟢 |  |
 | [Gemma 4 31B IT](https://freetier-radar.marcelkanters.workers.dev/models/google-ai-studio/gemma-4-31b-it/) | `gemma-4-31b-it` | 262k | ? | 🟡 |  |
 
@@ -66,7 +68,6 @@ _177 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | Model | ID | Context | Tools | Last test | Agent |
 |---|---|---|---|---|---|
 | [deepseek-ai/deepseek-v4.1-flash (deepseek-ai)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/deepseek-ai-deepseek-v4-1-flash/) | `deepseek-ai/deepseek-v4.1-flash` | unknown | ? | 🟡 |  |
-| [google/diffusiongemma-26b-a4b-it (google)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/google-diffusiongemma-26b-a4b-it/) | `google/diffusiongemma-26b-a4b-it` | unknown | ? | 🟢 |  |
 | [google/gemma-4-31b-it (google)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/google-gemma-4-31b-it/) | `google/gemma-4-31b-it` | unknown | ? | 🔴 |  |
 | [meta/llama-3.2-90b-vision-instruct (meta)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/meta-llama-3-2-90b-vision-instruct/) | `meta/llama-3.2-90b-vision-instruct` | unknown | ? | 🟢 |  |
 | [meta/muse-glimmer-30b (meta)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/meta-muse-glimmer-30b/) | `meta/muse-glimmer-30b` | unknown | ? | 🔴 |  |
@@ -87,9 +88,11 @@ _177 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 
 | Model | ID | Context | Tools | Last test | Agent |
 |---|---|---|---|---|---|
+| [Apodex: Apodex 1.1 Mini (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/apodex-apodex-1-1-mini-free/) | `apodex/apodex-1.1-mini:free` | 262k | yes | – |  |
 | [Baidu: ERNIE-5.5-Flash-Preview (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/baidu-ernie-5-5-flash-preview-free/) | `baidu/ernie-5.5-flash-preview:free` | 1M | yes | 🟢 |  |
 | [Cohere: North Mini Code (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/cohere-north-mini-code-free/) | `cohere/north-mini-code:free` | 256k | yes | 🟢 | 🤖 |
 | [Dots Studio: Dots3-Note Preview (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/dots-studio-dots-3-note-preview-free/) | `dots-studio/dots-3-note-preview:free` | 512k | yes | 🟢 | 🤖 |
+| [Glyph Cluster](https://freetier-radar.marcelkanters.workers.dev/models/kilo/stealth-glyph-cluster/) | `stealth/glyph-cluster` | 256k | yes | 🟢 | 🤖 |
 | [LiquidAI: LFM3-1.7B (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/liquid-lfm-3-1-7b-free/) | `liquid/lfm-3-1.7b:free` | 262k | yes | 🟢 | 🤖 |
 | [NVIDIA: Nemotron 3 Nano Omni (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/nvidia-nemotron-3-nano-omni-30b-a3b-reasoning-free/) | `nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free` | 256k | yes | 🟢 |  |
 | [NVIDIA: Nemotron 3 Ultra (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/nvidia-nemotron-3-ultra-550b-a55b-free/) | `nvidia/nemotron-3-ultra-550b-a55b:free` | 1M | yes | 🟢 |  |
@@ -97,7 +100,6 @@ _177 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [NVIDIA: Nemotron 3.5 Lightning Free](https://freetier-radar.marcelkanters.workers.dev/models/kilo/nvidia-nemotron-3-5-lightning-free-2/) | `nvidia/nemotron-3.5-lightning-free` | 1M | yes | 🟢 |  |
 | [NVIDIA: Nemotron 3.5 Super VL (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/nvidia-nemotron-3-5-super-vl-free/) | `nvidia/nemotron-3.5-super-vl:free` | 1M | yes | 🟢 |  |
 | [Reflection: Beam 1.0 (Free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/reflection-beam-free/) | `reflection/beam-free` | 1M | yes | 🟢 |  |
-| [Stealth: Glyph Cluster (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/stealth-glyph-cluster/) | `stealth/glyph-cluster` | 256k | yes | 🟢 | 🤖 |
 | [Thinking Machines: Inkling 2 Small (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/thinkingmachines-inkling-2-small-free/) | `thinkingmachines/inkling-2-small:free` | 1M | yes | – |  |
 
 #### LLM7.io ⚠ evaluation only

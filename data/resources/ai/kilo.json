@@ -26,11 +26,11 @@
     "id": "kilo/apodex/apodex-1.1-mini:free",
     "slug": "apodex-apodex-1-1-mini-free",
     "category": "ai-model",
-    "status": "removed",
+    "status": "active",
     "first_seen": "2026-10-01T21:20:33.669Z",
-    "last_seen": "2026-10-06T03:20:59.437Z",
+    "last_seen": "2026-11-12T21:20:58.374Z",
     "missing_since": null,
-    "removed_at": "2026-10-07T15:21:07.189Z",
+    "removed_at": null,
     "fingerprint": "b4ee29abfb213728"
   },
   {
@@ -544,10 +544,10 @@
     "id": "kilo/nvidia/nemotron-3.5-lightning-free",
     "slug": "nvidia-nemotron-3-5-lightning-free-2",
     "category": "ai-model",
-    "status": "active",
+    "status": "pending_removal",
     "first_seen": "2026-11-12T15:20:57.378Z",
     "last_seen": "2026-11-12T15:20:57.378Z",
-    "missing_since": null,
+    "missing_since": "2026-11-12T21:20:58.374Z",
     "removed_at": null,
     "fingerprint": "ae5cc724767d927d"
   },
@@ -881,7 +881,7 @@
     "licence": null,
     "data_logging": "may-train",
     "model_id": "stealth/glyph-cluster",
-    "name": "Stealth: Glyph Cluster (free)",
+    "name": "Glyph Cluster",
     "url": "https://kilo.ai/models",
     "price_type": "free",
     "context_length": 256000,
@@ -897,7 +897,7 @@
     "last_seen": "2026-11-12T03:21:00.053Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "4db51efbfda00004"
+    "fingerprint": "8fa0e11ac5fa2967"
   },
   {
     "provider": "kilo",
