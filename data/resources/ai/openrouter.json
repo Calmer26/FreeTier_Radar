@@ -252,12 +252,12 @@
     "data_logging": "unknown",
     "paid_version_pricing": [
       {
-        "usd": 0.09,
+        "usd": 0.0675,
         "unit": "M input tokens",
         "neurons": null
       },
       {
-        "usd": 0.3,
+        "usd": 0.225,
         "unit": "M output tokens",
         "neurons": null
       }
@@ -382,6 +382,43 @@
     "listed_by": "api",
     "data_logging": "unknown",
     "paid_version_pricing": null
+  },
+  {
+    "provider": "openrouter",
+    "kind": "chat",
+    "listed_by": "api",
+    "limit_scope": "shared",
+    "usage_terms": "production-ok",
+    "rate_limits": {
+      "rpm": 20,
+      "rpd": 50,
+      "note": "Shared across all free models. 1,000 requests/day after a one-time purchase of 10 credits.",
+      "source": "https://openrouter.ai/docs/faq"
+    },
+    "card_required": "no",
+    "account_required": "yes",
+    "licence": null,
+    "data_logging": "unknown",
+    "model_id": "inclusionai/ling-3.2-flash:free",
+    "name": "inclusionAI: Ling 3.2 Flash (free)",
+    "url": "https://openrouter.ai/inclusionai/ling-3.2-flash:free",
+    "price_type": "free",
+    "context_length": 1048576,
+    "input_modalities": [
+      "text",
+      "image"
+    ],
+    "tool_calling": true,
+    "paid_version_pricing": null,
+    "id": "openrouter/inclusionai/ling-3.2-flash:free",
+    "slug": "inclusionai-ling-3-2-flash-free",
+    "category": "ai-model",
+    "status": "active",
+    "first_seen": "2026-11-13T21:21:02.108Z",
+    "last_seen": "2026-11-13T21:21:02.108Z",
+    "missing_since": null,
+    "removed_at": null,
+    "fingerprint": "3aa8489bdeb38f44"
   },
   {
     "provider": "openrouter",
