@@ -28,7 +28,7 @@
     "category": "ai-model",
     "status": "active",
     "first_seen": "2026-10-01T21:20:33.669Z",
-    "last_seen": "2026-11-12T21:20:58.374Z",
+    "last_seen": "2026-11-13T03:21:07.752Z",
     "missing_since": null,
     "removed_at": null,
     "fingerprint": "b4ee29abfb213728"
@@ -62,7 +62,7 @@
     "category": "ai-model",
     "status": "active",
     "first_seen": "2026-11-11T09:20:36.410Z",
-    "last_seen": "2026-11-12T03:21:00.053Z",
+    "last_seen": "2026-11-13T03:21:07.752Z",
     "missing_since": null,
     "removed_at": null,
     "fingerprint": "d8867091d1641134"
@@ -96,7 +96,7 @@
     "category": "ai-model",
     "status": "active",
     "first_seen": "2026-09-28T11:37:34.966Z",
-    "last_seen": "2026-11-12T03:21:00.053Z",
+    "last_seen": "2026-11-13T03:21:07.752Z",
     "missing_since": null,
     "removed_at": null,
     "fingerprint": "e519fb179fdac159"
@@ -131,7 +131,7 @@
     "category": "ai-model",
     "status": "active",
     "first_seen": "2026-09-28T11:37:34.966Z",
-    "last_seen": "2026-11-12T03:21:00.053Z",
+    "last_seen": "2026-11-13T03:21:07.752Z",
     "missing_since": null,
     "removed_at": null,
     "fingerprint": "ec78086924d051a5"
@@ -371,7 +371,7 @@
     "category": "ai-model",
     "status": "active",
     "first_seen": "2026-11-07T03:20:30.574Z",
-    "last_seen": "2026-11-12T03:21:00.053Z",
+    "last_seen": "2026-11-13T03:21:07.752Z",
     "missing_since": null,
     "removed_at": null,
     "fingerprint": "e82dc0984c1741c6"
@@ -444,7 +444,7 @@
     "category": "ai-model",
     "status": "active",
     "first_seen": "2026-09-28T11:37:34.966Z",
-    "last_seen": "2026-11-12T03:21:00.053Z",
+    "last_seen": "2026-11-13T03:21:07.752Z",
     "missing_since": null,
     "removed_at": null,
     "fingerprint": "4cd19a96bb6f412e"
@@ -512,7 +512,7 @@
     "category": "ai-model",
     "status": "active",
     "first_seen": "2026-09-28T11:37:34.966Z",
-    "last_seen": "2026-11-12T03:21:00.053Z",
+    "last_seen": "2026-11-13T03:21:07.752Z",
     "missing_since": null,
     "removed_at": null,
     "fingerprint": "f46f401ffa43c25e"
@@ -580,7 +580,7 @@
     "category": "ai-model",
     "status": "active",
     "first_seen": "2026-09-28T11:37:34.966Z",
-    "last_seen": "2026-11-12T03:21:00.053Z",
+    "last_seen": "2026-11-13T03:21:07.752Z",
     "missing_since": null,
     "removed_at": null,
     "fingerprint": "856b000de2e99292"
@@ -616,10 +616,45 @@
     "category": "ai-model",
     "status": "active",
     "first_seen": "2026-10-15T15:20:40.166Z",
-    "last_seen": "2026-11-12T03:21:00.053Z",
+    "last_seen": "2026-11-13T03:21:07.752Z",
     "missing_since": null,
     "removed_at": null,
     "fingerprint": "29508db2c1115387"
+  },
+  {
+    "provider": "kilo",
+    "kind": "chat",
+    "listed_by": "api",
+    "limit_scope": "shared",
+    "usage_terms": "unknown",
+    "rate_limits": {
+      "rph": 200,
+      "note": "Anonymous access: 200 requests per hour per IP address, across all free models.",
+      "source": "https://kilo.ai/docs/gateway/authentication"
+    },
+    "card_required": "no",
+    "account_required": "no",
+    "licence": null,
+    "data_logging": "may-train",
+    "model_id": "particle-ai/particle-1:free",
+    "name": "Particle AI: Particle-1 (free)",
+    "url": "https://kilo.ai/models",
+    "price_type": "free",
+    "context_length": 1048576,
+    "input_modalities": [
+      "text",
+      "image"
+    ],
+    "tool_calling": true,
+    "id": "kilo/particle-ai/particle-1:free",
+    "slug": "particle-ai-particle-1-free",
+    "category": "ai-model",
+    "status": "active",
+    "first_seen": "2026-11-13T03:21:07.752Z",
+    "last_seen": "2026-11-13T03:21:07.752Z",
+    "missing_since": null,
+    "removed_at": null,
+    "fingerprint": "3a6f44599b218310"
   },
   {
     "provider": "kilo",
@@ -788,7 +823,7 @@
     "category": "ai-model",
     "status": "active",
     "first_seen": "2026-10-16T21:21:22.286Z",
-    "last_seen": "2026-11-12T15:20:57.378Z",
+    "last_seen": "2026-11-13T03:21:07.752Z",
     "missing_since": null,
     "removed_at": null,
     "fingerprint": "632803ae85a160ac"
@@ -894,7 +929,7 @@
     "category": "ai-model",
     "status": "active",
     "first_seen": "2026-10-08T15:20:51.786Z",
-    "last_seen": "2026-11-12T03:21:00.053Z",
+    "last_seen": "2026-11-13T03:21:07.752Z",
     "missing_since": null,
     "removed_at": null,
     "fingerprint": "8fa0e11ac5fa2967"
@@ -1033,11 +1068,11 @@
     "id": "kilo/thinkingmachines/inkling-2-small:free",
     "slug": "thinkingmachines-inkling-2-small-free",
     "category": "ai-model",
-    "status": "pending_removal",
+    "status": "removed",
     "first_seen": "2026-11-10T03:21:14.090Z",
     "last_seen": "2026-11-12T03:21:00.053Z",
-    "missing_since": "2026-11-12T15:20:57.378Z",
-    "removed_at": null,
+    "missing_since": null,
+    "removed_at": "2026-11-13T03:21:07.752Z",
     "fingerprint": "27ec062bfa289779"
   },
   {
