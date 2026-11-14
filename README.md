@@ -11,17 +11,16 @@ change history and ready-to-paste Cline settings.
 ## The list
 
 <!-- LIST:START -->
-_186 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
+_183 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
 
 🟢 responded to the latest daily test · 🟡 rate-limited or slow · 🔴 failed · 🤖 agent-ready (tool calling, ≥64k context, answered every test on 5 of the last 7 days)
 
-### Chat (150)
+### Chat (147)
 
 #### OpenRouter
 
 | Model | ID | Context | Tools | Last test | Agent |
 |---|---|---|---|---|---|
-| [Apodex: Apodex 1.1 Mini (free)](https://freetier-radar.marcelkanters.workers.dev/models/openrouter/apodex-apodex-1-1-mini-free/) | `apodex/apodex-1.1-mini:free` | 262k | yes | 🟢 |  |
 | [Baidu: ERNIE-5.5-Flash-Preview (free)](https://freetier-radar.marcelkanters.workers.dev/models/openrouter/baidu-ernie-5-5-flash-preview-free/) | `baidu/ernie-5.5-flash-preview:free` | 1M | yes | 🟢 |  |
 | [Cohere: North Mini Code (free)](https://freetier-radar.marcelkanters.workers.dev/models/openrouter/cohere-north-mini-code-free/) | `cohere/north-mini-code:free` | 256k | yes | 🟢 | 🤖 |
 | [Dots Studio: Dots3-Note Preview (free)](https://freetier-radar.marcelkanters.workers.dev/models/openrouter/dots-studio-dots-3-note-preview-free/) | `dots-studio/dots-3-note-preview:free` | 512k | yes | 🟢 | 🤖 |
@@ -90,7 +89,6 @@ _186 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 
 | Model | ID | Context | Tools | Last test | Agent |
 |---|---|---|---|---|---|
-| [Apodex: Apodex 1.1 Mini (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/apodex-apodex-1-1-mini-free/) | `apodex/apodex-1.1-mini:free` | 262k | yes | 🟢 |  |
 | [Baidu: ERNIE-5.5-Flash-Preview (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/baidu-ernie-5-5-flash-preview-free/) | `baidu/ernie-5.5-flash-preview:free` | 1M | yes | 🟢 |  |
 | [Cohere: North Mini Code (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/cohere-north-mini-code-free/) | `cohere/north-mini-code:free` | 256k | yes | 🟢 | 🤖 |
 | [Dots Studio: Dots3-Note Preview (free)](https://freetier-radar.marcelkanters.workers.dev/models/kilo/dots-studio-dots-3-note-preview-free/) | `dots-studio/dots-3-note-preview:free` | 512k | yes | 🟢 | 🤖 |
@@ -154,7 +152,6 @@ _186 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [Ministral 14B 2512](https://freetier-radar.marcelkanters.workers.dev/models/mistral/ministral-14b-2512/) | `ministral-14b-2512` | 262k | yes | 🟢 | 🤖 |
 | [Ministral 3B 2512](https://freetier-radar.marcelkanters.workers.dev/models/mistral/ministral-3b-2512/) | `ministral-3b-2512` | 131k | yes | 🟢 | 🤖 |
 | [Ministral 8B 2512](https://freetier-radar.marcelkanters.workers.dev/models/mistral/ministral-8b-2512/) | `ministral-8b-2512` | 262k | yes | 🟢 | 🤖 |
-| [Mistral Large 4](https://freetier-radar.marcelkanters.workers.dev/models/mistral/mistral-large-4/) | `mistral-large-4` | 1M | yes | 🟢 | 🤖 |
 
 #### Ollama Cloud (Free plan)
 
