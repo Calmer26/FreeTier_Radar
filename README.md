@@ -11,11 +11,11 @@ change history and ready-to-paste Cline settings.
 ## The list
 
 <!-- LIST:START -->
-_183 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
+_184 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
 
 🟢 responded to the latest daily test · 🟡 rate-limited or slow · 🔴 failed · 🤖 agent-ready (tool calling, ≥64k context, answered every test on 5 of the last 7 days)
 
-### Chat (147)
+### Chat (148)
 
 #### OpenRouter
 
@@ -218,6 +218,7 @@ _183 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [deepseek-v4.1-flash-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/deepseek-v4-1-flash-free/) | `deepseek-v4.1-flash-free` | unknown | ? | – |  |
 | [flint-40b-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/flint-40b-free/) | `flint-40b-free` | unknown | ? | – |  |
 | [glm-5.3-flash-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/glm-5-3-flash-free/) | `glm-5.3-flash-free` | unknown | ? | – |  |
+| [hy4-flash-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/hy4-flash-free/) | `hy4-flash-free` | unknown | ? | – |  |
 | [iceman-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/iceman-free/) | `iceman-free` | unknown | ? | – |  |
 | [inkling-2-small-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/inkling-2-small-free/) | `inkling-2-small-free` | unknown | ? | – |  |
 | [longcat-2.5-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/longcat-2-5-free/) | `longcat-2.5-free` | unknown | ? | – |  |
