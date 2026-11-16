@@ -169,6 +169,16 @@
     "status": "variant",
     "on": "2026-10-19"
   },
+  "google-ai-studio/gemini-4-carbon": {
+    "arena": "Gemini 4 Carbon (High)",
+    "status": "variant",
+    "on": "2026-11-16"
+  },
+  "google-ai-studio/gemini-4-hydrogen": {
+    "arena": "Gemini 4 Hydrogen (High)",
+    "status": "variant",
+    "on": "2026-11-16"
+  },
   "google-ai-studio/gemini-omni-1.1-flash": {
     "arena": "gemini-omni-1.1-flash",
     "status": "exact",
@@ -243,6 +253,11 @@
     "arena": "Inkling Small",
     "status": "exact",
     "on": "2026-09-28"
+  },
+  "llm7/glm-5.3-flash": {
+    "arena": "GLM-5.3-Flash",
+    "status": "exact",
+    "on": "2026-11-16"
   },
   "llm7/GLM-5.3-Flash": {
     "arena": "GLM 5.3 Flash",
@@ -419,6 +434,11 @@
     "status": "exact",
     "on": "2026-10-05"
   },
+  "ollama/inkling-2-small": {
+    "arena": "Inkling 2 Small",
+    "status": "exact",
+    "on": "2026-11-16"
+  },
   "ollama/kimi-k2.6": {
     "arena": "kimi-k2.6",
     "status": "exact",
@@ -518,6 +538,11 @@
     "arena": "qwen3.8-27b",
     "status": "exact",
     "on": "2026-09-28"
+  },
+  "openrouter/thinkingmachines/inkling-2-small:free": {
+    "arena": "Inkling 2 Small",
+    "status": "exact",
+    "on": "2026-11-16"
   },
   "openrouter/thinkingmachines/inkling-small:free": {
     "arena": "Inkling Small",
