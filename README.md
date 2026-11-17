@@ -11,11 +11,11 @@ change history and ready-to-paste Cline settings.
 ## The list
 
 <!-- LIST:START -->
-_186 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
+_184 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
 
 🟢 responded to the latest daily test · 🟡 rate-limited or slow · 🔴 failed · 🤖 agent-ready (tool calling, ≥64k context, answered every test on 5 of the last 7 days)
 
-### Chat (150)
+### Chat (148)
 
 #### OpenRouter
 
@@ -67,7 +67,6 @@ _186 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 
 | Model | ID | Context | Tools | Last test | Agent |
 |---|---|---|---|---|---|
-| [deepseek-ai/deepseek-v4.1-flash (deepseek-ai)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/deepseek-ai-deepseek-v4-1-flash/) | `deepseek-ai/deepseek-v4.1-flash` | unknown | ? | 🟢 |  |
 | [google/gemma-4-31b-it (google)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/google-gemma-4-31b-it/) | `google/gemma-4-31b-it` | unknown | ? | 🟢 |  |
 | [meta/muse-glimmer-30b (meta)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/meta-muse-glimmer-30b/) | `meta/muse-glimmer-30b` | unknown | ? | 🟢 |  |
 | [minimaxai/minimax-m3.1-flash (minimaxai)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/minimaxai-minimax-m3-1-flash/) | `minimaxai/minimax-m3.1-flash` | unknown | ? | 🟢 |  |
@@ -225,7 +224,6 @@ _186 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [inkling-2-small-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/inkling-2-small-free/) | `inkling-2-small-free` | unknown | ? | – |  |
 | [longcat-2.5-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/longcat-2-5-free/) | `longcat-2.5-free` | unknown | ? | – |  |
 | [mimo-v2.6-flash-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/mimo-v2-6-flash-free/) | `mimo-v2.6-flash-free` | unknown | ? | – |  |
-| [minimax-m3.1-flash-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/minimax-m3-1-flash-free/) | `minimax-m3.1-flash-free` | unknown | ? | – |  |
 | [nemotron-3.5-lightning-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/nemotron-3-5-lightning-free/) | `nemotron-3.5-lightning-free` | unknown | ? | – |  |
 | [nemotron-3.5-super-vl-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/nemotron-3-5-super-vl-free/) | `nemotron-3.5-super-vl-free` | unknown | ? | – |  |
 
