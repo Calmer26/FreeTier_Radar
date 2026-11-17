@@ -11,11 +11,11 @@ change history and ready-to-paste Cline settings.
 ## The list
 
 <!-- LIST:START -->
-_182 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
+_186 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
 
 🟢 responded to the latest daily test · 🟡 rate-limited or slow · 🔴 failed · 🤖 agent-ready (tool calling, ≥64k context, answered every test on 5 of the last 7 days)
 
-### Chat (146)
+### Chat (150)
 
 #### OpenRouter
 
@@ -104,9 +104,13 @@ _182 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | Model | ID | Context | Tools | Last test | Agent |
 |---|---|---|---|---|---|
 | [DeepSeek-V4-Flash-0731](https://freetier-radar.marcelkanters.workers.dev/models/llm7/deepseek-v4-flash-0731/) | `DeepSeek-V4-Flash-0731` | 400k | yes | 🟢 |  |
+| [gemma-3-27b](https://freetier-radar.marcelkanters.workers.dev/models/llm7/gemma-3-27b/) | `gemma-3-27b` | 262k | no | – |  |
+| [gemma4:31b](https://freetier-radar.marcelkanters.workers.dev/models/llm7/gemma4-31b/) | `gemma4:31b` | 262k | yes | – |  |
 | [glm-5.3-flash](https://freetier-radar.marcelkanters.workers.dev/models/llm7/glm-5-3-flash-2/) | `glm-5.3-flash` | 1M | yes | 🟡 |  |
 | [gpt-oss:120b](https://freetier-radar.marcelkanters.workers.dev/models/llm7/gpt-oss-120b/) | `gpt-oss:120b` | 131k | yes | 🟢 |  |
 | [gpt-oss:20b](https://freetier-radar.marcelkanters.workers.dev/models/llm7/gpt-oss-20b/) | `gpt-oss:20b` | 128k | yes | 🟢 |  |
+| [kimi-k2.7-code](https://freetier-radar.marcelkanters.workers.dev/models/llm7/kimi-k2-7-code/) | `kimi-k2.7-code` | 256k | yes | – |  |
+| [mimo-v2.6-flash](https://freetier-radar.marcelkanters.workers.dev/models/llm7/mimo-v2-6-flash/) | `mimo-v2.6-flash` | 1M | yes | – |  |
 | [minimax-m2.7](https://freetier-radar.marcelkanters.workers.dev/models/llm7/minimax-m2-7/) | `minimax-m2.7` | 180k | yes | 🟢 |  |
 | [mistral-Nemo-Instruct-2407](https://freetier-radar.marcelkanters.workers.dev/models/llm7/mistral-nemo-instruct-2407/) | `mistral-Nemo-Instruct-2407` | 128k | no | 🟢 |  |
 

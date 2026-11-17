@@ -55,7 +55,8 @@
     "price_type": "free",
     "context_length": 262144,
     "input_modalities": [
-      "text"
+      "text",
+      "image"
     ],
     "tool_calling": true,
     "id": "requesty/mistral/leanstral-1-5",
@@ -66,7 +67,7 @@
     "last_seen": "2026-11-17T03:21:18.545Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "079fccff16596462"
+    "fingerprint": "b6a4e41bcd16dc04"
   },
   {
     "provider": "requesty",
@@ -157,8 +158,7 @@
     "price_type": "free",
     "context_length": 131072,
     "input_modalities": [
-      "text",
-      "image"
+      "text"
     ],
     "tool_calling": true,
     "id": "requesty/nvidia/muse-glimmer-30b",
@@ -169,7 +169,7 @@
     "last_seen": "2026-11-17T03:21:18.545Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "8d2b4635df5409ee"
+    "fingerprint": "5ad3d9dbf6059506"
   },
   {
     "provider": "requesty",
@@ -226,8 +226,7 @@
     "price_type": "free",
     "context_length": 131072,
     "input_modalities": [
-      "text",
-      "image"
+      "text"
     ],
     "tool_calling": true,
     "id": "requesty/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
@@ -238,7 +237,7 @@
     "last_seen": "2026-11-17T03:21:18.545Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "86ed85e1b31742e0"
+    "fingerprint": "4933cbff803bdbfa"
   },
   {
     "provider": "requesty",

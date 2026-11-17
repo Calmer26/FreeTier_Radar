@@ -88,6 +88,42 @@
     "account_required": "no",
     "licence": null,
     "data_logging": "may-train",
+    "model_id": "gemma-3-27b",
+    "name": "gemma-3-27b",
+    "url": "https://docs.llm7.io/guides/models",
+    "price_type": "free",
+    "context_length": 262144,
+    "input_modalities": [
+      "text"
+    ],
+    "tool_calling": false,
+    "id": "llm7/gemma-3-27b",
+    "slug": "gemma-3-27b",
+    "category": "ai-model",
+    "status": "active",
+    "first_seen": "2026-11-17T15:21:17.880Z",
+    "last_seen": "2026-11-17T15:21:17.880Z",
+    "missing_since": null,
+    "removed_at": null,
+    "fingerprint": "7e3753cf31b3d582"
+  },
+  {
+    "provider": "llm7",
+    "kind": "chat",
+    "listed_by": "api",
+    "limit_scope": "shared",
+    "usage_terms": "evaluation-only",
+    "rate_limits": {
+      "rpm": 10,
+      "rph": 60,
+      "tpd": 500000,
+      "note": "Anonymous; a free token (email sign-in) raises this to 40/minute, 100/hour and 1M tokens/day.",
+      "source": "https://docs.llm7.io/limits"
+    },
+    "card_required": "no",
+    "account_required": "no",
+    "licence": null,
+    "data_logging": "may-train",
     "model_id": "gemma4:31b",
     "name": "gemma4:31b",
     "url": "https://docs.llm7.io/guides/models",
@@ -100,11 +136,11 @@
     "id": "llm7/gemma4:31b",
     "slug": "gemma4-31b",
     "category": "ai-model",
-    "status": "removed",
+    "status": "active",
     "first_seen": "2026-10-06T21:20:56.964Z",
-    "last_seen": "2026-10-09T03:20:59.619Z",
+    "last_seen": "2026-11-17T15:21:17.880Z",
     "missing_since": null,
-    "removed_at": "2026-10-10T15:20:53.801Z",
+    "removed_at": null,
     "fingerprint": "875a93e026e28cc7"
   },
   {
@@ -164,7 +200,7 @@
     "name": "glm-5.3-flash",
     "url": "https://docs.llm7.io/guides/models",
     "price_type": "free",
-    "context_length": 1000000,
+    "context_length": 1048576,
     "input_modalities": [
       "text"
     ],
@@ -177,7 +213,7 @@
     "last_seen": "2026-11-17T03:21:18.545Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "9ac5c3ddf08a55e3"
+    "fingerprint": "dde8cb3facc70600"
   },
   {
     "provider": "llm7",
@@ -286,6 +322,78 @@
     "missing_since": null,
     "removed_at": null,
     "fingerprint": "5a989344a11812f4"
+  },
+  {
+    "provider": "llm7",
+    "kind": "chat",
+    "listed_by": "api",
+    "limit_scope": "shared",
+    "usage_terms": "evaluation-only",
+    "rate_limits": {
+      "rpm": 10,
+      "rph": 60,
+      "tpd": 500000,
+      "note": "Anonymous; a free token (email sign-in) raises this to 40/minute, 100/hour and 1M tokens/day.",
+      "source": "https://docs.llm7.io/limits"
+    },
+    "card_required": "no",
+    "account_required": "no",
+    "licence": null,
+    "data_logging": "may-train",
+    "model_id": "kimi-k2.7-code",
+    "name": "kimi-k2.7-code",
+    "url": "https://docs.llm7.io/guides/models",
+    "price_type": "free",
+    "context_length": 256000,
+    "input_modalities": [
+      "text"
+    ],
+    "tool_calling": true,
+    "id": "llm7/kimi-k2.7-code",
+    "slug": "kimi-k2-7-code",
+    "category": "ai-model",
+    "status": "active",
+    "first_seen": "2026-11-17T15:21:17.880Z",
+    "last_seen": "2026-11-17T15:21:17.880Z",
+    "missing_since": null,
+    "removed_at": null,
+    "fingerprint": "1a04bb356ac91397"
+  },
+  {
+    "provider": "llm7",
+    "kind": "chat",
+    "listed_by": "api",
+    "limit_scope": "shared",
+    "usage_terms": "evaluation-only",
+    "rate_limits": {
+      "rpm": 10,
+      "rph": 60,
+      "tpd": 500000,
+      "note": "Anonymous; a free token (email sign-in) raises this to 40/minute, 100/hour and 1M tokens/day.",
+      "source": "https://docs.llm7.io/limits"
+    },
+    "card_required": "no",
+    "account_required": "no",
+    "licence": null,
+    "data_logging": "may-train",
+    "model_id": "mimo-v2.6-flash",
+    "name": "mimo-v2.6-flash",
+    "url": "https://docs.llm7.io/guides/models",
+    "price_type": "free",
+    "context_length": 1000000,
+    "input_modalities": [
+      "text"
+    ],
+    "tool_calling": true,
+    "id": "llm7/mimo-v2.6-flash",
+    "slug": "mimo-v2-6-flash",
+    "category": "ai-model",
+    "status": "active",
+    "first_seen": "2026-11-17T15:21:17.880Z",
+    "last_seen": "2026-11-17T15:21:17.880Z",
+    "missing_since": null,
+    "removed_at": null,
+    "fingerprint": "6821d5d9694299aa"
   },
   {
     "provider": "llm7",
