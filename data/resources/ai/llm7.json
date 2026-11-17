@@ -164,7 +164,7 @@
     "name": "glm-5.3-flash",
     "url": "https://docs.llm7.io/guides/models",
     "price_type": "free",
-    "context_length": null,
+    "context_length": 1000000,
     "input_modalities": [
       "text"
     ],
@@ -177,7 +177,7 @@
     "last_seen": "2026-11-17T03:21:18.545Z",
     "missing_since": null,
     "removed_at": null,
-    "fingerprint": "173f9ff8b9c50d72"
+    "fingerprint": "9ac5c3ddf08a55e3"
   },
   {
     "provider": "llm7",

@@ -104,7 +104,7 @@ _182 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | Model | ID | Context | Tools | Last test | Agent |
 |---|---|---|---|---|---|
 | [DeepSeek-V4-Flash-0731](https://freetier-radar.marcelkanters.workers.dev/models/llm7/deepseek-v4-flash-0731/) | `DeepSeek-V4-Flash-0731` | 400k | yes | 🟢 |  |
-| [glm-5.3-flash](https://freetier-radar.marcelkanters.workers.dev/models/llm7/glm-5-3-flash-2/) | `glm-5.3-flash` | unknown | yes | 🟡 |  |
+| [glm-5.3-flash](https://freetier-radar.marcelkanters.workers.dev/models/llm7/glm-5-3-flash-2/) | `glm-5.3-flash` | 1M | yes | 🟡 |  |
 | [gpt-oss:120b](https://freetier-radar.marcelkanters.workers.dev/models/llm7/gpt-oss-120b/) | `gpt-oss:120b` | 131k | yes | 🟢 |  |
 | [gpt-oss:20b](https://freetier-radar.marcelkanters.workers.dev/models/llm7/gpt-oss-20b/) | `gpt-oss:20b` | 128k | yes | 🟢 |  |
 | [minimax-m2.7](https://freetier-radar.marcelkanters.workers.dev/models/llm7/minimax-m2-7/) | `minimax-m2.7` | 180k | yes | 🟢 |  |
