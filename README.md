@@ -11,11 +11,11 @@ change history and ready-to-paste Cline settings.
 ## The list
 
 <!-- LIST:START -->
-_183 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
+_184 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
 
 🟢 responded to the latest daily test · 🟡 rate-limited or slow · 🔴 failed · 🤖 agent-ready (tool calling, ≥64k context, answered every test on 5 of the last 7 days)
 
-### Chat (147)
+### Chat (148)
 
 #### OpenRouter
 
@@ -67,6 +67,7 @@ _183 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 
 | Model | ID | Context | Tools | Last test | Agent |
 |---|---|---|---|---|---|
+| [fastino/gliner2-pii (fastino)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/fastino-gliner2-pii/) | `fastino/gliner2-pii` | unknown | ? | – |  |
 | [google/gemma-4-31b-it (google)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/google-gemma-4-31b-it/) | `google/gemma-4-31b-it` | unknown | ? | 🟢 |  |
 | [meta/muse-glimmer-30b (meta)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/meta-muse-glimmer-30b/) | `meta/muse-glimmer-30b` | unknown | ? | 🟢 |  |
 | [minimaxai/minimax-m3.1-flash (minimaxai)](https://freetier-radar.marcelkanters.workers.dev/models/nvidia/minimaxai-minimax-m3-1-flash/) | `minimaxai/minimax-m3.1-flash` | unknown | ? | 🟡 |  |
