@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-20T06:10:24.907Z",
+  "updated_at": "2026-11-20T18:10:39.461Z",
   "results": {
     "cloudflare/@cf/aisingapore/gemma-sea-lion-v4-27b-it": [
       {
@@ -301,6 +301,11 @@
         "at": "2026-11-20T06:10:24.938Z",
         "status": "responded",
         "latency_ms": 401
+      },
+      {
+        "at": "2026-11-20T18:10:39.489Z",
+        "status": "responded",
+        "latency_ms": 534
       }
     ],
     "cloudflare/@cf/black-forest-labs/flux-1-schnell": [
@@ -713,6 +718,11 @@
         "at": "2026-11-20T06:10:28.482Z",
         "status": "error",
         "latency_ms": 182
+      },
+      {
+        "at": "2026-11-20T18:10:41.023Z",
+        "status": "error",
+        "latency_ms": 101
       }
     ],
     "cloudflare/@cf/cloudflare/clairic-flash": [
@@ -730,6 +740,11 @@
         "at": "2026-11-20T06:10:29.664Z",
         "status": "error",
         "latency_ms": 77
+      },
+      {
+        "at": "2026-11-20T18:10:42.123Z",
+        "status": "error",
+        "latency_ms": 105
       }
     ],
     "cloudflare/@cf/cloudflare/clef": [
@@ -1032,6 +1047,11 @@
         "at": "2026-11-20T06:10:30.742Z",
         "status": "error",
         "latency_ms": 146
+      },
+      {
+        "at": "2026-11-20T18:10:43.229Z",
+        "status": "error",
+        "latency_ms": 75
       }
     ],
     "cloudflare/@cf/cloudflare/clef-flash": [
@@ -1334,6 +1354,11 @@
         "at": "2026-11-20T06:10:31.888Z",
         "status": "error",
         "latency_ms": 58
+      },
+      {
+        "at": "2026-11-20T18:10:44.303Z",
+        "status": "error",
+        "latency_ms": 55
       }
     ],
     "cloudflare/@cf/cloudflare/clef-omni": [
@@ -1636,6 +1661,11 @@
         "at": "2026-11-20T06:10:32.947Z",
         "status": "error",
         "latency_ms": 82
+      },
+      {
+        "at": "2026-11-20T18:10:45.358Z",
+        "status": "error",
+        "latency_ms": 120
       }
     ],
     "cloudflare/@cf/daily-co/phonellm-mini-alpha-2": [
@@ -1938,6 +1968,11 @@
         "at": "2026-11-20T06:10:34.029Z",
         "status": "responded",
         "latency_ms": 213
+      },
+      {
+        "at": "2026-11-20T18:10:46.479Z",
+        "status": "responded",
+        "latency_ms": 283
       }
     ],
     "cloudflare/@cf/deepseek-ai/deepseek-r1-distill-qwen-32b": [
@@ -2240,6 +2275,11 @@
         "at": "2026-11-20T06:10:39.266Z",
         "status": "gone",
         "latency_ms": 38
+      },
+      {
+        "at": "2026-11-20T18:10:47.762Z",
+        "status": "gone",
+        "latency_ms": 81
       }
     ],
     "cloudflare/@cf/ibm-granite/granite-4.0-h-micro": [
@@ -2542,6 +2582,11 @@
         "at": "2026-11-20T06:10:40.304Z",
         "status": "responded",
         "latency_ms": 549
+      },
+      {
+        "at": "2026-11-20T18:10:48.844Z",
+        "status": "responded",
+        "latency_ms": 532
       }
     ],
     "cloudflare/@cf/leonardo/lucid-origin": [
@@ -2910,6 +2955,11 @@
         "at": "2026-11-20T06:10:48.590Z",
         "status": "gone",
         "latency_ms": 65
+      },
+      {
+        "at": "2026-11-20T18:10:50.376Z",
+        "status": "gone",
+        "latency_ms": 159
       }
     ],
     "cloudflare/@cf/meta/llama-3.2-11b-vision-instruct": [
@@ -3212,6 +3262,11 @@
         "at": "2026-11-20T06:10:49.656Z",
         "status": "responded",
         "latency_ms": 577
+      },
+      {
+        "at": "2026-11-20T18:10:51.535Z",
+        "status": "responded",
+        "latency_ms": 585
       }
     ],
     "cloudflare/@cf/meta/llama-3.2-1b-instruct": [
@@ -3512,6 +3567,11 @@
       },
       {
         "at": "2026-11-20T06:10:53.562Z",
+        "status": "gone",
+        "latency_ms": 72
+      },
+      {
+        "at": "2026-11-20T18:10:53.120Z",
         "status": "gone",
         "latency_ms": 72
       }
@@ -3816,6 +3876,11 @@
         "at": "2026-11-20T06:10:54.633Z",
         "status": "responded",
         "latency_ms": 216
+      },
+      {
+        "at": "2026-11-20T18:10:54.192Z",
+        "status": "responded",
+        "latency_ms": 320
       }
     ],
     "cloudflare/@cf/mistralai/mistral-small-3.1-24b-instruct": [
@@ -4118,6 +4183,11 @@
         "at": "2026-11-20T06:10:59.120Z",
         "status": "responded",
         "latency_ms": 450
+      },
+      {
+        "at": "2026-11-20T18:10:55.513Z",
+        "status": "responded",
+        "latency_ms": 415
       }
     ],
     "cloudflare/@cf/myshell-ai/melotts": [
@@ -4577,6 +4647,11 @@
         "at": "2026-11-20T06:11:08.291Z",
         "status": "gone",
         "latency_ms": 64
+      },
+      {
+        "at": "2026-11-20T18:10:56.928Z",
+        "status": "gone",
+        "latency_ms": 149
       }
     ],
     "cloudflare/@cf/openai/whisper": [
@@ -5252,6 +5327,11 @@
         "at": "2026-11-20T06:11:14.455Z",
         "status": "responded",
         "latency_ms": 262
+      },
+      {
+        "at": "2026-11-20T18:10:58.078Z",
+        "status": "responded",
+        "latency_ms": 328
       }
     ],
     "cloudflare/@cf/qwen/qwq-32b": [
@@ -5554,6 +5634,11 @@
         "at": "2026-11-20T06:11:18.642Z",
         "status": "gone",
         "latency_ms": 72
+      },
+      {
+        "at": "2026-11-20T18:10:59.406Z",
+        "status": "gone",
+        "latency_ms": 67
       }
     ],
     "cloudflare/@cf/stabilityai/stable-diffusion-xl-base-1.0": [
@@ -5878,6 +5963,11 @@
         "at": "2026-11-20T06:11:19.714Z",
         "status": "error",
         "latency_ms": 134
+      },
+      {
+        "at": "2026-11-20T18:11:00.473Z",
+        "status": "error",
+        "latency_ms": 213
       }
     ],
     "cloudflare/@cf/utter-project/eurollm-9b-it": [
@@ -6180,6 +6270,11 @@
         "at": "2026-11-20T06:11:20.848Z",
         "status": "error",
         "latency_ms": 297
+      },
+      {
+        "at": "2026-11-20T18:11:01.687Z",
+        "status": "error",
+        "latency_ms": 341
       }
     ],
     "cloudflare/@cf/zai-org/glm-4.7-flash": [
@@ -6482,6 +6577,11 @@
         "at": "2026-11-20T06:11:22.146Z",
         "status": "responded",
         "latency_ms": 12039
+      },
+      {
+        "at": "2026-11-20T18:11:03.028Z",
+        "status": "responded",
+        "latency_ms": 1039
       }
     ],
     "cohere/c4ai-aya-expanse-32b": [
@@ -10108,6 +10208,11 @@
         "at": "2026-11-20T06:10:24.935Z",
         "status": "responded",
         "latency_ms": 588
+      },
+      {
+        "at": "2026-11-20T18:10:39.486Z",
+        "status": "responded",
+        "latency_ms": 639
       }
     ],
     "google-ai-studio/gemini-2.5-flash-lite": [
@@ -10410,6 +10515,11 @@
         "at": "2026-11-20T06:10:32.098Z",
         "status": "responded",
         "latency_ms": 401
+      },
+      {
+        "at": "2026-11-20T18:10:41.125Z",
+        "status": "responded",
+        "latency_ms": 299
       }
     ],
     "google-ai-studio/gemini-2.5-flash-preview-tts": [
@@ -10869,6 +10979,11 @@
         "at": "2026-11-20T06:10:40.319Z",
         "status": "gone",
         "latency_ms": 110
+      },
+      {
+        "at": "2026-11-20T18:10:42.425Z",
+        "status": "gone",
+        "latency_ms": 106
       }
     ],
     "google-ai-studio/gemini-2.5-pro-preview-tts": [
@@ -11328,6 +11443,11 @@
         "at": "2026-11-20T06:10:42.534Z",
         "status": "responded",
         "latency_ms": 667
+      },
+      {
+        "at": "2026-11-20T18:10:43.531Z",
+        "status": "responded",
+        "latency_ms": 720
       }
     ],
     "google-ai-studio/gemini-3.1-flash-lite": [
@@ -11630,6 +11750,11 @@
         "at": "2026-11-20T06:10:48.394Z",
         "status": "responded",
         "latency_ms": 4015
+      },
+      {
+        "at": "2026-11-20T18:10:45.250Z",
+        "status": "responded",
+        "latency_ms": 7658
       }
     ],
     "google-ai-studio/gemini-3.1-flash-lite-preview": [
@@ -11932,6 +12057,11 @@
         "at": "2026-11-20T06:11:00.907Z",
         "status": "responded",
         "latency_ms": 3203
+      },
+      {
+        "at": "2026-11-20T18:10:53.909Z",
+        "status": "responded",
+        "latency_ms": 1831
       }
     ],
     "google-ai-studio/gemini-3.1-flash-tts-preview": [
@@ -12391,6 +12521,11 @@
         "at": "2026-11-20T06:12:12.968Z",
         "status": "no_free_quota",
         "latency_ms": 110
+      },
+      {
+        "at": "2026-11-20T18:10:56.740Z",
+        "status": "no_free_quota",
+        "latency_ms": 123
       }
     ],
     "google-ai-studio/gemini-3.5-flash": [
@@ -12693,6 +12828,11 @@
         "at": "2026-11-20T06:12:14.077Z",
         "status": "responded",
         "latency_ms": 817
+      },
+      {
+        "at": "2026-11-20T18:10:57.863Z",
+        "status": "slow",
+        "latency_ms": 30001
       }
     ],
     "google-ai-studio/gemini-3.5-flash-lite": [
@@ -12995,6 +13135,11 @@
         "at": "2026-11-20T06:13:27.056Z",
         "status": "responded",
         "latency_ms": 473
+      },
+      {
+        "at": "2026-11-20T18:11:28.865Z",
+        "status": "responded",
+        "latency_ms": 4947
       }
     ],
     "google-ai-studio/gemini-3.5-transcribe": [
@@ -13448,6 +13593,11 @@
         "at": "2026-11-20T06:13:35.397Z",
         "status": "slow",
         "latency_ms": 25705
+      },
+      {
+        "at": "2026-11-20T18:11:34.813Z",
+        "status": "error",
+        "latency_ms": 3011
       }
     ],
     "google-ai-studio/gemini-3.7-flash": [
@@ -13750,6 +13900,11 @@
         "at": "2026-11-20T06:14:02.103Z",
         "status": "error",
         "latency_ms": 1216
+      },
+      {
+        "at": "2026-11-20T18:11:38.826Z",
+        "status": "error",
+        "latency_ms": 2180
       }
     ],
     "google-ai-studio/gemini-3.8-flash": [
@@ -14052,6 +14207,11 @@
         "at": "2026-11-20T06:14:04.319Z",
         "status": "responded",
         "latency_ms": 2811
+      },
+      {
+        "at": "2026-11-20T18:11:42.007Z",
+        "status": "error",
+        "latency_ms": 2675
       }
     ],
     "google-ai-studio/gemini-3.8-flash-lite-tts": [
@@ -14668,6 +14828,11 @@
         "at": "2026-11-20T06:15:25.355Z",
         "status": "no_free_quota",
         "latency_ms": 97
+      },
+      {
+        "at": "2026-11-20T18:11:45.682Z",
+        "status": "no_free_quota",
+        "latency_ms": 121
       }
     ],
     "google-ai-studio/gemini-4-carbon": [
@@ -14765,6 +14930,11 @@
         "at": "2026-11-20T06:15:26.454Z",
         "status": "no_free_quota",
         "latency_ms": 93
+      },
+      {
+        "at": "2026-11-20T18:11:46.803Z",
+        "status": "no_free_quota",
+        "latency_ms": 113
       }
     ],
     "google-ai-studio/gemini-4-hydrogen": [
@@ -14842,6 +15012,11 @@
         "at": "2026-11-20T06:15:27.547Z",
         "status": "error",
         "latency_ms": 348
+      },
+      {
+        "at": "2026-11-20T18:11:47.916Z",
+        "status": "error",
+        "latency_ms": 6227
       }
     ],
     "google-ai-studio/gemini-4-neon": [
@@ -14859,6 +15034,11 @@
         "at": "2026-11-20T06:15:28.895Z",
         "status": "no_free_quota",
         "latency_ms": 100
+      },
+      {
+        "at": "2026-11-20T18:11:55.143Z",
+        "status": "no_free_quota",
+        "latency_ms": 99
       }
     ],
     "google-ai-studio/gemini-omni-1.1-flash": [
@@ -15161,6 +15341,11 @@
         "at": "2026-11-20T06:15:29.996Z",
         "status": "no_free_quota",
         "latency_ms": 99
+      },
+      {
+        "at": "2026-11-20T18:11:56.242Z",
+        "status": "no_free_quota",
+        "latency_ms": 90
       }
     ],
     "google-ai-studio/gemini-omni-1.2-flash": [
@@ -15303,6 +15488,11 @@
         "at": "2026-11-20T06:15:31.095Z",
         "status": "no_free_quota",
         "latency_ms": 97
+      },
+      {
+        "at": "2026-11-20T18:11:57.331Z",
+        "status": "no_free_quota",
+        "latency_ms": 104
       }
     ],
     "google-ai-studio/gemini-omni-flash-preview": [
@@ -15605,6 +15795,11 @@
         "at": "2026-11-20T06:15:32.192Z",
         "status": "no_free_quota",
         "latency_ms": 65
+      },
+      {
+        "at": "2026-11-20T18:11:58.436Z",
+        "status": "no_free_quota",
+        "latency_ms": 119
       }
     ],
     "google-ai-studio/gemma-4-26b-a4b-it": [
@@ -15907,6 +16102,11 @@
         "at": "2026-11-20T06:15:33.258Z",
         "status": "error",
         "latency_ms": 160
+      },
+      {
+        "at": "2026-11-20T18:11:59.555Z",
+        "status": "error",
+        "latency_ms": 139
       }
     ],
     "google-ai-studio/gemma-4-31b-it": [
@@ -16209,6 +16409,11 @@
         "at": "2026-11-20T06:15:34.420Z",
         "status": "error",
         "latency_ms": 173
+      },
+      {
+        "at": "2026-11-20T18:12:00.695Z",
+        "status": "error",
+        "latency_ms": 194
       }
     ],
     "groq/allam-2-7b": [
@@ -16511,6 +16716,11 @@
         "at": "2026-11-20T06:10:24.934Z",
         "status": "responded",
         "latency_ms": 339
+      },
+      {
+        "at": "2026-11-20T18:10:39.485Z",
+        "status": "responded",
+        "latency_ms": 314
       }
     ],
     "groq/canopylabs/orpheus-arabic-saudi": [
@@ -17127,6 +17337,11 @@
         "at": "2026-11-20T06:10:29.068Z",
         "status": "responded",
         "latency_ms": 244
+      },
+      {
+        "at": "2026-11-20T18:10:40.299Z",
+        "status": "responded",
+        "latency_ms": 254
       }
     ],
     "groq/openai/gpt-oss-20b": [
@@ -17429,6 +17644,11 @@
         "at": "2026-11-20T06:10:32.711Z",
         "status": "responded",
         "latency_ms": 149
+      },
+      {
+        "at": "2026-11-20T18:10:41.053Z",
+        "status": "responded",
+        "latency_ms": 296
       }
     ],
     "groq/qwen/qwen3.8-27b": [
@@ -17731,6 +17951,11 @@
         "at": "2026-11-20T06:10:35.710Z",
         "status": "responded",
         "latency_ms": 99
+      },
+      {
+        "at": "2026-11-20T18:10:41.849Z",
+        "status": "responded",
+        "latency_ms": 89
       }
     ],
     "groq/whisper-large-v3": [
@@ -18409,6 +18634,11 @@
         "at": "2026-11-20T06:10:24.941Z",
         "status": "gone",
         "latency_ms": 973
+      },
+      {
+        "at": "2026-11-20T18:10:39.491Z",
+        "status": "gone",
+        "latency_ms": 773
       }
     ],
     "hetzner/Qwen/Qwen3.6-35B-A3B-FP8": [
@@ -18711,6 +18941,11 @@
         "at": "2026-11-20T06:10:32.415Z",
         "status": "gone",
         "latency_ms": 465
+      },
+      {
+        "at": "2026-11-20T18:10:46.764Z",
+        "status": "gone",
+        "latency_ms": 525
       }
     ],
     "hetzner/Qwen/Qwen3.8-27B": [
@@ -19013,6 +19248,11 @@
         "at": "2026-11-20T06:10:39.380Z",
         "status": "gone",
         "latency_ms": 459
+      },
+      {
+        "at": "2026-11-20T18:10:53.789Z",
+        "status": "gone",
+        "latency_ms": 531
       }
     ],
     "hetzner/Qwen3.8-27B": [
@@ -19315,6 +19555,11 @@
         "at": "2026-11-20T06:10:46.338Z",
         "status": "gone",
         "latency_ms": 471
+      },
+      {
+        "at": "2026-11-20T18:11:00.820Z",
+        "status": "gone",
+        "latency_ms": 527
       }
     ],
     "kilo/baidu/ernie-5.5-flash-preview:free": [
@@ -19397,303 +19642,6 @@
         "at": "2026-11-20T06:10:24.936Z",
         "status": "responded",
         "latency_ms": 2039
-      }
-    ],
-    "kilo/cohere/north-mini-code:free": [
-      {
-        "at": "2026-10-21T06:10:56.706Z",
-        "status": "responded",
-        "latency_ms": 1049
-      },
-      {
-        "at": "2026-10-21T18:10:58.060Z",
-        "status": "responded",
-        "latency_ms": 1194
-      },
-      {
-        "at": "2026-10-22T06:11:22.232Z",
-        "status": "responded",
-        "latency_ms": 1266
-      },
-      {
-        "at": "2026-10-22T18:11:19.735Z",
-        "status": "responded",
-        "latency_ms": 932
-      },
-      {
-        "at": "2026-10-23T06:11:18.186Z",
-        "status": "responded",
-        "latency_ms": 1274
-      },
-      {
-        "at": "2026-10-23T18:11:14.169Z",
-        "status": "responded",
-        "latency_ms": 1227
-      },
-      {
-        "at": "2026-10-24T06:11:18.011Z",
-        "status": "responded",
-        "latency_ms": 2264
-      },
-      {
-        "at": "2026-10-24T18:11:09.835Z",
-        "status": "responded",
-        "latency_ms": 1197
-      },
-      {
-        "at": "2026-10-25T06:11:12.496Z",
-        "status": "responded",
-        "latency_ms": 1094
-      },
-      {
-        "at": "2026-10-25T18:11:08.983Z",
-        "status": "responded",
-        "latency_ms": 1009
-      },
-      {
-        "at": "2026-10-26T06:10:43.616Z",
-        "status": "responded",
-        "latency_ms": 1076
-      },
-      {
-        "at": "2026-10-26T18:10:45.799Z",
-        "status": "responded",
-        "latency_ms": 1374
-      },
-      {
-        "at": "2026-10-27T06:10:41.293Z",
-        "status": "responded",
-        "latency_ms": 1570
-      },
-      {
-        "at": "2026-10-27T18:10:41.058Z",
-        "status": "responded",
-        "latency_ms": 1017
-      },
-      {
-        "at": "2026-10-28T06:10:44.328Z",
-        "status": "responded",
-        "latency_ms": 1291
-      },
-      {
-        "at": "2026-10-28T18:10:34.433Z",
-        "status": "responded",
-        "latency_ms": 1009
-      },
-      {
-        "at": "2026-10-29T06:11:16.969Z",
-        "status": "responded",
-        "latency_ms": 747
-      },
-      {
-        "at": "2026-10-29T18:11:16.599Z",
-        "status": "responded",
-        "latency_ms": 1133
-      },
-      {
-        "at": "2026-10-30T06:11:13.884Z",
-        "status": "responded",
-        "latency_ms": 1437
-      },
-      {
-        "at": "2026-10-30T18:11:25.216Z",
-        "status": "responded",
-        "latency_ms": 1202
-      },
-      {
-        "at": "2026-10-31T06:11:17.749Z",
-        "status": "responded",
-        "latency_ms": 1129
-      },
-      {
-        "at": "2026-10-31T18:11:19.218Z",
-        "status": "responded",
-        "latency_ms": 1968
-      },
-      {
-        "at": "2026-11-01T06:11:16.675Z",
-        "status": "responded",
-        "latency_ms": 1325
-      },
-      {
-        "at": "2026-11-01T18:11:14.264Z",
-        "status": "responded",
-        "latency_ms": 1236
-      },
-      {
-        "at": "2026-11-02T06:11:16.584Z",
-        "status": "responded",
-        "latency_ms": 1109
-      },
-      {
-        "at": "2026-11-02T18:11:17.170Z",
-        "status": "responded",
-        "latency_ms": 1239
-      },
-      {
-        "at": "2026-11-03T06:11:11.252Z",
-        "status": "responded",
-        "latency_ms": 1083
-      },
-      {
-        "at": "2026-11-03T18:10:36.139Z",
-        "status": "responded",
-        "latency_ms": 2410
-      },
-      {
-        "at": "2026-11-04T06:10:16.601Z",
-        "status": "responded",
-        "latency_ms": 1231
-      },
-      {
-        "at": "2026-11-04T18:10:38.080Z",
-        "status": "responded",
-        "latency_ms": 1501
-      },
-      {
-        "at": "2026-11-05T06:10:39.270Z",
-        "status": "responded",
-        "latency_ms": 889
-      },
-      {
-        "at": "2026-11-05T18:10:33.212Z",
-        "status": "responded",
-        "latency_ms": 928
-      },
-      {
-        "at": "2026-11-06T06:10:33.441Z",
-        "status": "responded",
-        "latency_ms": 837
-      },
-      {
-        "at": "2026-11-06T18:10:33.040Z",
-        "status": "responded",
-        "latency_ms": 808
-      },
-      {
-        "at": "2026-11-07T06:10:36.502Z",
-        "status": "responded",
-        "latency_ms": 1009
-      },
-      {
-        "at": "2026-11-07T18:10:32.052Z",
-        "status": "responded",
-        "latency_ms": 995
-      },
-      {
-        "at": "2026-11-08T06:11:12.062Z",
-        "status": "responded",
-        "latency_ms": 880
-      },
-      {
-        "at": "2026-11-08T18:11:15.219Z",
-        "status": "responded",
-        "latency_ms": 817
-      },
-      {
-        "at": "2026-11-09T06:11:12.883Z",
-        "status": "responded",
-        "latency_ms": 686
-      },
-      {
-        "at": "2026-11-10T06:11:15.644Z",
-        "status": "responded",
-        "latency_ms": 1011
-      },
-      {
-        "at": "2026-11-10T18:10:39.729Z",
-        "status": "responded",
-        "latency_ms": 1448
-      },
-      {
-        "at": "2026-11-11T06:10:37.310Z",
-        "status": "responded",
-        "latency_ms": 1804
-      },
-      {
-        "at": "2026-11-11T18:11:37.345Z",
-        "status": "responded",
-        "latency_ms": 592
-      },
-      {
-        "at": "2026-11-12T06:11:33.906Z",
-        "status": "responded",
-        "latency_ms": 550
-      },
-      {
-        "at": "2026-11-12T18:11:16.757Z",
-        "status": "responded",
-        "latency_ms": 542
-      },
-      {
-        "at": "2026-11-13T06:14:24.797Z",
-        "status": "responded",
-        "latency_ms": 477
-      },
-      {
-        "at": "2026-11-13T18:11:26.207Z",
-        "status": "responded",
-        "latency_ms": 521
-      },
-      {
-        "at": "2026-11-14T06:12:33.500Z",
-        "status": "responded",
-        "latency_ms": 415
-      },
-      {
-        "at": "2026-11-14T18:11:23.221Z",
-        "status": "responded",
-        "latency_ms": 639
-      },
-      {
-        "at": "2026-11-15T06:12:30.851Z",
-        "status": "responded",
-        "latency_ms": 663
-      },
-      {
-        "at": "2026-11-15T18:11:31.756Z",
-        "status": "responded",
-        "latency_ms": 460
-      },
-      {
-        "at": "2026-11-16T06:12:38.510Z",
-        "status": "responded",
-        "latency_ms": 415
-      },
-      {
-        "at": "2026-11-16T18:11:38.745Z",
-        "status": "responded",
-        "latency_ms": 425
-      },
-      {
-        "at": "2026-11-17T06:12:35.085Z",
-        "status": "responded",
-        "latency_ms": 596
-      },
-      {
-        "at": "2026-11-17T18:11:31.387Z",
-        "status": "responded",
-        "latency_ms": 768
-      },
-      {
-        "at": "2026-11-18T06:12:32.255Z",
-        "status": "responded",
-        "latency_ms": 454
-      },
-      {
-        "at": "2026-11-18T18:11:24.198Z",
-        "status": "responded",
-        "latency_ms": 884
-      },
-      {
-        "at": "2026-11-19T06:12:21.221Z",
-        "status": "responded",
-        "latency_ms": 588
-      },
-      {
-        "at": "2026-11-19T18:10:51.726Z",
-        "status": "responded",
-        "latency_ms": 788
       }
     ],
     "kilo/dots-studio/dots-3-note-preview:free": [
@@ -21838,60 +21786,11 @@
         "at": "2026-11-20T06:10:24.937Z",
         "status": "responded",
         "latency_ms": 1473
-      }
-    ],
-    "llm7/gemma4:31b": [
-      {
-        "at": "2026-11-17T18:11:26.636Z",
-        "status": "responded",
-        "latency_ms": 2126
       },
       {
-        "at": "2026-11-18T18:11:26.395Z",
+        "at": "2026-11-20T18:10:39.488Z",
         "status": "responded",
-        "latency_ms": 2484
-      },
-      {
-        "at": "2026-11-19T06:11:14.141Z",
-        "status": "responded",
-        "latency_ms": 585
-      }
-    ],
-    "llm7/glm-5.3-flash": [
-      {
-        "at": "2026-11-15T06:11:57.375Z",
-        "status": "responded",
-        "latency_ms": 2414
-      },
-      {
-        "at": "2026-11-15T18:11:29.712Z",
-        "status": "responded",
-        "latency_ms": 3192
-      },
-      {
-        "at": "2026-11-16T06:12:27.964Z",
-        "status": "responded",
-        "latency_ms": 6090
-      },
-      {
-        "at": "2026-11-16T18:11:39.362Z",
-        "status": "responded",
-        "latency_ms": 4477
-      },
-      {
-        "at": "2026-11-17T06:12:08.872Z",
-        "status": "slow",
-        "latency_ms": 25620
-      },
-      {
-        "at": "2026-11-17T18:11:35.762Z",
-        "status": "responded",
-        "latency_ms": 4055
-      },
-      {
-        "at": "2026-11-18T18:11:35.880Z",
-        "status": "responded",
-        "latency_ms": 3868
+        "latency_ms": 1777
       }
     ],
     "llm7/gpt-oss:20b": [
@@ -21934,18 +21833,6 @@
         "at": "2026-11-18T18:11:55.473Z",
         "status": "responded",
         "latency_ms": 3111
-      }
-    ],
-    "llm7/mimo-v2.6-flash": [
-      {
-        "at": "2026-11-17T18:12:23.294Z",
-        "status": "responded",
-        "latency_ms": 3075
-      },
-      {
-        "at": "2026-11-18T18:12:13.279Z",
-        "status": "responded",
-        "latency_ms": 3532
       }
     ],
     "llm7/mistral-Nemo-Instruct-2407": [
@@ -22470,6 +22357,11 @@
         "at": "2026-11-20T06:10:24.938Z",
         "status": "responded",
         "latency_ms": 525
+      },
+      {
+        "at": "2026-11-20T18:10:39.489Z",
+        "status": "responded",
+        "latency_ms": 805
       }
     ],
     "mistral/ministral-14b-2512": [
@@ -22767,6 +22659,11 @@
         "at": "2026-11-20T06:10:34.203Z",
         "status": "responded",
         "latency_ms": 294
+      },
+      {
+        "at": "2026-11-20T18:10:42.294Z",
+        "status": "responded",
+        "latency_ms": 677
       }
     ],
     "mistral/ministral-3b-2512": [
@@ -23069,6 +22966,11 @@
         "at": "2026-11-20T06:10:43.357Z",
         "status": "responded",
         "latency_ms": 293
+      },
+      {
+        "at": "2026-11-20T18:10:44.971Z",
+        "status": "responded",
+        "latency_ms": 358
       }
     ],
     "mistral/ministral-8b-2512": [
@@ -23371,6 +23273,11 @@
         "at": "2026-11-20T06:10:52.349Z",
         "status": "responded",
         "latency_ms": 389
+      },
+      {
+        "at": "2026-11-20T18:10:47.329Z",
+        "status": "responded",
+        "latency_ms": 368
       }
     ],
     "mistral/mistral-medium-latest": [
@@ -23673,6 +23580,11 @@
         "at": "2026-11-20T06:11:01.638Z",
         "status": "no_free_quota",
         "latency_ms": 200
+      },
+      {
+        "at": "2026-11-20T18:10:49.697Z",
+        "status": "no_free_quota",
+        "latency_ms": 274
       }
     ],
     "mistral/mistral-small-2603": [
@@ -23975,6 +23887,11 @@
         "at": "2026-11-20T06:11:03.838Z",
         "status": "no_free_quota",
         "latency_ms": 209
+      },
+      {
+        "at": "2026-11-20T18:10:51.971Z",
+        "status": "no_free_quota",
+        "latency_ms": 445
       }
     ],
     "nvidia/fastino/gliner2-pii": [
@@ -23982,6 +23899,11 @@
         "at": "2026-11-20T06:10:24.936Z",
         "status": "error",
         "latency_ms": 357
+      },
+      {
+        "at": "2026-11-20T18:10:39.486Z",
+        "status": "error",
+        "latency_ms": 264
       }
     ],
     "nvidia/google/gemma-3-12b-it": [
@@ -24284,6 +24206,11 @@
         "at": "2026-11-20T06:10:26.894Z",
         "status": "gone",
         "latency_ms": 70
+      },
+      {
+        "at": "2026-11-20T18:10:41.350Z",
+        "status": "gone",
+        "latency_ms": 42
       }
     ],
     "nvidia/google/gemma-3-4b-it": [
@@ -24586,6 +24513,11 @@
         "at": "2026-11-20T06:10:28.564Z",
         "status": "gone",
         "latency_ms": 69
+      },
+      {
+        "at": "2026-11-20T18:10:42.992Z",
+        "status": "gone",
+        "latency_ms": 46
       }
     ],
     "nvidia/google/gemma-4-31b-it": [
@@ -24888,6 +24820,11 @@
         "at": "2026-11-20T06:10:30.233Z",
         "status": "responded",
         "latency_ms": 1112
+      },
+      {
+        "at": "2026-11-20T18:10:44.638Z",
+        "status": "slow",
+        "latency_ms": 30001
       }
     ],
     "nvidia/meta/muse-glimmer-30b": [
@@ -25190,6 +25127,11 @@
         "at": "2026-11-20T06:10:42.318Z",
         "status": "responded",
         "latency_ms": 2777
+      },
+      {
+        "at": "2026-11-20T18:11:16.239Z",
+        "status": "responded",
+        "latency_ms": 3914
       }
     ],
     "nvidia/minimaxai/minimax-m3.1-flash": [
@@ -25472,6 +25414,11 @@
         "at": "2026-11-20T06:12:22.399Z",
         "status": "slow",
         "latency_ms": 30001
+      },
+      {
+        "at": "2026-11-20T18:11:21.753Z",
+        "status": "responded",
+        "latency_ms": 779
       }
     ],
     "nvidia/mistralai/mistral-large-4-1t-a52b": [
@@ -25689,6 +25636,11 @@
         "at": "2026-11-20T06:12:54.000Z",
         "status": "responded",
         "latency_ms": 4609
+      },
+      {
+        "at": "2026-11-20T18:11:24.133Z",
+        "status": "responded",
+        "latency_ms": 14847
       }
     ],
     "nvidia/moonshotai/kimi-k3.1-pro": [
@@ -25714,6 +25666,11 @@
       },
       {
         "at": "2026-11-20T06:14:15.921Z",
+        "status": "slow",
+        "latency_ms": 30000
+      },
+      {
+        "at": "2026-11-20T18:11:40.580Z",
         "status": "slow",
         "latency_ms": 30000
       }
@@ -26018,6 +25975,11 @@
         "at": "2026-11-20T06:14:47.521Z",
         "status": "gone",
         "latency_ms": 77
+      },
+      {
+        "at": "2026-11-20T18:12:12.180Z",
+        "status": "gone",
+        "latency_ms": 47
       }
     ],
     "nvidia/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning": [
@@ -26320,6 +26282,11 @@
         "at": "2026-11-20T06:14:49.199Z",
         "status": "responded",
         "latency_ms": 249
+      },
+      {
+        "at": "2026-11-20T18:12:13.827Z",
+        "status": "responded",
+        "latency_ms": 266
       }
     ],
     "nvidia/nvidia/nemotron-3-ultra-550b-a55b": [
@@ -26622,6 +26589,11 @@
         "at": "2026-11-20T06:14:59.995Z",
         "status": "responded",
         "latency_ms": 450
+      },
+      {
+        "at": "2026-11-20T18:12:15.693Z",
+        "status": "responded",
+        "latency_ms": 423
       }
     ],
     "nvidia/nvidia/nemotron-3.5-bolt-e4b": [
@@ -26899,6 +26871,11 @@
         "at": "2026-11-20T06:15:21.361Z",
         "status": "responded",
         "latency_ms": 171
+      },
+      {
+        "at": "2026-11-20T18:12:17.717Z",
+        "status": "responded",
+        "latency_ms": 240
       }
     ],
     "nvidia/nvidia/nemotron-3.5-lightning-30b-a3b": [
@@ -27201,6 +27178,11 @@
         "at": "2026-11-20T06:15:29.375Z",
         "status": "responded",
         "latency_ms": 176
+      },
+      {
+        "at": "2026-11-20T18:12:19.557Z",
+        "status": "responded",
+        "latency_ms": 233
       }
     ],
     "nvidia/nvidia/nemotron-3.5-super-vl-120b-a12b": [
@@ -27503,6 +27485,11 @@
         "at": "2026-11-20T06:15:41.342Z",
         "status": "responded",
         "latency_ms": 359
+      },
+      {
+        "at": "2026-11-20T18:12:21.390Z",
+        "status": "responded",
+        "latency_ms": 275
       }
     ],
     "nvidia/nvidia/riva-translate-4b-instruct-v2": [
@@ -27805,6 +27792,11 @@
         "at": "2026-11-20T06:15:51.842Z",
         "status": "responded",
         "latency_ms": 275
+      },
+      {
+        "at": "2026-11-20T18:12:23.265Z",
+        "status": "responded",
+        "latency_ms": 282
       }
     ],
     "nvidia/poolside/laguna-xs-2.1": [
@@ -28107,6 +28099,11 @@
         "at": "2026-11-20T06:15:57.794Z",
         "status": "responded",
         "latency_ms": 91
+      },
+      {
+        "at": "2026-11-20T18:12:25.147Z",
+        "status": "responded",
+        "latency_ms": 191
       }
     ],
     "nvidia/stepfun-ai/step-5-preview": [
@@ -28409,6 +28406,11 @@
         "at": "2026-11-20T06:16:05.313Z",
         "status": "responded",
         "latency_ms": 608
+      },
+      {
+        "at": "2026-11-20T18:12:26.938Z",
+        "status": "responded",
+        "latency_ms": 4317
       }
     ],
     "nvidia/z-ai/glm-5.3-flash": [
@@ -28711,6 +28713,11 @@
         "at": "2026-11-20T06:17:20.000Z",
         "status": "slow",
         "latency_ms": 30002
+      },
+      {
+        "at": "2026-11-20T18:12:32.856Z",
+        "status": "slow",
+        "latency_ms": 30000
       }
     ],
     "ollama/beam": [
@@ -29013,6 +29020,11 @@
         "at": "2026-11-20T06:10:24.939Z",
         "status": "error",
         "latency_ms": 515
+      },
+      {
+        "at": "2026-11-20T18:10:39.490Z",
+        "status": "error",
+        "latency_ms": 266
       }
     ],
     "ollama/clef:27b": [
@@ -29315,6 +29327,11 @@
         "at": "2026-11-20T06:10:28.455Z",
         "status": "error",
         "latency_ms": 144
+      },
+      {
+        "at": "2026-11-20T18:10:42.756Z",
+        "status": "error",
+        "latency_ms": 372
       }
     ],
     "ollama/deepseek-v4-pro:0813": [
@@ -29617,6 +29634,11 @@
         "at": "2026-11-20T06:10:31.599Z",
         "status": "error",
         "latency_ms": 144
+      },
+      {
+        "at": "2026-11-20T18:10:46.128Z",
+        "status": "error",
+        "latency_ms": 362
       }
     ],
     "ollama/deepseek-v4.1-flash": [
@@ -29919,6 +29941,11 @@
         "at": "2026-11-20T06:10:34.744Z",
         "status": "error",
         "latency_ms": 144
+      },
+      {
+        "at": "2026-11-20T18:10:49.490Z",
+        "status": "error",
+        "latency_ms": 164
       }
     ],
     "ollama/deepseek-v4.1-flash:1017": [
@@ -30221,6 +30248,11 @@
         "at": "2026-11-20T06:10:37.889Z",
         "status": "error",
         "latency_ms": 144
+      },
+      {
+        "at": "2026-11-20T18:10:52.654Z",
+        "status": "error",
+        "latency_ms": 173
       }
     ],
     "ollama/gemma4:31b": [
@@ -30523,6 +30555,11 @@
         "at": "2026-11-20T06:10:41.033Z",
         "status": "error",
         "latency_ms": 142
+      },
+      {
+        "at": "2026-11-20T18:10:55.827Z",
+        "status": "error",
+        "latency_ms": 169
       }
     ],
     "ollama/glm-5.2": [
@@ -30825,6 +30862,11 @@
         "at": "2026-11-20T06:10:44.176Z",
         "status": "error",
         "latency_ms": 144
+      },
+      {
+        "at": "2026-11-20T18:10:58.996Z",
+        "status": "error",
+        "latency_ms": 161
       }
     ],
     "ollama/glm-5.3": [
@@ -31127,6 +31169,11 @@
         "at": "2026-11-20T06:10:47.320Z",
         "status": "error",
         "latency_ms": 144
+      },
+      {
+        "at": "2026-11-20T18:11:02.158Z",
+        "status": "error",
+        "latency_ms": 164
       }
     ],
     "ollama/glm-5.3-flash": [
@@ -31429,6 +31476,11 @@
         "at": "2026-11-20T06:10:50.464Z",
         "status": "error",
         "latency_ms": 145
+      },
+      {
+        "at": "2026-11-20T18:11:05.322Z",
+        "status": "error",
+        "latency_ms": 161
       }
     ],
     "ollama/gpt-oss:120b": [
@@ -31731,6 +31783,11 @@
         "at": "2026-11-20T06:10:53.609Z",
         "status": "error",
         "latency_ms": 143
+      },
+      {
+        "at": "2026-11-20T18:11:08.484Z",
+        "status": "error",
+        "latency_ms": 168
       }
     ],
     "ollama/gpt-oss:20b": [
@@ -32033,6 +32090,11 @@
         "at": "2026-11-20T06:10:56.753Z",
         "status": "error",
         "latency_ms": 148
+      },
+      {
+        "at": "2026-11-20T18:11:11.652Z",
+        "status": "error",
+        "latency_ms": 159
       }
     ],
     "ollama/inkling-2-small": [
@@ -32110,6 +32172,11 @@
         "at": "2026-11-20T06:10:59.900Z",
         "status": "error",
         "latency_ms": 126
+      },
+      {
+        "at": "2026-11-20T18:11:14.811Z",
+        "status": "error",
+        "latency_ms": 192
       }
     ],
     "ollama/kimi-k2.6": [
@@ -32412,6 +32479,11 @@
         "at": "2026-11-20T06:11:03.026Z",
         "status": "error",
         "latency_ms": 150
+      },
+      {
+        "at": "2026-11-20T18:11:18.003Z",
+        "status": "error",
+        "latency_ms": 165
       }
     ],
     "ollama/kimi-k2.7-code": [
@@ -32714,6 +32786,11 @@
         "at": "2026-11-20T06:11:06.176Z",
         "status": "error",
         "latency_ms": 143
+      },
+      {
+        "at": "2026-11-20T18:11:21.169Z",
+        "status": "error",
+        "latency_ms": 179
       }
     ],
     "ollama/kimi-k3": [
@@ -33016,6 +33093,11 @@
         "at": "2026-11-20T06:11:09.319Z",
         "status": "error",
         "latency_ms": 163
+      },
+      {
+        "at": "2026-11-20T18:11:24.348Z",
+        "status": "error",
+        "latency_ms": 173
       }
     ],
     "ollama/kimi-k3.1-pro": [
@@ -33168,6 +33250,11 @@
         "at": "2026-11-20T06:11:12.482Z",
         "status": "error",
         "latency_ms": 149
+      },
+      {
+        "at": "2026-11-20T18:11:27.522Z",
+        "status": "error",
+        "latency_ms": 161
       }
     ],
     "ollama/mimo-v2.6-flash": [
@@ -33370,6 +33457,11 @@
         "at": "2026-11-20T06:11:15.630Z",
         "status": "error",
         "latency_ms": 145
+      },
+      {
+        "at": "2026-11-20T18:11:30.683Z",
+        "status": "error",
+        "latency_ms": 161
       }
     ],
     "ollama/mimo-v2.6-pro": [
@@ -33572,6 +33664,11 @@
         "at": "2026-11-20T06:11:18.776Z",
         "status": "error",
         "latency_ms": 144
+      },
+      {
+        "at": "2026-11-20T18:11:33.844Z",
+        "status": "error",
+        "latency_ms": 160
       }
     ],
     "ollama/minimax-m3": [
@@ -33874,6 +33971,11 @@
         "at": "2026-11-20T06:11:21.920Z",
         "status": "error",
         "latency_ms": 149
+      },
+      {
+        "at": "2026-11-20T18:11:37.004Z",
+        "status": "error",
+        "latency_ms": 164
       }
     ],
     "ollama/minimax-m3.1-flash": [
@@ -34176,6 +34278,11 @@
         "at": "2026-11-20T06:11:25.069Z",
         "status": "error",
         "latency_ms": 146
+      },
+      {
+        "at": "2026-11-20T18:11:40.169Z",
+        "status": "error",
+        "latency_ms": 192
       }
     ],
     "ollama/mistral-large-4": [
@@ -34478,6 +34585,11 @@
         "at": "2026-11-20T06:11:28.216Z",
         "status": "error",
         "latency_ms": 148
+      },
+      {
+        "at": "2026-11-20T18:11:43.362Z",
+        "status": "error",
+        "latency_ms": 169
       }
     ],
     "ollama/muse-spark-open": [
@@ -34780,6 +34892,11 @@
         "at": "2026-11-20T06:11:31.364Z",
         "status": "error",
         "latency_ms": 147
+      },
+      {
+        "at": "2026-11-20T18:11:46.532Z",
+        "status": "error",
+        "latency_ms": 171
       }
     ],
     "ollama/nemotron-3-super": [
@@ -35082,6 +35199,11 @@
         "at": "2026-11-20T06:11:34.511Z",
         "status": "error",
         "latency_ms": 150
+      },
+      {
+        "at": "2026-11-20T18:11:49.703Z",
+        "status": "error",
+        "latency_ms": 170
       }
     ],
     "ollama/nemotron-3-ultra": [
@@ -35384,6 +35506,11 @@
         "at": "2026-11-20T06:11:37.661Z",
         "status": "error",
         "latency_ms": 127
+      },
+      {
+        "at": "2026-11-20T18:11:52.874Z",
+        "status": "error",
+        "latency_ms": 157
       }
     ],
     "openrouter/baidu/ernie-5.5-flash-preview:free": [
@@ -35466,303 +35593,11 @@
         "at": "2026-11-20T06:10:24.916Z",
         "status": "responded",
         "latency_ms": 2752
-      }
-    ],
-    "openrouter/cohere/north-mini-code:free": [
-      {
-        "at": "2026-10-21T06:10:56.676Z",
-        "status": "responded",
-        "latency_ms": 423
       },
       {
-        "at": "2026-10-21T18:10:58.007Z",
+        "at": "2026-11-20T18:10:39.469Z",
         "status": "responded",
-        "latency_ms": 549
-      },
-      {
-        "at": "2026-10-22T06:11:22.210Z",
-        "status": "responded",
-        "latency_ms": 526
-      },
-      {
-        "at": "2026-10-22T18:11:19.706Z",
-        "status": "responded",
-        "latency_ms": 514
-      },
-      {
-        "at": "2026-10-23T06:11:18.164Z",
-        "status": "responded",
-        "latency_ms": 604
-      },
-      {
-        "at": "2026-10-23T18:11:14.140Z",
-        "status": "responded",
-        "latency_ms": 510
-      },
-      {
-        "at": "2026-10-24T06:11:17.979Z",
-        "status": "responded",
-        "latency_ms": 432
-      },
-      {
-        "at": "2026-10-24T18:11:09.802Z",
-        "status": "responded",
-        "latency_ms": 928
-      },
-      {
-        "at": "2026-10-25T06:11:12.477Z",
-        "status": "responded",
-        "latency_ms": 344
-      },
-      {
-        "at": "2026-10-25T18:11:08.956Z",
-        "status": "responded",
-        "latency_ms": 411
-      },
-      {
-        "at": "2026-10-26T06:10:43.594Z",
-        "status": "responded",
-        "latency_ms": 427
-      },
-      {
-        "at": "2026-10-26T18:10:45.747Z",
-        "status": "responded",
-        "latency_ms": 442
-      },
-      {
-        "at": "2026-10-27T06:10:41.263Z",
-        "status": "responded",
-        "latency_ms": 412
-      },
-      {
-        "at": "2026-10-27T18:10:41.021Z",
-        "status": "responded",
-        "latency_ms": 477
-      },
-      {
-        "at": "2026-10-28T06:10:44.295Z",
-        "status": "responded",
-        "latency_ms": 480
-      },
-      {
-        "at": "2026-10-28T18:10:34.405Z",
-        "status": "responded",
-        "latency_ms": 430
-      },
-      {
-        "at": "2026-10-29T06:11:16.940Z",
-        "status": "responded",
-        "latency_ms": 374
-      },
-      {
-        "at": "2026-10-29T18:11:16.573Z",
-        "status": "responded",
-        "latency_ms": 501
-      },
-      {
-        "at": "2026-10-30T06:11:13.866Z",
-        "status": "responded",
-        "latency_ms": 361
-      },
-      {
-        "at": "2026-10-30T18:11:25.190Z",
-        "status": "responded",
-        "latency_ms": 746
-      },
-      {
-        "at": "2026-10-31T06:11:17.722Z",
-        "status": "responded",
-        "latency_ms": 402
-      },
-      {
-        "at": "2026-10-31T18:11:19.182Z",
-        "status": "responded",
-        "latency_ms": 915
-      },
-      {
-        "at": "2026-11-01T06:11:16.648Z",
-        "status": "responded",
-        "latency_ms": 352
-      },
-      {
-        "at": "2026-11-01T18:11:14.245Z",
-        "status": "responded",
-        "latency_ms": 367
-      },
-      {
-        "at": "2026-11-02T06:11:16.564Z",
-        "status": "responded",
-        "latency_ms": 418
-      },
-      {
-        "at": "2026-11-02T18:11:17.141Z",
-        "status": "responded",
-        "latency_ms": 939
-      },
-      {
-        "at": "2026-11-03T06:11:11.236Z",
-        "status": "responded",
-        "latency_ms": 376
-      },
-      {
-        "at": "2026-11-03T18:10:36.110Z",
-        "status": "responded",
-        "latency_ms": 384
-      },
-      {
-        "at": "2026-11-04T06:10:16.582Z",
-        "status": "responded",
-        "latency_ms": 422
-      },
-      {
-        "at": "2026-11-04T18:10:38.050Z",
-        "status": "responded",
-        "latency_ms": 3698
-      },
-      {
-        "at": "2026-11-05T06:10:39.240Z",
-        "status": "responded",
-        "latency_ms": 399
-      },
-      {
-        "at": "2026-11-05T18:10:33.171Z",
-        "status": "responded",
-        "latency_ms": 392
-      },
-      {
-        "at": "2026-11-06T06:10:33.412Z",
-        "status": "responded",
-        "latency_ms": 2662
-      },
-      {
-        "at": "2026-11-06T18:10:33.000Z",
-        "status": "responded",
-        "latency_ms": 576
-      },
-      {
-        "at": "2026-11-07T06:10:36.450Z",
-        "status": "responded",
-        "latency_ms": 655
-      },
-      {
-        "at": "2026-11-07T18:10:32.014Z",
-        "status": "responded",
-        "latency_ms": 385
-      },
-      {
-        "at": "2026-11-08T06:11:12.040Z",
-        "status": "responded",
-        "latency_ms": 388
-      },
-      {
-        "at": "2026-11-08T18:11:15.192Z",
-        "status": "responded",
-        "latency_ms": 413
-      },
-      {
-        "at": "2026-11-09T06:11:12.838Z",
-        "status": "responded",
-        "latency_ms": 356
-      },
-      {
-        "at": "2026-11-10T06:11:15.623Z",
-        "status": "responded",
-        "latency_ms": 452
-      },
-      {
-        "at": "2026-11-10T18:10:39.703Z",
-        "status": "responded",
-        "latency_ms": 576
-      },
-      {
-        "at": "2026-11-11T06:10:37.284Z",
-        "status": "responded",
-        "latency_ms": 320
-      },
-      {
-        "at": "2026-11-11T18:11:04.014Z",
-        "status": "responded",
-        "latency_ms": 402
-      },
-      {
-        "at": "2026-11-12T06:11:00.739Z",
-        "status": "responded",
-        "latency_ms": 213
-      },
-      {
-        "at": "2026-11-12T18:10:59.369Z",
-        "status": "responded",
-        "latency_ms": 196
-      },
-      {
-        "at": "2026-11-13T06:11:51.140Z",
-        "status": "responded",
-        "latency_ms": 691
-      },
-      {
-        "at": "2026-11-13T18:11:10.106Z",
-        "status": "responded",
-        "latency_ms": 207
-      },
-      {
-        "at": "2026-11-14T06:11:28.142Z",
-        "status": "responded",
-        "latency_ms": 237
-      },
-      {
-        "at": "2026-11-14T18:11:07.096Z",
-        "status": "responded",
-        "latency_ms": 264
-      },
-      {
-        "at": "2026-11-15T06:11:24.247Z",
-        "status": "responded",
-        "latency_ms": 243
-      },
-      {
-        "at": "2026-11-15T18:11:15.220Z",
-        "status": "responded",
-        "latency_ms": 267
-      },
-      {
-        "at": "2026-11-16T06:11:31.390Z",
-        "status": "responded",
-        "latency_ms": 242
-      },
-      {
-        "at": "2026-11-16T18:11:21.827Z",
-        "status": "responded",
-        "latency_ms": 280
-      },
-      {
-        "at": "2026-11-17T06:11:29.386Z",
-        "status": "responded",
-        "latency_ms": 235
-      },
-      {
-        "at": "2026-11-17T18:11:13.906Z",
-        "status": "responded",
-        "latency_ms": 269
-      },
-      {
-        "at": "2026-11-18T06:11:25.691Z",
-        "status": "responded",
-        "latency_ms": 339
-      },
-      {
-        "at": "2026-11-18T18:11:07.706Z",
-        "status": "responded",
-        "latency_ms": 268
-      },
-      {
-        "at": "2026-11-19T06:11:10.842Z",
-        "status": "responded",
-        "latency_ms": 392
-      },
-      {
-        "at": "2026-11-19T18:10:32.085Z",
-        "status": "responded",
-        "latency_ms": 325
+        "latency_ms": 2758
       }
     ],
     "openrouter/deepgram/flux-tts:free": [
@@ -36222,6 +36057,11 @@
         "at": "2026-11-20T06:10:51.531Z",
         "status": "responded",
         "latency_ms": 2151
+      },
+      {
+        "at": "2026-11-20T18:10:45.728Z",
+        "status": "responded",
+        "latency_ms": 1727
       }
     ],
     "openrouter/fish-audio/s2.1-pro-free:free": [
@@ -37492,88 +37332,6 @@
         "latency_ms": 814
       }
     ],
-    "openrouter/thinkingmachines/inkling-2-small:free": [
-      {
-        "at": "2026-11-10T06:14:52.443Z",
-        "status": "restricted",
-        "latency_ms": 89
-      },
-      {
-        "at": "2026-11-10T18:11:29.724Z",
-        "status": "restricted",
-        "latency_ms": 85
-      },
-      {
-        "at": "2026-11-11T06:14:00.508Z",
-        "status": "restricted",
-        "latency_ms": 60
-      },
-      {
-        "at": "2026-11-11T18:12:24.711Z",
-        "status": "restricted",
-        "latency_ms": 118
-      },
-      {
-        "at": "2026-11-12T06:14:48.090Z",
-        "status": "restricted",
-        "latency_ms": 79
-      },
-      {
-        "at": "2026-11-12T18:11:47.957Z",
-        "status": "restricted",
-        "latency_ms": 78
-      },
-      {
-        "at": "2026-11-13T06:16:40.626Z",
-        "status": "restricted",
-        "latency_ms": 104
-      },
-      {
-        "at": "2026-11-13T18:12:00.706Z",
-        "status": "restricted",
-        "latency_ms": 88
-      },
-      {
-        "at": "2026-11-14T06:16:52.835Z",
-        "status": "restricted",
-        "latency_ms": 94
-      },
-      {
-        "at": "2026-11-14T18:12:05.546Z",
-        "status": "restricted",
-        "latency_ms": 84
-      },
-      {
-        "at": "2026-11-15T06:15:29.583Z",
-        "status": "restricted",
-        "latency_ms": 299
-      },
-      {
-        "at": "2026-11-15T18:12:13.042Z",
-        "status": "restricted",
-        "latency_ms": 112
-      },
-      {
-        "at": "2026-11-17T18:12:10.763Z",
-        "status": "restricted",
-        "latency_ms": 237
-      },
-      {
-        "at": "2026-11-18T06:15:42.199Z",
-        "status": "restricted",
-        "latency_ms": 116
-      },
-      {
-        "at": "2026-11-18T18:12:09.084Z",
-        "status": "restricted",
-        "latency_ms": 81
-      },
-      {
-        "at": "2026-11-19T06:15:50.306Z",
-        "status": "restricted",
-        "latency_ms": 130
-      }
-    ],
     "requesty/google/gemma-4-31b-it": [
       {
         "at": "2026-10-21T06:10:56.713Z",
@@ -37874,6 +37632,11 @@
         "at": "2026-11-20T06:10:24.941Z",
         "status": "responded",
         "latency_ms": 1832
+      },
+      {
+        "at": "2026-11-20T18:10:39.491Z",
+        "status": "responded",
+        "latency_ms": 1668
       }
     ],
     "requesty/mistral/leanstral-1-5": [
@@ -38176,6 +37939,11 @@
         "at": "2026-11-20T06:10:42.342Z",
         "status": "error",
         "latency_ms": 467
+      },
+      {
+        "at": "2026-11-20T18:10:43.160Z",
+        "status": "error",
+        "latency_ms": 337
       }
     ],
     "requesty/novita/ling-3.1-flash": [
@@ -38473,6 +38241,11 @@
         "at": "2026-11-20T06:10:44.810Z",
         "status": "responded",
         "latency_ms": 1169
+      },
+      {
+        "at": "2026-11-20T18:10:45.497Z",
+        "status": "responded",
+        "latency_ms": 1339
       }
     ],
     "requesty/nvidia/muse-glimmer-30b": [
@@ -38775,6 +38548,11 @@
         "at": "2026-11-20T06:10:59.537Z",
         "status": "responded",
         "latency_ms": 3452
+      },
+      {
+        "at": "2026-11-20T18:10:48.836Z",
+        "status": "responded",
+        "latency_ms": 3428
       }
     ],
     "requesty/nvidia/nemotron-3-nano-30b-a3b": [
@@ -39057,6 +38835,11 @@
         "at": "2026-11-20T06:12:31.965Z",
         "status": "gone",
         "latency_ms": 132
+      },
+      {
+        "at": "2026-11-20T18:10:54.265Z",
+        "status": "gone",
+        "latency_ms": 260
       }
     ],
     "requesty/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning": [
@@ -39354,6 +39137,11 @@
         "at": "2026-11-20T06:12:34.097Z",
         "status": "responded",
         "latency_ms": 399
+      },
+      {
+        "at": "2026-11-20T18:10:56.526Z",
+        "status": "responded",
+        "latency_ms": 8749
       }
     ],
     "requesty/nvidia/nemotron-3-ultra-550b-a55b": [
@@ -39626,6 +39414,11 @@
         "at": "2026-11-20T06:12:49.177Z",
         "status": "responded",
         "latency_ms": 1000
+      },
+      {
+        "at": "2026-11-20T18:11:07.275Z",
+        "status": "responded",
+        "latency_ms": 1519
       }
     ],
     "requesty/nvidia/nemotron-3.5-lightning-30b-a3b": [
@@ -39908,6 +39701,11 @@
         "at": "2026-11-20T06:13:05.450Z",
         "status": "responded",
         "latency_ms": 288
+      },
+      {
+        "at": "2026-11-20T18:11:10.794Z",
+        "status": "responded",
+        "latency_ms": 321
       }
     ],
     "speechify/simba-3.0": [
@@ -40676,6 +40474,11 @@
         "at": "2026-11-20T06:10:24.937Z",
         "status": "responded",
         "latency_ms": 1571
+      },
+      {
+        "at": "2026-11-20T18:10:39.488Z",
+        "status": "responded",
+        "latency_ms": 1296
       }
     ],
     "zai/glm-4.6v-flash": [
@@ -40793,6 +40596,11 @@
         "at": "2026-11-18T06:12:15.921Z",
         "status": "responded",
         "latency_ms": 566
+      },
+      {
+        "at": "2026-11-20T18:10:42.784Z",
+        "status": "responded",
+        "latency_ms": 570
       }
     ],
     "zai/glm-4.7-flash": [
@@ -40915,6 +40723,11 @@
         "at": "2026-11-20T06:11:03.772Z",
         "status": "slow",
         "latency_ms": 30000
+      },
+      {
+        "at": "2026-11-20T18:10:45.354Z",
+        "status": "responded",
+        "latency_ms": 945
       }
     ]
   },
@@ -45047,153 +44860,6 @@
         "latency_ms": 1691
       }
     ],
-    "kilo/cohere/north-mini-code:free": [
-      {
-        "at": "2026-10-21T06:11:17.755Z",
-        "status": "pass",
-        "latency_ms": 982
-      },
-      {
-        "at": "2026-10-22T06:11:43.499Z",
-        "status": "pass",
-        "latency_ms": 2303
-      },
-      {
-        "at": "2026-10-23T06:11:39.461Z",
-        "status": "pass",
-        "latency_ms": 1366
-      },
-      {
-        "at": "2026-10-24T06:11:40.276Z",
-        "status": "pass",
-        "latency_ms": 878
-      },
-      {
-        "at": "2026-10-25T06:11:33.589Z",
-        "status": "pass",
-        "latency_ms": 1231
-      },
-      {
-        "at": "2026-10-26T06:11:04.693Z",
-        "status": "pass",
-        "latency_ms": 811
-      },
-      {
-        "at": "2026-10-27T06:11:02.863Z",
-        "status": "pass",
-        "latency_ms": 1161
-      },
-      {
-        "at": "2026-10-28T06:11:05.619Z",
-        "status": "pass",
-        "latency_ms": 1005
-      },
-      {
-        "at": "2026-10-29T06:11:37.715Z",
-        "status": "pass",
-        "latency_ms": 1420
-      },
-      {
-        "at": "2026-10-30T06:11:35.321Z",
-        "status": "pass",
-        "latency_ms": 589
-      },
-      {
-        "at": "2026-10-31T06:11:38.878Z",
-        "status": "pass",
-        "latency_ms": 664
-      },
-      {
-        "at": "2026-11-01T06:11:38.000Z",
-        "status": "pass",
-        "latency_ms": 2849
-      },
-      {
-        "at": "2026-11-02T06:11:37.693Z",
-        "status": "pass",
-        "latency_ms": 710
-      },
-      {
-        "at": "2026-11-03T06:11:32.335Z",
-        "status": "pass",
-        "latency_ms": 1711
-      },
-      {
-        "at": "2026-11-04T06:10:37.832Z",
-        "status": "pass",
-        "latency_ms": 1018
-      },
-      {
-        "at": "2026-11-05T06:11:00.158Z",
-        "status": "pass",
-        "latency_ms": 865
-      },
-      {
-        "at": "2026-11-06T06:10:54.278Z",
-        "status": "pass",
-        "latency_ms": 728
-      },
-      {
-        "at": "2026-11-07T06:10:57.512Z",
-        "status": "pass",
-        "latency_ms": 805
-      },
-      {
-        "at": "2026-11-08T06:11:32.942Z",
-        "status": "pass",
-        "latency_ms": 866
-      },
-      {
-        "at": "2026-11-09T06:11:33.569Z",
-        "status": "pass",
-        "latency_ms": 846
-      },
-      {
-        "at": "2026-11-10T06:11:36.655Z",
-        "status": "pass",
-        "latency_ms": 725
-      },
-      {
-        "at": "2026-11-11T06:10:59.114Z",
-        "status": "pass",
-        "latency_ms": 647
-      },
-      {
-        "at": "2026-11-12T06:11:54.457Z",
-        "status": "pass",
-        "latency_ms": 669
-      },
-      {
-        "at": "2026-11-13T06:14:45.274Z",
-        "status": "pass",
-        "latency_ms": 742
-      },
-      {
-        "at": "2026-11-15T06:12:51.514Z",
-        "status": "pass",
-        "latency_ms": 650
-      },
-      {
-        "at": "2026-11-16T06:12:58.925Z",
-        "status": "pass",
-        "latency_ms": 557
-      },
-      {
-        "at": "2026-11-17T06:12:55.681Z",
-        "status": "pass",
-        "latency_ms": 736
-      },
-      {
-        "at": "2026-11-18T06:12:52.709Z",
-        "status": "pass",
-        "latency_ms": 662
-      },
-      {
-        "at": "2026-11-19T06:12:41.809Z",
-        "status": "pass",
-        "latency_ms": 1263
-      }
-    ],
     "kilo/dots-studio/dots-3-note-preview:free": [
       {
         "at": "2026-10-21T06:13:01.452Z",
@@ -46244,25 +45910,6 @@
         "at": "2026-11-20T06:26:43.840Z",
         "status": "pass",
         "latency_ms": 1405
-      }
-    ],
-    "llm7/gemma4:31b": [
-      {
-        "at": "2026-11-19T06:11:21.726Z",
-        "status": "pass",
-        "latency_ms": 686
-      }
-    ],
-    "llm7/glm-5.3-flash": [
-      {
-        "at": "2026-11-15T06:12:06.789Z",
-        "status": "pass",
-        "latency_ms": 4837
-      },
-      {
-        "at": "2026-11-16T06:12:41.055Z",
-        "status": "pass",
-        "latency_ms": 8929
       }
     ],
     "llm7/gpt-oss:20b": [
@@ -49137,158 +48784,6 @@
         "at": "2026-11-20T06:10:31.169Z",
         "status": "pass",
         "latency_ms": 1385
-      }
-    ],
-    "openrouter/cohere/north-mini-code:free": [
-      {
-        "at": "2026-10-21T06:11:00.599Z",
-        "status": "pass",
-        "latency_ms": 4242
-      },
-      {
-        "at": "2026-10-22T06:11:26.236Z",
-        "status": "pass",
-        "latency_ms": 857
-      },
-      {
-        "at": "2026-10-23T06:11:22.268Z",
-        "status": "pass",
-        "latency_ms": 634
-      },
-      {
-        "at": "2026-10-24T06:11:21.911Z",
-        "status": "pass",
-        "latency_ms": 3492
-      },
-      {
-        "at": "2026-10-25T06:11:16.321Z",
-        "status": "pass",
-        "latency_ms": 563
-      },
-      {
-        "at": "2026-10-26T06:10:47.522Z",
-        "status": "pass",
-        "latency_ms": 951
-      },
-      {
-        "at": "2026-10-27T06:10:45.175Z",
-        "status": "pass",
-        "latency_ms": 934
-      },
-      {
-        "at": "2026-10-28T06:10:48.276Z",
-        "status": "pass",
-        "latency_ms": 1234
-      },
-      {
-        "at": "2026-10-29T06:11:20.814Z",
-        "status": "pass",
-        "latency_ms": 770
-      },
-      {
-        "at": "2026-10-30T06:11:17.726Z",
-        "status": "pass",
-        "latency_ms": 946
-      },
-      {
-        "at": "2026-10-31T06:11:21.624Z",
-        "status": "pass",
-        "latency_ms": 452
-      },
-      {
-        "at": "2026-11-01T06:11:20.501Z",
-        "status": "pass",
-        "latency_ms": 700
-      },
-      {
-        "at": "2026-11-02T06:11:20.482Z",
-        "status": "pass",
-        "latency_ms": 583
-      },
-      {
-        "at": "2026-11-03T06:11:15.112Z",
-        "status": "pass",
-        "latency_ms": 636
-      },
-      {
-        "at": "2026-11-04T06:10:20.504Z",
-        "status": "pass",
-        "latency_ms": 1227
-      },
-      {
-        "at": "2026-11-05T06:10:43.139Z",
-        "status": "pass",
-        "latency_ms": 956
-      },
-      {
-        "at": "2026-11-06T06:10:39.574Z",
-        "status": "pass",
-        "latency_ms": 614
-      },
-      {
-        "at": "2026-11-07T06:10:40.605Z",
-        "status": "pass",
-        "latency_ms": 568
-      },
-      {
-        "at": "2026-11-08T06:11:15.927Z",
-        "status": "pass",
-        "latency_ms": 614
-      },
-      {
-        "at": "2026-11-09T06:11:16.695Z",
-        "status": "pass",
-        "latency_ms": 601
-      },
-      {
-        "at": "2026-11-10T06:11:19.575Z",
-        "status": "pass",
-        "latency_ms": 516
-      },
-      {
-        "at": "2026-11-11T06:10:41.104Z",
-        "status": "pass",
-        "latency_ms": 464
-      },
-      {
-        "at": "2026-11-12T06:11:04.453Z",
-        "status": "pass",
-        "latency_ms": 668
-      },
-      {
-        "at": "2026-11-13T06:11:55.331Z",
-        "status": "pass",
-        "latency_ms": 515
-      },
-      {
-        "at": "2026-11-14T06:11:31.880Z",
-        "status": "pass",
-        "latency_ms": 832
-      },
-      {
-        "at": "2026-11-15T06:11:27.991Z",
-        "status": "pass",
-        "latency_ms": 653
-      },
-      {
-        "at": "2026-11-16T06:11:35.132Z",
-        "status": "pass",
-        "latency_ms": 1182
-      },
-      {
-        "at": "2026-11-17T06:11:33.120Z",
-        "status": "pass",
-        "latency_ms": 432
-      },
-      {
-        "at": "2026-11-18T06:11:29.530Z",
-        "status": "pass",
-        "latency_ms": 685
-      },
-      {
-        "at": "2026-11-19T06:11:14.734Z",
-        "status": "pass",
-        "latency_ms": 623
       }
     ],
     "openrouter/dots-studio/dots-3-note-preview:free": [
@@ -54242,153 +53737,6 @@
         "latency_ms": 1807
       }
     ],
-    "kilo/cohere/north-mini-code:free": [
-      {
-        "at": "2026-10-21T06:11:17.755Z",
-        "status": "pass",
-        "latency_ms": 1468
-      },
-      {
-        "at": "2026-10-22T06:11:43.499Z",
-        "status": "pass",
-        "latency_ms": 7665
-      },
-      {
-        "at": "2026-10-23T06:11:39.461Z",
-        "status": "pass",
-        "latency_ms": 1098
-      },
-      {
-        "at": "2026-10-24T06:11:40.276Z",
-        "status": "pass",
-        "latency_ms": 1060
-      },
-      {
-        "at": "2026-10-25T06:11:33.589Z",
-        "status": "pass",
-        "latency_ms": 1021
-      },
-      {
-        "at": "2026-10-26T06:11:04.693Z",
-        "status": "pass",
-        "latency_ms": 1158
-      },
-      {
-        "at": "2026-10-27T06:11:02.863Z",
-        "status": "pass",
-        "latency_ms": 1076
-      },
-      {
-        "at": "2026-10-28T06:11:05.619Z",
-        "status": "pass",
-        "latency_ms": 900
-      },
-      {
-        "at": "2026-10-29T06:11:37.715Z",
-        "status": "pass",
-        "latency_ms": 843
-      },
-      {
-        "at": "2026-10-30T06:11:35.321Z",
-        "status": "pass",
-        "latency_ms": 788
-      },
-      {
-        "at": "2026-10-31T06:11:38.878Z",
-        "status": "pass",
-        "latency_ms": 764
-      },
-      {
-        "at": "2026-11-01T06:11:38.000Z",
-        "status": "pass",
-        "latency_ms": 771
-      },
-      {
-        "at": "2026-11-02T06:11:37.693Z",
-        "status": "pass",
-        "latency_ms": 824
-      },
-      {
-        "at": "2026-11-03T06:11:32.335Z",
-        "status": "pass",
-        "latency_ms": 1185
-      },
-      {
-        "at": "2026-11-04T06:10:37.832Z",
-        "status": "pass",
-        "latency_ms": 1189
-      },
-      {
-        "at": "2026-11-05T06:11:00.158Z",
-        "status": "pass",
-        "latency_ms": 1178
-      },
-      {
-        "at": "2026-11-06T06:10:54.278Z",
-        "status": "pass",
-        "latency_ms": 826
-      },
-      {
-        "at": "2026-11-07T06:10:57.512Z",
-        "status": "pass",
-        "latency_ms": 665
-      },
-      {
-        "at": "2026-11-08T06:11:32.942Z",
-        "status": "pass",
-        "latency_ms": 743
-      },
-      {
-        "at": "2026-11-09T06:11:33.569Z",
-        "status": "pass",
-        "latency_ms": 2335
-      },
-      {
-        "at": "2026-11-10T06:11:36.655Z",
-        "status": "pass",
-        "latency_ms": 1125
-      },
-      {
-        "at": "2026-11-11T06:10:59.114Z",
-        "status": "pass",
-        "latency_ms": 614
-      },
-      {
-        "at": "2026-11-12T06:11:54.457Z",
-        "status": "pass",
-        "latency_ms": 846
-      },
-      {
-        "at": "2026-11-13T06:14:45.274Z",
-        "status": "pass",
-        "latency_ms": 651
-      },
-      {
-        "at": "2026-11-15T06:12:51.514Z",
-        "status": "pass",
-        "latency_ms": 820
-      },
-      {
-        "at": "2026-11-16T06:12:58.925Z",
-        "status": "pass",
-        "latency_ms": 816
-      },
-      {
-        "at": "2026-11-17T06:12:55.681Z",
-        "status": "pass",
-        "latency_ms": 1093
-      },
-      {
-        "at": "2026-11-18T06:12:52.709Z",
-        "status": "pass",
-        "latency_ms": 591
-      },
-      {
-        "at": "2026-11-19T06:12:41.809Z",
-        "status": "pass",
-        "latency_ms": 792
-      }
-    ],
     "kilo/dots-studio/dots-3-note-preview:free": [
       {
         "at": "2026-10-21T06:13:01.452Z",
@@ -55439,25 +54787,6 @@
         "at": "2026-11-20T06:26:43.840Z",
         "status": "pass",
         "latency_ms": 1367
-      }
-    ],
-    "llm7/gemma4:31b": [
-      {
-        "at": "2026-11-19T06:11:21.726Z",
-        "status": "fail",
-        "latency_ms": 712
-      }
-    ],
-    "llm7/glm-5.3-flash": [
-      {
-        "at": "2026-11-15T06:12:06.789Z",
-        "status": "fail",
-        "latency_ms": 5459
-      },
-      {
-        "at": "2026-11-16T06:12:41.055Z",
-        "status": "fail",
-        "latency_ms": 8522
       }
     ],
     "llm7/gpt-oss:20b": [
@@ -58072,158 +57401,6 @@
         "at": "2026-11-20T06:10:31.169Z",
         "status": "pass",
         "latency_ms": 1976
-      }
-    ],
-    "openrouter/cohere/north-mini-code:free": [
-      {
-        "at": "2026-10-21T06:11:00.599Z",
-        "status": "pass",
-        "latency_ms": 801
-      },
-      {
-        "at": "2026-10-22T06:11:26.236Z",
-        "status": "pass",
-        "latency_ms": 1314
-      },
-      {
-        "at": "2026-10-23T06:11:22.268Z",
-        "status": "pass",
-        "latency_ms": 825
-      },
-      {
-        "at": "2026-10-24T06:11:21.911Z",
-        "status": "pass",
-        "latency_ms": 785
-      },
-      {
-        "at": "2026-10-25T06:11:16.321Z",
-        "status": "pass",
-        "latency_ms": 796
-      },
-      {
-        "at": "2026-10-26T06:10:47.522Z",
-        "status": "pass",
-        "latency_ms": 1363
-      },
-      {
-        "at": "2026-10-27T06:10:45.175Z",
-        "status": "pass",
-        "latency_ms": 849
-      },
-      {
-        "at": "2026-10-28T06:10:48.276Z",
-        "status": "pass",
-        "latency_ms": 1264
-      },
-      {
-        "at": "2026-10-29T06:11:20.814Z",
-        "status": "pass",
-        "latency_ms": 1728
-      },
-      {
-        "at": "2026-10-30T06:11:17.726Z",
-        "status": "pass",
-        "latency_ms": 753
-      },
-      {
-        "at": "2026-10-31T06:11:21.624Z",
-        "status": "pass",
-        "latency_ms": 512
-      },
-      {
-        "at": "2026-11-01T06:11:20.501Z",
-        "status": "pass",
-        "latency_ms": 587
-      },
-      {
-        "at": "2026-11-02T06:11:20.482Z",
-        "status": "pass",
-        "latency_ms": 633
-      },
-      {
-        "at": "2026-11-03T06:11:15.112Z",
-        "status": "pass",
-        "latency_ms": 1240
-      },
-      {
-        "at": "2026-11-04T06:10:20.504Z",
-        "status": "pass",
-        "latency_ms": 3491
-      },
-      {
-        "at": "2026-11-05T06:10:43.139Z",
-        "status": "pass",
-        "latency_ms": 904
-      },
-      {
-        "at": "2026-11-06T06:10:39.574Z",
-        "status": "pass",
-        "latency_ms": 671
-      },
-      {
-        "at": "2026-11-07T06:10:40.605Z",
-        "status": "pass",
-        "latency_ms": 772
-      },
-      {
-        "at": "2026-11-08T06:11:15.927Z",
-        "status": "pass",
-        "latency_ms": 1193
-      },
-      {
-        "at": "2026-11-09T06:11:16.695Z",
-        "status": "pass",
-        "latency_ms": 550
-      },
-      {
-        "at": "2026-11-10T06:11:19.575Z",
-        "status": "pass",
-        "latency_ms": 846
-      },
-      {
-        "at": "2026-11-11T06:10:41.104Z",
-        "status": "pass",
-        "latency_ms": 368
-      },
-      {
-        "at": "2026-11-12T06:11:04.453Z",
-        "status": "pass",
-        "latency_ms": 541
-      },
-      {
-        "at": "2026-11-13T06:11:55.331Z",
-        "status": "pass",
-        "latency_ms": 384
-      },
-      {
-        "at": "2026-11-14T06:11:31.880Z",
-        "status": "pass",
-        "latency_ms": 471
-      },
-      {
-        "at": "2026-11-15T06:11:27.991Z",
-        "status": "pass",
-        "latency_ms": 2458
-      },
-      {
-        "at": "2026-11-16T06:11:35.132Z",
-        "status": "pass",
-        "latency_ms": 971
-      },
-      {
-        "at": "2026-11-17T06:11:33.120Z",
-        "status": "pass",
-        "latency_ms": 394
-      },
-      {
-        "at": "2026-11-18T06:11:29.530Z",
-        "status": "pass",
-        "latency_ms": 718
-      },
-      {
-        "at": "2026-11-19T06:11:14.734Z",
-        "status": "pass",
-        "latency_ms": 772
       }
     ],
     "openrouter/dots-studio/dots-3-note-preview:free": [
@@ -65261,188 +64438,6 @@
         "mode": "json_schema"
       }
     ],
-    "kilo/cohere/north-mini-code:free": [
-      {
-        "at": "2026-10-21T06:12:00.204Z",
-        "status": "pass",
-        "latency_ms": 20180,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-10-22T06:12:33.467Z",
-        "status": "pass",
-        "latency_ms": 8916,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-10-23T06:12:21.926Z",
-        "status": "pass",
-        "latency_ms": 7423,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-10-24T06:12:22.214Z",
-        "status": "pass",
-        "latency_ms": 11934,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-10-25T06:12:15.841Z",
-        "status": "pass",
-        "latency_ms": 6086,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-10-26T06:11:46.661Z",
-        "status": "pass",
-        "latency_ms": 4060,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-10-27T06:11:45.100Z",
-        "status": "pass",
-        "latency_ms": 4023,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-10-28T06:11:47.522Z",
-        "status": "pass",
-        "latency_ms": 5428,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-10-29T06:12:19.978Z",
-        "status": "pass",
-        "latency_ms": 2965,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-10-30T06:12:16.697Z",
-        "status": "pass",
-        "latency_ms": 3045,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-10-31T06:12:20.306Z",
-        "status": "pass",
-        "latency_ms": 1438,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-11-01T06:12:21.620Z",
-        "status": "pass",
-        "latency_ms": 3718,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-11-02T06:12:19.227Z",
-        "status": "pass",
-        "latency_ms": 7382,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-11-03T06:12:15.232Z",
-        "status": "pass",
-        "latency_ms": 7171,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-11-04T06:11:20.039Z",
-        "status": "pass",
-        "latency_ms": 2828,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-11-05T06:11:42.200Z",
-        "status": "pass",
-        "latency_ms": 4920,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-11-06T06:11:35.832Z",
-        "status": "pass",
-        "latency_ms": 4104,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-11-07T06:11:38.983Z",
-        "status": "pass",
-        "latency_ms": 1677,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-11-08T06:12:14.550Z",
-        "status": "pass",
-        "latency_ms": 3234,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-11-09T06:12:16.750Z",
-        "status": "pass",
-        "latency_ms": 1636,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-11-10T06:12:18.505Z",
-        "status": "pass",
-        "latency_ms": 1199,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-11-11T06:11:40.375Z",
-        "status": "pass",
-        "latency_ms": 1725,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-11-12T06:12:35.972Z",
-        "status": "pass",
-        "latency_ms": 2773,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-11-13T06:15:26.668Z",
-        "status": "pass",
-        "latency_ms": 4900,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-11-14T06:13:14.111Z",
-        "status": "pass",
-        "latency_ms": 4322,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-11-15T06:13:32.984Z",
-        "status": "pass",
-        "latency_ms": 2880,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-11-16T06:13:40.299Z",
-        "status": "pass",
-        "latency_ms": 3492,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-11-17T06:13:37.510Z",
-        "status": "pass",
-        "latency_ms": 1582,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-11-18T06:13:33.963Z",
-        "status": "pass",
-        "latency_ms": 2592,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-11-19T06:13:23.864Z",
-        "status": "pass",
-        "latency_ms": 5475,
-        "mode": "json_schema"
-      }
-    ],
     "kilo/dots-studio/dots-3-note-preview:free": [
       {
         "at": "2026-10-21T06:13:45.262Z",
@@ -66685,18 +65680,6 @@
         "status": "pass",
         "latency_ms": 4649,
         "mode": "json_schema"
-      }
-    ],
-    "llm7/glm-5.3-flash": [
-      {
-        "at": "2026-11-15T06:12:31.086Z",
-        "status": "fail",
-        "latency_ms": 206
-      },
-      {
-        "at": "2026-11-16T06:13:12.505Z",
-        "status": "fail",
-        "latency_ms": 241
       }
     ],
     "llm7/gpt-oss:20b": [
@@ -69817,188 +68800,6 @@
         "at": "2026-11-20T06:10:41.529Z",
         "status": "pass",
         "latency_ms": 2267,
-        "mode": "json_schema"
-      }
-    ],
-    "openrouter/cohere/north-mini-code:free": [
-      {
-        "at": "2026-10-21T06:11:12.642Z",
-        "status": "pass",
-        "latency_ms": 18920,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-10-22T06:11:35.407Z",
-        "status": "pass",
-        "latency_ms": 14121,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-10-23T06:11:30.726Z",
-        "status": "pass",
-        "latency_ms": 5623,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-10-24T06:11:33.189Z",
-        "status": "pass",
-        "latency_ms": 5163,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-10-25T06:11:24.682Z",
-        "status": "pass",
-        "latency_ms": 3612,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-10-26T06:10:56.836Z",
-        "status": "pass",
-        "latency_ms": 6472,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-10-27T06:10:53.959Z",
-        "status": "pass",
-        "latency_ms": 2524,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-10-28T06:10:57.774Z",
-        "status": "pass",
-        "latency_ms": 7601,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-10-29T06:11:30.313Z",
-        "status": "pass",
-        "latency_ms": 3205,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-10-30T06:11:26.424Z",
-        "status": "pass",
-        "latency_ms": 2260,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-10-31T06:11:29.588Z",
-        "status": "pass",
-        "latency_ms": 1373,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-11-01T06:11:28.787Z",
-        "status": "pass",
-        "latency_ms": 2854,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-11-02T06:11:28.698Z",
-        "status": "pass",
-        "latency_ms": 3562,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-11-03T06:11:23.988Z",
-        "status": "pass",
-        "latency_ms": 2630,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-11-04T06:10:32.222Z",
-        "status": "pass",
-        "latency_ms": 5919,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-11-05T06:10:51.999Z",
-        "status": "pass",
-        "latency_ms": 3064,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-11-06T06:10:47.859Z",
-        "status": "pass",
-        "latency_ms": 5845,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-11-07T06:10:48.946Z",
-        "status": "pass",
-        "latency_ms": 1805,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-11-08T06:11:24.734Z",
-        "status": "pass",
-        "latency_ms": 3168,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-11-09T06:11:24.846Z",
-        "status": "pass",
-        "latency_ms": 4763,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-11-10T06:11:27.936Z",
-        "status": "pass",
-        "latency_ms": 2029,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-11-11T06:10:48.937Z",
-        "status": "pass",
-        "latency_ms": 6283,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-11-12T06:11:12.662Z",
-        "status": "pass",
-        "latency_ms": 2532,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-11-13T06:12:03.232Z",
-        "status": "pass",
-        "latency_ms": 1542,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-11-14T06:11:40.183Z",
-        "status": "pass",
-        "latency_ms": 1475,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-11-15T06:11:38.102Z",
-        "status": "pass",
-        "latency_ms": 2110,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-11-16T06:11:44.286Z",
-        "status": "pass",
-        "latency_ms": 2604,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-11-17T06:11:40.945Z",
-        "status": "pass",
-        "latency_ms": 3147,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-11-18T06:11:37.933Z",
-        "status": "pass",
-        "latency_ms": 1499,
-        "mode": "json_schema"
-      },
-      {
-        "at": "2026-11-19T06:11:23.129Z",
-        "status": "pass",
-        "latency_ms": 1906,
         "mode": "json_schema"
       }
     ],
