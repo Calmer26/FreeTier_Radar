@@ -252,12 +252,12 @@
     "data_logging": "unknown",
     "paid_version_pricing": [
       {
-        "usd": 0.0765,
+        "usd": 0.09,
         "unit": "M input tokens",
         "neurons": null
       },
       {
-        "usd": 0.255,
+        "usd": 0.3,
         "unit": "M output tokens",
         "neurons": null
       }
@@ -809,7 +809,7 @@
     "tool_calling": true,
     "paid_version_pricing": [
       {
-        "usd": 0.06,
+        "usd": 0.07,
         "unit": "M input tokens",
         "neurons": null
       },
@@ -1049,11 +1049,11 @@
     "id": "openrouter/thinkingmachines/inkling-2-small:free",
     "slug": "thinkingmachines-inkling-2-small-free",
     "category": "ai-model",
-    "status": "pending_removal",
+    "status": "removed",
     "first_seen": "2026-11-10T03:21:14.090Z",
     "last_seen": "2026-11-19T03:20:58.697Z",
-    "missing_since": "2026-11-19T15:20:24.711Z",
-    "removed_at": null,
+    "missing_since": null,
+    "removed_at": "2026-11-20T09:20:34.958Z",
     "fingerprint": "36d66c52aef7c053"
   },
   {

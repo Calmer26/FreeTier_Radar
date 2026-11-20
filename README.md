@@ -11,11 +11,11 @@ change history and ready-to-paste Cline settings.
 ## The list
 
 <!-- LIST:START -->
-_184 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
+_179 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
 
 🟢 responded to the latest daily test · 🟡 rate-limited or slow · 🔴 failed · 🤖 agent-ready (tool calling, ≥64k context, answered every test on 5 of the last 7 days)
 
-### Chat (148)
+### Chat (143)
 
 #### OpenRouter
 
@@ -34,7 +34,6 @@ _184 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [NVIDIA: Nemotron 3.5 Super VL (free)](https://freetier-radar.marcelkanters.workers.dev/models/openrouter/nvidia-nemotron-3-5-super-vl-free/) | `nvidia/nemotron-3.5-super-vl:free` | 1M | yes | 🟢 | 🤖 |
 | [Particle AI: Particle-1 (free)](https://freetier-radar.marcelkanters.workers.dev/models/openrouter/particle-ai-particle-1-free/) | `particle-ai/particle-1:free` | 1M | yes | 🟢 | 🤖 |
 | [Recursive: Flint (free)](https://freetier-radar.marcelkanters.workers.dev/models/openrouter/recursive-flint-v1-0-free/) | `recursive/flint-v1.0:free` | 262k | yes | 🟢 | 🤖 |
-| [Thinking Machines: Inkling 2 Small (free)](https://freetier-radar.marcelkanters.workers.dev/models/openrouter/thinkingmachines-inkling-2-small-free/) | `thinkingmachines/inkling-2-small:free` | 1M | yes | 🟡 |  |
 
 #### Groq
 
@@ -106,10 +105,7 @@ _184 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | Model | ID | Context | Tools | Last test | Agent |
 |---|---|---|---|---|---|
 | [gemma-3-27b](https://freetier-radar.marcelkanters.workers.dev/models/llm7/gemma-3-27b/) | `gemma-3-27b` | 262k | no | 🟢 |  |
-| [gemma4:31b](https://freetier-radar.marcelkanters.workers.dev/models/llm7/gemma4-31b/) | `gemma4:31b` | 262k | yes | 🟢 |  |
-| [glm-5.3-flash](https://freetier-radar.marcelkanters.workers.dev/models/llm7/glm-5-3-flash-2/) | `glm-5.3-flash` | 1M | yes | 🟢 |  |
 | [gpt-oss:20b](https://freetier-radar.marcelkanters.workers.dev/models/llm7/gpt-oss-20b/) | `gpt-oss:20b` | 128k | yes | 🟢 |  |
-| [mimo-v2.6-flash](https://freetier-radar.marcelkanters.workers.dev/models/llm7/mimo-v2-6-flash/) | `mimo-v2.6-flash` | 1M | yes | 🟢 |  |
 | [mistral-Nemo-Instruct-2407](https://freetier-radar.marcelkanters.workers.dev/models/llm7/mistral-nemo-instruct-2407/) | `mistral-Nemo-Instruct-2407` | 128k | no | 🟢 |  |
 
 #### Z.ai (Zhipu)
@@ -220,7 +216,6 @@ _184 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [flint-40b-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/flint-40b-free/) | `flint-40b-free` | unknown | ? | – |  |
 | [hy4-flash-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/hy4-flash-free/) | `hy4-flash-free` | unknown | ? | – |  |
 | [iceman-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/iceman-free/) | `iceman-free` | unknown | ? | – |  |
-| [inkling-2-small-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/inkling-2-small-free/) | `inkling-2-small-free` | unknown | ? | – |  |
 | [longcat-2.5-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/longcat-2-5-free/) | `longcat-2.5-free` | unknown | ? | – |  |
 | [mimo-v2.6-flash-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/mimo-v2-6-flash-free/) | `mimo-v2.6-flash-free` | unknown | ? | – |  |
 | [nemotron-3.5-lightning-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/nemotron-3-5-lightning-free/) | `nemotron-3.5-lightning-free` | unknown | ? | – |  |
