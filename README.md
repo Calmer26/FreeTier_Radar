@@ -11,11 +11,11 @@ change history and ready-to-paste Cline settings.
 ## The list
 
 <!-- LIST:START -->
-_177 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
+_176 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
 
 🟢 responded to the latest daily test · 🟡 rate-limited or slow · 🔴 failed · 🤖 agent-ready (tool calling, ≥64k context, answered every test on 5 of the last 7 days)
 
-### Chat (141)
+### Chat (140)
 
 #### OpenRouter
 
@@ -226,7 +226,6 @@ _177 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 |---|---|---|---|---|---|
 | [Nemotron 3.5 Lightning](https://freetier-radar.marcelkanters.workers.dev/models/cline/nvidia-nemotron-3-5-lightning-free/) | `nvidia/nemotron-3.5-lightning-free` | unknown | ? | – |  |
 | [nemotron-3.5-super-vl](https://freetier-radar.marcelkanters.workers.dev/models/cline/cline-free-nemotron-3-5-super-vl/) | `cline-free/nemotron-3.5-super-vl` | unknown | ? | – |  |
-| [Solar Mini 4](https://freetier-radar.marcelkanters.workers.dev/models/cline/cline-free-solar-mini4/) | `cline-free/solar-mini4` | unknown | ? | – |  |
 
 ### Text-to-speech (20)
 
