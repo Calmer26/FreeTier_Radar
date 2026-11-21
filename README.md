@@ -52,14 +52,14 @@ _165 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [Gemini 3 Flash Preview](https://freetier-radar.marcelkanters.workers.dev/models/google-ai-studio/gemini-3-flash-preview/) | `gemini-3-flash-preview` | 1M | ? | 🟢 | 🤖 |
 | [Gemini 3.1 Flash Lite](https://freetier-radar.marcelkanters.workers.dev/models/google-ai-studio/gemini-3-1-flash-lite/) | `gemini-3.1-flash-lite` | 1M | ? | 🟢 | 🤖 |
 | [Gemini 3.1 Flash Lite Preview](https://freetier-radar.marcelkanters.workers.dev/models/google-ai-studio/gemini-3-1-flash-lite-preview/) | `gemini-3.1-flash-lite-preview` | 1M | ? | 🟢 | 🤖 |
-| [Gemini 3.5 Flash](https://freetier-radar.marcelkanters.workers.dev/models/google-ai-studio/gemini-3-5-flash/) | `gemini-3.5-flash` | 1M | ? | 🟢 |  |
+| [Gemini 3.5 Flash](https://freetier-radar.marcelkanters.workers.dev/models/google-ai-studio/gemini-3-5-flash/) | `gemini-3.5-flash` | 1M | ? | 🟡 |  |
 | [Gemini 3.5 Flash Lite](https://freetier-radar.marcelkanters.workers.dev/models/google-ai-studio/gemini-3-5-flash-lite/) | `gemini-3.5-flash-lite` | 1M | ? | 🟢 | 🤖 |
-| [Gemini 3.6 Flash](https://freetier-radar.marcelkanters.workers.dev/models/google-ai-studio/gemini-3-6-flash/) | `gemini-3.6-flash` | 1M | ? | 🟢 |  |
-| [Gemini 3.7 Flash](https://freetier-radar.marcelkanters.workers.dev/models/google-ai-studio/gemini-3-7-flash/) | `gemini-3.7-flash` | 1M | ? | 🔴 |  |
-| [Gemini 3.8 Flash](https://freetier-radar.marcelkanters.workers.dev/models/google-ai-studio/gemini-3-8-flash/) | `gemini-3.8-flash` | 1M | ? | 🔴 |  |
-| [Gemini 4 Hydrogen](https://freetier-radar.marcelkanters.workers.dev/models/google-ai-studio/gemini-4-hydrogen/) | `gemini-4-hydrogen` | 1M | ? | 🟡 |  |
+| [Gemini 3.6 Flash](https://freetier-radar.marcelkanters.workers.dev/models/google-ai-studio/gemini-3-6-flash/) | `gemini-3.6-flash` | 1M | ? | 🟡 |  |
+| [Gemini 3.7 Flash](https://freetier-radar.marcelkanters.workers.dev/models/google-ai-studio/gemini-3-7-flash/) | `gemini-3.7-flash` | 1M | ? | 🟡 |  |
+| [Gemini 3.8 Flash](https://freetier-radar.marcelkanters.workers.dev/models/google-ai-studio/gemini-3-8-flash/) | `gemini-3.8-flash` | 1M | ? | 🟡 |  |
+| [Gemini 4 Hydrogen](https://freetier-radar.marcelkanters.workers.dev/models/google-ai-studio/gemini-4-hydrogen/) | `gemini-4-hydrogen` | 1M | ? | 🟢 |  |
 | [Gemma 4 26B A4B IT](https://freetier-radar.marcelkanters.workers.dev/models/google-ai-studio/gemma-4-26b-a4b-it/) | `gemma-4-26b-a4b-it` | 262k | ? | 🔴 |  |
-| [Gemma 4 31B IT](https://freetier-radar.marcelkanters.workers.dev/models/google-ai-studio/gemma-4-31b-it/) | `gemma-4-31b-it` | 262k | ? | 🟡 |  |
+| [Gemma 4 31B IT](https://freetier-radar.marcelkanters.workers.dev/models/google-ai-studio/gemma-4-31b-it/) | `gemma-4-31b-it` | 262k | ? | 🔴 |  |
 
 #### NVIDIA API catalog (build.nvidia.com) ⚠ evaluation only
 
@@ -131,7 +131,7 @@ _165 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [qwen/qwen2.5-coder-32b-instruct](https://freetier-radar.marcelkanters.workers.dev/models/cloudflare/cf-qwen-qwen2-5-coder-32b-instruct/) | `@cf/qwen/qwen2.5-coder-32b-instruct` | 33k | no | 🟢 |  |
 | [swiss-ai/apertus-v1.5-8b](https://freetier-radar.marcelkanters.workers.dev/models/cloudflare/cf-swiss-ai-apertus-v1-5-8b/) | `@cf/swiss-ai/apertus-v1.5-8b` | 262k | yes | 🔴 |  |
 | [utter-project/eurollm-9b-it](https://freetier-radar.marcelkanters.workers.dev/models/cloudflare/cf-utter-project-eurollm-9b-it/) | `@cf/utter-project/eurollm-9b-it` | 32k | yes | 🔴 |  |
-| [zai-org/glm-4.7-flash](https://freetier-radar.marcelkanters.workers.dev/models/cloudflare/cf-zai-org-glm-4-7-flash/) | `@cf/zai-org/glm-4.7-flash` | 131k | yes | 🟢 | 🤖 |
+| [zai-org/glm-4.7-flash](https://freetier-radar.marcelkanters.workers.dev/models/cloudflare/cf-zai-org-glm-4-7-flash/) | `@cf/zai-org/glm-4.7-flash` | 131k | yes | 🟡 | 🤖 |
 
 #### Mistral AI (Free mode)
 
