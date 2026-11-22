@@ -11,11 +11,11 @@ change history and ready-to-paste Cline settings.
 ## The list
 
 <!-- LIST:START -->
-_163 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
+_164 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
 
 🟢 responded to the latest daily test · 🟡 rate-limited or slow · 🔴 failed · 🤖 agent-ready (tool calling, ≥64k context, answered every test on 5 of the last 7 days)
 
-### Chat (132)
+### Chat (133)
 
 #### OpenRouter
 
@@ -155,6 +155,7 @@ _163 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [glm-5.3-flash](https://freetier-radar.marcelkanters.workers.dev/models/ollama/glm-5-3-flash/) | `glm-5.3-flash` | unknown | ? | 🔴 |  |
 | [gpt-oss:120b](https://freetier-radar.marcelkanters.workers.dev/models/ollama/gpt-oss-120b/) | `gpt-oss:120b` | unknown | ? | 🔴 |  |
 | [gpt-oss:20b](https://freetier-radar.marcelkanters.workers.dev/models/ollama/gpt-oss-20b/) | `gpt-oss:20b` | unknown | ? | 🔴 |  |
+| [hy4](https://freetier-radar.marcelkanters.workers.dev/models/ollama/hy4/) | `hy4` | unknown | ? | – |  |
 | [inkling-2-small](https://freetier-radar.marcelkanters.workers.dev/models/ollama/inkling-2-small/) | `inkling-2-small` | unknown | ? | 🔴 |  |
 | [kimi-k2.6](https://freetier-radar.marcelkanters.workers.dev/models/ollama/kimi-k2-6/) | `kimi-k2.6` | unknown | ? | 🔴 |  |
 | [kimi-k2.7-code](https://freetier-radar.marcelkanters.workers.dev/models/ollama/kimi-k2-7-code/) | `kimi-k2.7-code` | unknown | ? | 🔴 |  |
