@@ -179,6 +179,11 @@
     "status": "variant",
     "on": "2026-11-16"
   },
+  "google-ai-studio/gemini-4-neon": {
+    "arena": "Gemini 4 Neon (High)",
+    "status": "variant",
+    "on": "2026-11-23"
+  },
   "google-ai-studio/gemini-omni-1.1-flash": {
     "arena": "gemini-omni-1.1-flash",
     "status": "exact",
@@ -253,6 +258,11 @@
     "arena": "Inkling Small",
     "status": "exact",
     "on": "2026-09-28"
+  },
+  "llm7/gemma-3-27b": {
+    "arena": "Gemma 3 27B IT",
+    "status": "exact",
+    "on": "2026-11-23"
   },
   "llm7/glm-5.3-flash": {
     "arena": "GLM-5.3-Flash",
@@ -354,6 +364,11 @@
     "status": "variant",
     "on": "2026-09-28"
   },
+  "nvidia/moonshotai/kimi-k3.1-pro": {
+    "arena": "Kimi K3.1 Pro (Max)",
+    "status": "variant",
+    "on": "2026-11-23"
+  },
   "nvidia/nvidia/llama-3.1-nemotron-51b-instruct": {
     "arena": "llama-3.1-nemotron-51b-instruct",
     "status": "exact",
@@ -433,6 +448,11 @@
     "arena": "GLM 5.3 Flash",
     "status": "exact",
     "on": "2026-10-05"
+  },
+  "ollama/hy4": {
+    "arena": "Hy4",
+    "status": "exact",
+    "on": "2026-11-23"
   },
   "ollama/inkling-2-small": {
     "arena": "Inkling 2 Small",
