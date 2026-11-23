@@ -11,11 +11,11 @@ change history and ready-to-paste Cline settings.
 ## The list
 
 <!-- LIST:START -->
-_169 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
+_168 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
 
 🟢 responded to the latest daily test · 🟡 rate-limited or slow · 🔴 failed · 🤖 agent-ready (tool calling, ≥64k context, answered every test on 5 of the last 7 days)
 
-### Chat (138)
+### Chat (137)
 
 #### OpenRouter
 
@@ -211,7 +211,6 @@ _169 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [flint-40b-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/flint-40b-free/) | `flint-40b-free` | unknown | ? | – |  |
 | [hy4-flash-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/hy4-flash-free/) | `hy4-flash-free` | unknown | ? | – |  |
 | [iceman-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/iceman-free/) | `iceman-free` | unknown | ? | – |  |
-| [longcat-2.5-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/longcat-2-5-free/) | `longcat-2.5-free` | unknown | ? | – |  |
 | [mimo-v2.6-flash-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/mimo-v2-6-flash-free/) | `mimo-v2.6-flash-free` | unknown | ? | – |  |
 | [nemotron-3.5-lightning-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/nemotron-3-5-lightning-free/) | `nemotron-3.5-lightning-free` | unknown | ? | – |  |
 | [nemotron-3.5-super-vl-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/nemotron-3-5-super-vl-free/) | `nemotron-3.5-super-vl-free` | unknown | ? | – |  |
