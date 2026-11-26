@@ -11,11 +11,11 @@ change history and ready-to-paste Cline settings.
 ## The list
 
 <!-- LIST:START -->
-_158 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
+_157 free models. Updated automatically; see [FreeTier Radar](https://freetier-radar.marcelkanters.workers.dev) for filters, limits and change history._
 
 🟢 responded to the latest daily test · 🟡 rate-limited or slow · 🔴 failed · 🤖 agent-ready (tool calling, ≥64k context, answered every test on 5 of the last 7 days)
 
-### Chat (127)
+### Chat (126)
 
 #### OpenRouter
 
@@ -205,7 +205,6 @@ _158 free models. Updated automatically; see [FreeTier Radar](https://freetier-r
 | [nemotron-3.5-lightning-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/nemotron-3-5-lightning-free/) | `nemotron-3.5-lightning-free` | unknown | ? | – |  |
 | [nemotron-3.5-super-vl-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/nemotron-3-5-super-vl-free/) | `nemotron-3.5-super-vl-free` | unknown | ? | – |  |
 | [seaglass-alpha-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/seaglass-alpha-free/) | `seaglass-alpha-free` | unknown | ? | – |  |
-| [tidepool-alpha-free](https://freetier-radar.marcelkanters.workers.dev/models/opencode/tidepool-alpha-free/) | `tidepool-alpha-free` | unknown | ? | – |  |
 
 #### Cline (free promotion)
 
